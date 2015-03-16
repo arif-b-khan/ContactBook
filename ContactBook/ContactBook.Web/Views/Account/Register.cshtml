@@ -1,0 +1,29 @@
+﻿@model ContactBook.Web.Models.RegisterAccount
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div>
+        <label>Username:</label>
+        @Html.EditorFor(m => m.Username)
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>        
+
+    <div>
+        <label>Password:</label>
+        @Html.EditorFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>        
+    <div>
+        <label>Password:</label>
+        @Html.EditorFor(m => m.ConfirmPassword)
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    </div>        
+    <input type="submit" value="Create" />
+
+}
