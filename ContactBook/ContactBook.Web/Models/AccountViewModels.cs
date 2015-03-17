@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ContactBook.Web.Models
+namespace ContactBook.WebApi.Models
 {
     // Models returned by AccountController actions.
 

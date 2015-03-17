@@ -6,7 +6,7 @@ using http = System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
-namespace ContactBook.Web.Controllers
+namespace ContactBook.WebApi.Controllers
 {
     [Authorize]
     public class HomeController : Controller

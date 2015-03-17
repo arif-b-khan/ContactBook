@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using ContactBook.Web.Models;
-using ContactBook.Web.Providers;
-using ContactBook.Web.Results;
+using ContactBook.WebApi.Models;
+using ContactBook.WebApi.Providers;
+using ContactBook.WebApi.Results;
 
-namespace ContactBook.Web.Controllers
+namespace ContactBook.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

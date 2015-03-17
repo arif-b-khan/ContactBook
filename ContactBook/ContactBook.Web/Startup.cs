@@ -11,9 +11,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 
 
-namespace ContactBook.Web
+namespace ContactBook.WebApi
 {
-    [assembly: OwinStartup(typeof(ContactBook.Web.Startup))]
+    [assembly: OwinStartup(typeof(ContactBook.WebApi.Startup))]
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

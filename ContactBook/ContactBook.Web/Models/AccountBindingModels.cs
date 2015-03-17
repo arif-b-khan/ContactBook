@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace ContactBook.Web.Models
+namespace ContactBook.WebApi.Models
 {
     // Models used as parameters to AccountController actions.
 

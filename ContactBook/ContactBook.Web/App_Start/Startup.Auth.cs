@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Cors;
-using ContactBook.Web.Providers;
+using ContactBook.WebApi.Providers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -14,7 +14,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 
 
-namespace ContactBook.Web
+namespace ContactBook.WebApi
 {
     public partial class Startup
     {

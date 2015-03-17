@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 
-namespace ContactBook.Web
+namespace ContactBook.WebApi
 {
     public static class WebApiConfig
     {

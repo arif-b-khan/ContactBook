@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 
-namespace ContactBook.Web
+namespace ContactBook.WebApi
 {
     public static class BundleConfig
     {
