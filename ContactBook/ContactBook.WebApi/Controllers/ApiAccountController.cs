@@ -13,9 +13,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using ContactBook.WebApi.Models;
 using ContactBook.WebApi.Providers;
 using ContactBook.WebApi.Results;
+using ContactBook.Domain.Models;
 
 namespace ContactBook.WebApi.Controllers
 {

@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.WebApi", "ContactBook.WebApi\ContactBook.WebApi.csproj", "{4F78953F-7AC8-40B9-8CCC-C4094A6DE47F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Web", "ContactBook.Web\ContactBook.Web.csproj", "{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Domain", "ContactBook.Domain\ContactBook.Domain.csproj", "{5B65379A-C245-4012-B011-8A563B498FF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Db", "ContactBook.Db\ContactBook.Db.csproj", "{5CB257B9-2EC1-4E59-94D3-FA40F0016BBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +19,18 @@ Global
 		{4F78953F-7AC8-40B9-8CCC-C4094A6DE47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F78953F-7AC8-40B9-8CCC-C4094A6DE47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F78953F-7AC8-40B9-8CCC-C4094A6DE47F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B65379A-C245-4012-B011-8A563B498FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B65379A-C245-4012-B011-8A563B498FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B65379A-C245-4012-B011-8A563B498FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B65379A-C245-4012-B011-8A563B498FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB257B9-2EC1-4E59-94D3-FA40F0016BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB257B9-2EC1-4E59-94D3-FA40F0016BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB257B9-2EC1-4E59-94D3-FA40F0016BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB257B9-2EC1-4E59-94D3-FA40F0016BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

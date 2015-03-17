@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="78854e48196a41b890806a7e6ba12b84" Name="ContactBookDiagram" >
+        <EntityTypeShape EntityType="ContactBookEdm.ContactBook" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactNumber" Width="2" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactEmail" Width="1.5" PointX="8.25" PointY="11.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactAddress" Width="2" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_ContactGroup" Width="1.875" PointX="5.625" PointY="4.5" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_GroupType" Width="1.875" PointX="5.625" PointY="1.875" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactNumber" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactEmail" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_NumberType" Width="2" PointX="2.5" PointY="16.5" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_NumberType" Width="1.875" PointX="2.625" PointY="18.875" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactBook_GroupTypes" Width="1.875" PointX="8.25" PointY="7.375" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactBookAndGroup" />
+        <AssociationConnector Association="ContactBookEdm.ContactGroupContactBookAndGroup" />
+        <AssociationConnector Association="ContactBookEdm.DefaultGroupTypeContactBookAndGroup" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactAddress" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_AddressType" Width="2.125" PointX="2.375" PointY="6.5" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_AddressType" Width="2" PointX="2.5" PointY="3.875" />
+        <AssociationConnector Association="ContactBookEdm.Default_NumberTypeContactNumber" />
+        <AssociationConnector Association="ContactBookEdm.Custom_NumberTypeContactNumber" />
+        <AssociationConnector Association="ContactBookEdm.Default_AddressTypeContactAddress" />
+        <AssociationConnector Association="ContactBookEdm.Custom_AddressTypeContactAddress" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_EmailType" Width="1.5" PointX="6" PointY="24.875" />
+        <AssociationConnector Association="ContactBookEdm.Custom_EmailTypeContactEmail" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_EmailType" Width="1.5" PointX="6" PointY="18.5" />
+        <AssociationConnector Association="ContactBookEdm.Default_EmailTypeContactEmail" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_Suffix" Width="1.5" PointX="0.75" PointY="11.75" />
+        <AssociationConnector Association="ContactBookEdm.Default_SuffixContactBook" />
+        <EntityTypeShape EntityType="ContactBookEdm.IM" Width="1.5" PointX="8.25" PointY="15.25" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookIM" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_IMType" Width="1.75" PointX="5.75" PointY="29.875" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_IMType" Width="2.5" PointX="5" PointY="27.375" />
+        <AssociationConnector Association="ContactBookEdm.Default_IMTypeIM" />
+        <AssociationConnector Association="ContactBookEdm.Custom_IMTypeIM" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactWebsite" Width="1.5" PointX="5.25" PointY="21.5" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactWebsite" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactRelationship" Width="1.5" PointX="5.25" PointY="15.375" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactRelationship" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_RelationshipType" Width="1.5" PointX="3" PointY="21.5" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_RelationshipType" Width="2.5" PointX="2" PointY="23.875" />
+        <AssociationConnector Association="ContactBookEdm.Default_RelationshipTypeContactRelationship" />
+        <AssociationConnector Association="ContactBookEdm.Custom_RelationshipTypeContactRelationship" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactSpecialDates" Width="1.5" PointX="0.5" PointY="8.25" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactSpecialDates" />
+        <EntityTypeShape EntityType="ContactBookEdm.Default_SpecialDateType" Width="1.5" PointX="2.375" PointY="8.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.Custom_SpecialDateType" Width="3" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="ContactBookEdm.Default_SpecialDateTypeContactSpecialDates" />
+        <AssociationConnector Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" />
+        <EntityTypeShape EntityType="ContactBookEdm.ContactInternetCall" Width="1.5" PointX="0.5" PointY="14.125" />
+        <AssociationConnector Association="ContactBookEdm.ContactBookContactInternetCall" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

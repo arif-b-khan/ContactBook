@@ -60,14 +60,14 @@ namespace ContactBook.WebApi
                 }
             });
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationType = "Application",
-                AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
-                LoginPath = new PathString("/default.html"),
-                LogoutPath = new PathString("/account/Logout")
-            });
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            //{
+            //    AuthenticationType = "Application",
+            //    AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
+            //    LoginPath = new PathString("/default.html"),
+            //    LogoutPath = new PathString("/account/Logout")
+            //});
+            app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
             app.UseOAuthBearerTokens(OAuthOptions);
         }
