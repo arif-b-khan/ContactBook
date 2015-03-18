@@ -12,16 +12,19 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Default_GroupType
+    public partial class CB_IMType
     {
-        public Default_GroupType()
+        public CB_IMType()
         {
-            this.ContactBookAndGroups = new HashSet<ContactBook_GroupTypes>();
+            this.IM_TypeCode = "C";
+            this.CB_IMs = new HashSet<CB_IM>();
         }
     
-        public int Dflt_GroupId { get; set; }
-        public string GroupName { get; set; }
+        public int IMTypeId { get; set; }
+        public string IM_TypeName { get; set; }
+        public string IMLogoPath { get; set; }
+        public string IM_TypeCode { get; set; }
     
-        public virtual ICollection<ContactBook_GroupTypes> ContactBookAndGroups { get; set; }
+        public virtual ICollection<CB_IM> CB_IMs { get; set; }
     }
 }

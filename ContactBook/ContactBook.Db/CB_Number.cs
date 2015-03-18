@@ -12,16 +12,14 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Default_RelationshipType
+    public partial class CB_Number
     {
-        public Default_RelationshipType()
-        {
-            this.ContactRelationships = new HashSet<ContactRelationship>();
-        }
+        public int NumberId { get; set; }
+        public long BookId { get; set; }
+        public string Number { get; set; }
+        public Nullable<int> NumberTypeId { get; set; }
     
-        public int Dflt_RelationshipTypeId { get; set; }
-        public string RelationName { get; set; }
-    
-        public virtual ICollection<ContactRelationship> ContactRelationships { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_NumberType CB_NumberType { get; set; }
     }
 }

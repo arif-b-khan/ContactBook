@@ -12,16 +12,19 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Custom_NumberType
+    public partial class CB_EmailType
     {
-        public Custom_NumberType()
+        public CB_EmailType()
         {
-            this.ContactNumbers = new HashSet<ContactNumber>();
+            this.Email_TypeCode = "C";
+            this.CB_Emails = new HashSet<CB_Email>();
         }
     
-        public int NumberTypeId { get; set; }
-        public string NumberType { get; set; }
+        public int EmailTypeId { get; set; }
+        public string UserId { get; set; }
+        public string Email_TypeName { get; set; }
+        public string Email_TypeCode { get; set; }
     
-        public virtual ICollection<ContactNumber> ContactNumbers { get; set; }
+        public virtual ICollection<CB_Email> CB_Emails { get; set; }
     }
 }

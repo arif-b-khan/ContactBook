@@ -12,16 +12,14 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Default_AddressType
+    public partial class CB_Email
     {
-        public Default_AddressType()
-        {
-            this.ContactAddresses = new HashSet<ContactAddress>();
-        }
+        public int EmailId { get; set; }
+        public long BookId { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> EmailTypeId { get; set; }
     
-        public int Dflt_AddressTypeId { get; set; }
-        public string AddressType { get; set; }
-    
-        public virtual ICollection<ContactAddress> ContactAddresses { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_EmailType CB_EmailType { get; set; }
     }
 }

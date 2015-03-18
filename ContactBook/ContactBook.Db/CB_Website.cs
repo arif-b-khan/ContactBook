@@ -12,16 +12,12 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Custom_SpecialDateType
+    public partial class CB_Website
     {
-        public Custom_SpecialDateType()
-        {
-            this.ContactSpecialDates = new HashSet<ContactSpecialDates>();
-        }
+        public int WebsiteId { get; set; }
+        public string Website { get; set; }
+        public long BookId { get; set; }
     
-        public int Cst_SpecialDateTpId { get; set; }
-        public string DateType { get; set; }
-    
-        public virtual ICollection<ContactSpecialDates> ContactSpecialDates { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

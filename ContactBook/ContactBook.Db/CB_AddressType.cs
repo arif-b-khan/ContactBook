@@ -12,17 +12,19 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Default_IMType
+    public partial class CB_AddressType
     {
-        public Default_IMType()
+        public CB_AddressType()
         {
-            this.IMs = new HashSet<IM>();
+            this.Address_TypeCode = "C";
+            this.CB_Address = new HashSet<CB_Address>();
         }
     
-        public int Dflt_IMTypeId { get; set; }
-        public string IMName { get; set; }
-        public string IMLogoPath { get; set; }
+        public int AddressTypeId { get; set; }
+        public string UserId { get; set; }
+        public string Address_TypeName { get; set; }
+        public string Address_TypeCode { get; set; }
     
-        public virtual ICollection<IM> IMs { get; set; }
+        public virtual ICollection<CB_Address> CB_Address { get; set; }
     }
 }

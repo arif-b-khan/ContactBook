@@ -12,16 +12,13 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class ContactNumber
+    public partial class CB_Book_GroupTypes
     {
-        public int NumberId { get; set; }
+        public int GroupRelationId { get; set; }
         public long BookId { get; set; }
-        public string Number { get; set; }
-        public Nullable<int> Dflt_NumberTypeId { get; set; }
-        public Nullable<int> NumberTypeId { get; set; }
+        public Nullable<int> GroupId { get; set; }
     
-        public virtual ContactBook ContactBook { get; set; }
-        public virtual Default_NumberType Default_NumberType { get; set; }
-        public virtual Custom_NumberType Custom_NumberType { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Group CB_Group { get; set; }
     }
 }

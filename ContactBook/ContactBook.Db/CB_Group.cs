@@ -12,16 +12,19 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Custom_AddressType
+    public partial class CB_Group
     {
-        public Custom_AddressType()
+        public CB_Group()
         {
-            this.ContactAddresses = new HashSet<ContactAddress>();
+            this.Group_TypeCode = "C";
+            this.CB_Book_GroupTypes = new HashSet<CB_Book_GroupTypes>();
         }
     
-        public int Cst_AddressTypeId { get; set; }
-        public string AddressType { get; set; }
+        public int GroupId { get; set; }
+        public string UserId { get; set; }
+        public string Group_TypeName { get; set; }
+        public string Group_TypeCode { get; set; }
     
-        public virtual ICollection<ContactAddress> ContactAddresses { get; set; }
+        public virtual ICollection<CB_Book_GroupTypes> CB_Book_GroupTypes { get; set; }
     }
 }

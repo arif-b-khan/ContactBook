@@ -46,10 +46,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactAddress.cs">
+    <Compile Include="CB_Address.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContactBook.cs">
+    <Compile Include="CB_AddressType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Book_GroupTypes.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_ContactBook.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Email.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_EmailType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Group.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_IM.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_IMType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_InternetCall.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Number.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_NumberType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Relationship.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_RelationshipType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_SpecialDates.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_SpecialDateType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Suffix.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CB_Website.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactBookEdm.Context.cs">
@@ -66,75 +114,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ContactBook_GroupTypes.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEmail.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactInternetCall.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactNumber.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactRelationship.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactSpecialDates.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactWebsite.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_AddressType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_ContactGroup.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_EmailType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_IMType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_NumberType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_RelationshipType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_SpecialDateType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_AddressType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_EmailType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_GroupType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_IMType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_NumberType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_RelationshipType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_SpecialDateType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Default_Suffix.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IM.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -163,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactBookEdm.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

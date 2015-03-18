@@ -12,12 +12,12 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class ContactWebsite
+    public partial class CB_InternetCall
     {
-        public int WebsiteId { get; set; }
-        public string Website { get; set; }
+        public int InternetCallId { get; set; }
+        public string InternetCallNumber { get; set; }
         public long BookId { get; set; }
     
-        public virtual ContactBook ContactBook { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

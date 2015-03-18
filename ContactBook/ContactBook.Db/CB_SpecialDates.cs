@@ -12,12 +12,14 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class ContactInternetCall
+    public partial class CB_SpecialDates
     {
-        public int InternetCallId { get; set; }
-        public string InternetCallNumber { get; set; }
+        public int SpecialDateId { get; set; }
         public long BookId { get; set; }
+        public System.DateTime Dates { get; set; }
+        public int SpecialDateTpId { get; set; }
     
-        public virtual ContactBook ContactBook { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_SpecialDateType CB_SpecialDateType { get; set; }
     }
 }

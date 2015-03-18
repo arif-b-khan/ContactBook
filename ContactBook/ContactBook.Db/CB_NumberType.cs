@@ -12,16 +12,19 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Default_SpecialDateType
+    public partial class CB_NumberType
     {
-        public Default_SpecialDateType()
+        public CB_NumberType()
         {
-            this.ContactSpecialDates = new HashSet<ContactSpecialDates>();
+            this.Number_TypeCode = "C";
+            this.CB_Numbers = new HashSet<CB_Number>();
         }
     
-        public int Dflt_SpecialDateTpId { get; set; }
-        public string DateType { get; set; }
+        public int NumberTypeId { get; set; }
+        public string UserId { get; set; }
+        public string Number_TypeName { get; set; }
+        public string Number_TypeCode { get; set; }
     
-        public virtual ICollection<ContactSpecialDates> ContactSpecialDates { get; set; }
+        public virtual ICollection<CB_Number> CB_Numbers { get; set; }
     }
 }

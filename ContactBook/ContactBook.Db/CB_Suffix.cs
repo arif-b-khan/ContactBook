@@ -12,17 +12,16 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class Custom_IMType
+    public partial class CB_Suffix
     {
-        public Custom_IMType()
+        public CB_Suffix()
         {
-            this.IMs = new HashSet<IM>();
+            this.CB_ContactBooks = new HashSet<CB_ContactBook>();
         }
     
-        public int Cst_IMTypeId { get; set; }
-        public string IMName { get; set; }
-        public string IMLogoPath { get; set; }
+        public int SuffixId { get; set; }
+        public string Suffix { get; set; }
     
-        public virtual ICollection<IM> IMs { get; set; }
+        public virtual ICollection<CB_ContactBook> CB_ContactBooks { get; set; }
     }
 }

@@ -12,16 +12,13 @@ namespace ContactBook.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class ContactSpecialDates
+    public partial class CB_Relationship
     {
-        public int SpecialDataeId { get; set; }
+        public int RelationshipId { get; set; }
         public long BookId { get; set; }
-        public System.DateTime Dates { get; set; }
-        public Nullable<int> Dflt_SpecialDateTpId { get; set; }
-        public int Cst_SpecialDateTpId { get; set; }
+        public Nullable<int> RelationshipTypeId { get; set; }
     
-        public virtual ContactBook ContactBook { get; set; }
-        public virtual Default_SpecialDateType Default_SpecialDateType { get; set; }
-        public virtual Custom_SpecialDateType Custom_SpecialDateType { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_RelationshipType CB_RelationshipType { get; set; }
     }
 }
