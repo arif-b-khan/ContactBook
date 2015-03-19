@@ -1,6 +1,188 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-  <Alias Key="Model" Value="ContactBookEdm" />
-  <Alias Key="Target" Value="ContactBookEdm.Store" />
-  <EntityContainerMapping CdmEntityContainer="ContactBookEdmContainer" StorageEntityContainer="ContactBookEdmTargetContainer" />
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContactBookEdmStoreContainer" CdmEntityContainer="ContactBookEdmContainer">
+    <EntitySetMapping Name="CB_ContactBook">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_ContactBook)">
+        <MappingFragment StoreEntitySet="CB_ContactBook">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+          <ScalarProperty Name="SuffixId" ColumnName="SuffixId" />
+          <ScalarProperty Name="PhFirstname" ColumnName="PhFirstname" />
+          <ScalarProperty Name="PhMiddlename" ColumnName="PhMiddlename" />
+          <ScalarProperty Name="PhSurname" ColumnName="PhSurname" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Number">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Number)">
+        <MappingFragment StoreEntitySet="CB_Number">
+          <ScalarProperty Name="NumberId" ColumnName="NumberId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="NumberTypeId" ColumnName="NumberTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Email">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Email)">
+        <MappingFragment StoreEntitySet="CB_Email">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Address">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Address)">
+        <MappingFragment StoreEntitySet="CB_Address">
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Group">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Group)">
+        <MappingFragment StoreEntitySet="CB_Group">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Group_TypeName" ColumnName="Group_TypeName" />
+          <ScalarProperty Name="Group_TypeCode" ColumnName="Group_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_NumberType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_NumberType)">
+        <MappingFragment StoreEntitySet="CB_NumberType">
+          <ScalarProperty Name="NumberTypeId" ColumnName="NumberTypeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Number_TypeName" ColumnName="Number_TypeName" />
+          <ScalarProperty Name="Number_TypeCode" ColumnName="Number_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Book_GroupTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Book_GroupTypes)">
+        <MappingFragment StoreEntitySet="CB_Book_GroupTypes">
+          <ScalarProperty Name="GroupRelationId" ColumnName="GroupRelationId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_AddressType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_AddressType)">
+        <MappingFragment StoreEntitySet="CB_AddressType">
+          <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Address_TypeName" ColumnName="Address_TypeName" />
+          <ScalarProperty Name="Address_TypeCode" ColumnName="Address_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_EmailType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_EmailType)">
+        <MappingFragment StoreEntitySet="CB_EmailType">
+          <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Email_TypeName" ColumnName="Email_TypeName" />
+          <ScalarProperty Name="Email_TypeCode" ColumnName="Email_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Suffix">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Suffix)">
+        <MappingFragment StoreEntitySet="CB_Suffix">
+          <ScalarProperty Name="SuffixId" ColumnName="SuffixId" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_IM">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_IM)">
+        <MappingFragment StoreEntitySet="CB_IM">
+          <ScalarProperty Name="IMId" ColumnName="IMId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="IMTypeId" ColumnName="IMTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_IMType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_IMType)">
+        <MappingFragment StoreEntitySet="CB_IMType">
+          <ScalarProperty Name="IMTypeId" ColumnName="IMTypeId" />
+          <ScalarProperty Name="IM_TypeName" ColumnName="IM_TypeName" />
+          <ScalarProperty Name="IMLogoPath" ColumnName="IMLogoPath" />
+          <ScalarProperty Name="IM_TypeCode" ColumnName="IM_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Website">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Website)">
+        <MappingFragment StoreEntitySet="CB_Website">
+          <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Relationship">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Relationship)">
+        <MappingFragment StoreEntitySet="CB_Relationship">
+          <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="RelationshipTypeId" ColumnName="RelationshipTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_RelationshipType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_RelationshipType)">
+        <MappingFragment StoreEntitySet="CB_RelationshipType">
+          <ScalarProperty Name="RelationshipTypeId" ColumnName="RelationshipTypeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Relationship_TypeName" ColumnName="Relationship_TypeName" />
+          <ScalarProperty Name="Relationship_TypeCode" ColumnName="Relationship_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_SpecialDates">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDates)">
+        <MappingFragment StoreEntitySet="CB_SpecialDates">
+          <ScalarProperty Name="SpecialDateId" ColumnName="SpecialDateId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Dates" ColumnName="Dates" />
+          <ScalarProperty Name="SpecialDateTpId" ColumnName="SpecialDateTpId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_SpecialDateType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDateType)">
+        <MappingFragment StoreEntitySet="CB_SpecialDateType">
+          <ScalarProperty Name="SpecialDateTpId" ColumnName="SpecialDateTpId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Date_TypeName" ColumnName="Date_TypeName" />
+          <ScalarProperty Name="Date_TypeCode" ColumnName="Date_TypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_InternetCall">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_InternetCall)">
+        <MappingFragment StoreEntitySet="CB_InternetCall">
+          <ScalarProperty Name="InternetCallId" ColumnName="InternetCallId" />
+          <ScalarProperty Name="InternetCallNumber" ColumnName="InternetCallNumber" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
 </Mapping>

@@ -1,4 +1,494 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ContactBookEdm" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-  <EntityContainer Name="ContactBookEdmContainer" annotation:LazyLoadingEnabled="true" />
+  <EntityContainer Name="ContactBookEdmContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CB_ContactBook" EntityType="ContactBookEdm.CB_ContactBook" />
+    <EntitySet Name="CB_Number" EntityType="ContactBookEdm.CB_Number" />
+    <EntitySet Name="CB_Email" EntityType="ContactBookEdm.CB_Email" />
+    <EntitySet Name="CB_Address" EntityType="ContactBookEdm.CB_Address" />
+    <EntitySet Name="CB_Group" EntityType="ContactBookEdm.CB_Group" />
+    <AssociationSet Name="ContactBookContactNumber" Association="ContactBookEdm.ContactBookContactNumber">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactNumber" EntitySet="CB_Number" />
+    </AssociationSet>
+    <AssociationSet Name="ContactBookContactEmail" Association="ContactBookEdm.ContactBookContactEmail">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactEmail" EntitySet="CB_Email" />
+    </AssociationSet>
+    <EntitySet Name="CB_NumberType" EntityType="ContactBookEdm.CB_NumberType" />
+    <EntitySet Name="CB_Book_GroupTypes" EntityType="ContactBookEdm.CB_Book_GroupTypes" />
+    <AssociationSet Name="ContactBookContactBookAndGroup" Association="ContactBookEdm.ContactBookContactBookAndGroup">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+    </AssociationSet>
+    <AssociationSet Name="ContactGroupContactBookAndGroup" Association="ContactBookEdm.ContactGroupContactBookAndGroup">
+      <End Role="ContactGroup" EntitySet="CB_Group" />
+      <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+    </AssociationSet>
+    <AssociationSet Name="ContactBookContactAddress" Association="ContactBookEdm.ContactBookContactAddress">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactAddress" EntitySet="CB_Address" />
+    </AssociationSet>
+    <EntitySet Name="CB_AddressType" EntityType="ContactBookEdm.CB_AddressType" />
+    <AssociationSet Name="Custom_NumberTypeContactNumber" Association="ContactBookEdm.Custom_NumberTypeContactNumber">
+      <End Role="Custom_NumberType" EntitySet="CB_NumberType" />
+      <End Role="ContactNumber" EntitySet="CB_Number" />
+    </AssociationSet>
+    <AssociationSet Name="Custom_AddressTypeContactAddress" Association="ContactBookEdm.Custom_AddressTypeContactAddress">
+      <End Role="Custom_AddressType" EntitySet="CB_AddressType" />
+      <End Role="ContactAddress" EntitySet="CB_Address" />
+    </AssociationSet>
+    <EntitySet Name="CB_EmailType" EntityType="ContactBookEdm.CB_EmailType" />
+    <AssociationSet Name="Custom_EmailTypeContactEmail" Association="ContactBookEdm.Custom_EmailTypeContactEmail">
+      <End Role="Custom_EmailType" EntitySet="CB_EmailType" />
+      <End Role="ContactEmail" EntitySet="CB_Email" />
+    </AssociationSet>
+    <EntitySet Name="CB_Suffix" EntityType="ContactBookEdm.CB_Suffix" />
+    <AssociationSet Name="Default_SuffixContactBook" Association="ContactBookEdm.Default_SuffixContactBook">
+      <End Role="Default_Suffix" EntitySet="CB_Suffix" />
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+    </AssociationSet>
+    <EntitySet Name="CB_IM" EntityType="ContactBookEdm.CB_IM" />
+    <AssociationSet Name="ContactBookIM" Association="ContactBookEdm.ContactBookIM">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="IM" EntitySet="CB_IM" />
+    </AssociationSet>
+    <EntitySet Name="CB_IMType" EntityType="ContactBookEdm.CB_IMType" />
+    <AssociationSet Name="Custom_IMTypeIM" Association="ContactBookEdm.Custom_IMTypeIM">
+      <End Role="Custom_IMType" EntitySet="CB_IMType" />
+      <End Role="IM" EntitySet="CB_IM" />
+    </AssociationSet>
+    <EntitySet Name="CB_Website" EntityType="ContactBookEdm.CB_Website" />
+    <AssociationSet Name="ContactBookContactWebsite" Association="ContactBookEdm.ContactBookContactWebsite">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactWebsite" EntitySet="CB_Website" />
+    </AssociationSet>
+    <EntitySet Name="CB_Relationship" EntityType="ContactBookEdm.CB_Relationship" />
+    <AssociationSet Name="ContactBookContactRelationship" Association="ContactBookEdm.ContactBookContactRelationship">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactRelationship" EntitySet="CB_Relationship" />
+    </AssociationSet>
+    <EntitySet Name="CB_RelationshipType" EntityType="ContactBookEdm.CB_RelationshipType" />
+    <AssociationSet Name="Custom_RelationshipTypeContactRelationship" Association="ContactBookEdm.Custom_RelationshipTypeContactRelationship">
+      <End Role="Custom_RelationshipType" EntitySet="CB_RelationshipType" />
+      <End Role="ContactRelationship" EntitySet="CB_Relationship" />
+    </AssociationSet>
+    <EntitySet Name="CB_SpecialDates" EntityType="ContactBookEdm.CB_SpecialDates" />
+    <AssociationSet Name="ContactBookContactSpecialDates" Association="ContactBookEdm.ContactBookContactSpecialDates">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+    </AssociationSet>
+    <EntitySet Name="CB_SpecialDateType" EntityType="ContactBookEdm.CB_SpecialDateType" />
+    <AssociationSet Name="Custom_SpecialDateTypeContactSpecialDates" Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates">
+      <End Role="Custom_SpecialDateType" EntitySet="CB_SpecialDateType" />
+      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+    </AssociationSet>
+    <EntitySet Name="CB_InternetCall" EntityType="ContactBookEdm.CB_InternetCall" />
+    <AssociationSet Name="ContactBookContactInternetCall" Association="ContactBookEdm.ContactBookContactInternetCall">
+      <End Role="ContactBook" EntitySet="CB_ContactBook" />
+      <End Role="ContactInternetCall" EntitySet="CB_InternetCall" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CB_ContactBook">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Type="Int64" Name="BookId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="100" FixedLength="false" />
+    <Property Type="String" Name="Lastname" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Middlename" Nullable="true" />
+    <NavigationProperty Name="CB_Numbers" Relationship="ContactBookEdm.ContactBookContactNumber" FromRole="ContactBook" ToRole="ContactNumber" />
+    <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactBook" ToRole="ContactEmail" />
+    <NavigationProperty Name="CB_Book_GroupTypes" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
+    <NavigationProperty Name="CB_Addresses" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactBook" ToRole="ContactAddress" />
+    <NavigationProperty Name="CB_Suffix" Relationship="ContactBookEdm.Default_SuffixContactBook" FromRole="ContactBook" ToRole="Default_Suffix" />
+    <Property Type="Int32" Name="SuffixId" Nullable="true" />
+    <Property Type="String" Name="PhFirstname" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PhMiddlename" Nullable="true" />
+    <Property Type="String" Name="PhSurname" Nullable="true" />
+    <Property Type="String" Name="CompanyName" Nullable="true" />
+    <Property Type="String" Name="JobTitle" Nullable="false" />
+    <NavigationProperty Name="CB_IMs" Relationship="ContactBookEdm.ContactBookIM" FromRole="ContactBook" ToRole="IM" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="NickName" Nullable="true" MaxLength="50" />
+    <NavigationProperty Name="CB_Websites" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactBook" ToRole="ContactWebsite" />
+    <NavigationProperty Name="CB_Relationships" Relationship="ContactBookEdm.ContactBookContactRelationship" FromRole="ContactBook" ToRole="ContactRelationship" />
+    <NavigationProperty Name="CB_SpecialDates" Relationship="ContactBookEdm.ContactBookContactSpecialDates" FromRole="ContactBook" ToRole="ContactSpecialDates" />
+    <NavigationProperty Name="CB_InternetCalls" Relationship="ContactBookEdm.ContactBookContactInternetCall" FromRole="ContactBook" ToRole="ContactInternetCall" />
+  </EntityType>
+  <EntityType Name="CB_Number">
+    <Key>
+      <PropertyRef Name="NumberId" />
+    </Key>
+    <Property Type="Int32" Name="NumberId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactNumber" FromRole="ContactNumber" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Number" Nullable="false" MaxLength="30" />
+    <NavigationProperty Name="CB_NumberType" Relationship="ContactBookEdm.Custom_NumberTypeContactNumber" FromRole="ContactNumber" ToRole="Custom_NumberType" />
+    <Property Type="Int32" Name="NumberTypeId" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CB_Email">
+    <Key>
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Type="Int32" Name="EmailId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactEmail" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" />
+    <NavigationProperty Name="CB_EmailType" Relationship="ContactBookEdm.Custom_EmailTypeContactEmail" FromRole="ContactEmail" ToRole="Custom_EmailType" />
+    <Property Type="Int32" Name="EmailTypeId" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CB_Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Type="Int32" Name="AddressId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactAddress" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="6000" />
+    <NavigationProperty Name="CB_AddressType" Relationship="ContactBookEdm.Custom_AddressTypeContactAddress" FromRole="ContactAddress" ToRole="Custom_AddressType" />
+    <Property Type="Int32" Name="AddressTypeId" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CB_Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Type="Int32" Name="GroupId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Group_TypeName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Group_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_Book_GroupTypes" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactGroup" ToRole="ContactBookAndGroup" />
+  </EntityType>
+  <Association Name="ContactBookContactNumber">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Number" Role="ContactNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactNumber">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContactBookContactEmail">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Email" Role="ContactEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactEmail">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_NumberType">
+    <Key>
+      <PropertyRef Name="NumberTypeId" />
+    </Key>
+    <Property Type="Int32" Name="NumberTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Number_TypeName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Number_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_Numbers" Relationship="ContactBookEdm.Custom_NumberTypeContactNumber" FromRole="Custom_NumberType" ToRole="ContactNumber" />
+  </EntityType>
+  <EntityType Name="CB_Book_GroupTypes">
+    <Key>
+      <PropertyRef Name="GroupRelationId" />
+    </Key>
+    <Property Type="Int32" Name="GroupRelationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <NavigationProperty Name="CB_Group" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactGroup" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+  </EntityType>
+  <Association Name="ContactBookContactBookAndGroup">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Book_GroupTypes" Role="ContactBookAndGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactBookAndGroup">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContactGroupContactBookAndGroup">
+    <End Type="ContactBookEdm.CB_Group" Role="ContactGroup" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_Book_GroupTypes" Role="ContactBookAndGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactGroup">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="ContactBookAndGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContactBookContactAddress">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Address" Role="ContactAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactAddress">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypeId" />
+    </Key>
+    <Property Type="Int32" Name="AddressTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Address_TypeName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Address_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_Address" Relationship="ContactBookEdm.Custom_AddressTypeContactAddress" FromRole="Custom_AddressType" ToRole="ContactAddress" />
+  </EntityType>
+  <Association Name="Custom_NumberTypeContactNumber">
+    <End Type="ContactBookEdm.CB_NumberType" Role="Custom_NumberType" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_Number" Role="ContactNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_NumberType">
+        <PropertyRef Name="NumberTypeId" />
+      </Principal>
+      <Dependent Role="ContactNumber">
+        <PropertyRef Name="NumberTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Custom_AddressTypeContactAddress">
+    <End Type="ContactBookEdm.CB_AddressType" Role="Custom_AddressType" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_Address" Role="ContactAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_AddressType">
+        <PropertyRef Name="AddressTypeId" />
+      </Principal>
+      <Dependent Role="ContactAddress">
+        <PropertyRef Name="AddressTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_EmailType">
+    <Key>
+      <PropertyRef Name="EmailTypeId" />
+    </Key>
+    <Property Type="Int32" Name="EmailTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Email_TypeName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Email_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.Custom_EmailTypeContactEmail" FromRole="Custom_EmailType" ToRole="ContactEmail" />
+  </EntityType>
+  <Association Name="Custom_EmailTypeContactEmail">
+    <End Type="ContactBookEdm.CB_EmailType" Role="Custom_EmailType" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_Email" Role="ContactEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_EmailType">
+        <PropertyRef Name="EmailTypeId" />
+      </Principal>
+      <Dependent Role="ContactEmail">
+        <PropertyRef Name="EmailTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_Suffix">
+    <Key>
+      <PropertyRef Name="SuffixId" />
+    </Key>
+    <Property Type="Int32" Name="SuffixId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Suffix" Nullable="false" />
+    <NavigationProperty Name="CB_ContactBooks" Relationship="ContactBookEdm.Default_SuffixContactBook" FromRole="Default_Suffix" ToRole="ContactBook" />
+  </EntityType>
+  <Association Name="Default_SuffixContactBook">
+    <End Type="ContactBookEdm.CB_Suffix" Role="Default_Suffix" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Default_Suffix">
+        <PropertyRef Name="SuffixId" />
+      </Principal>
+      <Dependent Role="ContactBook">
+        <PropertyRef Name="SuffixId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_IM">
+    <Key>
+      <PropertyRef Name="IMId" />
+    </Key>
+    <Property Type="Int32" Name="IMId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Username" Nullable="false" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookIM" FromRole="IM" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <NavigationProperty Name="CB_IMType" Relationship="ContactBookEdm.Custom_IMTypeIM" FromRole="IM" ToRole="Custom_IMType" />
+    <Property Type="Int32" Name="IMTypeId" Nullable="true" />
+  </EntityType>
+  <Association Name="ContactBookIM">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_IM" Role="IM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="IM">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_IMType">
+    <Key>
+      <PropertyRef Name="IMTypeId" />
+    </Key>
+    <Property Type="Int32" Name="IMTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="IM_TypeName" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="IMLogoPath" Nullable="true" MaxLength="2000" />
+    <NavigationProperty Name="CB_IMs" Relationship="ContactBookEdm.Custom_IMTypeIM" FromRole="Custom_IMType" ToRole="IM" />
+    <Property Type="String" Name="IM_TypeCode" Nullable="false" MaxLength="1" DefaultValue="C" />
+  </EntityType>
+  <Association Name="Custom_IMTypeIM">
+    <End Type="ContactBookEdm.CB_IMType" Role="Custom_IMType" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_IM" Role="IM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_IMType">
+        <PropertyRef Name="IMTypeId" />
+      </Principal>
+      <Dependent Role="IM">
+        <PropertyRef Name="IMTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_Website">
+    <Key>
+      <PropertyRef Name="WebsiteId" />
+    </Key>
+    <Property Type="Int32" Name="WebsiteId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Website" Nullable="true" MaxLength="1000" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactWebsite" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+  </EntityType>
+  <Association Name="ContactBookContactWebsite">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Website" Role="ContactWebsite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactWebsite">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_Relationship">
+    <Key>
+      <PropertyRef Name="RelationshipId" />
+    </Key>
+    <Property Type="Int32" Name="RelationshipId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactRelationship" FromRole="ContactRelationship" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <NavigationProperty Name="CB_RelationshipType" Relationship="ContactBookEdm.Custom_RelationshipTypeContactRelationship" FromRole="ContactRelationship" ToRole="Custom_RelationshipType" />
+    <Property Type="Int32" Name="RelationshipTypeId" Nullable="true" />
+  </EntityType>
+  <Association Name="ContactBookContactRelationship">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Relationship" Role="ContactRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactRelationship">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_RelationshipType">
+    <Key>
+      <PropertyRef Name="RelationshipTypeId" />
+    </Key>
+    <Property Type="Int32" Name="RelationshipTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Relationship_TypeName" Nullable="false" />
+    <Property Type="String" Name="Relationship_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_Relationships" Relationship="ContactBookEdm.Custom_RelationshipTypeContactRelationship" FromRole="Custom_RelationshipType" ToRole="ContactRelationship" />
+  </EntityType>
+  <Association Name="Custom_RelationshipTypeContactRelationship">
+    <End Type="ContactBookEdm.CB_RelationshipType" Role="Custom_RelationshipType" Multiplicity="0..1" />
+    <End Type="ContactBookEdm.CB_Relationship" Role="ContactRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_RelationshipType">
+        <PropertyRef Name="RelationshipTypeId" />
+      </Principal>
+      <Dependent Role="ContactRelationship">
+        <PropertyRef Name="RelationshipTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_SpecialDates">
+    <Key>
+      <PropertyRef Name="SpecialDateId" />
+    </Key>
+    <Property Type="Int32" Name="SpecialDateId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactSpecialDates" FromRole="ContactSpecialDates" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+    <Property Type="DateTime" Name="Dates" Nullable="false" />
+    <NavigationProperty Name="CB_SpecialDateType" Relationship="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" FromRole="ContactSpecialDates" ToRole="Custom_SpecialDateType" />
+    <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" />
+  </EntityType>
+  <Association Name="ContactBookContactSpecialDates">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactSpecialDates">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_SpecialDateType">
+    <Key>
+      <PropertyRef Name="SpecialDateTpId" />
+    </Key>
+    <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Date_TypeName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Date_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <NavigationProperty Name="CB_SpecialDates" Relationship="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" FromRole="Custom_SpecialDateType" ToRole="ContactSpecialDates" />
+  </EntityType>
+  <Association Name="Custom_SpecialDateTypeContactSpecialDates">
+    <End Type="ContactBookEdm.CB_SpecialDateType" Role="Custom_SpecialDateType" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custom_SpecialDateType">
+        <PropertyRef Name="SpecialDateTpId" />
+      </Principal>
+      <Dependent Role="ContactSpecialDates">
+        <PropertyRef Name="SpecialDateTpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CB_InternetCall">
+    <Key>
+      <PropertyRef Name="InternetCallId" />
+    </Key>
+    <Property Type="Int32" Name="InternetCallId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="InternetCallNumber" Nullable="false" MaxLength="100" />
+    <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactInternetCall" FromRole="ContactInternetCall" ToRole="ContactBook" />
+    <Property Type="Int64" Name="BookId" Nullable="false" />
+  </EntityType>
+  <Association Name="ContactBookContactInternetCall">
+    <End Type="ContactBookEdm.CB_ContactBook" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_InternetCall" Role="ContactInternetCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactBook">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="ContactInternetCall">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
