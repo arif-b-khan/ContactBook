@@ -1,4 +1,5 @@
-﻿using ContactBook.Domain.Repositories;
+﻿using ContactBook.Db.Data;
+using ContactBook.Db.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,8 @@ namespace ContactBook.Db.Implementation
     {
         DbContext context;
         DbSet<T> dbSet;
-        public ContactBookDbRepository() : this(new ContactBookEdmContainer())
+        public ContactBookDbRepository()
+            : this(new ContactBookEdmContainer())
         {
 
         }

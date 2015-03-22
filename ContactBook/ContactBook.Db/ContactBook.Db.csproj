@@ -47,110 +47,111 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetRole.cs">
+    <Compile Include="Data\AspNetRole.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUser.cs">
+    <Compile Include="Data\AspNetUser.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUserClaim.cs">
+    <Compile Include="Data\AspNetUserClaim.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUserLogin.cs">
+    <Compile Include="Data\AspNetUserLogin.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Address.cs">
+    <Compile Include="Data\CB_Address.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_AddressType.cs">
+    <Compile Include="Data\CB_AddressType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Book_GroupTypes.cs">
+    <Compile Include="Data\CB_Book_GroupTypes.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_ContactBook.cs">
+    <Compile Include="Data\CB_ContactBook.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Email.cs">
+    <Compile Include="Data\CB_Email.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_EmailType.cs">
+    <Compile Include="Data\CB_EmailType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Group.cs">
+    <Compile Include="Data\CB_Group.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_IM.cs">
+    <Compile Include="Data\CB_IM.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_IMType.cs">
+    <Compile Include="Data\CB_IMType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_InternetCall.cs">
+    <Compile Include="Data\CB_InternetCall.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Number.cs">
+    <Compile Include="Data\CB_Number.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_NumberType.cs">
+    <Compile Include="Data\CB_NumberType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Relationship.cs">
+    <Compile Include="Data\CB_Relationship.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_RelationshipType.cs">
+    <Compile Include="Data\CB_RelationshipType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_SpecialDates.cs">
+    <Compile Include="Data\CB_SpecialDates.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_SpecialDateType.cs">
+    <Compile Include="Data\CB_SpecialDateType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Suffix.cs">
+    <Compile Include="Data\CB_Suffix.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="CB_Website.cs">
+    <Compile Include="Data\CB_Website.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContactBookEdm.Context.cs">
+    <Compile Include="Data\ContactBookEdm.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContactBookEdm.cs">
+    <Compile Include="Data\ContactBookEdm.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContactBookEdm.Designer.cs">
+    <Compile Include="Data\ContactBookEdm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Partials\AspNetUser.cs" />
+    <Compile Include="Data\Partials\CB_Address.cs" />
+    <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Implementation\ContactBookDbRepository.cs" />
-    <Compile Include="Partials\AspNetUser.cs" />
-    <Compile Include="Partials\CB_Address.cs" />
-    <Compile Include="Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ContactBookRepositoryUow.cs" />
+    <Compile Include="Repositories\IContactBookRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ContactBookEdm.edmx">
+    <EntityDeploy Include="Data\ContactBookEdm.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ContactBookEdm.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="ContactBookEdm.Context.tt">
+    <None Include="Data\ContactBookEdm.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
       <LastGenOutput>ContactBookEdm.Context.cs</LastGenOutput>
     </None>
-    <None Include="ContactBookEdm.edmx.diagram">
+    <None Include="Data\ContactBookEdm.edmx.diagram">
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </None>
-    <None Include="ContactBookEdm.tt">
+    <None Include="Data\ContactBookEdm.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
       <LastGenOutput>ContactBookEdm.cs</LastGenOutput>
@@ -162,12 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ContactBookEdm.edmx.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ContactBook.Domain\ContactBook.Domain.csproj">
-      <Project>{5b65379a-c245-4012-b011-8a563b498ff9}</Project>
-      <Name>ContactBook.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

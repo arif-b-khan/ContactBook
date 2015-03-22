@@ -12,3 +12,7 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\obj\Debug\Conta
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\obj\Debug\ContactBook.Domain.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\obj\Debug\ContactBook.Domain.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\ContactBook.Domain.dll.config
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\ContactBook.Db.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\EntityFramework.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\ContactBook.Db.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\EntityFramework.xml

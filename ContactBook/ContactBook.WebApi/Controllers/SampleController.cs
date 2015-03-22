@@ -1,4 +1,5 @@
 ﻿using ContactBook.Db;
+using ContactBook.Db.Data;
 using ContactBook.Db.Implementation;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,10 @@ namespace ContactBook.WebApi.Controllers
         // GET api/<controller>
         public IHttpActionResult Get()
         {
-            ContactBookDbRepository<AspNetUser> address =
-                new AspNetUser();
-            return Ok(address.Get().ToList());
+            //ContactBookDbRepository<AspNetUser> address =
+            //    new AspNetUser();
+            //return Ok(address.Get().ToList());
+            return Ok();
         }
 
         // GET api/<controller>/5
