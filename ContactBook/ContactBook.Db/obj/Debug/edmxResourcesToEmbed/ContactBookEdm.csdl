@@ -87,30 +87,46 @@
       <End Role="ContactBook" EntitySet="CB_ContactBook" />
       <End Role="ContactInternetCall" EntitySet="CB_InternetCall" />
     </AssociationSet>
+    <EntitySet Name="AspNetRoles" EntityType="ContactBookEdm.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="ContactBookEdm.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="ContactBookEdm.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="ContactBookEdm.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ContactBookEdm.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ContactBookEdm.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="ContactBookEdm.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CB_ContactBook">
     <Key>
       <PropertyRef Name="BookId" />
     </Key>
     <Property Type="Int64" Name="BookId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="100" FixedLength="false" />
-    <Property Type="String" Name="Lastname" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Middlename" Nullable="true" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Lastname" Nullable="true" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Middlename" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Numbers" Relationship="ContactBookEdm.ContactBookContactNumber" FromRole="ContactBook" ToRole="ContactNumber" />
     <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactBook" ToRole="ContactEmail" />
     <NavigationProperty Name="CB_Book_GroupTypes" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
     <NavigationProperty Name="CB_Addresses" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactBook" ToRole="ContactAddress" />
     <NavigationProperty Name="CB_Suffix" Relationship="ContactBookEdm.Default_SuffixContactBook" FromRole="ContactBook" ToRole="Default_Suffix" />
     <Property Type="Int32" Name="SuffixId" Nullable="true" />
-    <Property Type="String" Name="PhFirstname" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="PhMiddlename" Nullable="true" />
-    <Property Type="String" Name="PhSurname" Nullable="true" />
-    <Property Type="String" Name="CompanyName" Nullable="true" />
-    <Property Type="String" Name="JobTitle" Nullable="false" />
+    <Property Type="String" Name="PhFirstname" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="PhMiddlename" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="PhSurname" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="JobTitle" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_IMs" Relationship="ContactBookEdm.ContactBookIM" FromRole="ContactBook" ToRole="IM" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="String" Name="NickName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="NickName" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Websites" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactBook" ToRole="ContactWebsite" />
     <NavigationProperty Name="CB_Relationships" Relationship="ContactBookEdm.ContactBookContactRelationship" FromRole="ContactBook" ToRole="ContactRelationship" />
     <NavigationProperty Name="CB_SpecialDates" Relationship="ContactBookEdm.ContactBookContactSpecialDates" FromRole="ContactBook" ToRole="ContactSpecialDates" />
@@ -123,7 +139,7 @@
     <Property Type="Int32" Name="NumberId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactNumber" FromRole="ContactNumber" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
-    <Property Type="String" Name="Number" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Number" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_NumberType" Relationship="ContactBookEdm.Custom_NumberTypeContactNumber" FromRole="ContactNumber" ToRole="Custom_NumberType" />
     <Property Type="Int32" Name="NumberTypeId" Nullable="true" />
   </EntityType>
@@ -134,7 +150,7 @@
     <Property Type="Int32" Name="EmailId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactEmail" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
-    <Property Type="String" Name="Email" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_EmailType" Relationship="ContactBookEdm.Custom_EmailTypeContactEmail" FromRole="ContactEmail" ToRole="Custom_EmailType" />
     <Property Type="Int32" Name="EmailTypeId" Nullable="true" />
   </EntityType>
@@ -145,7 +161,7 @@
     <Property Type="Int32" Name="AddressId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactAddress" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
-    <Property Type="String" Name="Address" Nullable="false" MaxLength="6000" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_AddressType" Relationship="ContactBookEdm.Custom_AddressTypeContactAddress" FromRole="ContactAddress" ToRole="Custom_AddressType" />
     <Property Type="Int32" Name="AddressTypeId" Nullable="true" />
   </EntityType>
@@ -154,9 +170,9 @@
       <PropertyRef Name="GroupId" />
     </Key>
     <Property Type="Int32" Name="GroupId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Group_TypeName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Group_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Group_TypeName" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Group_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Book_GroupTypes" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactGroup" ToRole="ContactBookAndGroup" />
   </EntityType>
   <Association Name="ContactBookContactNumber">
@@ -188,9 +204,9 @@
       <PropertyRef Name="NumberTypeId" />
     </Key>
     <Property Type="Int32" Name="NumberTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Number_TypeName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Number_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Number_TypeName" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Number_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Numbers" Relationship="ContactBookEdm.Custom_NumberTypeContactNumber" FromRole="Custom_NumberType" ToRole="ContactNumber" />
   </EntityType>
   <EntityType Name="CB_Book_GroupTypes">
@@ -244,9 +260,9 @@
       <PropertyRef Name="AddressTypeId" />
     </Key>
     <Property Type="Int32" Name="AddressTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Address_TypeName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Address_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Address_TypeName" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Address_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Address" Relationship="ContactBookEdm.Custom_AddressTypeContactAddress" FromRole="Custom_AddressType" ToRole="ContactAddress" />
   </EntityType>
   <Association Name="Custom_NumberTypeContactNumber">
@@ -278,9 +294,9 @@
       <PropertyRef Name="EmailTypeId" />
     </Key>
     <Property Type="Int32" Name="EmailTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Email_TypeName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Email_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Email_TypeName" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Email_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.Custom_EmailTypeContactEmail" FromRole="Custom_EmailType" ToRole="ContactEmail" />
   </EntityType>
   <Association Name="Custom_EmailTypeContactEmail">
@@ -300,7 +316,7 @@
       <PropertyRef Name="SuffixId" />
     </Key>
     <Property Type="Int32" Name="SuffixId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Suffix" Nullable="false" />
+    <Property Type="String" Name="Suffix" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_ContactBooks" Relationship="ContactBookEdm.Default_SuffixContactBook" FromRole="Default_Suffix" ToRole="ContactBook" />
   </EntityType>
   <Association Name="Default_SuffixContactBook">
@@ -320,7 +336,7 @@
       <PropertyRef Name="IMId" />
     </Key>
     <Property Type="Int32" Name="IMId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Username" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookIM" FromRole="IM" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
     <NavigationProperty Name="CB_IMType" Relationship="ContactBookEdm.Custom_IMTypeIM" FromRole="IM" ToRole="Custom_IMType" />
@@ -343,10 +359,10 @@
       <PropertyRef Name="IMTypeId" />
     </Key>
     <Property Type="Int32" Name="IMTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="IM_TypeName" Nullable="false" MaxLength="30" />
-    <Property Type="String" Name="IMLogoPath" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="IM_TypeName" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="IMLogoPath" Nullable="true" MaxLength="2000" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_IMs" Relationship="ContactBookEdm.Custom_IMTypeIM" FromRole="Custom_IMType" ToRole="IM" />
-    <Property Type="String" Name="IM_TypeCode" Nullable="false" MaxLength="1" DefaultValue="C" />
+    <Property Type="String" Name="IM_TypeCode" Nullable="false" MaxLength="1" DefaultValue="C" Unicode="true" FixedLength="false" />
   </EntityType>
   <Association Name="Custom_IMTypeIM">
     <End Type="ContactBookEdm.CB_IMType" Role="Custom_IMType" Multiplicity="0..1" />
@@ -365,7 +381,7 @@
       <PropertyRef Name="WebsiteId" />
     </Key>
     <Property Type="Int32" Name="WebsiteId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Website" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="Website" Nullable="true" MaxLength="1000" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactWebsite" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
   </EntityType>
@@ -408,9 +424,9 @@
       <PropertyRef Name="RelationshipTypeId" />
     </Key>
     <Property Type="Int32" Name="RelationshipTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Relationship_TypeName" Nullable="false" />
-    <Property Type="String" Name="Relationship_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Relationship_TypeName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Relationship_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_Relationships" Relationship="ContactBookEdm.Custom_RelationshipTypeContactRelationship" FromRole="Custom_RelationshipType" ToRole="ContactRelationship" />
   </EntityType>
   <Association Name="Custom_RelationshipTypeContactRelationship">
@@ -432,7 +448,7 @@
     <Property Type="Int32" Name="SpecialDateId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactSpecialDates" FromRole="ContactSpecialDates" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
-    <Property Type="DateTime" Name="Dates" Nullable="false" />
+    <Property Type="DateTime" Name="Dates" Nullable="false" Precision="3" />
     <NavigationProperty Name="CB_SpecialDateType" Relationship="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" FromRole="ContactSpecialDates" ToRole="Custom_SpecialDateType" />
     <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" />
   </EntityType>
@@ -453,9 +469,9 @@
       <PropertyRef Name="SpecialDateTpId" />
     </Key>
     <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="Date_TypeName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Date_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Date_TypeName" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Date_TypeCode" Nullable="false" DefaultValue="C" MaxLength="1" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_SpecialDates" Relationship="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" FromRole="Custom_SpecialDateType" ToRole="ContactSpecialDates" />
   </EntityType>
   <Association Name="Custom_SpecialDateTypeContactSpecialDates">
@@ -475,7 +491,7 @@
       <PropertyRef Name="InternetCallId" />
     </Key>
     <Property Type="Int32" Name="InternetCallId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="InternetCallNumber" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="InternetCallNumber" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.ContactBookContactInternetCall" FromRole="ContactInternetCall" ToRole="ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
   </EntityType>
@@ -490,5 +506,86 @@
         <PropertyRef Name="BookId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="ContactBookEdm.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ClaimType" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ClaimValue" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ContactBookEdm.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="String" Name="LoginProvider" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ProviderKey" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ContactBookEdm.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+    <Property Type="String" Name="PasswordHash" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="SecurityStamp" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PhoneNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="PhoneNumberConfirmed" Nullable="false" />
+    <Property Type="Boolean" Name="TwoFactorEnabled" Nullable="false" />
+    <Property Type="DateTime" Name="LockoutEndDateUtc" Precision="3" />
+    <Property Type="Boolean" Name="LockoutEnabled" Nullable="false" />
+    <Property Type="Int32" Name="AccessFailedCount" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="ContactBookEdm.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="ContactBookEdm.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="ContactBookEdm.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="ContactBookEdm.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ContactBookEdm.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="ContactBookEdm.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ContactBookEdm.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="ContactBookEdm.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="ContactBookEdm.AspNetUser" Role="AspNetUser" Multiplicity="*" />
   </Association>
 </Schema>

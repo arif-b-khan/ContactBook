@@ -12,6 +12,7 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using ContactBook.WebApi.Context;
 
 
 namespace ContactBook.WebApi
@@ -22,7 +23,7 @@ namespace ContactBook.WebApi
         {
             PublicClientId = "self";
 
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()));
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
