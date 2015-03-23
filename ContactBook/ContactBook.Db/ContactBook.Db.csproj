@@ -128,7 +128,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\Partials\AspNetUser.cs" />
     <Compile Include="Data\Partials\CB_Address.cs" />
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Implementation\ContactBookDbRepository.cs" />

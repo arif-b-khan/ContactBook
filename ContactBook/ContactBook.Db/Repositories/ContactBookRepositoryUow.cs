@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Dynamic;
+using System.Reflection;
 
 namespace ContactBook.Db.Repositories
 {
@@ -13,25 +15,41 @@ namespace ContactBook.Db.Repositories
     {
         bool disposed = false;
         DbContext container;
-        Lazy<ContactBookDbRepository<CB_Address>> lazyAddress;
-        
+        IDictionary<string, Type> entityDictionary = new Dictionary<string, Type>();
+        IDictionary<string, object> cachedInstance = new Dictionary<string, object>();
+
         public ContactBookRepositoryUow(DbContext container)
         {
             this.container = container;
-            lazyAddress = new Lazy<ContactBookDbRepository<CB_Address>>(() =>
-            {
-                return new ContactBookDbRepository<CB_Address>(container as ContactBookEdmContainer);
-            });
-        }
 
-        public ContactBookDbRepository<CB_Address> Address
-        {
-            get
+            var types = Assembly.Load("ContactBook.Db").GetTypes()
+                .Where(w =>
+                {
+                    var type = typeof(ContactBookDbRepository<>).MakeGenericType(w);
+                    return type.IsAssignableFrom(w);
+                });
+
+            foreach (Type itemType in types)
             {
-                return lazyAddress.Value;
+                entityDictionary.Add(itemType.Name, itemType);
             }
         }
 
+        public T GetEntityByType<T>()
+        {
+            string key = typeof(T).Name;
+
+            if (entityDictionary.ContainsKey(key))
+            {
+                if (!cachedInstance.ContainsKey(key))
+                {
+                    cachedInstance.Add(key, Activator.CreateInstance(entityDictionary[key], container));
+                }
+                return (T)cachedInstance[key];
+            }
+
+            return default(T);
+        }
 
         public void Dispose()
         {

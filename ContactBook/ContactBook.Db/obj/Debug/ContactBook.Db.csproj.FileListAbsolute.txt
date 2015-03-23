@@ -2,7 +2,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBo
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.pdb
-C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll.config
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.csprojResolveAssemblyReference.cache

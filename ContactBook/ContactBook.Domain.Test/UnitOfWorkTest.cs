@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using ContactBook.Db.Data;
 
 namespace ContactBook.Domain.Test
 {
@@ -16,6 +17,9 @@ namespace ContactBook.Domain.Test
         [Fact]
         public void AddressAdd()
         {
+            ContactBookRepositoryUow work = new ContactBookRepositoryUow(new ContactBookEdmContainer());
+            var address = work.GetEntityByType<CB_Address>();
+            
             ////arrange
             ////UnitOfWork work = new UnitOfWork();
             //IUnityContainer container = new UnityContainer()

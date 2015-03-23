@@ -14,11 +14,7 @@ namespace ContactBook.Db.Implementation
     {
         DbContext context;
         DbSet<T> dbSet;
-        public ContactBookDbRepository()
-            : this(new ContactBookEdmContainer())
-        {
-
-        }
+        
         public ContactBookDbRepository(ContactBookEdmContainer con)
         {
             this.context = con;
