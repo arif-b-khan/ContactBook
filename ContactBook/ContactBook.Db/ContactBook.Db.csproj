@@ -71,6 +71,9 @@
     <Compile Include="Data\CB_ContactBook.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\CB_Contacts.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\CB_Email.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
@@ -107,9 +110,6 @@
     <Compile Include="Data\CB_SpecialDateType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\CB_Suffix.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\CB_Website.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
@@ -128,12 +128,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\Partials\CB_Address.cs" />
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
-    <Compile Include="Implementation\ContactBookDbRepository.cs" />
+    <Compile Include="Repositories\ContactBookDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContactBookRepositoryUow.cs" />
     <Compile Include="Repositories\IContactBookRepository.cs" />
+    <Compile Include="Repositories\IContactBookRepositoryUow.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Data\ContactBookEdm.edmx">
@@ -142,6 +142,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Data\ContactBookEdm.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
@@ -161,7 +162,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ContactBookEdm.edmx.sql" />
+    <Content Include="DefaultData.edmx.sql" />
+    <Content Include="Data\ContactBookEdm.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

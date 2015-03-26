@@ -25,7 +25,7 @@ namespace ContactBook.Db.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<CB_ContactBook> CB_ContactBook { get; set; }
+        public DbSet<CB_Contacts> CB_Contacts { get; set; }
         public DbSet<CB_Number> CB_Number { get; set; }
         public DbSet<CB_Email> CB_Email { get; set; }
         public DbSet<CB_Address> CB_Address { get; set; }
@@ -34,7 +34,6 @@ namespace ContactBook.Db.Data
         public DbSet<CB_Book_GroupTypes> CB_Book_GroupTypes { get; set; }
         public DbSet<CB_AddressType> CB_AddressType { get; set; }
         public DbSet<CB_EmailType> CB_EmailType { get; set; }
-        public DbSet<CB_Suffix> CB_Suffix { get; set; }
         public DbSet<CB_IM> CB_IM { get; set; }
         public DbSet<CB_IMType> CB_IMType { get; set; }
         public DbSet<CB_Website> CB_Website { get; set; }
@@ -47,5 +46,6 @@ namespace ContactBook.Db.Data
         public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }
+        public DbSet<CB_ContactBook> CB_ContactBook { get; set; }
     }
 }

@@ -15,11 +15,11 @@ namespace ContactBook.Db.Data
     public partial class CB_SpecialDates
     {
         public int SpecialDateId { get; set; }
-        public long BookId { get; set; }
+        public long ContactId { get; set; }
         public System.DateTime Dates { get; set; }
         public int SpecialDateTpId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
         public virtual CB_SpecialDateType CB_SpecialDateType { get; set; }
     }
 }

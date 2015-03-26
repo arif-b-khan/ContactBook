@@ -1,5 +1,4 @@
 ﻿using ContactBook.Db.Data;
-using ContactBook.Db.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +10,7 @@ using System.Reflection;
 
 namespace ContactBook.Db.Repositories
 {
-    public class ContactBookRepositoryUow : IDisposable
+    public class ContactBookRepositoryUow : IDisposable, IContactBookRepositoryUow
     {
         bool disposed = false;
         DbContext container;
@@ -25,17 +24,15 @@ namespace ContactBook.Db.Repositories
             var types = Assembly.Load("ContactBook.Db").GetTypes()
                 .Where(w =>
                 {
-                    var type = typeof(ContactBookDbRepository<>).MakeGenericType(w);
-                    return type.IsAssignableFrom(w);
+                    return w.Name.StartsWith("CB_") && w.Namespace.Equals("ContactBook.Db.Data");
                 });
-
             foreach (Type itemType in types)
             {
                 entityDictionary.Add(itemType.Name, itemType);
             }
         }
 
-        public T GetEntityByType<T>()
+        public ContactBookDbRepository<T> GetEntityByType<T>() where T : class
         {
             string key = typeof(T).Name;
 
@@ -43,12 +40,35 @@ namespace ContactBook.Db.Repositories
             {
                 if (!cachedInstance.ContainsKey(key))
                 {
-                    cachedInstance.Add(key, Activator.CreateInstance(entityDictionary[key], container));
+                    lock (cachedInstance)
+                    {
+                        if (!cachedInstance.ContainsKey(key))
+                        {
+                            var contactDbRepoType = typeof(ContactBookDbRepository<>).MakeGenericType(entityDictionary[key]);
+                            cachedInstance.Add(key, Activator.CreateInstance(contactDbRepoType, container));
+                        }
+                    }
                 }
-                return (T)cachedInstance[key];
+                return (ContactBookDbRepository<T>)cachedInstance[key];
+            }
+            return default(ContactBookDbRepository<T>);
+        }
+        
+        public bool Save()
+        {
+            bool result = false;
+            
+            try
+            {
+                container.SaveChanges();
+                result = true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw;
             }
 
-            return default(T);
+            return result;
         }
 
         public void Dispose()
@@ -57,7 +77,7 @@ namespace ContactBook.Db.Repositories
             GC.SuppressFinalize(this);
         }
 
-        private void Dispose(bool managedDisposed)
+        protected virtual void Dispose(bool managedDisposed)
         {
             if (!disposed)
             {

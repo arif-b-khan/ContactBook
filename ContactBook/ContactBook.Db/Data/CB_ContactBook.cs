@@ -16,40 +16,29 @@ namespace ContactBook.Db.Data
     {
         public CB_ContactBook()
         {
-            this.CB_Numbers = new HashSet<CB_Number>();
-            this.CB_Emails = new HashSet<CB_Email>();
-            this.CB_Book_GroupTypes = new HashSet<CB_Book_GroupTypes>();
-            this.CB_Addresses = new HashSet<CB_Address>();
-            this.CB_IMs = new HashSet<CB_IM>();
-            this.CB_Websites = new HashSet<CB_Website>();
-            this.CB_Relationships = new HashSet<CB_Relationship>();
-            this.CB_SpecialDates = new HashSet<CB_SpecialDates>();
-            this.CB_InternetCalls = new HashSet<CB_InternetCall>();
+            this.CB_Contacts = new HashSet<CB_Contacts>();
+            this.CB_RelationshipType = new HashSet<CB_RelationshipType>();
+            this.CB_NumberType = new HashSet<CB_NumberType>();
+            this.CB_AddressType = new HashSet<CB_AddressType>();
+            this.CB_SpecialDateType = new HashSet<CB_SpecialDateType>();
+            this.CB_EmailType = new HashSet<CB_EmailType>();
+            this.CB_Group = new HashSet<CB_Group>();
+            this.CB_IMType = new HashSet<CB_IMType>();
         }
     
         public long BookId { get; set; }
-        public string UserId { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Middlename { get; set; }
-        public Nullable<int> SuffixId { get; set; }
-        public string PhFirstname { get; set; }
-        public string PhMiddlename { get; set; }
-        public string PhSurname { get; set; }
-        public string CompanyName { get; set; }
-        public string JobTitle { get; set; }
-        public string Notes { get; set; }
-        public string NickName { get; set; }
+        public string BookName { get; set; }
+        public bool Enbaled { get; set; }
+        public string AspNetUserId { get; set; }
     
-        public virtual ICollection<CB_Number> CB_Numbers { get; set; }
-        public virtual ICollection<CB_Email> CB_Emails { get; set; }
-        public virtual ICollection<CB_Book_GroupTypes> CB_Book_GroupTypes { get; set; }
-        public virtual ICollection<CB_Address> CB_Addresses { get; set; }
-        public virtual CB_Suffix CB_Suffix { get; set; }
-        public virtual ICollection<CB_IM> CB_IMs { get; set; }
-        public virtual ICollection<CB_Website> CB_Websites { get; set; }
-        public virtual ICollection<CB_Relationship> CB_Relationships { get; set; }
-        public virtual ICollection<CB_SpecialDates> CB_SpecialDates { get; set; }
-        public virtual ICollection<CB_InternetCall> CB_InternetCalls { get; set; }
+        public virtual ICollection<CB_Contacts> CB_Contacts { get; set; }
+        public virtual ICollection<CB_RelationshipType> CB_RelationshipType { get; set; }
+        public virtual ICollection<CB_NumberType> CB_NumberType { get; set; }
+        public virtual ICollection<CB_AddressType> CB_AddressType { get; set; }
+        public virtual ICollection<CB_SpecialDateType> CB_SpecialDateType { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ICollection<CB_EmailType> CB_EmailType { get; set; }
+        public virtual ICollection<CB_Group> CB_Group { get; set; }
+        public virtual ICollection<CB_IMType> CB_IMType { get; set; }
     }
 }

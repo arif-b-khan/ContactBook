@@ -1,5 +1,4 @@
 ﻿using ContactBook.Db.Data;
-using ContactBook.Db.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactBook.Db.Implementation
+namespace ContactBook.Db.Repositories
 {
     public class ContactBookDbRepository<T> : IContactBookRepository<T> where T : class
     {

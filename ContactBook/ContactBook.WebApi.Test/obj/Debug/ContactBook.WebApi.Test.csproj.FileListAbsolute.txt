@@ -126,3 +126,6 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\ContactBook.Db.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\ContactBook.Db.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\ContactBook.Db.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.xml

@@ -16,10 +16,10 @@ namespace ContactBook.Db.Data
     {
         public int IMId { get; set; }
         public string Username { get; set; }
-        public long BookId { get; set; }
-        public Nullable<int> IMTypeId { get; set; }
+        public long ContactId { get; set; }
+        public int IMTypeId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
         public virtual CB_IMType CB_IMType { get; set; }
     }
 }

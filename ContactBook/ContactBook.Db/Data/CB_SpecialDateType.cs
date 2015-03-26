@@ -16,15 +16,14 @@ namespace ContactBook.Db.Data
     {
         public CB_SpecialDateType()
         {
-            this.Date_TypeCode = "C";
             this.CB_SpecialDates = new HashSet<CB_SpecialDates>();
         }
     
         public int SpecialDateTpId { get; set; }
-        public string UserId { get; set; }
         public string Date_TypeName { get; set; }
-        public string Date_TypeCode { get; set; }
+        public Nullable<long> BookId { get; set; }
     
         public virtual ICollection<CB_SpecialDates> CB_SpecialDates { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

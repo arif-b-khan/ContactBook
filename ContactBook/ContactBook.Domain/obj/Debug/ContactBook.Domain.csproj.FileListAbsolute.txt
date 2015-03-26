@@ -22,3 +22,8 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Entit
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\ContactBook.Db.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\EntityFramework.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\obj\Debug\ContactBook.Domain.csprojResolveAssemblyReference.cache
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.Net4.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.Net4.pdb

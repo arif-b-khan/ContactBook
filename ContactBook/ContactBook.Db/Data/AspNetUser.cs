@@ -19,6 +19,7 @@ namespace ContactBook.Db.Data
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.CB_ContactBook = new HashSet<CB_ContactBook>();
         }
     
         public string Id { get; set; }
@@ -37,5 +38,6 @@ namespace ContactBook.Db.Data
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<CB_ContactBook> CB_ContactBook { get; set; }
     }
 }

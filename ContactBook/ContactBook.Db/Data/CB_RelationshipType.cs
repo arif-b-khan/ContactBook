@@ -16,15 +16,14 @@ namespace ContactBook.Db.Data
     {
         public CB_RelationshipType()
         {
-            this.Relationship_TypeCode = "C";
             this.CB_Relationships = new HashSet<CB_Relationship>();
         }
     
         public int RelationshipTypeId { get; set; }
-        public string UserId { get; set; }
         public string Relationship_TypeName { get; set; }
-        public string Relationship_TypeCode { get; set; }
+        public Nullable<long> BookId { get; set; }
     
         public virtual ICollection<CB_Relationship> CB_Relationships { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

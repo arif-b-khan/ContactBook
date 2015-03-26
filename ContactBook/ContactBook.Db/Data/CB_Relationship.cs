@@ -15,10 +15,10 @@ namespace ContactBook.Db.Data
     public partial class CB_Relationship
     {
         public int RelationshipId { get; set; }
-        public long BookId { get; set; }
+        public long ContactId { get; set; }
         public Nullable<int> RelationshipTypeId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
         public virtual CB_RelationshipType CB_RelationshipType { get; set; }
     }
 }

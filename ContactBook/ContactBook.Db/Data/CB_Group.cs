@@ -16,15 +16,14 @@ namespace ContactBook.Db.Data
     {
         public CB_Group()
         {
-            this.Group_TypeCode = "C";
             this.CB_Book_GroupTypes = new HashSet<CB_Book_GroupTypes>();
         }
     
         public int GroupId { get; set; }
-        public string UserId { get; set; }
         public string Group_TypeName { get; set; }
-        public string Group_TypeCode { get; set; }
+        public Nullable<long> BookId { get; set; }
     
         public virtual ICollection<CB_Book_GroupTypes> CB_Book_GroupTypes { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

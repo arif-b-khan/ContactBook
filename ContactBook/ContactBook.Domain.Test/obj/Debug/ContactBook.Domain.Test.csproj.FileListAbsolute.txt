@@ -54,3 +54,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\obj\Debug\ContactBook.Domain.Test.csprojResolveAssemblyReference.cache
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\obj\Debug\ContactBook.Domain.Test.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\obj\Debug\ContactBook.Domain.Test.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.xml

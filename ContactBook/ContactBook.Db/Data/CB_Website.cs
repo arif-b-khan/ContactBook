@@ -16,8 +16,8 @@ namespace ContactBook.Db.Data
     {
         public int WebsiteId { get; set; }
         public string Website { get; set; }
-        public long BookId { get; set; }
+        public long ContactId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
     }
 }

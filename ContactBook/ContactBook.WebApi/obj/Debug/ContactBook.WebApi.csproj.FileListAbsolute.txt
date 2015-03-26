@@ -324,3 +324,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.Configuration.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.xml

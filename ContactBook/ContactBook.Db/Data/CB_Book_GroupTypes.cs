@@ -15,10 +15,10 @@ namespace ContactBook.Db.Data
     public partial class CB_Book_GroupTypes
     {
         public int GroupRelationId { get; set; }
-        public long BookId { get; set; }
+        public long ContactId { get; set; }
         public Nullable<int> GroupId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
         public virtual CB_Group CB_Group { get; set; }
     }
 }

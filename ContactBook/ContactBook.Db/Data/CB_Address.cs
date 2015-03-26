@@ -15,11 +15,11 @@ namespace ContactBook.Db.Data
     public partial class CB_Address
     {
         public int AddressId { get; set; }
-        public long BookId { get; set; }
+        public long ContactId { get; set; }
         public string Address { get; set; }
         public Nullable<int> AddressTypeId { get; set; }
     
-        public virtual CB_ContactBook CB_ContactBook { get; set; }
+        public virtual CB_Contacts CB_Contacts { get; set; }
         public virtual CB_AddressType CB_AddressType { get; set; }
     }
 }

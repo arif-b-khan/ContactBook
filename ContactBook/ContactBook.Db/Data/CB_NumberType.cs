@@ -16,15 +16,14 @@ namespace ContactBook.Db.Data
     {
         public CB_NumberType()
         {
-            this.Number_TypeCode = "C";
             this.CB_Numbers = new HashSet<CB_Number>();
         }
     
         public int NumberTypeId { get; set; }
-        public string UserId { get; set; }
         public string Number_TypeName { get; set; }
-        public string Number_TypeCode { get; set; }
+        public Nullable<long> BookId { get; set; }
     
         public virtual ICollection<CB_Number> CB_Numbers { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }

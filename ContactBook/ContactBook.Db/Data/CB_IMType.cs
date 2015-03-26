@@ -16,15 +16,15 @@ namespace ContactBook.Db.Data
     {
         public CB_IMType()
         {
-            this.IM_TypeCode = "C";
             this.CB_IMs = new HashSet<CB_IM>();
         }
     
         public int IMTypeId { get; set; }
         public string IM_TypeName { get; set; }
         public string IMLogoPath { get; set; }
-        public string IM_TypeCode { get; set; }
+        public Nullable<long> BookId { get; set; }
     
         public virtual ICollection<CB_IM> CB_IMs { get; set; }
+        public virtual CB_ContactBook CB_ContactBook { get; set; }
     }
 }
