@@ -8,14 +8,12 @@
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ContactBook];
+USE [ContactBookTest];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
 IF OBJECT_ID(N'[dbo].[CB_NumberType]', 'U') IS NOT NULL
 BEGIN
-	DELETE CB_NumberType
-	DBCC CHECKIDENT ('CB_NumberType', RESEED, 0)
 	INSERT INTO CB_NumberType(BookId, Number_TypeName) values (null, 'Mobile')
 	INSERT INTO CB_NumberType(BookId, Number_TypeName) values (null, 'Work')
 	INSERT INTO CB_NumberType(BookId, Number_TypeName) values (null, 'Home')
@@ -28,8 +26,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[CB_EmailType]', 'U') IS NOT NULL
 BEGIN
-	DELETE CB_EmailType
-	DBCC CHECKIDENT ('CB_EmailType', RESEED, 0)
 	INSERT INTO CB_EmailType(BookId,Email_TypeName) values (null, 'Home')
 	INSERT INTO CB_EmailType(BookId,Email_TypeName) values (null, 'Work')
 	INSERT INTO CB_EmailType(BookId,Email_TypeName) values (null, 'Other')

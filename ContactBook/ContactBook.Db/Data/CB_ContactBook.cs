@@ -16,29 +16,28 @@ namespace ContactBook.Db.Data
     {
         public CB_ContactBook()
         {
-            this.CB_Contacts = new HashSet<CB_Contacts>();
+            this.CB_Contacts = new HashSet<CB_Contact>();
             this.CB_RelationshipType = new HashSet<CB_RelationshipType>();
             this.CB_NumberType = new HashSet<CB_NumberType>();
             this.CB_AddressType = new HashSet<CB_AddressType>();
             this.CB_SpecialDateType = new HashSet<CB_SpecialDateType>();
             this.CB_EmailType = new HashSet<CB_EmailType>();
-            this.CB_Group = new HashSet<CB_Group>();
+            this.CB_GroupTypes = new HashSet<CB_GroupType>();
             this.CB_IMType = new HashSet<CB_IMType>();
         }
     
         public long BookId { get; set; }
         public string BookName { get; set; }
-        public bool Enbaled { get; set; }
+        public bool Enabled { get; set; }
         public string AspNetUserId { get; set; }
     
-        public virtual ICollection<CB_Contacts> CB_Contacts { get; set; }
+        public virtual ICollection<CB_Contact> CB_Contacts { get; set; }
         public virtual ICollection<CB_RelationshipType> CB_RelationshipType { get; set; }
         public virtual ICollection<CB_NumberType> CB_NumberType { get; set; }
         public virtual ICollection<CB_AddressType> CB_AddressType { get; set; }
         public virtual ICollection<CB_SpecialDateType> CB_SpecialDateType { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<CB_EmailType> CB_EmailType { get; set; }
-        public virtual ICollection<CB_Group> CB_Group { get; set; }
+        public virtual ICollection<CB_GroupType> CB_GroupTypes { get; set; }
         public virtual ICollection<CB_IMType> CB_IMType { get; set; }
     }
 }

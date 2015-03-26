@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace ContactBook.Db.Repositories
 {
-    public class ContactBookRepositoryUow : IDisposable, IContactBookRepositoryUow
+    public class ContactBookRepositoryUow : IContactBookRepositoryUow
     {
         bool disposed = false;
         DbContext container;
@@ -24,7 +24,7 @@ namespace ContactBook.Db.Repositories
             var types = Assembly.Load("ContactBook.Db").GetTypes()
                 .Where(w =>
                 {
-                    return w.Name.StartsWith("CB_") && w.Namespace.Equals("ContactBook.Db.Data");
+                    return w.Namespace.Equals("ContactBook.Db.Data");
                 });
             foreach (Type itemType in types)
             {

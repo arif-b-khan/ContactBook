@@ -18,6 +18,6 @@ namespace ContactBook.Db.Data
         public string InternetCallNumber { get; set; }
         public long ContactId { get; set; }
     
-        public virtual CB_Contacts CB_Contacts { get; set; }
+        public virtual CB_Contact CB_Contacts { get; set; }
     }
 }

@@ -57,3 +57,9 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\obj\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.Net4.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\EntityFramework.SqlServer.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\EntityFramework.SqlServer.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.Net4.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\Moq.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\Moq.xml

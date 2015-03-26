@@ -6,13 +6,13 @@
     <edmx:StorageModels>
     <Schema Namespace="ContactBookEdm.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ContactBookEdmStoreContainer">
-    <EntitySet Name="CB_Contacts" EntityType="ContactBookEdm.Store.CB_Contacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CB_Contact" EntityType="ContactBookEdm.Store.CB_Contact" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_Number" EntityType="ContactBookEdm.Store.CB_Number" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_Email" EntityType="ContactBookEdm.Store.CB_Email" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_Address" EntityType="ContactBookEdm.Store.CB_Address" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CB_Group" EntityType="ContactBookEdm.Store.CB_Group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CB_GroupType" EntityType="ContactBookEdm.Store.CB_GroupType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_NumberType" EntityType="ContactBookEdm.Store.CB_NumberType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CB_Book_GroupTypes" EntityType="ContactBookEdm.Store.CB_Book_GroupTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CB_ContactByGroup" EntityType="ContactBookEdm.Store.CB_ContactByGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_AddressType" EntityType="ContactBookEdm.Store.CB_AddressType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_EmailType" EntityType="ContactBookEdm.Store.CB_EmailType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_IM" EntityType="ContactBookEdm.Store.CB_IM" store:Type="Tables" Schema="dbo" />
@@ -30,23 +30,23 @@
     <EntitySet Name="CB_ContactBook" EntityType="ContactBookEdm.Store.CB_ContactBook" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AspNetUserRoles" EntityType="ContactBookEdm.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ContactBookContactNumber" Association="ContactBookEdm.Store.ContactBookContactNumber">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactNumber" EntitySet="CB_Number" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactEmail" Association="ContactBookEdm.Store.ContactBookContactEmail">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactEmail" EntitySet="CB_Email" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactBookAndGroup" Association="ContactBookEdm.Store.ContactBookContactBookAndGroup">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
-      <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
+      <End Role="ContactBookAndGroup" EntitySet="CB_ContactByGroup" />
     </AssociationSet>
     <AssociationSet Name="ContactGroupContactBookAndGroup" Association="ContactBookEdm.Store.ContactGroupContactBookAndGroup">
-      <End Role="ContactGroup" EntitySet="CB_Group" />
-      <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+      <End Role="ContactGroup" EntitySet="CB_GroupType" />
+      <End Role="ContactBookAndGroup" EntitySet="CB_ContactByGroup" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactAddress" Association="ContactBookEdm.Store.ContactBookContactAddress">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactAddress" EntitySet="CB_Address" />
     </AssociationSet>
     <AssociationSet Name="Custom_NumberTypeContactNumber" Association="ContactBookEdm.Store.Custom_NumberTypeContactNumber">
@@ -62,7 +62,7 @@
       <End Role="ContactEmail" EntitySet="CB_Email" />
     </AssociationSet>
     <AssociationSet Name="ContactBookIM" Association="ContactBookEdm.Store.ContactBookIM">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="IM" EntitySet="CB_IM" />
     </AssociationSet>
     <AssociationSet Name="Custom_IMTypeIM" Association="ContactBookEdm.Store.Custom_IMTypeIM">
@@ -70,11 +70,11 @@
       <End Role="IM" EntitySet="CB_IM" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactWebsite" Association="ContactBookEdm.Store.ContactBookContactWebsite">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactWebsite" EntitySet="CB_Website" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactRelationship" Association="ContactBookEdm.Store.ContactBookContactRelationship">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactRelationship" EntitySet="CB_Relationship" />
     </AssociationSet>
     <AssociationSet Name="Custom_RelationshipTypeContactRelationship" Association="ContactBookEdm.Store.Custom_RelationshipTypeContactRelationship">
@@ -82,7 +82,7 @@
       <End Role="ContactRelationship" EntitySet="CB_Relationship" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactSpecialDates" Association="ContactBookEdm.Store.ContactBookContactSpecialDates">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
     </AssociationSet>
     <AssociationSet Name="Custom_SpecialDateTypeContactSpecialDates" Association="ContactBookEdm.Store.Custom_SpecialDateTypeContactSpecialDates">
@@ -90,7 +90,7 @@
       <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactInternetCall" Association="ContactBookEdm.Store.ContactBookContactInternetCall">
-      <End Role="ContactBook" EntitySet="CB_Contacts" />
+      <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactInternetCall" EntitySet="CB_InternetCall" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ContactBookEdm.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -111,7 +111,7 @@
     </AssociationSet>
     <AssociationSet Name="CB_ContactBookCB_Contacts" Association="ContactBookEdm.Store.CB_ContactBookCB_Contacts">
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-      <End Role="CB_Contacts" EntitySet="CB_Contacts" />
+      <End Role="CB_Contacts" EntitySet="CB_Contact" />
     </AssociationSet>
     <AssociationSet Name="CB_ContactBookCB_RelationshipType" Association="ContactBookEdm.Store.CB_ContactBookCB_RelationshipType">
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
@@ -129,24 +129,20 @@
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
       <End Role="CB_SpecialDateType" EntitySet="CB_SpecialDateType" />
     </AssociationSet>
-    <AssociationSet Name="AspNetUserCB_ContactBook" Association="ContactBookEdm.Store.AspNetUserCB_ContactBook">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-    </AssociationSet>
     <AssociationSet Name="CB_ContactBookCB_EmailType" Association="ContactBookEdm.Store.CB_ContactBookCB_EmailType">
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
       <End Role="CB_EmailType" EntitySet="CB_EmailType" />
     </AssociationSet>
     <AssociationSet Name="CB_ContactBookCB_Group" Association="ContactBookEdm.Store.CB_ContactBookCB_Group">
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-      <End Role="CB_Group" EntitySet="CB_Group" />
+      <End Role="CB_Group" EntitySet="CB_GroupType" />
     </AssociationSet>
     <AssociationSet Name="CB_ContactBookCB_IMType" Association="ContactBookEdm.Store.CB_ContactBookCB_IMType">
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
       <End Role="CB_IMType" EntitySet="CB_IMType" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="CB_Contacts">
+  <EntityType Name="CB_Contact">
     <Key>
       <PropertyRef Name="ContactId" />
     </Key>
@@ -191,7 +187,7 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AddressTypeId" Type="int" Nullable="true" />
   </EntityType>
-  <EntityType Name="CB_Group">
+  <EntityType Name="CB_GroupType">
     <Key>
       <PropertyRef Name="GroupId" />
     </Key>
@@ -207,7 +203,7 @@
     <Property Name="Number_TypeName" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="BookId" Type="bigint" Nullable="true" />
   </EntityType>
-  <EntityType Name="CB_Book_GroupTypes">
+  <EntityType Name="CB_ContactByGroup">
     <Key>
       <PropertyRef Name="GroupRelationId" />
     </Key>
@@ -347,7 +343,7 @@
     </Key>
     <Property Name="BookId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BookName" Type="nvarchar" Nullable="false" MaxLength="300" />
-    <Property Name="Enbaled" Type="bit" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="AspNetUserId" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
@@ -359,7 +355,7 @@
     <Property Name="AspNetUsers_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
   <Association Name="ContactBookContactNumber">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactNumber" Type="ContactBookEdm.Store.CB_Number" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -371,7 +367,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactEmail">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactEmail" Type="ContactBookEdm.Store.CB_Email" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -383,8 +379,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactBookAndGroup">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
-    <End Role="ContactBookAndGroup" Type="ContactBookEdm.Store.CB_Book_GroupTypes" Multiplicity="*" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
+    <End Role="ContactBookAndGroup" Type="ContactBookEdm.Store.CB_ContactByGroup" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
         <PropertyRef Name="ContactId" />
@@ -395,8 +391,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactGroupContactBookAndGroup">
-    <End Role="ContactGroup" Type="ContactBookEdm.Store.CB_Group" Multiplicity="0..1" />
-    <End Role="ContactBookAndGroup" Type="ContactBookEdm.Store.CB_Book_GroupTypes" Multiplicity="*" />
+    <End Role="ContactGroup" Type="ContactBookEdm.Store.CB_GroupType" Multiplicity="0..1" />
+    <End Role="ContactBookAndGroup" Type="ContactBookEdm.Store.CB_ContactByGroup" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactGroup">
         <PropertyRef Name="GroupId" />
@@ -407,7 +403,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactAddress">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactAddress" Type="ContactBookEdm.Store.CB_Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -455,7 +451,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookIM">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="IM" Type="ContactBookEdm.Store.CB_IM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -479,7 +475,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactWebsite">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactWebsite" Type="ContactBookEdm.Store.CB_Website" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -491,7 +487,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactRelationship">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactRelationship" Type="ContactBookEdm.Store.CB_Relationship" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -515,7 +511,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactSpecialDates">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactSpecialDates" Type="ContactBookEdm.Store.CB_SpecialDates" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -539,7 +535,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactInternetCall">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
     <End Role="ContactInternetCall" Type="ContactBookEdm.Store.CB_InternetCall" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -580,7 +576,7 @@
   </Association>
   <Association Name="CB_ContactBookCB_Contacts">
     <End Role="CB_ContactBook" Type="ContactBookEdm.Store.CB_ContactBook" Multiplicity="1" />
-    <End Role="CB_Contacts" Type="ContactBookEdm.Store.CB_Contacts" Multiplicity="*" />
+    <End Role="CB_Contacts" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CB_ContactBook">
         <PropertyRef Name="BookId" />
@@ -638,18 +634,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="AspNetUserCB_ContactBook">
-    <End Role="AspNetUser" Type="ContactBookEdm.Store.AspNetUsers" Multiplicity="1" />
-    <End Role="CB_ContactBook" Type="ContactBookEdm.Store.CB_ContactBook" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CB_ContactBook">
-        <PropertyRef Name="AspNetUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CB_ContactBookCB_EmailType">
     <End Role="CB_ContactBook" Type="ContactBookEdm.Store.CB_ContactBook" Multiplicity="0..1" />
     <End Role="CB_EmailType" Type="ContactBookEdm.Store.CB_EmailType" Multiplicity="*" />
@@ -664,7 +648,7 @@
   </Association>
   <Association Name="CB_ContactBookCB_Group">
     <End Role="CB_ContactBook" Type="ContactBookEdm.Store.CB_ContactBook" Multiplicity="0..1" />
-    <End Role="CB_Group" Type="ContactBookEdm.Store.CB_Group" Multiplicity="*" />
+    <End Role="CB_Group" Type="ContactBookEdm.Store.CB_GroupType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CB_ContactBook">
         <PropertyRef Name="BookId" />
@@ -715,31 +699,31 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ContactBookEdm" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ContactBookEdmContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CB_Contacts" EntityType="ContactBookEdm.CB_Contacts" />
+          <EntitySet Name="CB_Contact" EntityType="ContactBookEdm.CB_Contact" />
           <EntitySet Name="CB_Number" EntityType="ContactBookEdm.CB_Number" />
           <EntitySet Name="CB_Email" EntityType="ContactBookEdm.CB_Email" />
           <EntitySet Name="CB_Address" EntityType="ContactBookEdm.CB_Address" />
-          <EntitySet Name="CB_Group" EntityType="ContactBookEdm.CB_Group" />
+          <EntitySet Name="CB_GroupType" EntityType="ContactBookEdm.CB_GroupType" />
           <AssociationSet Name="ContactBookContactNumber" Association="ContactBookEdm.ContactBookContactNumber">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactNumber" EntitySet="CB_Number" />
           </AssociationSet>
           <AssociationSet Name="ContactBookContactEmail" Association="ContactBookEdm.ContactBookContactEmail">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactEmail" EntitySet="CB_Email" />
           </AssociationSet>
           <EntitySet Name="CB_NumberType" EntityType="ContactBookEdm.CB_NumberType" />
-          <EntitySet Name="CB_Book_GroupTypes" EntityType="ContactBookEdm.CB_Book_GroupTypes" />
+          <EntitySet Name="CB_ContactByGroup" EntityType="ContactBookEdm.CB_ContactByGroup" />
           <AssociationSet Name="ContactBookContactBookAndGroup" Association="ContactBookEdm.ContactBookContactBookAndGroup">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
-            <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
+            <End Role="ContactBookAndGroup" EntitySet="CB_ContactByGroup" />
           </AssociationSet>
           <AssociationSet Name="ContactGroupContactBookAndGroup" Association="ContactBookEdm.ContactGroupContactBookAndGroup">
-            <End Role="ContactGroup" EntitySet="CB_Group" />
-            <End Role="ContactBookAndGroup" EntitySet="CB_Book_GroupTypes" />
+            <End Role="ContactGroup" EntitySet="CB_GroupType" />
+            <End Role="ContactBookAndGroup" EntitySet="CB_ContactByGroup" />
           </AssociationSet>
           <AssociationSet Name="ContactBookContactAddress" Association="ContactBookEdm.ContactBookContactAddress">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactAddress" EntitySet="CB_Address" />
           </AssociationSet>
           <EntitySet Name="CB_AddressType" EntityType="ContactBookEdm.CB_AddressType" />
@@ -758,7 +742,7 @@
           </AssociationSet>
           <EntitySet Name="CB_IM" EntityType="ContactBookEdm.CB_IM" />
           <AssociationSet Name="ContactBookIM" Association="ContactBookEdm.ContactBookIM">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="IM" EntitySet="CB_IM" />
           </AssociationSet>
           <EntitySet Name="CB_IMType" EntityType="ContactBookEdm.CB_IMType" />
@@ -768,12 +752,12 @@
           </AssociationSet>
           <EntitySet Name="CB_Website" EntityType="ContactBookEdm.CB_Website" />
           <AssociationSet Name="ContactBookContactWebsite" Association="ContactBookEdm.ContactBookContactWebsite">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactWebsite" EntitySet="CB_Website" />
           </AssociationSet>
           <EntitySet Name="CB_Relationship" EntityType="ContactBookEdm.CB_Relationship" />
           <AssociationSet Name="ContactBookContactRelationship" Association="ContactBookEdm.ContactBookContactRelationship">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactRelationship" EntitySet="CB_Relationship" />
           </AssociationSet>
           <EntitySet Name="CB_RelationshipType" EntityType="ContactBookEdm.CB_RelationshipType" />
@@ -783,7 +767,7 @@
           </AssociationSet>
           <EntitySet Name="CB_SpecialDates" EntityType="ContactBookEdm.CB_SpecialDates" />
           <AssociationSet Name="ContactBookContactSpecialDates" Association="ContactBookEdm.ContactBookContactSpecialDates">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
           </AssociationSet>
           <EntitySet Name="CB_SpecialDateType" EntityType="ContactBookEdm.CB_SpecialDateType" />
@@ -793,7 +777,7 @@
           </AssociationSet>
           <EntitySet Name="CB_InternetCall" EntityType="ContactBookEdm.CB_InternetCall" />
           <AssociationSet Name="ContactBookContactInternetCall" Association="ContactBookEdm.ContactBookContactInternetCall">
-            <End Role="ContactBook" EntitySet="CB_Contacts" />
+            <End Role="ContactBook" EntitySet="CB_Contact" />
             <End Role="ContactInternetCall" EntitySet="CB_InternetCall" />
           </AssociationSet>
           <EntitySet Name="AspNetRoles" EntityType="ContactBookEdm.AspNetRole" />
@@ -815,7 +799,7 @@
           <EntitySet Name="CB_ContactBook" EntityType="ContactBookEdm.CB_ContactBook" />
           <AssociationSet Name="CB_ContactBookCB_Contacts" Association="ContactBookEdm.CB_ContactBookCB_Contacts">
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-            <End Role="CB_Contacts" EntitySet="CB_Contacts" />
+            <End Role="CB_Contacts" EntitySet="CB_Contact" />
           </AssociationSet>
           <AssociationSet Name="CB_ContactBookCB_RelationshipType" Association="ContactBookEdm.CB_ContactBookCB_RelationshipType">
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
@@ -833,24 +817,20 @@
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
             <End Role="CB_SpecialDateType" EntitySet="CB_SpecialDateType" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserCB_ContactBook" Association="ContactBookEdm.AspNetUserCB_ContactBook">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-          </AssociationSet>
           <AssociationSet Name="CB_ContactBookCB_EmailType" Association="ContactBookEdm.CB_ContactBookCB_EmailType">
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
             <End Role="CB_EmailType" EntitySet="CB_EmailType" />
           </AssociationSet>
           <AssociationSet Name="CB_ContactBookCB_Group" Association="ContactBookEdm.CB_ContactBookCB_Group">
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
-            <End Role="CB_Group" EntitySet="CB_Group" />
+            <End Role="CB_Group" EntitySet="CB_GroupType" />
           </AssociationSet>
           <AssociationSet Name="CB_ContactBookCB_IMType" Association="ContactBookEdm.CB_ContactBookCB_IMType">
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
             <End Role="CB_IMType" EntitySet="CB_IMType" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="CB_Contacts">
+        <EntityType Name="CB_Contact">
           <Key>
             <PropertyRef Name="ContactId" />
           </Key>
@@ -860,7 +840,7 @@
           <Property Type="String" Name="Middlename" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="CB_Numbers" Relationship="ContactBookEdm.ContactBookContactNumber" FromRole="ContactBook" ToRole="ContactNumber" />
           <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactBook" ToRole="ContactEmail" />
-          <NavigationProperty Name="CB_Book_GroupTypes" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
+          <NavigationProperty Name="CB_ContactByGroups" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
           <NavigationProperty Name="CB_Addresses" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactBook" ToRole="ContactAddress" />
           <Property Type="String" Name="Suffix" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="PhFirstname" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -911,7 +891,7 @@
           <NavigationProperty Name="CB_AddressType" Relationship="ContactBookEdm.Custom_AddressTypeContactAddress" FromRole="ContactAddress" ToRole="Custom_AddressType" />
           <Property Type="Int32" Name="AddressTypeId" Nullable="true" />
         </EntityType>
-        <EntityType Name="CB_Group">
+        <EntityType Name="CB_GroupType">
           <Key>
             <PropertyRef Name="GroupId" />
           </Key>
@@ -922,7 +902,7 @@
           <Property Type="Int64" Name="BookId" Nullable="true" />
         </EntityType>
         <Association Name="ContactBookContactNumber">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_Number" Role="ContactNumber" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -934,7 +914,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ContactBookContactEmail">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_Email" Role="ContactEmail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -955,19 +935,19 @@
           <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.CB_ContactBookCB_NumberType" FromRole="CB_NumberType" ToRole="CB_ContactBook" />
           <Property Type="Int64" Name="BookId" Nullable="true" />
         </EntityType>
-        <EntityType Name="CB_Book_GroupTypes">
+        <EntityType Name="CB_ContactByGroup">
           <Key>
             <PropertyRef Name="GroupRelationId" />
           </Key>
           <Property Type="Int32" Name="GroupRelationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="CB_Contacts" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactBook" />
           <Property Type="Int64" Name="ContactId" Nullable="false" />
-          <NavigationProperty Name="CB_Group" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactGroup" />
+          <NavigationProperty Name="CB_GroupTypes" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactGroup" />
           <Property Type="Int32" Name="GroupId" Nullable="true" />
         </EntityType>
         <Association Name="ContactBookContactBookAndGroup">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
-          <End Type="ContactBookEdm.CB_Book_GroupTypes" Role="ContactBookAndGroup" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_ContactByGroup" Role="ContactBookAndGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
               <PropertyRef Name="ContactId" />
@@ -978,8 +958,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ContactGroupContactBookAndGroup">
-          <End Type="ContactBookEdm.CB_Group" Role="ContactGroup" Multiplicity="0..1" />
-          <End Type="ContactBookEdm.CB_Book_GroupTypes" Role="ContactBookAndGroup" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_GroupType" Role="ContactGroup" Multiplicity="0..1" />
+          <End Type="ContactBookEdm.CB_ContactByGroup" Role="ContactBookAndGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactGroup">
               <PropertyRef Name="GroupId" />
@@ -990,7 +970,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ContactBookContactAddress">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_Address" Role="ContactAddress" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1069,7 +1049,7 @@
           <Property Type="Int32" Name="IMTypeId" Nullable="false" />
         </EntityType>
         <Association Name="ContactBookIM">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_IM" Role="IM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1109,11 +1089,11 @@
           </Key>
           <Property Type="Int32" Name="WebsiteId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Website" Nullable="true" MaxLength="1000" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="CB_Contacts" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactWebsite" ToRole="ContactBook" />
+          <NavigationProperty Name="CB_Contact" Relationship="ContactBookEdm.ContactBookContactWebsite" FromRole="ContactWebsite" ToRole="ContactBook" />
           <Property Type="Int64" Name="ContactId" Nullable="false" />
         </EntityType>
         <Association Name="ContactBookContactWebsite">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_Website" Role="ContactWebsite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1135,7 +1115,7 @@
           <Property Type="Int32" Name="RelationshipTypeId" Nullable="true" />
         </EntityType>
         <Association Name="ContactBookContactRelationship">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_Relationship" Role="ContactRelationship" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1180,7 +1160,7 @@
           <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" />
         </EntityType>
         <Association Name="ContactBookContactSpecialDates">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1223,7 +1203,7 @@
           <Property Type="Int64" Name="ContactId" Nullable="false" />
         </EntityType>
         <Association Name="ContactBookContactInternetCall">
-          <End Type="ContactBookEdm.CB_Contacts" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
           <End Type="ContactBookEdm.CB_InternetCall" Role="ContactInternetCall" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
@@ -1282,7 +1262,6 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="ContactBookEdm.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="ContactBookEdm.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="ContactBookEdm.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-          <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.AspNetUserCB_ContactBook" FromRole="AspNetUser" ToRole="CB_ContactBook" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="ContactBookEdm.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -1327,16 +1306,15 @@
           <NavigationProperty Name="CB_NumberType" Relationship="ContactBookEdm.CB_ContactBookCB_NumberType" FromRole="CB_ContactBook" ToRole="CB_NumberType" />
           <NavigationProperty Name="CB_AddressType" Relationship="ContactBookEdm.CB_ContactBookCB_AddressType" FromRole="CB_ContactBook" ToRole="CB_AddressType" />
           <NavigationProperty Name="CB_SpecialDateType" Relationship="ContactBookEdm.CB_ContactBookCB_SpecialDateType" FromRole="CB_ContactBook" ToRole="CB_SpecialDateType" />
-          <Property Type="Boolean" Name="Enbaled" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="ContactBookEdm.AspNetUserCB_ContactBook" FromRole="CB_ContactBook" ToRole="AspNetUser" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
           <Property Type="String" Name="AspNetUserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CB_EmailType" Relationship="ContactBookEdm.CB_ContactBookCB_EmailType" FromRole="CB_ContactBook" ToRole="CB_EmailType" />
-          <NavigationProperty Name="CB_Group" Relationship="ContactBookEdm.CB_ContactBookCB_Group" FromRole="CB_ContactBook" ToRole="CB_Group" />
+          <NavigationProperty Name="CB_GroupTypes" Relationship="ContactBookEdm.CB_ContactBookCB_Group" FromRole="CB_ContactBook" ToRole="CB_Group" />
           <NavigationProperty Name="CB_IMType" Relationship="ContactBookEdm.CB_ContactBookCB_IMType" FromRole="CB_ContactBook" ToRole="CB_IMType" />
         </EntityType>
         <Association Name="CB_ContactBookCB_Contacts">
           <End Type="ContactBookEdm.CB_ContactBook" Role="CB_ContactBook" Multiplicity="1" />
-          <End Type="ContactBookEdm.CB_Contacts" Role="CB_Contacts" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_Contact" Role="CB_Contacts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CB_ContactBook">
               <PropertyRef Name="BookId" />
@@ -1394,20 +1372,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserCB_ContactBook">
-          <End Type="ContactBookEdm.AspNetUser" Role="AspNetUser" Multiplicity="1" >
-          </End>
-          <End Type="ContactBookEdm.CB_ContactBook" Role="CB_ContactBook" Multiplicity="*" >
-          </End>
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CB_ContactBook">
-              <PropertyRef Name="AspNetUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="CB_ContactBookCB_EmailType">
           <End Type="ContactBookEdm.CB_ContactBook" Role="CB_ContactBook" Multiplicity="0..1" />
           <End Type="ContactBookEdm.CB_EmailType" Role="CB_EmailType" Multiplicity="*" />
@@ -1422,7 +1386,7 @@
         </Association>
         <Association Name="CB_ContactBookCB_Group">
           <End Type="ContactBookEdm.CB_ContactBook" Role="CB_ContactBook" Multiplicity="0..1" />
-          <End Type="ContactBookEdm.CB_Group" Role="CB_Group" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_GroupType" Role="CB_Group" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CB_ContactBook">
               <PropertyRef Name="BookId" />
@@ -1450,9 +1414,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ContactBookEdmStoreContainer" CdmEntityContainer="ContactBookEdmContainer">
-    <EntitySetMapping Name="CB_Contacts">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Contacts)">
-        <MappingFragment StoreEntitySet="CB_Contacts">
+    <EntitySetMapping Name="CB_Contact">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Contact)">
+        <MappingFragment StoreEntitySet="CB_Contact">
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
@@ -1499,9 +1463,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_Group">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Group)">
-        <MappingFragment StoreEntitySet="CB_Group">
+    <EntitySetMapping Name="CB_GroupType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_GroupType)">
+        <MappingFragment StoreEntitySet="CB_GroupType">
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="Group_TypeName" ColumnName="Group_TypeName" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
@@ -1517,9 +1481,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_Book_GroupTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Book_GroupTypes)">
-        <MappingFragment StoreEntitySet="CB_Book_GroupTypes">
+    <EntitySetMapping Name="CB_ContactByGroup">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_ContactByGroup)">
+        <MappingFragment StoreEntitySet="CB_ContactByGroup">
           <ScalarProperty Name="GroupRelationId" ColumnName="GroupRelationId" />
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
@@ -1669,7 +1633,7 @@
         <MappingFragment StoreEntitySet="CB_ContactBook">
           <ScalarProperty Name="BookId" ColumnName="BookId" />
           <ScalarProperty Name="BookName" ColumnName="BookName" />
-          <ScalarProperty Name="Enbaled" ColumnName="Enbaled" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
         </MappingFragment>
       </EntityTypeMapping>

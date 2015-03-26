@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/25/2015 07:17:28
+-- Date Created: 03/26/2015 07:34:32
 -- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
@@ -24,10 +24,10 @@ IF OBJECT_ID(N'[dbo].[FK_ContactBookContactEmail]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_Email] DROP CONSTRAINT [FK_ContactBookContactEmail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactBookContactBookAndGroup]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Book_GroupTypes] DROP CONSTRAINT [FK_ContactBookContactBookAndGroup];
+    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactBookContactBookAndGroup];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactGroupContactBookAndGroup]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Book_GroupTypes] DROP CONSTRAINT [FK_ContactGroupContactBookAndGroup];
+    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactGroupContactBookAndGroup];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactBookContactAddress]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_Address] DROP CONSTRAINT [FK_ContactBookContactAddress];
@@ -78,7 +78,7 @@ IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Contacts]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Contacts] DROP CONSTRAINT [FK_CB_ContactBookCB_Contacts];
+    ALTER TABLE [dbo].[CB_Contact] DROP CONSTRAINT [FK_CB_ContactBookCB_Contacts];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_RelationshipType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_RelationshipType] DROP CONSTRAINT [FK_CB_ContactBookCB_RelationshipType];
@@ -92,22 +92,22 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_SpecialDateType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_SpecialDateType] DROP CONSTRAINT [FK_CB_ContactBookCB_SpecialDateType];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserCB_ContactBook]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_ContactBook] DROP CONSTRAINT [FK_AspNetUserCB_ContactBook];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_EmailType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_EmailType] DROP CONSTRAINT [FK_CB_ContactBookCB_EmailType];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Group]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_Group] DROP CONSTRAINT [FK_CB_ContactBookCB_Group];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_IMType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_IMType] DROP CONSTRAINT [FK_CB_ContactBookCB_IMType];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[CB_Contacts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Contacts];
+IF OBJECT_ID(N'[dbo].[CB_Contact]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Contact];
 GO
 IF OBJECT_ID(N'[dbo].[CB_Number]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_Number];
@@ -124,8 +124,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_NumberType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_NumberType];
 GO
-IF OBJECT_ID(N'[dbo].[CB_Book_GroupTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Book_GroupTypes];
+IF OBJECT_ID(N'[dbo].[CB_ContactByGroup]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_ContactByGroup];
 GO
 IF OBJECT_ID(N'[dbo].[CB_AddressType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_AddressType];
@@ -180,8 +180,8 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'CB_Contacts'
-CREATE TABLE [dbo].[CB_Contacts] (
+-- Creating table 'CB_Contact'
+CREATE TABLE [dbo].[CB_Contact] (
     [ContactId] bigint IDENTITY(1,1) NOT NULL,
     [Firstname] nvarchar(100)  NOT NULL,
     [Lastname] nvarchar(100)  NULL,
@@ -225,8 +225,8 @@ CREATE TABLE [dbo].[CB_Address] (
 );
 GO
 
--- Creating table 'CB_Group'
-CREATE TABLE [dbo].[CB_Group] (
+-- Creating table 'CB_GroupType'
+CREATE TABLE [dbo].[CB_GroupType] (
     [GroupId] int IDENTITY(1,1) NOT NULL,
     [Group_TypeName] nvarchar(100)  NOT NULL,
     [BookId] bigint  NULL
@@ -241,8 +241,8 @@ CREATE TABLE [dbo].[CB_NumberType] (
 );
 GO
 
--- Creating table 'CB_Book_GroupTypes'
-CREATE TABLE [dbo].[CB_Book_GroupTypes] (
+-- Creating table 'CB_ContactByGroup'
+CREATE TABLE [dbo].[CB_ContactByGroup] (
     [GroupRelationId] int IDENTITY(1,1) NOT NULL,
     [ContactId] bigint  NOT NULL,
     [GroupId] int  NULL
@@ -377,7 +377,7 @@ GO
 CREATE TABLE [dbo].[CB_ContactBook] (
     [BookId] bigint IDENTITY(1,1) NOT NULL,
     [BookName] nvarchar(300)  NOT NULL,
-    [Enbaled] bit  NOT NULL,
+    [Enabled] bit  NOT NULL,
     [AspNetUserId] nvarchar(128)  NOT NULL
 );
 GO
@@ -393,9 +393,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [ContactId] in table 'CB_Contacts'
-ALTER TABLE [dbo].[CB_Contacts]
-ADD CONSTRAINT [PK_CB_Contacts]
+-- Creating primary key on [ContactId] in table 'CB_Contact'
+ALTER TABLE [dbo].[CB_Contact]
+ADD CONSTRAINT [PK_CB_Contact]
     PRIMARY KEY CLUSTERED ([ContactId] ASC);
 GO
 
@@ -417,9 +417,9 @@ ADD CONSTRAINT [PK_CB_Address]
     PRIMARY KEY CLUSTERED ([AddressId] ASC);
 GO
 
--- Creating primary key on [GroupId] in table 'CB_Group'
-ALTER TABLE [dbo].[CB_Group]
-ADD CONSTRAINT [PK_CB_Group]
+-- Creating primary key on [GroupId] in table 'CB_GroupType'
+ALTER TABLE [dbo].[CB_GroupType]
+ADD CONSTRAINT [PK_CB_GroupType]
     PRIMARY KEY CLUSTERED ([GroupId] ASC);
 GO
 
@@ -429,9 +429,9 @@ ADD CONSTRAINT [PK_CB_NumberType]
     PRIMARY KEY CLUSTERED ([NumberTypeId] ASC);
 GO
 
--- Creating primary key on [GroupRelationId] in table 'CB_Book_GroupTypes'
-ALTER TABLE [dbo].[CB_Book_GroupTypes]
-ADD CONSTRAINT [PK_CB_Book_GroupTypes]
+-- Creating primary key on [GroupRelationId] in table 'CB_ContactByGroup'
+ALTER TABLE [dbo].[CB_ContactByGroup]
+ADD CONSTRAINT [PK_CB_ContactByGroup]
     PRIMARY KEY CLUSTERED ([GroupRelationId] ASC);
 GO
 
@@ -539,7 +539,7 @@ GO
 ALTER TABLE [dbo].[CB_Number]
 ADD CONSTRAINT [FK_ContactBookContactNumber]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -553,7 +553,7 @@ GO
 ALTER TABLE [dbo].[CB_Email]
 ADD CONSTRAINT [FK_ContactBookContactEmail]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -563,31 +563,31 @@ ON [dbo].[CB_Email]
     ([ContactId]);
 GO
 
--- Creating foreign key on [ContactId] in table 'CB_Book_GroupTypes'
-ALTER TABLE [dbo].[CB_Book_GroupTypes]
+-- Creating foreign key on [ContactId] in table 'CB_ContactByGroup'
+ALTER TABLE [dbo].[CB_ContactByGroup]
 ADD CONSTRAINT [FK_ContactBookContactBookAndGroup]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactBookAndGroup'
 CREATE INDEX [IX_FK_ContactBookContactBookAndGroup]
-ON [dbo].[CB_Book_GroupTypes]
+ON [dbo].[CB_ContactByGroup]
     ([ContactId]);
 GO
 
--- Creating foreign key on [GroupId] in table 'CB_Book_GroupTypes'
-ALTER TABLE [dbo].[CB_Book_GroupTypes]
+-- Creating foreign key on [GroupId] in table 'CB_ContactByGroup'
+ALTER TABLE [dbo].[CB_ContactByGroup]
 ADD CONSTRAINT [FK_ContactGroupContactBookAndGroup]
     FOREIGN KEY ([GroupId])
-    REFERENCES [dbo].[CB_Group]
+    REFERENCES [dbo].[CB_GroupType]
         ([GroupId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactGroupContactBookAndGroup'
 CREATE INDEX [IX_FK_ContactGroupContactBookAndGroup]
-ON [dbo].[CB_Book_GroupTypes]
+ON [dbo].[CB_ContactByGroup]
     ([GroupId]);
 GO
 
@@ -595,7 +595,7 @@ GO
 ALTER TABLE [dbo].[CB_Address]
 ADD CONSTRAINT [FK_ContactBookContactAddress]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -651,7 +651,7 @@ GO
 ALTER TABLE [dbo].[CB_IM]
 ADD CONSTRAINT [FK_ContactBookIM]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -679,7 +679,7 @@ GO
 ALTER TABLE [dbo].[CB_Website]
 ADD CONSTRAINT [FK_ContactBookContactWebsite]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -693,7 +693,7 @@ GO
 ALTER TABLE [dbo].[CB_Relationship]
 ADD CONSTRAINT [FK_ContactBookContactRelationship]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -721,7 +721,7 @@ GO
 ALTER TABLE [dbo].[CB_SpecialDates]
 ADD CONSTRAINT [FK_ContactBookContactSpecialDates]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -749,7 +749,7 @@ GO
 ALTER TABLE [dbo].[CB_InternetCall]
 ADD CONSTRAINT [FK_ContactBookContactInternetCall]
     FOREIGN KEY ([ContactId])
-    REFERENCES [dbo].[CB_Contacts]
+    REFERENCES [dbo].[CB_Contact]
         ([ContactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -810,8 +810,8 @@ ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
 GO
 
--- Creating foreign key on [BookId] in table 'CB_Contacts'
-ALTER TABLE [dbo].[CB_Contacts]
+-- Creating foreign key on [BookId] in table 'CB_Contact'
+ALTER TABLE [dbo].[CB_Contact]
 ADD CONSTRAINT [FK_CB_ContactBookCB_Contacts]
     FOREIGN KEY ([BookId])
     REFERENCES [dbo].[CB_ContactBook]
@@ -820,7 +820,7 @@ ADD CONSTRAINT [FK_CB_ContactBookCB_Contacts]
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CB_ContactBookCB_Contacts'
 CREATE INDEX [IX_FK_CB_ContactBookCB_Contacts]
-ON [dbo].[CB_Contacts]
+ON [dbo].[CB_Contact]
     ([BookId]);
 GO
 
@@ -880,20 +880,6 @@ ON [dbo].[CB_SpecialDateType]
     ([BookId]);
 GO
 
--- Creating foreign key on [AspNetUserId] in table 'CB_ContactBook'
-ALTER TABLE [dbo].[CB_ContactBook]
-ADD CONSTRAINT [FK_AspNetUserCB_ContactBook]
-    FOREIGN KEY ([AspNetUserId])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserCB_ContactBook'
-CREATE INDEX [IX_FK_AspNetUserCB_ContactBook]
-ON [dbo].[CB_ContactBook]
-    ([AspNetUserId]);
-GO
-
 -- Creating foreign key on [BookId] in table 'CB_EmailType'
 ALTER TABLE [dbo].[CB_EmailType]
 ADD CONSTRAINT [FK_CB_ContactBookCB_EmailType]
@@ -908,8 +894,8 @@ ON [dbo].[CB_EmailType]
     ([BookId]);
 GO
 
--- Creating foreign key on [BookId] in table 'CB_Group'
-ALTER TABLE [dbo].[CB_Group]
+-- Creating foreign key on [BookId] in table 'CB_GroupType'
+ALTER TABLE [dbo].[CB_GroupType]
 ADD CONSTRAINT [FK_CB_ContactBookCB_Group]
     FOREIGN KEY ([BookId])
     REFERENCES [dbo].[CB_ContactBook]
@@ -918,7 +904,7 @@ ADD CONSTRAINT [FK_CB_ContactBookCB_Group]
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CB_ContactBookCB_Group'
 CREATE INDEX [IX_FK_CB_ContactBookCB_Group]
-ON [dbo].[CB_Group]
+ON [dbo].[CB_GroupType]
     ([BookId]);
 GO
 

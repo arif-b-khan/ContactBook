@@ -19,7 +19,7 @@ namespace ContactBook.Db.Data
         public string Address { get; set; }
         public Nullable<int> AddressTypeId { get; set; }
     
-        public virtual CB_Contacts CB_Contacts { get; set; }
+        public virtual CB_Contact CB_Contacts { get; set; }
         public virtual CB_AddressType CB_AddressType { get; set; }
     }
 }

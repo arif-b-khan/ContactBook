@@ -18,7 +18,7 @@ namespace ContactBook.Db.Data
         public long ContactId { get; set; }
         public Nullable<int> RelationshipTypeId { get; set; }
     
-        public virtual CB_Contacts CB_Contacts { get; set; }
+        public virtual CB_Contact CB_Contacts { get; set; }
         public virtual CB_RelationshipType CB_RelationshipType { get; set; }
     }
 }

@@ -129,3 +129,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\EntityFramework.SqlServer.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\EntityFramework.SqlServer.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.dll

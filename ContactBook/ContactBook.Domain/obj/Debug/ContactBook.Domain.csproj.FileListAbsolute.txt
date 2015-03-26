@@ -27,3 +27,5 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoM
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\AutoMapper.Net4.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\EntityFramework.SqlServer.xml

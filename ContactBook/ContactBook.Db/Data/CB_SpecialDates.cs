@@ -19,7 +19,7 @@ namespace ContactBook.Db.Data
         public System.DateTime Dates { get; set; }
         public int SpecialDateTpId { get; set; }
     
-        public virtual CB_Contacts CB_Contacts { get; set; }
+        public virtual CB_Contact CB_Contacts { get; set; }
         public virtual CB_SpecialDateType CB_SpecialDateType { get; set; }
     }
 }

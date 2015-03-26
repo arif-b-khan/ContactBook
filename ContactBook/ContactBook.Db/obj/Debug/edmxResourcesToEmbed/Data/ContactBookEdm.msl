@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ContactBookEdmStoreContainer" CdmEntityContainer="ContactBookEdmContainer">
-    <EntitySetMapping Name="CB_Contacts">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Contacts)">
-        <MappingFragment StoreEntitySet="CB_Contacts">
+    <EntitySetMapping Name="CB_Contact">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Contact)">
+        <MappingFragment StoreEntitySet="CB_Contact">
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
@@ -50,9 +50,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_Group">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Group)">
-        <MappingFragment StoreEntitySet="CB_Group">
+    <EntitySetMapping Name="CB_GroupType">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_GroupType)">
+        <MappingFragment StoreEntitySet="CB_GroupType">
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="Group_TypeName" ColumnName="Group_TypeName" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
@@ -68,9 +68,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_Book_GroupTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Book_GroupTypes)">
-        <MappingFragment StoreEntitySet="CB_Book_GroupTypes">
+    <EntitySetMapping Name="CB_ContactByGroup">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_ContactByGroup)">
+        <MappingFragment StoreEntitySet="CB_ContactByGroup">
           <ScalarProperty Name="GroupRelationId" ColumnName="GroupRelationId" />
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
@@ -220,7 +220,7 @@
         <MappingFragment StoreEntitySet="CB_ContactBook">
           <ScalarProperty Name="BookId" ColumnName="BookId" />
           <ScalarProperty Name="BookName" ColumnName="BookName" />
-          <ScalarProperty Name="Enbaled" ColumnName="Enbaled" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
         </MappingFragment>
       </EntityTypeMapping>

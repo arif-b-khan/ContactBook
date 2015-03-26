@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using ContactBook.WebApi.Providers;
 using ContactBook.WebApi.Results;
 using ContactBook.Domain.Models;
+using ContactBook.Domain.Contexts;
+using ContactBook.Db.Data;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -203,14 +205,14 @@ namespace ContactBook.WebApi.Controllers
                 result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
-
+            
             IHttpActionResult errorResult = GetErrorResult(result);
 
             if (errorResult != null)
             {
                 return errorResult;
             }
-
+            
             return Ok();
         }
 
@@ -332,9 +334,18 @@ namespace ContactBook.WebApi.Controllers
             {
                 return errorResult;
             }
+            else
+            {
+                using (ContactBookContext context = new ContactBookContext()) {
+                    context.UserInfoContext = new UserInfoContext();
+                    context.CreateContactBook(model.UserName);
+                }
+            }
 
             return Ok();
         }
+
+      
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

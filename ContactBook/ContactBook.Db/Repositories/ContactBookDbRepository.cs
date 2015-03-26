@@ -37,7 +37,7 @@ namespace ContactBook.Db.Repositories
         public virtual void Update(T t)
         {
             dbSet.Attach(t);
-            context.Entry(t).State = System.Data.EntityState.Modified;
+            context.Entry(t).State = EntityState.Modified;
         }
 
         public virtual IEnumerable<T> Get(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null, string includeProperties = "")

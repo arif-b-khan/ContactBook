@@ -25,13 +25,13 @@ namespace ContactBook.Db.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<CB_Contacts> CB_Contacts { get; set; }
+        public DbSet<CB_Contact> CB_Contact { get; set; }
         public DbSet<CB_Number> CB_Number { get; set; }
         public DbSet<CB_Email> CB_Email { get; set; }
         public DbSet<CB_Address> CB_Address { get; set; }
-        public DbSet<CB_Group> CB_Group { get; set; }
+        public DbSet<CB_GroupType> CB_GroupType { get; set; }
         public DbSet<CB_NumberType> CB_NumberType { get; set; }
-        public DbSet<CB_Book_GroupTypes> CB_Book_GroupTypes { get; set; }
+        public DbSet<CB_ContactByGroup> CB_ContactByGroup { get; set; }
         public DbSet<CB_AddressType> CB_AddressType { get; set; }
         public DbSet<CB_EmailType> CB_EmailType { get; set; }
         public DbSet<CB_IM> CB_IM { get; set; }

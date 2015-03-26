@@ -214,7 +214,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Context\CBIndentityDbContext.cs" />
     <Compile Include="Controllers\ApiAccountController.cs" />
-    <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\ApiContactController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

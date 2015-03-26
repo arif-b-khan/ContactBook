@@ -37,9 +37,12 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -49,7 +52,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,11 +59,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\Address\AddressContext.cs" />
+    <Compile Include="Contexts\Address\AddressTypeContext.cs" />
+    <Compile Include="Contexts\Address\IAddressTypeContext.cs" />
+    <Compile Include="Contexts\ContactBaseContext.cs" />
     <Compile Include="Contexts\ContactBookContext.cs" />
+    <Compile Include="Contexts\Contact\ContactContext.cs" />
+    <Compile Include="Contexts\IContactBookContext.cs" />
+    <Compile Include="Contexts\IUnitOfWork.cs" />
+    <Compile Include="Contexts\IUserInfoContext.cs" />
+    <Compile Include="Contexts\UserInfoContext.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\ContactBook.cs" />
+    <Compile Include="Models\MdlAddress.cs" />
+    <Compile Include="Models\MdlAddressType.cs" />
+    <Compile Include="Models\MdlContact.cs" />
+    <Compile Include="Models\MdlContactBook.cs" />
+    <Compile Include="Models\MdlGroupTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,16 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using ContactBook.Db.Data;
+using ContactBook.Domain.Test.Fixtures;
 
 namespace ContactBook.Domain.Test
 {
-    public class ContactBookRepositoryUowTest
+    public class ContactBookRepositoryUowTest : IClassFixture<ContactBookDataFixture>, IDisposable
     {
+        bool disposed = false;
+        ContactBookDataFixture dataFixture;
+
+        public ContactBookRepositoryUowTest(ContactBookDataFixture fixture)
+        {
+            dataFixture = fixture;
+        }
+
         [Fact]
         public void GetEntityByType_TestForNotNull()
         {
             //arrange
-            ContactBookRepositoryUow work = new ContactBookRepositoryUow(new ContactBookEdmContainer());
+            ContactBookRepositoryUow work = dataFixture.UnitOfWork;
             //IUnityContainer container = new UnityContainer()
 
             //act
@@ -25,6 +34,15 @@ namespace ContactBook.Domain.Test
 
             //assert
             Assert.NotNull(address);
+        }
+
+        public void Dispose()
+        {
+            if (!disposed)
+            {
+                dataFixture.Dispose();
+                disposed = true;
+            }
         }
     }
 }

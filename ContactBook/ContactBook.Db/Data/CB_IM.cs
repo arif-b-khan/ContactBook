@@ -19,7 +19,7 @@ namespace ContactBook.Db.Data
         public long ContactId { get; set; }
         public int IMTypeId { get; set; }
     
-        public virtual CB_Contacts CB_Contacts { get; set; }
+        public virtual CB_Contact CB_Contacts { get; set; }
         public virtual CB_IMType CB_IMType { get; set; }
     }
 }

@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="78854e48196a41b890806a7e6ba12b84" Name="ContactBookDiagram" ZoomLevel="82" >
-        <EntityTypeShape EntityType="ContactBookEdm.CB_Contacts" Width="1.5" PointX="2.375" PointY="11.125" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_Contact" Width="1.5" PointX="2.375" PointY="11.125" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_Number" Width="2" PointX="8.25" PointY="13.125" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_Email" Width="1.5" PointX="8.25" PointY="10.125" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_Address" Width="2" PointX="5.25" PointY="13.125" />
-        <EntityTypeShape EntityType="ContactBookEdm.CB_Group" Width="1.875" PointX="2.625" PointY="4.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_GroupType" Width="1.875" PointX="2.625" PointY="4.25" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactNumber" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactEmail" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_NumberType" Width="2" PointX="5.5" PointY="19.25" />
-        <EntityTypeShape EntityType="ContactBookEdm.CB_Book_GroupTypes" Width="1.875" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_ContactByGroup" Width="1.875" PointX="5.25" PointY="10.25" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactBookAndGroup" />
         <AssociationConnector Association="ContactBookEdm.ContactGroupContactBookAndGroup" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactAddress" />
@@ -51,7 +51,6 @@
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_NumberType" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_AddressType" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_SpecialDateType" />
-        <AssociationConnector Association="ContactBookEdm.AspNetUserCB_ContactBook" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_EmailType" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_Group" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_IMType" />
