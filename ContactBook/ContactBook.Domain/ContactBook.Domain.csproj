@@ -62,7 +62,6 @@
     <Compile Include="Contexts\Address\AddressContext.cs" />
     <Compile Include="Contexts\Address\AddressTypeContext.cs" />
     <Compile Include="Contexts\Address\IAddressTypeContext.cs" />
-    <Compile Include="Contexts\ContactBaseContext.cs" />
     <Compile Include="Contexts\ContactBookContext.cs" />
     <Compile Include="Contexts\Contact\ContactContext.cs" />
     <Compile Include="Contexts\IContactBookContext.cs" />

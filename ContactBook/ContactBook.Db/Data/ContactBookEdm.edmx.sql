@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/26/2015 07:34:32
+-- Date Created: 03/27/2015 06:19:53
 -- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ContactBook];
+USE [ContactBookTest];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -96,7 +96,7 @@ IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_EmailType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_EmailType] DROP CONSTRAINT [FK_CB_ContactBookCB_EmailType];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Group]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Group] DROP CONSTRAINT [FK_CB_ContactBookCB_Group];
+    ALTER TABLE [dbo].[CB_GroupType] DROP CONSTRAINT [FK_CB_ContactBookCB_Group];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_IMType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_IMType] DROP CONSTRAINT [FK_CB_ContactBookCB_IMType];
@@ -118,8 +118,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_Address]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_Address];
 GO
-IF OBJECT_ID(N'[dbo].[CB_Group]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Group];
+IF OBJECT_ID(N'[dbo].[CB_GroupType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_GroupType];
 GO
 IF OBJECT_ID(N'[dbo].[CB_NumberType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_NumberType];

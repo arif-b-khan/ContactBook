@@ -10,50 +10,43 @@ using AutoMapper;
 
 namespace ContactBook.Domain.Contexts
 {
-    public class ContactBookContext: ContactBaseContext, IContactBookContext
+    public class ContactBookContext : IContactBookContext
     {
         IUserInfoContext userContext;
+        IContactBookRepositoryUow unitOfWork;
+        IContactBookDbRepository<CB_ContactBook> conBookRepo;
 
-        public ContactBookContext()
-            : this("")
+        public ContactBookContext(IContactBookRepositoryUow unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+            conBookRepo = unitOfWork.GetEntityByType<CB_ContactBook>();
         }
 
-        public ContactBookContext(string connectionName)
-            : base(connectionName)
+        public ContactBookContext(IContactBookRepositoryUow unitOfWork, IUserInfoContext userContext) : this(unitOfWork)
         {
-
+            this.userContext = userContext;
         }
         
-        public IUserInfoContext UserInfoContext { get; set; }
-
         public void AddContactBook(MdlContactBook mCb)
         {
-            using (var uow = new ContactBookRepositoryUow(GetContainer))
-            {
-                var cb = uow.GetEntityByType<CB_ContactBook>();
-                Mapper.CreateMap<MdlContactBook, CB_ContactBook>();
-                CB_ContactBook contactBook = Mapper.Map<CB_ContactBook>(mCb);
-                cb.Insert(contactBook);
-                uow.Save();
-            }
+            Mapper.CreateMap<MdlContactBook, CB_ContactBook>();
+            CB_ContactBook contactBook = Mapper.Map<CB_ContactBook>(mCb);
+            conBookRepo.Insert(contactBook);
+            unitOfWork.Save();
         }
 
         public MdlContactBook GetContactBook(string userId)
         {
-            using (var uow = new ContactBookRepositoryUow(GetContainer))
-            {
-                CB_ContactBook cb = uow.GetEntityByType<CB_ContactBook>().Get(c => c.AspNetUserId == userId).FirstOrDefault();
-                Mapper.CreateMap<CB_ContactBook, MdlContactBook>();
-                return Mapper.Map<MdlContactBook>(cb);
-            }
+            CB_ContactBook cb = conBookRepo.Get(c => c.AspNetUserId == userId).FirstOrDefault();
+            Mapper.CreateMap<CB_ContactBook, MdlContactBook>();
+            return Mapper.Map<MdlContactBook>(cb);
         }
 
         public void CreateContactBook(string userName)
         {
-            if(UserInfoContext != null)
+            if (userContext != null)
             {
-                AspNetUser userInfo = UserInfoContext.GetUserInfo(userName);
+                AspNetUser userInfo = userContext.GetUserInfo(userName);
                 this.AddContactBook(new MdlContactBook()
                 {
                     AspNetUserId = userInfo.Id,

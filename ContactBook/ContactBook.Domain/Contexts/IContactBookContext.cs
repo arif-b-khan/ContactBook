@@ -7,7 +7,6 @@ namespace ContactBook.Domain.Contexts
     {
         void AddContactBook(MdlContactBook mCb);
         MdlContactBook GetContactBook(string userId);
-        IUserInfoContext UserInfoContext { get; set; }
         void CreateContactBook(string username);
     }
 }

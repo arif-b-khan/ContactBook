@@ -11,62 +11,57 @@ using AutoMapper;
 
 namespace ContactBook.Domain.Contexts.Address
 {
-    public class AddressTypeContext : ContactBaseContext, IUnitOfWork, ContactBook.Domain.Contexts.Address.IAddressTypeContext
+    public class AddressTypeContext : IAddressTypeContext
     {
-        public AddressTypeContext() : this("") { }
+        IContactBookRepositoryUow unitOfwork;
+        IContactBookDbRepository<CB_AddressType> addressTypeRepo;
 
-        public AddressTypeContext(string connection)
-            : base(connection)
+        public AddressTypeContext(IContactBookRepositoryUow unitOfwork)
         {
-            UnitOfWork = new ContactBookRepositoryUow(GetContainer);
-        }
-
-
-        public IContactBookRepositoryUow UnitOfWork
-        {
-            get;
-            set;
+            this.unitOfwork = unitOfwork;
+            this.addressTypeRepo = unitOfwork.GetEntityByType<CB_AddressType>();
         }
 
         public List<MdlAddressType> GetAddessType(long bookId)
         {
-            if (UnitOfWork == null)
-            {
-                new NullReferenceException("UnitOfWork is cannot be null");
-            }
-
-            ContactBookDbRepository<CB_AddressType> addressRepo = UnitOfWork.GetEntityByType<CB_AddressType>();
-            var addressTypes = addressRepo.Get(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
+            List<MdlAddressType> modelAddrTypes;
+            var addressTypes = addressTypeRepo.Get(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
             Mapper.CreateMap<CB_AddressType, MdlAddressType>();
-            List<MdlAddressType> modelAddrTypes = Mapper.Map<List<MdlAddressType>>(addressTypes);
-
+            modelAddrTypes = Mapper.Map<List<MdlAddressType>>(addressTypes);
             return modelAddrTypes;
         }
 
         public void AddAddressTypes(List<MdlAddressType> addressType)
         {
-            if (UnitOfWork == null)
+            foreach (var address in GetCBAddressTypeList(addressType))
             {
-                new NullReferenceException("UnitOfWork is cannot be null");
+                addressTypeRepo.Insert(address);
             }
-
-            ContactBookDbRepository<CB_AddressType> addressRepo = UnitOfWork.GetEntityByType<CB_AddressType>();
-            
-            Mapper.CreateMap<List<MdlAddressType>, List<CB_AddressType>>();
-            List<CB_AddressType> cbAddressTypes = Mapper.Map <List<CB_AddressType>>(addressType);
-            
-            foreach (var address in cbAddressTypes)
-            {
-                addressRepo.Insert(address);
-            }
-
-            UnitOfWork.Save();
+            unitOfwork.Save();
         }
 
-        protected override void Dispose(bool managedDispose)
+        public void RemoveAddressTypes(List<MdlAddressType> addressTypes)
         {
-            UnitOfWork.Dispose();
-            base.Dispose(managedDispose);
+            foreach (var address in GetCBAddressTypeList(addressTypes))
+            {
+                addressTypeRepo.Delete(address);
+            }
+            unitOfwork.Save();
+        }
+
+        public void UpdateAddressTypes(List<MdlAddressType> addressTypes)
+        {
+            foreach (var address in GetCBAddressTypeList(addressTypes))
+            {
+                addressTypeRepo.Update(address);
+            }
+            unitOfwork.Save();
+        }
+
+        private List<CB_AddressType> GetCBAddressTypeList(List<MdlAddressType> addressTypes)
+        {
+            Mapper.CreateMap<MdlAddressType, CB_AddressType>();
+            return Mapper.Map<List<CB_AddressType>>(addressTypes);
         }
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Domain.Contexts.Contact
 {
-    public class ContactContext : ContactBaseContext
+    public class ContactContext 
     {
         
     }

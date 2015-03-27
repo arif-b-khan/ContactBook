@@ -8,36 +8,19 @@ using ContactBook.Db.Repositories;
 
 namespace ContactBook.Domain.Contexts
 {
-    public class UserInfoContext : ContactBaseContext, IUserInfoContext
+    public class UserInfoContext : IUserInfoContext
     {
-        
-        public UserInfoContext()
-            : this("")
+        IContactBookRepositoryUow unitOfWork;
+        IContactBookDbRepository<AspNetUser> user;
+        public UserInfoContext(IContactBookRepositoryUow unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+            user = unitOfWork.GetEntityByType<AspNetUser>();
         }
-
-        public UserInfoContext(string connection)
-            : base(connection)
-        {
-            UnitOfWork = new ContactBookRepositoryUow(GetContainer);
-        }
-
-        public IContactBookRepositoryUow UnitOfWork
-        {
-            get;
-            set;
-        }
-
         public AspNetUser GetUserInfo(string userName)
         {
-            ContactBookDbRepository<AspNetUser> user = UnitOfWork.GetEntityByType<AspNetUser>();
-            return user.Get(u => u.UserName == userName).FirstOrDefault();
-        }
-
-        protected override void Dispose(bool managedDispose)
-        {
-            base.Dispose(managedDispose);
-            UnitOfWork.Dispose();
+            AspNetUser retuser = user.Get(usr => usr.UserName == userName).FirstOrDefault();
+            return retuser;
         }
     }
 }

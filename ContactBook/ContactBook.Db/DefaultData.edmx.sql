@@ -76,3 +76,8 @@ BEGIN
 	INSERT INTO CB_IMType(BookId, IM_TypeName, IMLogoPath) values (null, 'Hangouts', '~/')
 	INSERT INTO CB_IMType(BookId, IM_TypeName, IMLogoPath) values (null, 'Jabber', '~/')
 END
+GO
+IF OBJECT_ID(N'[dbo].[CB_IMType]', 'U') IS NOT NULL
+BEGIN
+	INSERT INTO CB_ContactBook(BookName, [Enabled], AspNetUserId) values ('1-axkhan', 1, '1');
+END

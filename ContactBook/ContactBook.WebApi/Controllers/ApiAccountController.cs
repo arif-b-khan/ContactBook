@@ -18,6 +18,7 @@ using ContactBook.WebApi.Results;
 using ContactBook.Domain.Models;
 using ContactBook.Domain.Contexts;
 using ContactBook.Db.Data;
+using ContactBook.Db.Repositories;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -336,8 +337,8 @@ namespace ContactBook.WebApi.Controllers
             }
             else
             {
-                using (ContactBookContext context = new ContactBookContext()) {
-                    context.UserInfoContext = new UserInfoContext();
+                using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer())) {
+                    IContactBookContext context = new ContactBookContext(uow, new UserInfoContext(uow));
                     context.CreateContactBook(model.UserName);
                 }
             }

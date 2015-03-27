@@ -4,9 +4,11 @@ using ContactBook.Db.Repositories;
 using ContactBook.Domain.Models;
 namespace ContactBook.Domain.Contexts.Address
 {
-    public interface IAddressTypeContext : IUnitOfWork
+    public interface IAddressTypeContext
     {
-        void AddAddressTypes(List<MdlAddressType> addressType);
         List<MdlAddressType> GetAddessType(long bookId);
+        void AddAddressTypes(List<MdlAddressType> addressType);
+        void UpdateAddressTypes(List<MdlAddressType> addressTypes);
+        void RemoveAddressTypes(List<MdlAddressType> addressTypes);
     }
 }

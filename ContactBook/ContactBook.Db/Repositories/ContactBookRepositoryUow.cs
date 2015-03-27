@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Dynamic;
 using System.Reflection;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core.Objects;
 
 namespace ContactBook.Db.Repositories
 {
@@ -32,7 +34,7 @@ namespace ContactBook.Db.Repositories
             }
         }
 
-        public ContactBookDbRepository<T> GetEntityByType<T>() where T : class
+        public IContactBookDbRepository<T> GetEntityByType<T>() where T : class
         {
             string key = typeof(T).Name;
 

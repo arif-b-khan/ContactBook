@@ -7,7 +7,7 @@ using ContactBook.Db.Data;
 
 namespace ContactBook.Domain.Contexts
 {
-    public interface IUserInfoContext:  IDisposable, IUnitOfWork
+    public interface IUserInfoContext
     {
         AspNetUser GetUserInfo(string userName);
     }

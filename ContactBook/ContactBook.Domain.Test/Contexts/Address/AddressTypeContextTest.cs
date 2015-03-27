@@ -16,35 +16,66 @@ namespace ContactBook.Domain.Test.Contexts.Address
     public class AddressTypeContextTest : IDisposable, IClassFixture<ContactBookDataFixture>
     {
         ContactBookDataFixture dataFixture;
-        
+        List<MdlAddressType> mdlAddressTypes;
+
         public AddressTypeContextTest(ContactBookDataFixture dataFixture)
         {
             this.dataFixture = dataFixture;
-        }
-
-        [Fact]
-        public void AddAddressTypeThrowsNullReferenceException()
-        {
-            //Arrange
-            IAddressTypeContext address = new AddressTypeContext(dataFixture.Catalog);
-            address.UnitOfWork = null;
-
-            //Act and Assert
-            Assert.Throws<NullReferenceException>(() => address.GetAddessType(0));
+            mdlAddressTypes = new List<MdlAddressType>() { new MdlAddressType() { BookId = 1, Address_TypeName = "Family" } };
         }
 
         [Fact]
         public void AddAddressTypeReturnsList()
         {
-            //Arrange 
-            IAddressTypeContext addressContext = new AddressTypeContext(dataFixture.Catalog);
+            List<MdlAddressType> result = null;
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            {
+                IAddressTypeContext addressContext = new AddressTypeContext(uow);
+                //Act
+                result = addressContext.GetAddessType(1);
+            }
 
-            //Act
-           List<MdlAddressType> result = addressContext.GetAddessType(0);
+            Assert.NotNull(result);
 
-           Assert.NotNull(result);
+            Assert.True(result.Count >= 3);
+        }
 
-           Assert.True(result.Count >= 3);
+        [Fact]
+        public void DB_AddressTypeRemovesAddressTypeList()
+        {
+            List<MdlAddressType> addressTypes = null;
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            {
+                IAddressTypeContext addressContext = new AddressTypeContext(uow);
+                //List<MdlAddressType> addresses = addressContext.GetAddessType(7);
+                try
+                {
+                    addressContext.AddAddressTypes(mdlAddressTypes);
+                    addressTypes = addressContext.GetAddessType(1).Where(addr => addr.BookId.HasValue).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Assert.Contains("Unable to add address type", ex.StackTrace);
+                }
+            }
+
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            {
+                IAddressTypeContext addressContext = new AddressTypeContext(uow);
+
+                foreach (MdlAddressType mdlType in addressTypes)
+                {
+                    mdlType.Address_TypeName = "Updated Type";
+                }
+
+                addressContext.UpdateAddressTypes(addressTypes);
+            }
+
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            {
+                IAddressTypeContext addressContext = new AddressTypeContext(uow);
+                addressContext.RemoveAddressTypes(addressTypes.Where(addr => addr.BookId.HasValue).ToList());
+            }
         }
 
         public void Dispose()

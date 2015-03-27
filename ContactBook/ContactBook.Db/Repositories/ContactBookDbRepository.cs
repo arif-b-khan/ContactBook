@@ -6,14 +6,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace ContactBook.Db.Repositories
 {
-    public class ContactBookDbRepository<T> : IContactBookRepository<T> where T : class
+    public class ContactBookDbRepository<T> : IContactBookDbRepository<T> where T : class
     {
         DbContext context;
         DbSet<T> dbSet;
-        
+        private object lockObj = new object();
         public ContactBookDbRepository(ContactBookEdmContainer con)
         {
             this.context = con;
@@ -22,28 +23,42 @@ namespace ContactBook.Db.Repositories
 
         public virtual void Insert(T t)
         {
-            dbSet.Add(t);
+            lock (lockObj)
+            {
+                dbSet.Add(t);
+            }
         }
 
         public virtual void Delete(T t)
         {
-            if (context.Entry(t).State == EntityState.Detached)
+            lock (lockObj)
             {
-                dbSet.Attach(t);
+                if (context.Entry(t).State == EntityState.Detached)
+                {
+                    dbSet.Attach(t);
+                }
+                dbSet.Remove(t);
             }
-            dbSet.Remove(t);
         }
 
         public virtual void Update(T t)
         {
-            dbSet.Attach(t);
-            context.Entry(t).State = EntityState.Modified;
+            lock (lockObj)
+            {
+                dbSet.Attach(t);
+                context.Entry(t).State = EntityState.Modified;
+            }
         }
 
-        public virtual IEnumerable<T> Get(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null, string includeProperties = "")
+        public T GetById(object id)
+        {
+            return dbSet.Find(id);
+        }
+
+        public virtual IEnumerable<T> Get(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>> orderby = null, string includeProperties = "")
         {
             IQueryable<T> query = dbSet;
-            
+
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -57,7 +72,7 @@ namespace ContactBook.Db.Repositories
 
             if (orderby != null)
             {
-                return orderby(query).ToList();
+                return orderby.Compile().Invoke(query).ToList();
             }
             else
             {
@@ -65,9 +80,19 @@ namespace ContactBook.Db.Repositories
             }
         }
 
-        public virtual T GetById(object id)
+        public virtual IEnumerable<T> Get()
         {
-            return dbSet.Find(id);
+            return Get(null);
+        }
+
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> expression)
+        {
+            return Get(expression, null);
+        }
+
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> expression = null, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>> orderby = null)
+        {
+            return Get(expression, orderby, "");
         }
     }
 }

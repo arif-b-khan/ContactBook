@@ -30,32 +30,38 @@ namespace ContactBook.Domain.Test.Contexts
         [Fact]
         public void AddContactBookTest()
         {
-            //Arrange
-            var context = new ContactBookContext("ContactBookEdmContainerTest");
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(contactFixture.Catalog)))
+            {
+                //Arrange
+                var context = new ContactBookContext(uow);
 
-            ////act
-            try
-            {
-                context.AddContactBook(modelContact);
-            }
-            catch (Exception ex)
-            {
-                Assert.Contains("Update failed", ex.StackTrace);
+                ////act
+                try
+                {
+                    context.AddContactBook(modelContact);
+                }
+                catch (Exception ex)
+                {
+                    Assert.Contains("Update failed", ex.StackTrace);
+                }
             }
         }
 
         [Fact]
         public void GetContactBookTest()
         {
-            //Arrange
-            var context = new ContactBookContext("ContactBookEdmContainerTest");
+            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(contactFixture.Catalog)))
+            {
+                //Arrange
+                var context = new ContactBookContext(uow);
 
-            //act
-            context.AddContactBook(modelContact);
-            var contact = context.GetContactBook(modelContact.AspNetUserId);
+                //act
+                context.AddContactBook(modelContact);
+                var contact = context.GetContactBook(modelContact.AspNetUserId);
 
-            //Assert
-            Assert.NotNull(contact);
+                //Assert
+                Assert.NotNull(contact);
+            }
         }
 
         [Fact]
@@ -67,10 +73,17 @@ namespace ContactBook.Domain.Test.Contexts
             UserName = "UserName",
             Id = modelContact.AspNetUserId
             });
-            
+
+            var unitOfWorkMoq = new Mock<IContactBookRepositoryUow>();
+            unitOfWorkMoq.Setup(un => un.GetEntityByType<CB_ContactBook>()).Returns(() =>
+            {
+                return contactFixture.Repository<CB_ContactBook>(new List<CB_ContactBook>() { 
+                new CB_ContactBook(){BookId = 1, BookName="1-axkhan", AspNetUserId="1"}
+                });
+            });
+            unitOfWorkMoq.Setup(un => un.Save());
             //act
-            IContactBookContext contactBook = new ContactBookContext(contactFixture.Catalog);
-            contactBook.UserInfoContext = userContextMoq.Object;
+            IContactBookContext contactBook = new ContactBookContext(unitOfWorkMoq.Object, userContextMoq.Object);
 
             //assert
             try
