@@ -340,6 +340,7 @@ namespace ContactBook.WebApi.Controllers
                 using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer())) {
                     IContactBookContext context = new ContactBookContext(uow, new UserInfoContext(uow));
                     context.CreateContactBook(model.UserName);
+                    uow.Save();
                 }
             }
 

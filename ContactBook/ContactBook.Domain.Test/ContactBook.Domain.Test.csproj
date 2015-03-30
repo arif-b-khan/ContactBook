@@ -99,8 +99,9 @@
     <Compile Include="Contexts\Address\AddressTypeContextTest.cs" />
     <Compile Include="Contexts\ContactBookContextTest.cs" />
     <Compile Include="Contexts\Contact\ContactContextTest.cs" />
+    <Compile Include="Contexts\Number\NumberTypeContextTest.cs" />
     <Compile Include="Contexts\UserInfoContextTest.cs" />
-    <Compile Include="Fixtures\ContactBookContextFixture.cs" />
+    <Compile Include="Fixtures\ContactBookDataFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContactBookRepositoryUowTest.cs" />
   </ItemGroup>
@@ -118,12 +119,9 @@
       <Name>ContactBook.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="TestDb\TestDb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestDb\TestDb_log.ldf">
-      <DependentUpon>TestDb.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

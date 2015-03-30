@@ -42,7 +42,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\xunit.core.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\System.Web.Optimization.xml
-C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\System.Web.Mvc.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Security.xml
@@ -138,3 +137,9 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\System.Web.Mvc.xml

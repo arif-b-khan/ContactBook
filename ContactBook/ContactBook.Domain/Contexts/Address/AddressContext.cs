@@ -33,7 +33,6 @@ namespace ContactBook.Domain.Contexts.Address
             foreach(var address in ReturnAddressFromModel(addresses)){
                 addressRepo.Insert(address);
             }
-            unitOfWork.Save();
         }
 
         public void UpdateAddresses(List<MdlAddress> addresses)
@@ -42,7 +41,6 @@ namespace ContactBook.Domain.Contexts.Address
             {
                 addressRepo.Update(address);
             }
-            unitOfWork.Save();
         }
 
         public void DeleteAddresses(List<MdlAddress> addresses)
@@ -51,7 +49,6 @@ namespace ContactBook.Domain.Contexts.Address
             {
                 addressRepo.Delete(address);
             }
-            unitOfWork.Save();
         }
 
         private List<CB_Address> ReturnAddressFromModel(List<MdlAddress> addresses)

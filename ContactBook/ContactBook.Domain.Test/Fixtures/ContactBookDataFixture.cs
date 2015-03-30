@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using Moq;
 
@@ -25,7 +26,7 @@ namespace ContactBook.Domain.Test.Fixtures
             list = new List<AspNetUser>(){
             new AspNetUser(){Id = "1", UserName="user1"}
             };
-            container = new ContactBookEdmContainer("name=ContactBookEdmContainerTest");
+            container = DependencyFactory.Resolve<ContactBookEdmContainer>();
             uow = new ContactBookRepositoryUow(container);
 
             contactRepo = new Mock<ContactBookDbRepository<AspNetUser>>(Container);

@@ -37,7 +37,6 @@ namespace ContactBook.Domain.Contexts.Address
             {
                 addressTypeRepo.Insert(address);
             }
-            unitOfwork.Save();
         }
 
         public void RemoveAddressTypes(List<MdlAddressType> addressTypes)
@@ -46,7 +45,6 @@ namespace ContactBook.Domain.Contexts.Address
             {
                 addressTypeRepo.Delete(address);
             }
-            unitOfwork.Save();
         }
 
         public void UpdateAddressTypes(List<MdlAddressType> addressTypes)
@@ -55,7 +53,6 @@ namespace ContactBook.Domain.Contexts.Address
             {
                 addressTypeRepo.Update(address);
             }
-            unitOfwork.Save();
         }
 
         private List<CB_AddressType> GetCBAddressTypeList(List<MdlAddressType> addressTypes)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Contexts.Address;
+using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using ContactBook.Domain.Test.Fixtures;
 using Moq;
@@ -28,7 +29,7 @@ namespace ContactBook.Domain.Test.Contexts.Address
         public void AddAddressTypeReturnsList()
         {
             List<MdlAddressType> result = null;
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 IAddressTypeContext addressContext = new AddressTypeContext(uow);
                 //Act
@@ -44,13 +45,14 @@ namespace ContactBook.Domain.Test.Contexts.Address
         public void DB_AddressTypeRemovesAddressTypeList()
         {
             List<MdlAddressType> addressTypes = null;
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 IAddressTypeContext addressContext = new AddressTypeContext(uow);
-                //List<MdlAddressType> addresses = addressContext.GetAddessType(7);
+
                 try
                 {
                     addressContext.AddAddressTypes(mdlAddressTypes);
+                    uow.Save();
                     addressTypes = addressContext.GetAddessType(1).Where(addr => addr.BookId.HasValue).ToList();
                 }
                 catch (Exception ex)
@@ -59,7 +61,7 @@ namespace ContactBook.Domain.Test.Contexts.Address
                 }
             }
 
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 IAddressTypeContext addressContext = new AddressTypeContext(uow);
 
@@ -69,12 +71,14 @@ namespace ContactBook.Domain.Test.Contexts.Address
                 }
 
                 addressContext.UpdateAddressTypes(addressTypes);
+                uow.Save();
             }
 
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(dataFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 IAddressTypeContext addressContext = new AddressTypeContext(uow);
                 addressContext.RemoveAddressTypes(addressTypes.Where(addr => addr.BookId.HasValue).ToList());
+                uow.Save();
             }
         }
 

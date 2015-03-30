@@ -12,6 +12,7 @@ using Moq;
 
 using ContactBook.Domain.Test.Fixtures;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.Domain.Test.Contexts
 {
@@ -30,7 +31,7 @@ namespace ContactBook.Domain.Test.Contexts
         [Fact]
         public void AddContactBookTest()
         {
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(contactFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 //Arrange
                 var context = new ContactBookContext(uow);
@@ -39,6 +40,7 @@ namespace ContactBook.Domain.Test.Contexts
                 try
                 {
                     context.AddContactBook(modelContact);
+                    uow.Save();
                 }
                 catch (Exception ex)
                 {
@@ -50,13 +52,14 @@ namespace ContactBook.Domain.Test.Contexts
         [Fact]
         public void GetContactBookTest()
         {
-            using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer(contactFixture.Catalog)))
+            using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 //Arrange
                 var context = new ContactBookContext(uow);
 
                 //act
                 context.AddContactBook(modelContact);
+                uow.Save();
                 var contact = context.GetContactBook(modelContact.AspNetUserId);
 
                 //Assert
@@ -96,6 +99,7 @@ namespace ContactBook.Domain.Test.Contexts
             }
 
         }
+
         public void Dispose()
         {
             if (!disposed)

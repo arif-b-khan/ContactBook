@@ -78,7 +78,7 @@
     <Compile Include="Contexts\IContactBookContext.cs" />
     <Compile Include="Contexts\IUnitOfWork.cs" />
     <Compile Include="Contexts\IUserInfoContext.cs" />
-    <Compile Include="Contexts\Number\NumberContext.cs" />
+    <Compile Include="Contexts\Number\NumberTypeContext.cs" />
     <Compile Include="Contexts\UserInfoContext.cs" />
     <Compile Include="IoC\DependencyFactory.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Models\MdlIM.cs" />
     <Compile Include="Models\MdlInternetCall.cs" />
     <Compile Include="Models\MdlNumber.cs" />
+    <Compile Include="Models\MdlNumberType.cs" />
     <Compile Include="Models\MdlRelationship.cs" />
     <Compile Include="Models\MdlSpecialDates.cs" />
     <Compile Include="Models\MdlWebsite.cs" />

@@ -32,7 +32,6 @@ namespace ContactBook.Domain.Contexts
             Mapper.CreateMap<MdlContactBook, CB_ContactBook>();
             CB_ContactBook contactBook = Mapper.Map<CB_ContactBook>(mCb);
             conBookRepo.Insert(contactBook);
-            unitOfWork.Save();
         }
 
         public MdlContactBook GetContactBook(string userId)

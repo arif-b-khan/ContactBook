@@ -42,3 +42,9 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Micro
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
