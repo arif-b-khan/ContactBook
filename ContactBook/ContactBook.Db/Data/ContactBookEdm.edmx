@@ -151,11 +151,11 @@
     <Property Name="Lastname" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="Middlename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Suffix" Type="nvarchar" Nullable="true" MaxLength="10" />
-    <Property Name="PhFirstname" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="PhFirstname" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="PhMiddlename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PhSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CompanyName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NickName" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="BookId" Type="bigint" Nullable="false" />
@@ -843,11 +843,11 @@
           <NavigationProperty Name="CB_ContactByGroups" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
           <NavigationProperty Name="CB_Addresses" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactBook" ToRole="ContactAddress" />
           <Property Type="String" Name="Suffix" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="PhFirstname" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="PhFirstname" Nullable="true" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="PhMiddlename" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="PhSurname" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="JobTitle" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="CB_IMs" Relationship="ContactBookEdm.ContactBookIM" FromRole="ContactBook" ToRole="IM" />
           <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="NickName" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />

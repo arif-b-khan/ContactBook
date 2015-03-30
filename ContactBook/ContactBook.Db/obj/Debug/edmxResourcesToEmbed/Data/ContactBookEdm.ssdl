@@ -146,11 +146,11 @@
     <Property Name="Lastname" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="Middlename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Suffix" Type="nvarchar" Nullable="true" MaxLength="10" />
-    <Property Name="PhFirstname" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="PhFirstname" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="PhMiddlename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PhSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CompanyName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NickName" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="BookId" Type="bigint" Nullable="false" />

@@ -8,7 +8,8 @@
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ContactBookTest];
+--use [ContactBook]
+--USE [D:\DEVELOPMENT\GITHUB\CONTACTBOOK\CONTACTBOOK\CONTACTBOOK.DB\TESTDB\TESTDB.MDF];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -77,7 +78,17 @@ BEGIN
 	INSERT INTO CB_IMType(BookId, IM_TypeName, IMLogoPath) values (null, 'Jabber', '~/')
 END
 GO
-IF OBJECT_ID(N'[dbo].[CB_IMType]', 'U') IS NOT NULL
+IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
 BEGIN
-	INSERT INTO CB_ContactBook(BookName, [Enabled], AspNetUserId) values ('1-axkhan', 1, '1');
+	INSERT INTO CB_ContactBook(BookName, [Enabled], AspNetUserId) values ('axkhan-1', 1, 1);
+END
+GO
+IF OBJECT_ID(N'[dbo].[CB_Contact]', 'U') IS NOT NULL
+BEGIN
+	INSERT INTO CB_Contact(BookId,Firstname) values (1, 'arif');
+END
+GO
+IF OBJECT_ID(N'[dbo].[CB_Number]', 'U') IS NOT NULL
+BEGIN
+	INSERT INTO CB_Number(ContactId, Number, NumberTypeId) values (1, '9768836054', 1);
 END

@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/27/2015 06:19:53
--- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
+-- Date Created: 03/28/2015 14:05:51
+-- Generated from EDMX file: D:\Development\Github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ContactBookTest];
+--USE [ContactBook];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -187,11 +187,11 @@ CREATE TABLE [dbo].[CB_Contact] (
     [Lastname] nvarchar(100)  NULL,
     [Middlename] nvarchar(max)  NULL,
     [Suffix] nvarchar(10)  NULL,
-    [PhFirstname] nvarchar(100)  NOT NULL,
+    [PhFirstname] nvarchar(100)  NULL,
     [PhMiddlename] nvarchar(max)  NULL,
     [PhSurname] nvarchar(max)  NULL,
     [CompanyName] nvarchar(max)  NULL,
-    [JobTitle] nvarchar(max)  NOT NULL,
+    [JobTitle] nvarchar(max)  NULL,
     [Notes] nvarchar(max)  NULL,
     [NickName] nvarchar(50)  NULL,
     [BookId] bigint  NOT NULL

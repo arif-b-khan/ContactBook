@@ -237,7 +237,6 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Http.OData.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Http.Owin.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Http.WebHost.dll
-D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Optimization.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Razor.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Webpages.Deployment.dll
@@ -277,7 +276,6 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Webpages.Deployment.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Webpages.Razor.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Helpers.xml
-D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\de\Microsoft.Data.Edm.resources.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\es\Microsoft.Data.Edm.resources.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\fr\Microsoft.Data.Edm.resources.dll
@@ -310,10 +308,8 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\obj\Debug\Conta
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\obj\Debug\ContactBook.WebApi.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.Configuration.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.dll
-D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.Configuration.xml
-D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.Db.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.Db.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.Db.dll
@@ -327,3 +323,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.P
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.xml
