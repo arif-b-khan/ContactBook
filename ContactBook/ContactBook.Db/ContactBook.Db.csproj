@@ -65,18 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\AspNetRole.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\AspNetUser.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\AspNetUserClaim.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\AspNetUserLogin.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\CB_Address.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
@@ -146,6 +134,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Partials\AspNetUser.cs" />
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

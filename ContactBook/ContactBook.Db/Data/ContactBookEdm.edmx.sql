@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/28/2015 14:05:51
--- Generated from EDMX file: D:\Development\Github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
+-- Date Created: 03/31/2015 08:31:12
+-- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ContactBookTest];
+USE [ContactBook];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -64,18 +64,6 @@ IF OBJECT_ID(N'[dbo].[FK_Custom_SpecialDateTypeContactSpecialDates]', 'F') IS NO
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactBookContactInternetCall]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_InternetCall] DROP CONSTRAINT [FK_ContactBookContactInternetCall];
-GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
-GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRole]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetRole];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Contacts]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_Contact] DROP CONSTRAINT [FK_CB_ContactBookCB_Contacts];
@@ -157,23 +145,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_InternetCall]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_InternetCall];
 GO
-IF OBJECT_ID(N'[dbo].[AspNetRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetRoles];
-GO
-IF OBJECT_ID(N'[dbo].[AspNetUserClaims]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserClaims];
-GO
-IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserLogins];
-GO
-IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUsers];
-GO
 IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_ContactBook];
-GO
-IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserRoles];
 GO
 
 -- --------------------------------------------------
@@ -332,60 +305,12 @@ CREATE TABLE [dbo].[CB_InternetCall] (
 );
 GO
 
--- Creating table 'AspNetRoles'
-CREATE TABLE [dbo].[AspNetRoles] (
-    [Id] nvarchar(128)  NOT NULL,
-    [Name] nvarchar(256)  NOT NULL
-);
-GO
-
--- Creating table 'AspNetUserClaims'
-CREATE TABLE [dbo].[AspNetUserClaims] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [UserId] nvarchar(128)  NOT NULL,
-    [ClaimType] nvarchar(max)  NULL,
-    [ClaimValue] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'AspNetUserLogins'
-CREATE TABLE [dbo].[AspNetUserLogins] (
-    [LoginProvider] nvarchar(128)  NOT NULL,
-    [ProviderKey] nvarchar(128)  NOT NULL,
-    [UserId] nvarchar(128)  NOT NULL
-);
-GO
-
--- Creating table 'AspNetUsers'
-CREATE TABLE [dbo].[AspNetUsers] (
-    [Id] nvarchar(128)  NOT NULL,
-    [Email] nvarchar(256)  NULL,
-    [EmailConfirmed] bit  NOT NULL,
-    [PasswordHash] nvarchar(max)  NULL,
-    [SecurityStamp] nvarchar(max)  NULL,
-    [PhoneNumber] nvarchar(max)  NULL,
-    [PhoneNumberConfirmed] bit  NOT NULL,
-    [TwoFactorEnabled] bit  NOT NULL,
-    [LockoutEndDateUtc] datetime  NULL,
-    [LockoutEnabled] bit  NOT NULL,
-    [AccessFailedCount] int  NOT NULL,
-    [UserName] nvarchar(256)  NOT NULL
-);
-GO
-
 -- Creating table 'CB_ContactBook'
 CREATE TABLE [dbo].[CB_ContactBook] (
     [BookId] bigint IDENTITY(1,1) NOT NULL,
     [BookName] nvarchar(300)  NOT NULL,
     [Enabled] bit  NOT NULL,
     [AspNetUserId] nvarchar(128)  NOT NULL
-);
-GO
-
--- Creating table 'AspNetUserRoles'
-CREATE TABLE [dbo].[AspNetUserRoles] (
-    [AspNetRoles_Id] nvarchar(128)  NOT NULL,
-    [AspNetUsers_Id] nvarchar(128)  NOT NULL
 );
 GO
 
@@ -495,40 +420,10 @@ ADD CONSTRAINT [PK_CB_InternetCall]
     PRIMARY KEY CLUSTERED ([InternetCallId] ASC);
 GO
 
--- Creating primary key on [Id] in table 'AspNetRoles'
-ALTER TABLE [dbo].[AspNetRoles]
-ADD CONSTRAINT [PK_AspNetRoles]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AspNetUserClaims'
-ALTER TABLE [dbo].[AspNetUserClaims]
-ADD CONSTRAINT [PK_AspNetUserClaims]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [LoginProvider], [ProviderKey], [UserId] in table 'AspNetUserLogins'
-ALTER TABLE [dbo].[AspNetUserLogins]
-ADD CONSTRAINT [PK_AspNetUserLogins]
-    PRIMARY KEY CLUSTERED ([LoginProvider], [ProviderKey], [UserId] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AspNetUsers'
-ALTER TABLE [dbo].[AspNetUsers]
-ADD CONSTRAINT [PK_AspNetUsers]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [BookId] in table 'CB_ContactBook'
 ALTER TABLE [dbo].[CB_ContactBook]
 ADD CONSTRAINT [PK_CB_ContactBook]
     PRIMARY KEY CLUSTERED ([BookId] ASC);
-GO
-
--- Creating primary key on [AspNetRoles_Id], [AspNetUsers_Id] in table 'AspNetUserRoles'
-ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [PK_AspNetUserRoles]
-    PRIMARY KEY NONCLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -757,57 +652,6 @@ ADD CONSTRAINT [FK_ContactBookContactInternetCall]
 CREATE INDEX [IX_FK_ContactBookContactInternetCall]
 ON [dbo].[CB_InternetCall]
     ([ContactId]);
-GO
-
--- Creating foreign key on [UserId] in table 'AspNetUserClaims'
-ALTER TABLE [dbo].[AspNetUserClaims]
-ADD CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId'
-CREATE INDEX [IX_FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]
-ON [dbo].[AspNetUserClaims]
-    ([UserId]);
-GO
-
--- Creating foreign key on [UserId] in table 'AspNetUserLogins'
-ALTER TABLE [dbo].[AspNetUserLogins]
-ADD CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId'
-CREATE INDEX [IX_FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]
-ON [dbo].[AspNetUserLogins]
-    ([UserId]);
-GO
-
--- Creating foreign key on [AspNetRoles_Id] in table 'AspNetUserRoles'
-ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRole]
-    FOREIGN KEY ([AspNetRoles_Id])
-    REFERENCES [dbo].[AspNetRoles]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AspNetUsers_Id] in table 'AspNetUserRoles'
-ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUser]
-    FOREIGN KEY ([AspNetUsers_Id])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserRoles_AspNetUser'
-CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUser]
-ON [dbo].[AspNetUserRoles]
-    ([AspNetUsers_Id]);
 GO
 
 -- Creating foreign key on [BookId] in table 'CB_Contact'

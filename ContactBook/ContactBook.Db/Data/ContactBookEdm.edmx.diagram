@@ -38,13 +38,6 @@
         <AssociationConnector Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_InternetCall" Width="1.5" PointX="5.25" PointY="26.5" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactInternetCall" />
-        <EntityTypeShape EntityType="ContactBookEdm.AspNetRole" Width="1.5" PointX="12.625" PointY="11.625" />
-        <EntityTypeShape EntityType="ContactBookEdm.AspNetUserClaim" Width="1.5" PointX="10.776608682599203" PointY="24.809108551968404" />
-        <EntityTypeShape EntityType="ContactBookEdm.AspNetUserLogin" Width="1.5" PointX="0.93093488036232763" PointY="0.9529128377106566" />
-        <EntityTypeShape EntityType="ContactBookEdm.AspNetUser" Width="1.5" PointX="11.25" PointY="0.5" />
-        <AssociationConnector Association="ContactBookEdm.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="ContactBookEdm.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="ContactBookEdm.AspNetUserRoles" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_ContactBook" Width="2.625" PointX="7.875" PointY="3" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_Contacts" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_RelationshipType" />

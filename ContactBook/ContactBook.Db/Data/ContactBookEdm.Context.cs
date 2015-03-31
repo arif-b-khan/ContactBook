@@ -42,10 +42,6 @@ namespace ContactBook.Db.Data
         public DbSet<CB_SpecialDates> CB_SpecialDates { get; set; }
         public DbSet<CB_SpecialDateType> CB_SpecialDateType { get; set; }
         public DbSet<CB_InternetCall> CB_InternetCall { get; set; }
-        public DbSet<AspNetRole> AspNetRoles { get; set; }
-        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<CB_ContactBook> CB_ContactBook { get; set; }
     }
 }

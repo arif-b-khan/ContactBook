@@ -39,10 +39,15 @@ namespace ContactBook.WebApi.Providers
             {
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
 
+
                 if (user == null)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
+                }
+                else
+                {
+                    user.Claims.Add(new IdentityUserClaim() { ClaimType = "BookId", ClaimValue = "101" });
                 }
 
                 ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user,

@@ -75,6 +75,8 @@
     <Compile Include="Contexts\ContactBookContext.cs" />
     <Compile Include="Contexts\Contact\ContactContext.cs" />
     <Compile Include="Contexts\Contact\IContactContext.cs" />
+    <Compile Include="Contexts\Generics\GenericTypes.cs" />
+    <Compile Include="Contexts\Generics\IGenericTypes.cs" />
     <Compile Include="Contexts\IContactBookContext.cs" />
     <Compile Include="Contexts\IUnitOfWork.cs" />
     <Compile Include="Contexts\IUserInfoContext.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="IoC\DependencyFactory.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ModelMapper\ModelMapper.cs" />
     <Compile Include="Models\MdlAddress.cs" />
     <Compile Include="Models\MdlAddressType.cs" />
     <Compile Include="Models\MdlContact.cs" />
