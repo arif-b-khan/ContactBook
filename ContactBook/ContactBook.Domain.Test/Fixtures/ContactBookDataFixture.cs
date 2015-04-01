@@ -15,25 +15,16 @@ namespace ContactBook.Domain.Test.Fixtures
 {
     public class ContactBookDataFixture : IDisposable
     {
-        List<AspNetUser> list;
         bool disposed = false;
         ContactBookRepositoryUow uow;
         ContactBookEdmContainer container;
-        Mock<ContactBookDbRepository<AspNetUser>> contactRepo;
 
         public ContactBookDataFixture()
         {
-            list = new List<AspNetUser>(){
-            new AspNetUser(){Id = "1", UserName="user1"}
-            };
+
             container = DependencyFactory.Resolve<ContactBookEdmContainer>();
             uow = new ContactBookRepositoryUow(container);
 
-            contactRepo = new Mock<ContactBookDbRepository<AspNetUser>>(Container);
-            contactRepo.Setup(rp => rp.Get()).Returns(list);
-            contactRepo.Setup(rp => rp.Get(It.IsAny<Expression<Func<AspNetUser, bool>>>())).Returns(list);
-            contactRepo.Setup(rp => rp.Get(It.IsAny<Expression<Func<AspNetUser, bool>>>(), It.IsAny<Expression<Func<IQueryable<AspNetUser>, IOrderedQueryable<AspNetUser>>>>())).Returns(list);
-            contactRepo.Setup(rp => rp.Get(It.IsAny<Expression<Func<AspNetUser, bool>>>(), It.IsAny<Expression<Func<IQueryable<AspNetUser>, IOrderedQueryable<AspNetUser>>>>(), "")).Returns(list);
         }
 
         public IContactBookDbRepository<T> Repository<T>(List<T> plist) where T : class
@@ -46,13 +37,6 @@ namespace ContactBook.Domain.Test.Fixtures
             return repository.Object;
         }
 
-        public ContactBookDbRepository<AspNetUser> ContactBookDbRepository
-        {
-            get
-            {
-                return contactRepo.Object;
-            }
-        }
             
         public ContactBookEdmContainer Container
         {
@@ -78,10 +62,10 @@ namespace ContactBook.Domain.Test.Fixtures
             }
         }
 
-        public void DeleteContactBookModel(MdlContactBook modelContact)
+        public void DeleteContactBookModel(ContactBookInfo modelContact)
         {
             IContactBookDbRepository<CB_ContactBook> cb = uow.GetEntityByType<CB_ContactBook>();
-            var contactBook = cb.Get(c => c.AspNetUserId == modelContact.AspNetUserId);
+            var contactBook = cb.Get(c => c.Username == modelContact.Username);
             foreach (var con in contactBook)
             {
                 cb.Delete(con);

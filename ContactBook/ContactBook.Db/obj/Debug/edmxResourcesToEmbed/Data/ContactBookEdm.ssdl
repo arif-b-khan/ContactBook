@@ -275,7 +275,7 @@
     <Property Name="BookId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BookName" Type="nvarchar" Nullable="false" MaxLength="300" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
-    <Property Name="AspNetUserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
   <Association Name="ContactBookContactNumber">
     <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />

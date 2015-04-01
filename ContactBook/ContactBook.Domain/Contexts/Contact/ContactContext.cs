@@ -77,7 +77,7 @@ namespace ContactBook.Domain.Contexts.Contact
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
                 .ForSourceMember(cb => cb.CB_EmailType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_AddressType, MdlAddressType>()
+            Mapper.CreateMap<CB_AddressType, AddressType>()
                 .ForSourceMember(cb => cb.CB_Address, cbs => cbs.Ignore())
                 .ForSourceMember(cb => cb.CB_ContactBook, cbs => cbs.Ignore());
 

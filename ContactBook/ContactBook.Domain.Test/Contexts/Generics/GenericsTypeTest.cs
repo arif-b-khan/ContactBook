@@ -18,7 +18,7 @@ namespace ContactBook.Domain.Test.Contexts.Generics
     public class GenericsTypeTest : IDisposable, IClassFixture<ContactBookDataFixture>
     {
         public ContactBookDataFixture dataFixture;
-        List<MdlAddressType> mdlAddressTypes;
+        List<AddressType> mdlAddressTypes;
         
         Expression<Func<CB_AddressType, bool>> addressTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
         Expression<Func<CB_NumberType, bool>> numberTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
@@ -26,17 +26,17 @@ namespace ContactBook.Domain.Test.Contexts.Generics
         public GenericsTypeTest(ContactBookDataFixture pdataFixture)
         {
             this.dataFixture = pdataFixture;
-            mdlAddressTypes = new List<MdlAddressType>() { new MdlAddressType() { BookId = 1, Address_TypeName = "Family" } };
+            mdlAddressTypes = new List<AddressType>() { new AddressType() { BookId = 1, AddressTypeName = "Family" } };
         }
         
         #region AddressTypeContextTest
         [Fact]
         public void AddressTypeIsNotNull()
         {
-            List<MdlAddressType> result = null;
+            List<AddressType> result = null;
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                IGenericTypes<MdlAddressType, CB_AddressType> address = new GenericTypes<MdlAddressType, CB_AddressType>(uow);
+                IGenericContextTypes<AddressType, CB_AddressType> address = new GenericContextTypes<AddressType, CB_AddressType>(uow);
                 result = address.GetTypes(addressTypeExpr).ToList();
             }
 
@@ -47,10 +47,10 @@ namespace ContactBook.Domain.Test.Contexts.Generics
         [Fact]
         public void AddAddressTypeReturnsList()
         {
-            List<MdlAddressType> result = null;
+            List<AddressType> result = null;
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                IGenericTypes<MdlAddressType, CB_AddressType> addressContext = new GenericTypes<MdlAddressType, CB_AddressType>(uow);
+                IGenericContextTypes<AddressType, CB_AddressType> addressContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
                 //Act
                 result = addressContext.GetTypes(addressTypeExpr);
             }
@@ -63,15 +63,15 @@ namespace ContactBook.Domain.Test.Contexts.Generics
         [Fact]
         public void DB_AddressTypeRemovesAddressTypeList()
         {
-            List<MdlAddressType> addressTypes = null;
+            List<AddressType> addressTypes = null;
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                IGenericTypes<MdlAddressType, CB_AddressType> addressContext = new GenericTypes<MdlAddressType, CB_AddressType>(uow);
+                IGenericContextTypes<AddressType, CB_AddressType> addressContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
 
                 try
                 {
                     addressContext.InsertTypes(mdlAddressTypes);
-                    uow.Save();
+                    
                     addressTypes = addressContext.GetTypes(addressTypeExpr).Where(addr => addr.BookId.HasValue).ToList();
                 }
                 catch (Exception ex)
@@ -82,22 +82,22 @@ namespace ContactBook.Domain.Test.Contexts.Generics
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                IGenericTypes<MdlAddressType, CB_AddressType> addressContext = new GenericTypes<MdlAddressType, CB_AddressType>(uow);
+                IGenericContextTypes<AddressType, CB_AddressType> addressContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
 
-                foreach (MdlAddressType mdlType in addressTypes)
+                foreach (AddressType mdlType in addressTypes)
                 {
-                    mdlType.Address_TypeName = "Updated Type";
+                    mdlType.AddressTypeName = "Updated Type";
                 }
 
                 addressContext.UpdateTypes(addressTypes);
-                uow.Save();
+                
             }
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                IGenericTypes<MdlAddressType, CB_AddressType> addressContext = new GenericTypes<MdlAddressType, CB_AddressType>(uow);
+                IGenericContextTypes<AddressType, CB_AddressType> addressContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
                 addressContext.DeleteTypes(addressTypes.Where(addr => addr.BookId.HasValue).ToList());
-                uow.Save();
+                
             }
         }
         #endregion
@@ -113,7 +113,7 @@ namespace ContactBook.Domain.Test.Contexts.Generics
                  () => dataFixture.Repository<CB_NumberType>(null)
                 );
 
-            var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
+            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
 
             //act and Assert
             Assert.Throws<ArgumentNullException>(() => numberContext.GetTypes(numberTypeExpr));
@@ -129,7 +129,7 @@ namespace ContactBook.Domain.Test.Contexts.Generics
                  NumberTypeId = 1, Number_TypeName="Mobile", BookId=null
                  }})
                 );
-            var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
+            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
 
             //act
             var numberList = numberContext.GetTypes(numberTypeExpr);
@@ -160,7 +160,7 @@ new CB_NumberType() {
                  })
                 );
 
-            var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
+            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
 
             //act
             var numberList = numberContext.GetTypes(numberTypeExpr);
@@ -182,11 +182,11 @@ new CB_NumberType() {
             //Act
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
                 try
                 {
                     numberContext.InsertTypes(numberTypeList);
-                    uow.Save();
+                    
                     numberTypeList = numberContext.GetTypes(numberTypeExpr).Where(nm => nm.BookId.HasValue).ToList();
                 }
                 catch (Exception ex)
@@ -197,7 +197,7 @@ new CB_NumberType() {
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
                 foreach (var mType in numberTypeList)
                 {
                     mType.NumberType = "UpdatedCustom";
@@ -206,7 +206,7 @@ new CB_NumberType() {
                 try
                 {
                     numberContext.UpdateTypes(numberTypeList);
-                    uow.Save();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -216,12 +216,12 @@ new CB_NumberType() {
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
                 
                 try
                 {
                     numberContext.DeleteTypes(numberTypeList);
-                    uow.Save();
+                    
                 }
                 catch (Exception ex)
                 {

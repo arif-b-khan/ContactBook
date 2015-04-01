@@ -17,12 +17,12 @@ namespace ContactBook.Domain.Models.ModelMapper
 
             switch (convertType)
             {
-                case "CB_AddressType-to-MdlAddressType":
+                case "CB_AddressType-to-AddressType":
                     return AddressTypeMapper(t as List<CB_AddressType>) as List<D>;
                     break;
 
-                case "MdlAddressType-to-CB_AddressType":
-                    return MdlAddressTypeToAddressType(t as List<MdlAddressType>) as List<D>;
+                case "AddressType-to-CB_AddressType":
+                    return MdlAddressTypeToAddressType(t as List<AddressType>) as List<D>;
                     break;
                 case "MdlNumberType-to-CB_NumberType":
                     return MdlNumberTypeToCBNumberType(t as List<MdlNumberType>) as List<D>;
@@ -38,15 +38,15 @@ namespace ContactBook.Domain.Models.ModelMapper
             return default(List<D>);
         }
 
-        private List<MdlAddressType> AddressTypeMapper(List<CB_AddressType> source)
+        private List<AddressType> AddressTypeMapper(List<CB_AddressType> source)
         {
-            Mapper.CreateMap<CB_AddressType, MdlAddressType>();
-            return Mapper.Map<List<MdlAddressType>>(source);
+            Mapper.CreateMap<CB_AddressType, AddressType>().ForMember(at => at.AddressTypeName, ca => ca.MapFrom(a => a.Address_TypeName));
+            return Mapper.Map<List<AddressType>>(source);
         }
 
-        private List<CB_AddressType> MdlAddressTypeToAddressType(List<MdlAddressType> source)
+        private List<CB_AddressType> MdlAddressTypeToAddressType(List<AddressType> source)
         {
-            Mapper.CreateMap<MdlAddressType, CB_AddressType>();
+            Mapper.CreateMap<AddressType, CB_AddressType>().ForMember(m => m.Address_TypeName, ad => ad.MapFrom(a => a.AddressTypeName));
             return Mapper.Map<List<CB_AddressType>>(source);
         }
 

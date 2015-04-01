@@ -12,7 +12,6 @@ namespace ContactBook.Domain.Contexts
 {
     public class ContactBookContext : IContactBookContext
     {
-        IUserInfoContext userContext;
         IContactBookRepositoryUow unitOfWork;
         IContactBookDbRepository<CB_ContactBook> conBookRepo;
 
@@ -22,38 +21,42 @@ namespace ContactBook.Domain.Contexts
             conBookRepo = unitOfWork.GetEntityByType<CB_ContactBook>();
         }
 
-        public ContactBookContext(IContactBookRepositoryUow unitOfWork, IUserInfoContext userContext) : this(unitOfWork)
+        public void AddContactBook(ContactBookInfo mCb)
         {
-            this.userContext = userContext;
-        }
-        
-        public void AddContactBook(MdlContactBook mCb)
-        {
-            Mapper.CreateMap<MdlContactBook, CB_ContactBook>();
+            Mapper.CreateMap<ContactBookInfo, CB_ContactBook>();
             CB_ContactBook contactBook = Mapper.Map<CB_ContactBook>(mCb);
             conBookRepo.Insert(contactBook);
+            unitOfWork.Save();
         }
 
-        public MdlContactBook GetContactBook(string userId)
+        public ContactBookInfo GetContactBook(string userName)
         {
-            CB_ContactBook cb = conBookRepo.Get(c => c.AspNetUserId == userId).FirstOrDefault();
-            Mapper.CreateMap<CB_ContactBook, MdlContactBook>();
-            return Mapper.Map<MdlContactBook>(cb);
-        }
-
-        public void CreateContactBook(string userName)
-        {
-            if (userContext != null)
+            ContactBookInfo retBook = null;
+           
+            try
             {
-                AspNetUser userInfo = userContext.GetUserInfo(userName);
-                this.AddContactBook(new MdlContactBook()
-                {
-                    AspNetUserId = userInfo.Id,
-                    BookName = userInfo.Id + "-" + userInfo.UserName,
-                    Enabled = true
-                });
+                CB_ContactBook cb = conBookRepo.Get(c => c.Username == userName).FirstOrDefault();
+                Mapper.CreateMap<CB_ContactBook, ContactBookInfo>();
+                retBook = Mapper.Map<ContactBookInfo>(cb);
             }
+            catch (ArgumentNullException ex)
+            {
+                //todo: write code to log this exception
+                //throw;
+            }
+
+            return retBook;
         }
 
+        public void CreateContactBook(string userName, string Id)
+        {
+            this.AddContactBook(new ContactBookInfo()
+            {
+                Username = userName,
+                BookName = Id + "-" + userName,
+                Enabled = true
+            });
+            unitOfWork.Save();
+        }
     }
 }

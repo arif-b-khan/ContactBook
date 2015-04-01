@@ -10,13 +10,13 @@ using ContactBook.Domain.Models.ModelMapper;
 
 namespace ContactBook.Domain.Contexts.Generics
 {
-    public class GenericTypes<M, T> : IGenericTypes<M, T> where M: class where T : class
+    public class GenericContextTypes<M, T> : IGenericContextTypes<M, T> where M: class where T : class
     {
         IContactBookRepositoryUow unitOfWork;
         IContactBookDbRepository<T> repoType;
         ModelMapper mapper = null;
 
-        public GenericTypes(IContactBookRepositoryUow unitOfWork)
+        public GenericContextTypes(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             repoType = this.unitOfWork.GetEntityByType<T>();
@@ -31,6 +31,8 @@ namespace ContactBook.Domain.Contexts.Generics
             {
                 repoType.Insert(item);
             }
+
+            unitOfWork.Save();
         }
 
         public void UpdateTypes(List<M> typeList)
@@ -41,6 +43,7 @@ namespace ContactBook.Domain.Contexts.Generics
             {
                 repoType.Update(item);
             }
+            unitOfWork.Save();
         }
 
         public void DeleteTypes(List<M> typeList)
@@ -51,6 +54,7 @@ namespace ContactBook.Domain.Contexts.Generics
             {
                 repoType.Delete(item);
             }
+            unitOfWork.Save();
         }
 
         public List<M> GetTypes(Expression<Func<T, bool>> filter)

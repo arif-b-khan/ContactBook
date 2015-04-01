@@ -8,7 +8,7 @@
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-use [ContactBookTest]
+use [ContactBook]
 --USE [D:\DEVELOPMENT\GITHUB\CONTACTBOOK\CONTACTBOOK\CONTACTBOOK.DB\TESTDB\TESTDB.MDF];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -80,7 +80,7 @@ END
 GO
 IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
 BEGIN
-	INSERT INTO CB_ContactBook(BookName, [Enabled], AspNetUserId) values ('axkhan-1', 1, 1);
+	INSERT INTO CB_ContactBook(BookName, [Enabled], Username) values ('axkhan-1', 1, 'testuser');
 END
 GO
 IF OBJECT_ID(N'[dbo].[CB_Contact]', 'U') IS NOT NULL

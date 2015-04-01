@@ -29,7 +29,7 @@ namespace ContactBook.Db.Data
         public long BookId { get; set; }
         public string BookName { get; set; }
         public bool Enabled { get; set; }
-        public string AspNetUserId { get; set; }
+        public string Username { get; set; }
     
         public virtual ICollection<CB_Contact> CB_Contacts { get; set; }
         public virtual ICollection<CB_RelationshipType> CB_RelationshipType { get; set; }

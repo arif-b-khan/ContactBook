@@ -215,7 +215,9 @@
     <Compile Include="Context\CBIndentityDbContext.cs" />
     <Compile Include="Controllers\ApiAccountController.cs" />
     <Compile Include="Controllers\ApiAddressTypeController.cs" />
+    <Compile Include="Controllers\ApiContactBookController.cs" />
     <Compile Include="Controllers\ApiContactController.cs" />
+    <Compile Include="Filters\ValidationModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

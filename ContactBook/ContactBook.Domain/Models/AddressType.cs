@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Domain.Models
 {
-    public class MdlAddressType
+    public class AddressType
     {
         public int AddressTypeId { get; set; }
         
-        [Required]
+        [Required(ErrorMessage="Address type cannot be empty.")]
         [Display(Name="AddressType")]
-        public string Address_TypeName { get; set; }
+        public string AddressTypeName { get; set; }
+        
+
         public Nullable<long> BookId { get; set; }
     }
 }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ContactBook.Domain.Models;
 
 namespace ContactBook.WebApi.Controllers
 {
+    [RoutePrefix("api/Contacts")]
     public class ApiContactController : ApiController
     {
         // GET api/<controller>
@@ -35,5 +37,7 @@ namespace ContactBook.WebApi.Controllers
         public void Delete(int id)
         {
         }
+
+        
     }
 }

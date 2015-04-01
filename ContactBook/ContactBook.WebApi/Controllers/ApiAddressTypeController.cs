@@ -8,30 +8,80 @@ using System.Web.Http.Description;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
+using ContactBook.Domain.Contexts.Generics;
+using ContactBook.Db.Data;
+using System.Linq.Expressions;
 
 namespace ContactBook.WebApi.Controllers
 {
+    [RoutePrefix("api/AddressType")]
+    [Authorize]
     public class ApiAddressTypeController : ApiController
     {
-        // GET api/<controller>
-        //[ResponseType(typeof(List<MdlAddressType>))]
-        //public IEnumerable<string> Get()
-        //{
-        //    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        //    {
-
-        //    }
-        //}
-
-        //// GET api/<controller>/5
-        //public string Get(int id)
-        //{
-            
-        //}
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        IContactBookRepositoryUow unitOfWork;
+        IGenericContextTypes<AddressType, CB_AddressType> genericContext;
+        public ApiAddressTypeController()
+            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
+
+        }
+
+        public ApiAddressTypeController(IContactBookRepositoryUow uow)
+        {
+            unitOfWork = uow;
+            genericContext = new GenericContextTypes<AddressType, CB_AddressType>(unitOfWork);
+        }
+
+        // GET api/<controller>
+        [Route("GetTypes/{bookId}")]
+        [ResponseType(typeof(List<AddressType>))]
+        [HttpGet]
+        public IHttpActionResult Get(long bookId)
+        {
+
+            List<AddressType> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
+
+            if (retAddressType == null)
+            {
+                return NotFound();
+            }
+
+            return Ok<List<AddressType>>(retAddressType);
+        }
+
+        [Route("InsertTypes")]
+        [HttpPost]
+        public IHttpActionResult InsertAddressTypes([FromBody]List<AddressType> addressTypes)
+        {
+            Exception retException = null;
+            bool status = true;
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                genericContext.InsertTypes(addressTypes);
+            }
+            catch (Exception ex)
+            {
+                //todo: log this exception
+                status = false;
+                retException = ex;
+            }
+
+            if (status)
+            {
+                var routeValue = new Dictionary<string, object>();
+                routeValue.Add("bookId", "1");
+                return CreatedAtRoute<List<AddressType>>("GetTypes", routeValue , addressTypes);
+            }
+            else
+            {
+                return InternalServerError(retException);
+            }
         }
 
         // PUT api/<controller>/5

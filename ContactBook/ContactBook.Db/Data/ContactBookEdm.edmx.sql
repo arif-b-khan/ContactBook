@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/31/2015 08:31:12
+-- Date Created: 04/01/2015 07:11:57
 -- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
@@ -17,68 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactNumber]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Number] DROP CONSTRAINT [FK_ContactBookContactNumber];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactEmail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Email] DROP CONSTRAINT [FK_ContactBookContactEmail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactBookAndGroup]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactBookContactBookAndGroup];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactGroupContactBookAndGroup]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactGroupContactBookAndGroup];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactAddress]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Address] DROP CONSTRAINT [FK_ContactBookContactAddress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_NumberTypeContactNumber]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Number] DROP CONSTRAINT [FK_Custom_NumberTypeContactNumber];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_AddressTypeContactAddress]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Address] DROP CONSTRAINT [FK_Custom_AddressTypeContactAddress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_EmailTypeContactEmail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Email] DROP CONSTRAINT [FK_Custom_EmailTypeContactEmail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookIM]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_IM] DROP CONSTRAINT [FK_ContactBookIM];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_IMTypeIM]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_IM] DROP CONSTRAINT [FK_Custom_IMTypeIM];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactWebsite]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Website] DROP CONSTRAINT [FK_ContactBookContactWebsite];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactRelationship]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Relationship] DROP CONSTRAINT [FK_ContactBookContactRelationship];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_RelationshipTypeContactRelationship]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Relationship] DROP CONSTRAINT [FK_Custom_RelationshipTypeContactRelationship];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactSpecialDates]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_ContactBookContactSpecialDates];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Custom_SpecialDateTypeContactSpecialDates]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactBookContactInternetCall]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_InternetCall] DROP CONSTRAINT [FK_ContactBookContactInternetCall];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Contacts]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_Contact] DROP CONSTRAINT [FK_CB_ContactBookCB_Contacts];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_RelationshipType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_RelationshipType] DROP CONSTRAINT [FK_CB_ContactBookCB_RelationshipType];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_NumberType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_NumberType] DROP CONSTRAINT [FK_CB_ContactBookCB_NumberType];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_AddressType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_AddressType] DROP CONSTRAINT [FK_CB_ContactBookCB_AddressType];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_SpecialDateType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_SpecialDateType] DROP CONSTRAINT [FK_CB_ContactBookCB_SpecialDateType];
+IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_Contacts]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Contact] DROP CONSTRAINT [FK_CB_ContactBookCB_Contacts];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_EmailType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_EmailType] DROP CONSTRAINT [FK_CB_ContactBookCB_EmailType];
@@ -89,37 +32,91 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_IMType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_IMType] DROP CONSTRAINT [FK_CB_ContactBookCB_IMType];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_NumberType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_NumberType] DROP CONSTRAINT [FK_CB_ContactBookCB_NumberType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_RelationshipType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_RelationshipType] DROP CONSTRAINT [FK_CB_ContactBookCB_RelationshipType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CB_ContactBookCB_SpecialDateType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_SpecialDateType] DROP CONSTRAINT [FK_CB_ContactBookCB_SpecialDateType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Address] DROP CONSTRAINT [FK_ContactBookContactAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactBookAndGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactBookContactBookAndGroup];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Email] DROP CONSTRAINT [FK_ContactBookContactEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactInternetCall]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_InternetCall] DROP CONSTRAINT [FK_ContactBookContactInternetCall];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactNumber]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Number] DROP CONSTRAINT [FK_ContactBookContactNumber];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactRelationship]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Relationship] DROP CONSTRAINT [FK_ContactBookContactRelationship];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactSpecialDates]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_ContactBookContactSpecialDates];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookContactWebsite]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Website] DROP CONSTRAINT [FK_ContactBookContactWebsite];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactBookIM]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_IM] DROP CONSTRAINT [FK_ContactBookIM];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactGroupContactBookAndGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_ContactByGroup] DROP CONSTRAINT [FK_ContactGroupContactBookAndGroup];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_AddressTypeContactAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Address] DROP CONSTRAINT [FK_Custom_AddressTypeContactAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_EmailTypeContactEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Email] DROP CONSTRAINT [FK_Custom_EmailTypeContactEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_IMTypeIM]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_IM] DROP CONSTRAINT [FK_Custom_IMTypeIM];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_NumberTypeContactNumber]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Number] DROP CONSTRAINT [FK_Custom_NumberTypeContactNumber];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_RelationshipTypeContactRelationship]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_Relationship] DROP CONSTRAINT [FK_Custom_RelationshipTypeContactRelationship];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Custom_SpecialDateTypeContactSpecialDates]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[CB_Contact]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Contact];
-GO
-IF OBJECT_ID(N'[dbo].[CB_Number]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Number];
-GO
-IF OBJECT_ID(N'[dbo].[CB_Email]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Email];
-GO
 IF OBJECT_ID(N'[dbo].[CB_Address]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_Address];
-GO
-IF OBJECT_ID(N'[dbo].[CB_GroupType]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_GroupType];
-GO
-IF OBJECT_ID(N'[dbo].[CB_NumberType]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_NumberType];
-GO
-IF OBJECT_ID(N'[dbo].[CB_ContactByGroup]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_ContactByGroup];
 GO
 IF OBJECT_ID(N'[dbo].[CB_AddressType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_AddressType];
 GO
+IF OBJECT_ID(N'[dbo].[CB_Contact]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Contact];
+GO
+IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_ContactBook];
+GO
+IF OBJECT_ID(N'[dbo].[CB_ContactByGroup]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_ContactByGroup];
+GO
+IF OBJECT_ID(N'[dbo].[CB_Email]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Email];
+GO
 IF OBJECT_ID(N'[dbo].[CB_EmailType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_EmailType];
+GO
+IF OBJECT_ID(N'[dbo].[CB_GroupType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_GroupType];
 GO
 IF OBJECT_ID(N'[dbo].[CB_IM]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_IM];
@@ -127,8 +124,14 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_IMType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_IMType];
 GO
-IF OBJECT_ID(N'[dbo].[CB_Website]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_Website];
+IF OBJECT_ID(N'[dbo].[CB_InternetCall]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_InternetCall];
+GO
+IF OBJECT_ID(N'[dbo].[CB_Number]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Number];
+GO
+IF OBJECT_ID(N'[dbo].[CB_NumberType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_NumberType];
 GO
 IF OBJECT_ID(N'[dbo].[CB_Relationship]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_Relationship];
@@ -142,11 +145,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_SpecialDateType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_SpecialDateType];
 GO
-IF OBJECT_ID(N'[dbo].[CB_InternetCall]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_InternetCall];
-GO
-IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_ContactBook];
+IF OBJECT_ID(N'[dbo].[CB_Website]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Website];
 GO
 
 -- --------------------------------------------------
@@ -310,7 +310,7 @@ CREATE TABLE [dbo].[CB_ContactBook] (
     [BookId] bigint IDENTITY(1,1) NOT NULL,
     [BookName] nvarchar(300)  NOT NULL,
     [Enabled] bit  NOT NULL,
-    [AspNetUserId] nvarchar(128)  NOT NULL
+    [Username] nvarchar(128)  NOT NULL
 );
 GO
 

@@ -206,14 +206,14 @@ namespace ContactBook.WebApi.Controllers
                 result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
-            
+
             IHttpActionResult errorResult = GetErrorResult(result);
 
             if (errorResult != null)
             {
                 return errorResult;
             }
-            
+
             return Ok();
         }
 
@@ -337,9 +337,11 @@ namespace ContactBook.WebApi.Controllers
             }
             else
             {
-                using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer())) {
-                    IContactBookContext context = new ContactBookContext(uow, new UserInfoContext(uow));
-                    context.CreateContactBook(model.UserName);
+                IdentityUser identityUser = await UserManager.FindAsync(user.UserName, model.Password);
+                using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer()))
+                {
+                    IContactBookContext context = new ContactBookContext(uow);
+                    context.CreateContactBook(model.UserName, identityUser.Id);
                     uow.Save();
                 }
             }
@@ -347,7 +349,7 @@ namespace ContactBook.WebApi.Controllers
             return Ok();
         }
 
-      
+
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

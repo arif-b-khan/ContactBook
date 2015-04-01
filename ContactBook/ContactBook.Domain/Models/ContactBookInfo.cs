@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Domain.Models
 {
-    public class MdlContactBook
+    public class ContactBookInfo
     {
         public long BookId { get; set; }
         public string BookName { get; set; }
         public bool Enabled { get; set; }
-        public string AspNetUserId { get; set; }
+        public string Username { get; set; }
     }
 }

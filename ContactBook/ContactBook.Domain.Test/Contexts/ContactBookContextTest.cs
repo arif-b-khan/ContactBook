@@ -16,15 +16,16 @@ using ContactBook.Domain.IoC;
 
 namespace ContactBook.Domain.Test.Contexts
 {
+
     public class ContactBookContextTest : IDisposable, IClassFixture<ContactBookDataFixture>
     {
         bool disposed = false;
-        MdlContactBook modelContact;
+        ContactBookInfo modelContact;
         ContactBookDataFixture contactFixture;
 
         public ContactBookContextTest(ContactBookDataFixture fixture)
         {
-            modelContact = new MdlContactBook() { BookName = "1", Enabled = true, AspNetUserId = "User1" };
+            modelContact = new ContactBookInfo() { BookName = "1", Enabled = true, Username = "User1" };
             this.contactFixture = fixture;
         }
 
@@ -40,7 +41,6 @@ namespace ContactBook.Domain.Test.Contexts
                 try
                 {
                     context.AddContactBook(modelContact);
-                    uow.Save();
                 }
                 catch (Exception ex)
                 {
@@ -59,8 +59,8 @@ namespace ContactBook.Domain.Test.Contexts
 
                 //act
                 context.AddContactBook(modelContact);
-                uow.Save();
-                var contact = context.GetContactBook(modelContact.AspNetUserId);
+                
+                var contact = context.GetContactBook(modelContact.Username);
 
                 //Assert
                 Assert.NotNull(contact);
@@ -71,32 +71,50 @@ namespace ContactBook.Domain.Test.Contexts
         public void CreateContactBookTest()
         {
             //arrange
-            var userContextMoq = new Mock<IUserInfoContext>();
-            userContextMoq.Setup(u => u.GetUserInfo("")).Returns(new AspNetUser() {
-            UserName = "UserName",
-            Id = modelContact.AspNetUserId
-            });
-
             var unitOfWorkMoq = new Mock<IContactBookRepositoryUow>();
             unitOfWorkMoq.Setup(un => un.GetEntityByType<CB_ContactBook>()).Returns(() =>
             {
                 return contactFixture.Repository<CB_ContactBook>(new List<CB_ContactBook>() { 
-                new CB_ContactBook(){BookId = 1, BookName="1-axkhan", AspNetUserId="1"}
+                new CB_ContactBook(){BookId = 1, BookName="1-axkhan", Username="1"}
                 });
             });
+
             unitOfWorkMoq.Setup(un => un.Save());
             //act
-            IContactBookContext contactBook = new ContactBookContext(unitOfWorkMoq.Object, userContextMoq.Object);
+            IContactBookContext contactBook = new ContactBookContext(unitOfWorkMoq.Object);
 
             //assert
             try
             {
-                contactBook.CreateContactBook("");
+                contactBook.CreateContactBook("usr1", "1");
             }
             catch(Exception ex)
             {
                 Assert.NotNull(ex);
             }
+
+        }
+
+        [Fact]
+        public void GetContactBookReturnsContact()
+        {
+            //arrange
+            var unitOfWorkMoq = new Mock<IContactBookRepositoryUow>();
+            unitOfWorkMoq.Setup(un => un.GetEntityByType<CB_ContactBook>()).Returns(() =>
+            {
+                return contactFixture.Repository<CB_ContactBook>(new List<CB_ContactBook>() { 
+                new CB_ContactBook(){BookId = 1, BookName="1-axkhan", Username="testuser"}
+                });
+            });
+
+            //act
+            IContactBookContext contactBook = new ContactBookContext(unitOfWorkMoq.Object);
+
+            ContactBookInfo bookInfo = contactBook.GetContactBook("1");
+
+            //Assert
+            Assert.NotNull(bookInfo);
+            Assert.True(bookInfo.Username == "testuser");
 
         }
 

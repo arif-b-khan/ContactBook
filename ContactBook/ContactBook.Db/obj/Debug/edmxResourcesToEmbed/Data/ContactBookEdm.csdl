@@ -128,7 +128,7 @@
     <NavigationProperty Name="CB_Emails" Relationship="ContactBookEdm.ContactBookContactEmail" FromRole="ContactBook" ToRole="ContactEmail" />
     <NavigationProperty Name="CB_ContactByGroups" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBook" ToRole="ContactBookAndGroup" />
     <NavigationProperty Name="CB_Addresses" Relationship="ContactBookEdm.ContactBookContactAddress" FromRole="ContactBook" ToRole="ContactAddress" />
-    <Property Type="String" Name="Suffix" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Suffix" Nullable="true" MaxLength="10" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="PhFirstname" Nullable="true" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="PhMiddlename" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="PhSurname" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -512,7 +512,7 @@
     <NavigationProperty Name="CB_AddressType" Relationship="ContactBookEdm.CB_ContactBookCB_AddressType" FromRole="CB_ContactBook" ToRole="CB_AddressType" />
     <NavigationProperty Name="CB_SpecialDateType" Relationship="ContactBookEdm.CB_ContactBookCB_SpecialDateType" FromRole="CB_ContactBook" ToRole="CB_SpecialDateType" />
     <Property Type="Boolean" Name="Enabled" Nullable="false" />
-    <Property Type="String" Name="AspNetUserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CB_EmailType" Relationship="ContactBookEdm.CB_ContactBookCB_EmailType" FromRole="CB_ContactBook" ToRole="CB_EmailType" />
     <NavigationProperty Name="CB_GroupTypes" Relationship="ContactBookEdm.CB_ContactBookCB_Group" FromRole="CB_ContactBook" ToRole="CB_Group" />
     <NavigationProperty Name="CB_IMType" Relationship="ContactBookEdm.CB_ContactBookCB_IMType" FromRole="CB_ContactBook" ToRole="CB_IMType" />
