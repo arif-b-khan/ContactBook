@@ -20,6 +20,7 @@ namespace ContactBook.WebApi.Controllers
     {
         IContactBookRepositoryUow unitOfWork;
         IGenericContextTypes<AddressType, CB_AddressType> genericContext;
+
         public ApiAddressTypeController()
             : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
@@ -32,7 +33,7 @@ namespace ContactBook.WebApi.Controllers
             genericContext = new GenericContextTypes<AddressType, CB_AddressType>(unitOfWork);
         }
 
-        // GET api/<controller>
+        // GET api/AddressType/GetTypes/1
         [Route("GetTypes/{bookId}")]
         [ResponseType(typeof(List<AddressType>))]
         [HttpGet]
@@ -49,9 +50,10 @@ namespace ContactBook.WebApi.Controllers
             return Ok<List<AddressType>>(retAddressType);
         }
 
-        [Route("InsertTypes")]
+        //Post api/AddressType/InsertType
+        [Route("InsertType")]
         [HttpPost]
-        public IHttpActionResult InsertAddressTypes([FromBody]List<AddressType> addressTypes)
+        public IHttpActionResult InsertAddressTypes([FromBody]AddressType addressType)
         {
             Exception retException = null;
             bool status = true;
@@ -63,7 +65,7 @@ namespace ContactBook.WebApi.Controllers
 
             try
             {
-                genericContext.InsertTypes(addressTypes);
+                genericContext.InsertTypes(new List<AddressType>() { addressType });
             }
             catch (Exception ex)
             {
@@ -74,9 +76,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (status)
             {
-                var routeValue = new Dictionary<string, object>();
-                routeValue.Add("bookId", "1");
-                return CreatedAtRoute<List<AddressType>>("GetTypes", routeValue , addressTypes);
+                return CreatedAtRoute<AddressType>("DefaultApi", new { controller = "AddressType", action = "GetTypes", bookid = 1 }, addressType);
             }
             else
             {
@@ -85,13 +85,57 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [Route("UpdateType")]
+        [HttpPut]
+        public IHttpActionResult Put([FromBody]AddressType addressType)
         {
+            Exception retException = null;
+            bool status = true;
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            long bookId = addressType.BookId.HasValue ? addressType.BookId.Value : 0;
+
+            try
+            {
+                IGenericContextTypes<AddressType, CB_AddressType> existingType = new GenericContextTypes<AddressType, CB_AddressType>(unitOfWork);
+                List<AddressType> existingTypeList = existingType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == addressType.BookId.Value) && cbt.AddressTypeId == addressType.AddressTypeId));
+
+                if (existingTypeList == null)
+                {
+                    return NotFound();
+                }
+
+                AddressType existingAddressType = existingTypeList.SingleOrDefault();
+
+                if (!existingAddressType.Equals(addressType))
+                {
+                    genericContext.UpdateTypes(new List<AddressType>() { addressType });
+                }
+            }
+            catch (Exception ex)
+            {
+                //todo: log this exception
+                status = false;
+                retException = ex;
+            }
+
+            if (status)
+            {
+                return Ok();
+            }
+            else
+            {
+                return InternalServerError(retException);
+            }
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        //    // DELETE api/<controller>/5
+        //    public void Delete(int id)
+        //    {
+        //    }
     }
 }

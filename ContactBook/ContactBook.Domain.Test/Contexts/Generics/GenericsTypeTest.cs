@@ -105,21 +105,6 @@ namespace ContactBook.Domain.Test.Contexts.Generics
         #region NumberTypeContextTest
 
         [Fact]
-        public void GetNumberTypesThrowsArgsNullException()
-        {
-            //Arrange
-            var mockRepository = new Mock<IContactBookRepositoryUow>();
-            mockRepository.Setup(c => c.GetEntityByType<CB_NumberType>()).Returns(
-                 () => dataFixture.Repository<CB_NumberType>(null)
-                );
-
-            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
-
-            //act and Assert
-            Assert.Throws<ArgumentNullException>(() => numberContext.GetTypes(numberTypeExpr));
-        }
-
-        [Fact]
         public void GetNumberTypesReturnsOneRecord()
         {
             //Arrange

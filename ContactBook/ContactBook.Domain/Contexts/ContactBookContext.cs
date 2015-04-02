@@ -7,6 +7,7 @@ using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Models;
 using AutoMapper;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.Domain.Contexts
 {
@@ -14,6 +15,11 @@ namespace ContactBook.Domain.Contexts
     {
         IContactBookRepositoryUow unitOfWork;
         IContactBookDbRepository<CB_ContactBook> conBookRepo;
+
+        public ContactBookContext():this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
+        {
+
+        }
 
         public ContactBookContext(IContactBookRepositoryUow unitOfWork)
         {

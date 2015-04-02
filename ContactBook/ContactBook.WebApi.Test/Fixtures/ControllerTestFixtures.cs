@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Http;
 using ContactBook.Db.Repositories;
 using Moq;
 
@@ -22,11 +25,31 @@ namespace ContactBook.WebApi.Test.Fixtures
         {
             Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
             repository.Setup(rp => rp.Get()).Returns(plist);
-            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>())).Returns(plist);
-            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>())).Returns(plist);
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>())).Returns<Expression<Func<T, bool>>>(e => 
+                {
+                    if (plist != null)
+                    {
+                        return plist.Where(e.Compile());
+                    }
+                    else
+                    {
+                        return plist;
+                    }
+                }
+                );
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>())).Returns<Expression<Func<T, bool>>, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>((wh, od) => {
+                return od.Compile().Invoke(plist.Where(wh.Compile()).AsQueryable()).AsEnumerable();
+            });
             repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>(), "")).Returns(plist);
             return repository.Object;
         }
+
+        public Mock<IContactBookDbRepository<T>> MockRepository<T>() where T : class
+        {
+            Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
+            return repository;
+        }
+
 
         public Mock<IContactBookRepositoryUow> MockUnitOfWork
         {
@@ -34,5 +57,14 @@ namespace ContactBook.WebApi.Test.Fixtures
             private set { mockUnitOfWork = value; }
         }
 
+        public HttpResponseMessage GetResponseMessage(IHttpActionResult actResult, CancellationToken ct)
+        {
+            return actResult.ExecuteAsync(ct).Result;
+        }
+
+        public void RouteConfig(HttpConfiguration config)
+        {
+            config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{id}"); 
+        }
     }
 }

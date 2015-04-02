@@ -5,16 +5,25 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using ContactBook.Domain.Models.ModelMapper;
 
 namespace ContactBook.Domain.Contexts.Generics
 {
-    public class GenericContextTypes<M, T> : IGenericContextTypes<M, T> where M: class where T : class
+    public class GenericContextTypes<M, T> : IGenericContextTypes<M, T>
+        where M : class
+        where T : class
     {
         IContactBookRepositoryUow unitOfWork;
         IContactBookDbRepository<T> repoType;
         ModelMapper mapper = null;
+
+        public GenericContextTypes()
+            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
+        {
+
+        }
 
         public GenericContextTypes(IContactBookRepositoryUow unitOfWork)
         {
@@ -60,9 +69,15 @@ namespace ContactBook.Domain.Contexts.Generics
         public List<M> GetTypes(Expression<Func<T, bool>> filter)
         {
             List<M> retTypes = null;
-            List<T> repoTypes = repoType.Get(filter).ToList();
-            retTypes = mapper.GetMappedType<T, M>(repoTypes);
+            var repoTypes = repoType.Get(filter);
+
+            if (repoTypes != null)
+            {
+                retTypes = mapper.GetMappedType<T, M>(repoTypes.ToList());
+            }
+            
             return retTypes;
         }
+
     }
 }

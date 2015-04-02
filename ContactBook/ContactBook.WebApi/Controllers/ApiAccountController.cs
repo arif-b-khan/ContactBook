@@ -27,7 +27,7 @@ namespace ContactBook.WebApi.Controllers
     public class ApiAccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-
+        
         public UserManager<IdentityUser> UserManager { get; private set; }
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
