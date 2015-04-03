@@ -114,13 +114,13 @@ namespace ContactBook.Domain.Test.Contexts.Generics
                  NumberTypeId = 1, Number_TypeName="Mobile", BookId=null
                  }})
                 );
-            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
+            var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(mockRepository.Object);
 
             //act
             var numberList = numberContext.GetTypes(numberTypeExpr);
 
             //Assert
-            Assert.Single<MdlNumberType>(numberList);
+            Assert.Single<NumberType>(numberList);
         }
 
 
@@ -145,7 +145,7 @@ new CB_NumberType() {
                  })
                 );
 
-            var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(mockRepository.Object);
+            var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(mockRepository.Object);
 
             //act
             var numberList = numberContext.GetTypes(numberTypeExpr);
@@ -153,21 +153,21 @@ new CB_NumberType() {
             //Assert
             Assert.True(numberList.Count == 4);
 
-            Assert.Contains(numberList, m => m.NumberType == "Custom");
+            Assert.Contains(numberList, m => m.NumberTypeName == "Custom");
         }
 
         [Fact()]
         public void ShouldPerformCUDOnCBNumberTypes()
         {
             //Arrange
-            List<MdlNumberType> numberTypeList = new List<MdlNumberType>() { 
-            new MdlNumberType(){NumberType="Custom", BookId = 1}
+            List<NumberType> numberTypeList = new List<NumberType>() { 
+            new NumberType(){NumberTypeName="Custom", BookId = 1}
             };
 
             //Act
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(uow);
                 try
                 {
                     numberContext.InsertTypes(numberTypeList);
@@ -182,10 +182,10 @@ new CB_NumberType() {
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(uow);
                 foreach (var mType in numberTypeList)
                 {
-                    mType.NumberType = "UpdatedCustom";
+                    mType.NumberTypeName = "UpdatedCustom";
                 }
 
                 try
@@ -201,7 +201,7 @@ new CB_NumberType() {
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
-                var numberContext = new GenericContextTypes<MdlNumberType, CB_NumberType>(uow);
+                var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(uow);
                 
                 try
                 {

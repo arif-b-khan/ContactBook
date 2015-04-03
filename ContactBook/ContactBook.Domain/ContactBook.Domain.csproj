@@ -101,7 +101,7 @@
     <Compile Include="Models\MdlIM.cs" />
     <Compile Include="Models\MdlInternetCall.cs" />
     <Compile Include="Models\MdlNumber.cs" />
-    <Compile Include="Models\MdlNumberType.cs" />
+    <Compile Include="Models\NumberType.cs" />
     <Compile Include="Models\MdlRelationship.cs" />
     <Compile Include="Models\MdlSpecialDates.cs" />
     <Compile Include="Models\MdlWebsite.cs" />

@@ -15,6 +15,7 @@ namespace ContactBook.Db.Repositories
         DbContext context;
         DbSet<T> dbSet;
         private object lockObj = new object();
+
         public ContactBookDbRepository(ContactBookEdmContainer con)
         {
             this.context = con;

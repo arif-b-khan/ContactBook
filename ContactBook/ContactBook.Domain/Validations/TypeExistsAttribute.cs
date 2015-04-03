@@ -49,16 +49,17 @@ namespace ContactBook.Domain.Validations
             {
                 return new ValidationResult("Invalid bookId");
             }
+            Type repoType = typeof(GenericContextTypes<,>).MakeGenericType(typeof(NumberType), typeof(CB_NumberType));
 
-            IGenericContextTypes<AddressType, CB_AddressType> addressTypes = new GenericContextTypes<AddressType, CB_AddressType>();
+            var addressTypes = Activator.CreateInstance(repoType);
 
-            foreach (string item in addressTypes.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.AddressTypeName))
-            {
-                if (item.Equals(typeValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    return new ValidationResult("Type name with this value already exists");
-                }
-            }
+            //foreach (string item in addressTypes.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.AddressTypeName))
+            //{
+            //    if (item.Equals(typeValue, StringComparison.OrdinalIgnoreCase))
+            //    {
+            //        return new ValidationResult("Type name with this value already exists");
+            //    }
+            //}
 
             return ValidationResult.Success;
         }

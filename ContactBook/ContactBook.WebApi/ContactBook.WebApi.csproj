@@ -217,6 +217,8 @@
     <Compile Include="Controllers\ApiAddressTypeController.cs" />
     <Compile Include="Controllers\ApiContactBookController.cs" />
     <Compile Include="Controllers\ApiContactController.cs" />
+    <Compile Include="Controllers\ApiNumberTypeController.cs" />
+    <Compile Include="Controllers\Helpers\ApiHelper.cs" />
     <Compile Include="Filters\ValidationModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

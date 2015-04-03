@@ -24,10 +24,10 @@ namespace ContactBook.Domain.Models.ModelMapper
                 case "AddressType-to-CB_AddressType":
                     return MdlAddressTypeToAddressType(t as List<AddressType>) as List<D>;
                     break;
-                case "MdlNumberType-to-CB_NumberType":
-                    return MdlNumberTypeToCBNumberType(t as List<MdlNumberType>) as List<D>;
+                case "NumberType-to-CB_NumberType":
+                    return MdlNumberTypeToCBNumberType(t as List<NumberType>) as List<D>;
                     break;
-                case "CB_NumberType-to-MdlNumberType":
+                case "CB_NumberType-to-NumberType":
                     return CBNumberTypeToMdlModelType(t as List<CB_NumberType>) as List<D>;
                     break;
                 default:
@@ -36,6 +36,17 @@ namespace ContactBook.Domain.Models.ModelMapper
             }
 
             return default(List<D>);
+        }
+
+        public D GetMappedType<T, D>(T t)
+        {
+            D d = default(D);
+            if (t == null)
+            {
+               return default(D);
+            }
+            d = this.GetMappedType<T, D>(new List<T>() { t }).SingleOrDefault();
+            return d;
         }
 
         private List<AddressType> AddressTypeMapper(List<CB_AddressType> source)
@@ -50,21 +61,21 @@ namespace ContactBook.Domain.Models.ModelMapper
             return Mapper.Map<List<CB_AddressType>>(source);
         }
 
-        private List<CB_NumberType> MdlNumberTypeToCBNumberType(List<MdlNumberType> source)
+        private List<CB_NumberType> MdlNumberTypeToCBNumberType(List<NumberType> source)
         {
-            Mapper.CreateMap<MdlNumberType, CB_NumberType>()
-    .ForMember(md => md.Number_TypeName, cb => cb.MapFrom(m => m.NumberType));
+            Mapper.CreateMap<NumberType, CB_NumberType>()
+    .ForMember(md => md.Number_TypeName, cb => cb.MapFrom(m => m.NumberTypeName));
             List<CB_NumberType> numberTypeList = Mapper.Map<List<CB_NumberType>>(source);
             return numberTypeList;
         }
 
-        private List<MdlNumberType> CBNumberTypeToMdlModelType(List<CB_NumberType> cbNumberType)
+        private List<NumberType> CBNumberTypeToMdlModelType(List<CB_NumberType> cbNumberType)
         {
-            Mapper.CreateMap<CB_NumberType, MdlNumberType>()
-    .ForMember(md => md.NumberType, cb => cb.MapFrom(m => m.Number_TypeName))
+            Mapper.CreateMap<CB_NumberType, NumberType>()
+    .ForMember(md => md.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName))
     .ForSourceMember(cb => cb.CB_ContactBook, c => c.Ignore())
     .ForSourceMember(cb => cb.CB_Numbers, c => c.Ignore());
-            return Mapper.Map<List<MdlNumberType>>(cbNumberType);
+            return Mapper.Map<List<NumberType>>(cbNumberType);
         }
     }
 

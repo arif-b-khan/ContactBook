@@ -75,9 +75,19 @@ namespace ContactBook.Domain.Contexts.Generics
             {
                 retTypes = mapper.GetMappedType<T, M>(repoTypes.ToList());
             }
-            
+
             return retTypes;
         }
 
+        public M Find(object id)
+        {
+            M retType = null;
+            T repType = repoType.GetById(id);
+            if (repoType != null)
+            {
+                retType = mapper.GetMappedType<T, M>(repType);
+            }
+            return retType;
+        }
     }
 }

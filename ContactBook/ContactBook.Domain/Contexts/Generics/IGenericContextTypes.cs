@@ -13,5 +13,6 @@ namespace ContactBook.Domain.Contexts.Generics
         void InsertTypes(List<T> typeList);
         void UpdateTypes(List<T> typeList);
         void DeleteTypes(List<T> typeList);
+        T Find(object id);
     }
 }

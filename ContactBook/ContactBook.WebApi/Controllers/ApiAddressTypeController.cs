@@ -20,18 +20,24 @@ namespace ContactBook.WebApi.Controllers
     {
         IContactBookRepositoryUow unitOfWork;
         IGenericContextTypes<AddressType, CB_AddressType> genericContext;
+        IGenericContextTypes<AddressType, CB_AddressType> readOnlyContext;
+        IContactBookRepositoryUow getUnitOfWork;
+
 
         public ApiAddressTypeController()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
+            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
 
         }
 
-        public ApiAddressTypeController(IContactBookRepositoryUow uow)
+        public ApiAddressTypeController(IContactBookRepositoryUow uow, IContactBookRepositoryUow getUnitOfWork)
         {
             unitOfWork = uow;
+            this.getUnitOfWork = getUnitOfWork;
             genericContext = new GenericContextTypes<AddressType, CB_AddressType>(unitOfWork);
+            readOnlyContext = new GenericContextTypes<AddressType, CB_AddressType>(getUnitOfWork);
         }
+
 
         // GET api/AddressType/GetTypes/1
         [Route("GetTypes/{bookId}")]
@@ -42,7 +48,7 @@ namespace ContactBook.WebApi.Controllers
 
             List<AddressType> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
 
-            if (retAddressType == null)
+            if (retAddressType == null || retAddressType.Count == 0)
             {
                 return NotFound();
             }
@@ -91,20 +97,19 @@ namespace ContactBook.WebApi.Controllers
         {
             Exception retException = null;
             bool status = true;
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
+
             long bookId = addressType.BookId.HasValue ? addressType.BookId.Value : 0;
 
             try
             {
-                IGenericContextTypes<AddressType, CB_AddressType> existingType = new GenericContextTypes<AddressType, CB_AddressType>(unitOfWork);
-                List<AddressType> existingTypeList = existingType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == addressType.BookId.Value) && cbt.AddressTypeId == addressType.AddressTypeId));
+                List<AddressType> existingTypeList = readOnlyContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) && cbt.AddressTypeId == addressType.AddressTypeId));
 
-                if (existingTypeList == null)
+                if (existingTypeList == null || existingTypeList.Count == 0)
                 {
                     return NotFound();
                 }
@@ -133,9 +138,36 @@ namespace ContactBook.WebApi.Controllers
             }
         }
 
-        //    // DELETE api/<controller>/5
-        //    public void Delete(int id)
-        //    {
-        //    }
+        //    // DELETE api/DeleteType/5
+        [Route("DeleteType/{addressTypeId}/{bookId}")]
+        [HttpDelete]
+        public IHttpActionResult Delete(int addressTypeId, long bookId)
+        {
+            AddressType addressType = null;
+
+            if (bookId <= 0)
+            {
+                return BadRequest(string.Format("Invalid book id {0}", bookId));
+            }
+
+            addressType = readOnlyContext.GetTypes(cb => cb.AddressTypeId == addressTypeId && (cb.BookId.HasValue && cb.BookId.Value == bookId)).SingleOrDefault();
+            
+            if (addressType == null)
+            {
+                return NotFound();
+            }
+
+
+            if (addressType.BookId.HasValue)
+            {
+                genericContext.DeleteTypes(new List<AddressType>() { addressType });
+            }
+            else 
+            {
+                return BadRequest("Invalid operation. You're trying to delete default Address type.");
+            }
+
+            return Ok();
+        }
     }
 }
