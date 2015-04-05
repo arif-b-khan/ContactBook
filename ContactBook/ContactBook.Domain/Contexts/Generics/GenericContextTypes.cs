@@ -1,13 +1,10 @@
-﻿using System;
+﻿using ContactBook.Db.Repositories;
+using ContactBook.Domain.IoC;
+using ContactBook.Domain.Models.ModelMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using ContactBook.Db.Repositories;
-using ContactBook.Domain.IoC;
-using ContactBook.Domain.Models;
-using ContactBook.Domain.Models.ModelMapper;
 
 namespace ContactBook.Domain.Contexts.Generics
 {
@@ -15,14 +12,13 @@ namespace ContactBook.Domain.Contexts.Generics
         where M : class
         where T : class
     {
-        IContactBookRepositoryUow unitOfWork;
-        IContactBookDbRepository<T> repoType;
-        ModelMapper mapper = null;
+        private IContactBookRepositoryUow unitOfWork;
+        private IContactBookDbRepository<T> repoType;
+        private ModelMapper mapper = null;
 
         public GenericContextTypes()
             : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
-
         }
 
         public GenericContextTypes(IContactBookRepositoryUow unitOfWork)

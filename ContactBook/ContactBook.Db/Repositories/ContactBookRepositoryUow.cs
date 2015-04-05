@@ -1,23 +1,19 @@
-﻿using ContactBook.Db.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Dynamic;
 using System.Reflection;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Core.Objects;
 
 namespace ContactBook.Db.Repositories
 {
     public class ContactBookRepositoryUow : IContactBookRepositoryUow
     {
-        bool disposed = false;
-        DbContext container;
-        IDictionary<string, Type> entityDictionary = new Dictionary<string, Type>();
-        IDictionary<string, object> cachedInstance = new Dictionary<string, object>();
+        private bool disposed = false;
+        private DbContext container;
+        private IDictionary<string, Type> entityDictionary = new Dictionary<string, Type>();
+        private IDictionary<string, object> cachedInstance = new Dictionary<string, object>();
 
         public ContactBookRepositoryUow(DbContext container)
         {
@@ -55,17 +51,34 @@ namespace ContactBook.Db.Repositories
             }
             return default(ContactBookDbRepository<T>);
         }
-        
+
         public bool Save()
         {
             bool result = false;
-            
+
             try
             {
                 container.SaveChanges();
                 result = true;
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException inex)
+            {
+                throw;
+            }
+            catch (DbEntityValidationException vdExec)
+            {
+                foreach (var item in vdExec.EntityValidationErrors)
+                {
+                    Debug.WriteLine(item.Entry.Entity.ToString());
+                    Debug.WriteLine(item.IsValid.ToString());
+                    foreach (var error in item.ValidationErrors)
+                    {
+                        Debug.WriteLine(error.PropertyName);
+                        Debug.WriteLine(error.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 throw;
             }

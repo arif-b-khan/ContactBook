@@ -1,21 +1,15 @@
-﻿using ContactBook.Db;
+﻿using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
-using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using ContactBook.Db.Data;
 using ContactBook.Domain.Test.Fixtures;
+using System;
+using Xunit;
 
 namespace ContactBook.Domain.Test
 {
     public class ContactBookRepositoryUowTest : IClassFixture<ContactBookDataFixture>, IDisposable
     {
-        bool disposed = false;
-        ContactBookDataFixture dataFixture;
+        private bool disposed = false;
+        private ContactBookDataFixture dataFixture;
 
         public ContactBookRepositoryUowTest(ContactBookDataFixture fixture)
         {

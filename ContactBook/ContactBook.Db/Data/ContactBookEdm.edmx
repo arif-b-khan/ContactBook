@@ -283,7 +283,9 @@
     <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
   <Association Name="ContactBookContactNumber">
-    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1" />
+    <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ContactNumber" Type="ContactBookEdm.Store.CB_Number" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -762,7 +764,9 @@
           <Property Type="Int64" Name="BookId" Nullable="true" />
         </EntityType>
         <Association Name="ContactBookContactNumber">
-          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+          <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ContactBookEdm.CB_Number" Role="ContactNumber" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">

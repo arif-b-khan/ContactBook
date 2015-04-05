@@ -1,19 +1,16 @@
 ﻿using ContactBook.Db.Data;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace ContactBook.Db.Repositories
 {
     public class ContactBookDbRepository<T> : IContactBookDbRepository<T> where T : class
     {
-        DbContext context;
-        DbSet<T> dbSet;
+        private DbContext context;
+        private DbSet<T> dbSet;
         private object lockObj = new object();
 
         public ContactBookDbRepository(ContactBookEdmContainer con)

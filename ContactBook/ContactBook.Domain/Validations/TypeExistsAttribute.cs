@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ContactBook.Domain.Validations.Helper;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using ContactBook.Db.Data;
-using ContactBook.Domain.Contexts.Generics;
-using ContactBook.Domain.Models;
 
 namespace ContactBook.Domain.Validations
 {
     public class TypeExistsAttribute : ValidationAttribute
     {
-        string bookIdProperty;
+        private string bookIdProperty;
 
         public TypeExistsAttribute(string bookId)
         {
@@ -49,19 +43,17 @@ namespace ContactBook.Domain.Validations
             {
                 return new ValidationResult("Invalid bookId");
             }
-            Type repoType = typeof(GenericContextTypes<,>).MakeGenericType(typeof(NumberType), typeof(CB_NumberType));
 
-            var addressTypes = Activator.CreateInstance(repoType);
+            ValidationResult result = TypeExistsHelper.GetTypeName(validationContext.ObjectInstance.GetType().Name, typeValue, bookId);
 
-            //foreach (string item in addressTypes.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.AddressTypeName))
-            //{
-            //    if (item.Equals(typeValue, StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        return new ValidationResult("Type name with this value already exists");
-            //    }
-            //}
-
-            return ValidationResult.Success;
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return ValidationResult.Success;
+            }
         }
     }
 }

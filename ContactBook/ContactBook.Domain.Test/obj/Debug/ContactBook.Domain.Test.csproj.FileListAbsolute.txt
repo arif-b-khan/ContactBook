@@ -35,8 +35,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.Net4.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\Moq.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\Moq.xml
-D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\TestDb\TestDb.mdf
-D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\TestDb\TestDb_log.ldf
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\AutoMapper.Net4.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\xunit.abstractions.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\xunit.runner.visualstudio.testadapter.dll

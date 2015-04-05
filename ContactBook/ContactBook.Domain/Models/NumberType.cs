@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ContactBook.Domain.Validations;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ContactBook.Domain.Validations;
 
 namespace ContactBook.Domain.Models
 {
     public class NumberType : IEquatable<NumberType>
     {
         public int NumberTypeId { get; set; }
-        
+
         [Required]
-        [Display(Name="NumberType")]
         [TypeExists("BookId")]
         public string NumberTypeName { get; set; }
 

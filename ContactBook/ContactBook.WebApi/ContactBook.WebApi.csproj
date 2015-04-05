@@ -217,7 +217,12 @@
     <Compile Include="Controllers\ApiAddressTypeController.cs" />
     <Compile Include="Controllers\ApiContactBookController.cs" />
     <Compile Include="Controllers\ApiContactController.cs" />
+    <Compile Include="Controllers\ApiEmailTypeController.cs" />
+    <Compile Include="Controllers\ApiIMTypeController.cs" />
     <Compile Include="Controllers\ApiNumberTypeController.cs" />
+    <Compile Include="Controllers\ApiGroupTypeController.cs" />
+    <Compile Include="Controllers\ApiRelationshipTypeController.cs" />
+    <Compile Include="Controllers\ApiSpecialDateTypeController.cs" />
     <Compile Include="Controllers\Helpers\ApiHelper.cs" />
     <Compile Include="Filters\ValidationModelAttribute.cs" />
     <Compile Include="Global.asax.cs">

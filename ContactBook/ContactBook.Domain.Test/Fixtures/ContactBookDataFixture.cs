@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContactBook.Db.Data;
+﻿using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace ContactBook.Domain.Test.Fixtures
 {
     public class ContactBookDataFixture : IDisposable
     {
-        bool disposed = false;
-        ContactBookRepositoryUow uow;
-        ContactBookEdmContainer container;
+        private bool disposed = false;
+        private ContactBookRepositoryUow uow;
+        private ContactBookEdmContainer container;
 
         public ContactBookDataFixture()
         {
-
             container = DependencyFactory.Resolve<ContactBookEdmContainer>();
             uow = new ContactBookRepositoryUow(container);
-
         }
 
         public IContactBookDbRepository<T> Repository<T>(List<T> plist) where T : class
@@ -37,7 +32,6 @@ namespace ContactBook.Domain.Test.Fixtures
             return repository.Object;
         }
 
-            
         public ContactBookEdmContainer Container
         {
             get

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using ContactBook.Db.Data;
+﻿using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Contexts.Generics;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using ContactBook.Domain.Test.Fixtures;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace ContactBook.Domain.Test.Contexts.Generics
@@ -18,18 +16,19 @@ namespace ContactBook.Domain.Test.Contexts.Generics
     public class GenericsTypeTest : IDisposable, IClassFixture<ContactBookDataFixture>
     {
         public ContactBookDataFixture dataFixture;
-        List<AddressType> mdlAddressTypes;
-        
-        Expression<Func<CB_AddressType, bool>> addressTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
-        Expression<Func<CB_NumberType, bool>> numberTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
-        
+        private List<AddressType> mdlAddressTypes;
+
+        private Expression<Func<CB_AddressType, bool>> addressTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
+        private Expression<Func<CB_NumberType, bool>> numberTypeExpr = cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == 1) || !cbt.BookId.HasValue);
+
         public GenericsTypeTest(ContactBookDataFixture pdataFixture)
         {
             this.dataFixture = pdataFixture;
             mdlAddressTypes = new List<AddressType>() { new AddressType() { BookId = 1, AddressTypeName = "Family" } };
         }
-        
+
         #region AddressTypeContextTest
+
         [Fact]
         public void AddressTypeIsNotNull()
         {
@@ -42,7 +41,6 @@ namespace ContactBook.Domain.Test.Contexts.Generics
 
             Assert.NotNull(result);
         }
-
 
         [Fact]
         public void AddAddressTypeReturnsList()
@@ -71,7 +69,7 @@ namespace ContactBook.Domain.Test.Contexts.Generics
                 try
                 {
                     addressContext.InsertTypes(mdlAddressTypes);
-                    
+
                     addressTypes = addressContext.GetTypes(addressTypeExpr).Where(addr => addr.BookId.HasValue).ToList();
                 }
                 catch (Exception ex)
@@ -90,17 +88,16 @@ namespace ContactBook.Domain.Test.Contexts.Generics
                 }
 
                 addressContext.UpdateTypes(addressTypes);
-                
             }
 
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 IGenericContextTypes<AddressType, CB_AddressType> addressContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
                 addressContext.DeleteTypes(addressTypes.Where(addr => addr.BookId.HasValue).ToList());
-                
             }
         }
-        #endregion
+
+        #endregion AddressTypeContextTest
 
         #region NumberTypeContextTest
 
@@ -110,7 +107,7 @@ namespace ContactBook.Domain.Test.Contexts.Generics
             //Arrange
             var mockRepository = new Mock<IContactBookRepositoryUow>();
             mockRepository.Setup(c => c.GetEntityByType<CB_NumberType>()).Returns(
-                 () => dataFixture.Repository<CB_NumberType>(new List<CB_NumberType>(){new CB_NumberType() { 
+                 () => dataFixture.Repository<CB_NumberType>(new List<CB_NumberType>(){new CB_NumberType() {
                  NumberTypeId = 1, Number_TypeName="Mobile", BookId=null
                  }})
                 );
@@ -123,23 +120,22 @@ namespace ContactBook.Domain.Test.Contexts.Generics
             Assert.Single<NumberType>(numberList);
         }
 
-
         [Fact]
         public void GetNumberTypes_ReturnDefaultAndUserSpecificNumberTypes()
         {
             //Arrange
             var mockRepository = new Mock<IContactBookRepositoryUow>();
             mockRepository.Setup(c => c.GetEntityByType<CB_NumberType>()).Returns(
-                 () => dataFixture.Repository<CB_NumberType>(new List<CB_NumberType>(){new CB_NumberType() { 
+                 () => dataFixture.Repository<CB_NumberType>(new List<CB_NumberType>(){new CB_NumberType() {
                  NumberTypeId = 1, Number_TypeName="Mobile", BookId=null
                  },
-                 new CB_NumberType() { 
+                 new CB_NumberType() {
                  NumberTypeId = 2, Number_TypeName="Home", BookId=null
                  },
-new CB_NumberType() { 
+new CB_NumberType() {
                  NumberTypeId = 3, Number_TypeName="Office", BookId=null
                  },
-new CB_NumberType() { 
+new CB_NumberType() {
                  NumberTypeId = 4, Number_TypeName="Custom", BookId=1
                  }
                  })
@@ -160,7 +156,7 @@ new CB_NumberType() {
         public void ShouldPerformCUDOnCBNumberTypes()
         {
             //Arrange
-            List<NumberType> numberTypeList = new List<NumberType>() { 
+            List<NumberType> numberTypeList = new List<NumberType>() {
             new NumberType(){NumberTypeName="Custom", BookId = 1}
             };
 
@@ -171,7 +167,7 @@ new CB_NumberType() {
                 try
                 {
                     numberContext.InsertTypes(numberTypeList);
-                    
+
                     numberTypeList = numberContext.GetTypes(numberTypeExpr).Where(nm => nm.BookId.HasValue).ToList();
                 }
                 catch (Exception ex)
@@ -191,7 +187,6 @@ new CB_NumberType() {
                 try
                 {
                     numberContext.UpdateTypes(numberTypeList);
-                    
                 }
                 catch (Exception ex)
                 {
@@ -202,25 +197,22 @@ new CB_NumberType() {
             using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
             {
                 var numberContext = new GenericContextTypes<NumberType, CB_NumberType>(uow);
-                
+
                 try
                 {
                     numberContext.DeleteTypes(numberTypeList);
-                    
                 }
                 catch (Exception ex)
                 {
                     Assert.NotNull(ex);
                 }
             }
-
         }
 
-        #endregion
+        #endregion NumberTypeContextTest
 
         public void Dispose()
         {
-
         }
     }
 }

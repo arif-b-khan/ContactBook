@@ -52,3 +52,7 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Syste
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Net.Http.Formatting.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Net.Http.Formatting.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Net.Http.Formatting.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.xml

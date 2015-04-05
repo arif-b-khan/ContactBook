@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
-using ContactBook.Domain.Models;
-using AutoMapper;
 using ContactBook.Domain.IoC;
+using ContactBook.Domain.Models;
+using System;
+using System.Linq;
 
 namespace ContactBook.Domain.Contexts
 {
     public class ContactBookContext : IContactBookContext
     {
-        IContactBookRepositoryUow unitOfWork;
-        IContactBookDbRepository<CB_ContactBook> conBookRepo;
+        private IContactBookRepositoryUow unitOfWork;
+        private IContactBookDbRepository<CB_ContactBook> conBookRepo;
 
-        public ContactBookContext():this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
+        public ContactBookContext()
+            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
-
         }
 
         public ContactBookContext(IContactBookRepositoryUow unitOfWork)
@@ -38,7 +35,7 @@ namespace ContactBook.Domain.Contexts
         public ContactBookInfo GetContactBook(string userName)
         {
             ContactBookInfo retBook = null;
-           
+
             try
             {
                 CB_ContactBook cb = conBookRepo.Get(c => c.Username == userName).FirstOrDefault();

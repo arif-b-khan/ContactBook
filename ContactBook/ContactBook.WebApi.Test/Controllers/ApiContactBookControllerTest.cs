@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
-using AutoMapper;
-using ContactBook.Db.Data;
-using ContactBook.Db.Repositories;
+﻿using ContactBook.Db.Data;
 using ContactBook.Domain.Models;
 using ContactBook.WebApi.Controllers;
 using ContactBook.WebApi.Test.Fixtures;
-using Moq;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Web.Http;
 using Xunit;
 
 namespace ContactBook.WebApi.Test.Controllers
 {
     public class ApiContactBookControllerTest : IClassFixture<ControllerTestFixtures>
     {
-        CancellationTokenSource cts;
+        private CancellationTokenSource cts;
+
         public ApiContactBookControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
@@ -75,7 +68,5 @@ namespace ContactBook.WebApi.Test.Controllers
             message.TryGetContentValue<ContactBookInfo>(out cbInfo);
             Assert.NotNull(cbInfo);
         }
-
-
     }
 }

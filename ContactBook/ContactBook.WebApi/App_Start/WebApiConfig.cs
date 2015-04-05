@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using Microsoft.Owin.Security.OAuth;
+﻿using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http;
 
 namespace ContactBook.WebApi
 {
@@ -19,7 +15,6 @@ namespace ContactBook.WebApi
 
             //var cors = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors();
-
 
             // Web API routes
             config.MapHttpAttributeRoutes();

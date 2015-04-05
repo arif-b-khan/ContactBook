@@ -78,11 +78,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contexts\Address\AddressContext.cs" />
-    <Compile Include="Contexts\Address\IAddressContext.cs" />
+    <Compile Include="Contexts\Addresses\AddressContext.cs" />
+    <Compile Include="Contexts\Addresses\IAddressContext.cs" />
     <Compile Include="Contexts\ContactBookContext.cs" />
-    <Compile Include="Contexts\Contact\ContactContext.cs" />
-    <Compile Include="Contexts\Contact\IContactContext.cs" />
+    <Compile Include="Contexts\Contacts\ContactContext.cs" />
+    <Compile Include="Contexts\Contacts\IContactContext.cs" />
     <Compile Include="Contexts\Generics\GenericContextTypes.cs" />
     <Compile Include="Contexts\Generics\IGenericContextTypes.cs" />
     <Compile Include="Contexts\IContactBookContext.cs" />
@@ -90,22 +90,27 @@
     <Compile Include="IoC\DependencyFactory.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EmailType.cs" />
+    <Compile Include="Models\IMType.cs" />
     <Compile Include="Models\ModelMapper\ModelMapper.cs" />
-    <Compile Include="Models\MdlAddress.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AddressType.cs" />
-    <Compile Include="Models\MdlContact.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactBookInfo.cs" />
-    <Compile Include="Models\MdlContactByGroup.cs" />
-    <Compile Include="Models\MdlEmail.cs" />
-    <Compile Include="Models\MdlGroupTypes.cs" />
-    <Compile Include="Models\MdlIM.cs" />
-    <Compile Include="Models\MdlInternetCall.cs" />
-    <Compile Include="Models\MdlNumber.cs" />
+    <Compile Include="Models\ContactByGroup.cs" />
+    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\GroupType.cs" />
+    <Compile Include="Models\IM.cs" />
+    <Compile Include="Models\InternetCall.cs" />
+    <Compile Include="Models\Number.cs" />
     <Compile Include="Models\NumberType.cs" />
-    <Compile Include="Models\MdlRelationship.cs" />
-    <Compile Include="Models\MdlSpecialDates.cs" />
-    <Compile Include="Models\MdlWebsite.cs" />
+    <Compile Include="Models\Relationship.cs" />
+    <Compile Include="Models\SpecialDates.cs" />
+    <Compile Include="Models\Website.cs" />
+    <Compile Include="Models\RelationshipType.cs" />
+    <Compile Include="Models\SpecialDateType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\Helper\TypeExistsHelper.cs" />
     <Compile Include="Validations\TypeExistsAttribute.cs" />
     <Compile Include="Validations\ValidateBookIdAttribute.cs" />
   </ItemGroup>

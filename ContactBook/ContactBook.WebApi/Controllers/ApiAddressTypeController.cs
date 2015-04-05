@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+﻿using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.Contexts.Generics;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
-using ContactBook.Domain.Contexts.Generics;
-using ContactBook.Db.Data;
-using System.Linq.Expressions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -18,16 +15,14 @@ namespace ContactBook.WebApi.Controllers
     [Authorize]
     public class ApiAddressTypeController : ApiController
     {
-        IContactBookRepositoryUow unitOfWork;
-        IGenericContextTypes<AddressType, CB_AddressType> genericContext;
-        IGenericContextTypes<AddressType, CB_AddressType> readOnlyContext;
-        IContactBookRepositoryUow getUnitOfWork;
-
+        private IContactBookRepositoryUow unitOfWork;
+        private IGenericContextTypes<AddressType, CB_AddressType> genericContext;
+        private IGenericContextTypes<AddressType, CB_AddressType> readOnlyContext;
+        private IContactBookRepositoryUow getUnitOfWork;
 
         public ApiAddressTypeController()
             : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
-
         }
 
         public ApiAddressTypeController(IContactBookRepositoryUow uow, IContactBookRepositoryUow getUnitOfWork)
@@ -38,14 +33,12 @@ namespace ContactBook.WebApi.Controllers
             readOnlyContext = new GenericContextTypes<AddressType, CB_AddressType>(getUnitOfWork);
         }
 
-
         // GET api/AddressType/GetTypes/1
         [Route("GetTypes/{bookId}")]
         [ResponseType(typeof(List<AddressType>))]
         [HttpGet]
         public IHttpActionResult Get(long bookId)
         {
-
             List<AddressType> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
 
             if (retAddressType == null || retAddressType.Count == 0)
@@ -151,18 +144,17 @@ namespace ContactBook.WebApi.Controllers
             }
 
             addressType = readOnlyContext.GetTypes(cb => cb.AddressTypeId == addressTypeId && (cb.BookId.HasValue && cb.BookId.Value == bookId)).SingleOrDefault();
-            
+
             if (addressType == null)
             {
                 return NotFound();
             }
 
-
             if (addressType.BookId.HasValue)
             {
                 genericContext.DeleteTypes(new List<AddressType>() { addressType });
             }
-            else 
+            else
             {
                 return BadRequest("Invalid operation. You're trying to delete default Address type.");
             }

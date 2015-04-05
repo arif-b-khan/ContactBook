@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Cors;
+﻿using ContactBook.WebApi.Context;
 using ContactBook.WebApi.Providers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,8 +7,9 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using ContactBook.WebApi.Context;
-
+using System;
+using System.Threading.Tasks;
+using System.Web.Cors;
 
 namespace ContactBook.WebApi
 {
@@ -43,7 +39,6 @@ namespace ContactBook.WebApi
 
         public void ConfigureAuth(IAppBuilder app)
         {
-
             //app.UseCors(CorsOptions.AllowAll);
             // restrict policy to an end point if webapi cors is enabled...
             app.UseCors(new CorsOptions()

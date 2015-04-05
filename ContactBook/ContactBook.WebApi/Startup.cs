@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.Owin;
 using Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Hosting;
-using System.Web.Http;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
-
 
 namespace ContactBook.WebApi
 {

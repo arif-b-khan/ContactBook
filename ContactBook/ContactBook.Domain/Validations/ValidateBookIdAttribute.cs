@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using ContactBook.Db.Repositories;
-using ContactBook.Domain.Contexts;
-using ContactBook.Domain.IoC;
+﻿using ContactBook.Domain.Contexts;
 using ContactBook.Domain.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
+using System.Web;
 
 namespace ContactBook.Domain.Validations
 {
@@ -19,7 +13,8 @@ namespace ContactBook.Domain.Validations
 
         public IPrincipal UserPrincipal
         {
-            get {
+            get
+            {
                 if (userPrincipal == null)
                 {
                     if (HttpContext.Current.User != null)
@@ -27,11 +22,11 @@ namespace ContactBook.Domain.Validations
                         userPrincipal = HttpContext.Current.User;
                     }
                 }
-                return userPrincipal; 
+                return userPrincipal;
             }
             set { userPrincipal = value; }
         }
-        
+
         public ValidateBookIdAttribute()
         {
         }
@@ -39,7 +34,7 @@ namespace ContactBook.Domain.Validations
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             long bookId;
-            
+
             if (value == null)
             {
                 return new ValidationResult("Invalid bookId.");
@@ -64,7 +59,7 @@ namespace ContactBook.Domain.Validations
                 }
                 else
                 {
-                    return new ValidationResult(string.Format("BookId {0} is not match with bookid saved in database for this user"));
+                    return new ValidationResult(string.Format("BookId {0} is not match with bookid saved in database for this user", bookId));
                 }
             }
             else

@@ -103,6 +103,12 @@
     <Compile Include="ApiAccountControllerTest.cs" />
     <Compile Include="Controllers\ApiAddressTypeControllerTest.cs" />
     <Compile Include="Controllers\ApiContactBookControllerTest.cs" />
+    <Compile Include="Controllers\ApiNumberTypeControllerTest.cs" />
+    <Compile Include="Controllers\ApiEmailTypeControllerTest.cs" />
+    <Compile Include="Controllers\ApiIMTypeControllerTest.cs" />
+    <Compile Include="Controllers\ApiGroupTypeControllerTest.cs" />
+    <Compile Include="Controllers\ApiRelationshipTypeControllerTest.cs" />
+    <Compile Include="Controllers\ApiSpecialDateTypeControllerTest.cs" />
     <Compile Include="Fixtures\ControllerTestFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

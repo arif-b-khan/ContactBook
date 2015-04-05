@@ -188,7 +188,9 @@
     <Property Type="Int64" Name="BookId" Nullable="true" />
   </EntityType>
   <Association Name="ContactBookContactNumber">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_Number" Role="ContactNumber" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">

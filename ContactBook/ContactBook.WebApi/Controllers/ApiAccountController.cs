@@ -1,6 +1,16 @@
-﻿using System;
+﻿using ContactBook.Db.Data;
+using ContactBook.Db.Repositories;
+using ContactBook.Domain.Contexts;
+using ContactBook.Domain.Models;
+using ContactBook.WebApi.Providers;
+using ContactBook.WebApi.Results;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -8,17 +18,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
-using ContactBook.WebApi.Providers;
-using ContactBook.WebApi.Results;
-using ContactBook.Domain.Models;
-using ContactBook.Domain.Contexts;
-using ContactBook.Db.Data;
-using ContactBook.Db.Repositories;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -27,8 +26,9 @@ namespace ContactBook.WebApi.Controllers
     public class ApiAccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        
+
         public UserManager<IdentityUser> UserManager { get; private set; }
+
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         public ApiAccountController()
@@ -57,6 +57,7 @@ namespace ContactBook.WebApi.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -349,8 +350,6 @@ namespace ContactBook.WebApi.Controllers
             return Ok();
         }
 
-
-
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -436,7 +435,9 @@ namespace ContactBook.WebApi.Controllers
         private class ExternalLoginData
         {
             public string LoginProvider { get; set; }
+
             public string ProviderKey { get; set; }
+
             public string UserName { get; set; }
 
             public IList<Claim> GetClaims()
@@ -501,6 +502,5 @@ namespace ContactBook.WebApi.Controllers
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }
-
     }
 }

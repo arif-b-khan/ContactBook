@@ -148,3 +148,9 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Moq.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Moq.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\AutoMapper.Net4.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Moq.xml

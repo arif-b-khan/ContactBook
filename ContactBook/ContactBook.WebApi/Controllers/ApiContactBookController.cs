@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using ContactBook.Db.Data;
+﻿using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Contexts;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Http;
 
 namespace ContactBook.WebApi.Controllers
 {
     [RoutePrefix("api/ContactBook")]
     public class ApiContactBookController : ApiController
     {
-        IContactBookRepositoryUow unitOfWork = null;
+        private IContactBookRepositoryUow unitOfWork = null;
 
         public ApiContactBookController()
             : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
-
         }
 
         public ApiContactBookController(IContactBookRepositoryUow unitOfWork)

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ContactBook.WebApi.Providers
 {
@@ -38,7 +36,6 @@ namespace ContactBook.WebApi.Providers
             using (UserManager<IdentityUser> userManager = _userManagerFactory())
             {
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
-
 
                 if (user == null)
                 {
