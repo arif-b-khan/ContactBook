@@ -82,6 +82,7 @@
     <Compile Include="Contexts\Addresses\IAddressContext.cs" />
     <Compile Include="Contexts\ContactBookContext.cs" />
     <Compile Include="Contexts\Contacts\ContactContext.cs" />
+    <Compile Include="Contexts\Contacts\Helpers\ChildEntityDbOperations.cs" />
     <Compile Include="Contexts\Contacts\IContactContext.cs" />
     <Compile Include="Contexts\Generics\GenericContextTypes.cs" />
     <Compile Include="Contexts\Generics\IGenericContextTypes.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmailType.cs" />
     <Compile Include="Models\IMType.cs" />
+    <Compile Include="Models\ModelDbState.cs" />
     <Compile Include="Models\ModelMapper\ModelMapper.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AddressType.cs" />

@@ -7,5 +7,6 @@
         public string InternetCallNumber { get; set; }
 
         public long ContactId { get; set; }
+
     }
 }

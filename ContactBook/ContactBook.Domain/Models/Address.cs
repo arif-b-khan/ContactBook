@@ -11,5 +11,6 @@ namespace ContactBook.Domain.Models
         public string AddressDescription { get; set; }
 
         public Nullable<int> AddressTypeId { get; set; }
+
     }
 }

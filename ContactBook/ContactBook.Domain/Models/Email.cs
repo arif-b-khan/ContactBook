@@ -11,5 +11,6 @@ namespace ContactBook.Domain.Models
         public string EmailAddress { get; set; }
 
         public Nullable<int> EmailTypeId { get; set; }
+
     }
 }

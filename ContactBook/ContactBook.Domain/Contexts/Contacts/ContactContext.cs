@@ -1,32 +1,39 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ContactBook.Domain.Contexts.Contacts
 {
     public class ContactContext : IContactContext
     {
+        private const string CONTACT_FIELDS = "CB_Addresses, CB_Numbers, CB_Emails, CB_Websites, CB_ContactByGroups, CB_Addresses, CB_IMs, CB_Relationships, CB_SpecialDates, CB_InternetCalls";
         private IContactBookRepositoryUow unitOfWork;
+        private IContactBookRepositoryUow readOnlyUow;
         private IContactBookDbRepository<CB_Contact> contactRepo;
-        private IContactBookDbRepository<CB_Number> numberRepo;
+        private IContactBookDbRepository<CB_Contact> rContactRepo;
+        
+        public ContactContext()
+            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
+        {
+        }
 
-        public ContactContext(IContactBookRepositoryUow unitOfWork)
+        public ContactContext(IContactBookRepositoryUow unitOfWork, IContactBookRepositoryUow pReadOnlyUow)
         {
             this.unitOfWork = unitOfWork;
+            this.readOnlyUow = pReadOnlyUow;
             contactRepo = this.unitOfWork.GetEntityByType<CB_Contact>();
-            numberRepo = this.unitOfWork.GetEntityByType<CB_Number>();
+            rContactRepo = this.readOnlyUow.GetEntityByType<CB_Contact>();
             CBContactToContactMapping();
             ContactToCBContactMapping();
         }
 
         public Contact GetContact(long contactId)
         {
-            CB_Contact contact = contactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), "CB_Addresses, CB_Numbers").FirstOrDefault();
-
-            CBContactToContactMapping();
+            CB_Contact contact = rContactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
 
             Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
 
@@ -35,8 +42,7 @@ namespace ContactBook.Domain.Contexts.Contacts
 
         public List<Contact> GetContacts(long bookId)
         {
-            List<CB_Contact> contacts = contactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), "").ToList();
-            CBContactToContactMapping();
+            List<CB_Contact> contacts = rContactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
             List<Contact> contactList = Mapper.Map<List<Contact>>(contacts);
             return contactList;
         }
@@ -48,6 +54,7 @@ namespace ContactBook.Domain.Contexts.Contacts
             contactRepo.Insert(cbContact);
             unitOfWork.Save();
         }
+
         public void DeleteContact(Contact contact)
         {
             CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
@@ -95,7 +102,6 @@ namespace ContactBook.Domain.Contexts.Contacts
             Mapper.CreateMap<Email, CB_Email>();
 
             Mapper.CreateMap<AddressType, CB_AddressType>();
-      
         }
 
         private static void CBContactToContactMapping()

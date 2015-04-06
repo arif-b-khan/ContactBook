@@ -134,7 +134,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Partials\CB_Email.cs" />
+    <Compile Include="Data\Partials\CB_IM.cs" />
+    <Compile Include="Data\Partials\CB_Number.cs" />
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
+    <Compile Include="Data\Partials\INewEntity.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

@@ -202,7 +202,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactEmail">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_Email" Role="ContactEmail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -234,7 +236,9 @@
     <Property Type="Int32" Name="GroupId" Nullable="true" />
   </EntityType>
   <Association Name="ContactBookContactBookAndGroup">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_ContactByGroup" Role="ContactBookAndGroup" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -258,7 +262,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactBookContactAddress">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_Address" Role="ContactAddress" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -337,7 +343,9 @@
     <Property Type="Int32" Name="IMTypeId" Nullable="false" />
   </EntityType>
   <Association Name="ContactBookIM">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_IM" Role="IM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -381,7 +389,9 @@
     <Property Type="Int64" Name="ContactId" Nullable="false" />
   </EntityType>
   <Association Name="ContactBookContactWebsite">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_Website" Role="ContactWebsite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -403,7 +413,9 @@
     <Property Type="Int32" Name="RelationshipTypeId" Nullable="true" />
   </EntityType>
   <Association Name="ContactBookContactRelationship">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_Relationship" Role="ContactRelationship" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -448,7 +460,9 @@
     <Property Type="Int32" Name="SpecialDateTpId" Nullable="false" />
   </EntityType>
   <Association Name="ContactBookContactSpecialDates">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
@@ -491,7 +505,9 @@
     <Property Type="Int64" Name="ContactId" Nullable="false" />
   </EntityType>
   <Association Name="ContactBookContactInternetCall">
-    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" />
+    <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ContactBookEdm.CB_InternetCall" Role="ContactInternetCall" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">

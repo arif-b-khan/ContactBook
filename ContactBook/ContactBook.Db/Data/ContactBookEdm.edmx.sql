@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/05/2015 17:11:36
--- Generated from EDMX file: D:\Development\Github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
+-- Date Created: 04/06/2015 01:18:22
+-- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -450,7 +450,7 @@ ADD CONSTRAINT [FK_ContactBookContactEmail]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactEmail'
 CREATE INDEX [IX_FK_ContactBookContactEmail]
@@ -464,7 +464,7 @@ ADD CONSTRAINT [FK_ContactBookContactBookAndGroup]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactBookAndGroup'
 CREATE INDEX [IX_FK_ContactBookContactBookAndGroup]
@@ -492,7 +492,7 @@ ADD CONSTRAINT [FK_ContactBookContactAddress]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactAddress'
 CREATE INDEX [IX_FK_ContactBookContactAddress]
@@ -548,7 +548,7 @@ ADD CONSTRAINT [FK_ContactBookIM]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookIM'
 CREATE INDEX [IX_FK_ContactBookIM]
@@ -576,7 +576,7 @@ ADD CONSTRAINT [FK_ContactBookContactWebsite]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactWebsite'
 CREATE INDEX [IX_FK_ContactBookContactWebsite]
@@ -590,7 +590,7 @@ ADD CONSTRAINT [FK_ContactBookContactRelationship]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactRelationship'
 CREATE INDEX [IX_FK_ContactBookContactRelationship]
@@ -618,7 +618,7 @@ ADD CONSTRAINT [FK_ContactBookContactSpecialDates]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactSpecialDates'
 CREATE INDEX [IX_FK_ContactBookContactSpecialDates]
@@ -646,7 +646,7 @@ ADD CONSTRAINT [FK_ContactBookContactInternetCall]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
         ([ContactId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactInternetCall'
 CREATE INDEX [IX_FK_ContactBookContactInternetCall]

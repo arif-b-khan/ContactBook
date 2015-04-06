@@ -9,5 +9,6 @@
         public long ContactId { get; set; }
 
         public int IMTypeId { get; set; }
+
     }
 }

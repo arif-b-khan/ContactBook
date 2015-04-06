@@ -9,5 +9,6 @@ namespace ContactBook.Domain.Models
         public long ContactId { get; set; }
 
         public Nullable<int> GroupId { get; set; }
+
     }
 }
