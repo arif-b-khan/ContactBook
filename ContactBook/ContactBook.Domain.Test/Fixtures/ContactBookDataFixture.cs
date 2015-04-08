@@ -1,12 +1,12 @@
-﻿using ContactBook.Db.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace ContactBook.Domain.Test.Fixtures
 {
@@ -25,12 +25,89 @@ namespace ContactBook.Domain.Test.Fixtures
         public IContactBookDbRepository<T> Repository<T>(List<T> plist) where T : class
         {
             Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
-            repository.Setup(rp => rp.Get()).Returns(plist);
-            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>())).Returns(plist);
-            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>())).Returns(plist);
-            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>(), "")).Returns(plist);
+
+            repository.Setup(rp => rp.Get()).Returns(() =>
+            {
+                return plist;
+            });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>())).Returns<Expression<Func<T, bool>>>(e =>
+                {
+                    if (plist != null)
+                    {
+                        return plist.Where(e.Compile());
+                    }
+                    else
+                    {
+                        return plist;
+                    }
+                });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>())).Returns<Expression<Func<T, bool>>, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>((wh, od) =>
+            {
+                if (plist == null)
+                {
+                    return null;
+                }
+                return od.Compile().Invoke(plist.Where(wh.Compile()).AsQueryable()).AsEnumerable();
+            });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>(), It.IsAny<string>())).Returns<Expression<Func<T, bool>>, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>, string>((wh, od, str) =>
+            {
+                if (plist == null)
+                {
+                    return null;
+                }
+                return od.Compile().Invoke(plist.Where(wh.Compile()).AsQueryable()).AsEnumerable();
+            });
+
             return repository.Object;
         }
+
+
+        public Mock<IContactBookDbRepository<T>> MockRepository<T>(List<T> plist) where T : class
+        {
+            Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
+
+            repository.Setup(rp => rp.Get()).Returns(() =>
+            {
+                return plist;
+            });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>())).Returns<Expression<Func<T, bool>>>(e =>
+                {
+                    if (plist != null)
+                    {
+                        return plist.Where(e.Compile());
+                    }
+                    else
+                    {
+                        return plist;
+                    }
+                });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>())).Returns<Expression<Func<T, bool>>, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>((wh, od) =>
+            {
+                if (plist == null)
+                {
+                    return null;
+                }
+                return od.Compile().Invoke(plist.Where(wh.Compile()).AsQueryable()).AsEnumerable();
+            });
+
+            repository.Setup(rp => rp.Get(It.IsAny<Expression<Func<T, bool>>>(), It.IsAny<Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>>(), It.IsAny<string>())).Returns<Expression<Func<T, bool>>, Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>, string>((wh, od, str) =>
+            {
+                if (plist == null)
+                {
+                    return null;
+                }
+                return od.Compile().Invoke(plist.Where(wh.Compile()).AsQueryable()).AsEnumerable();
+            });
+
+            return repository;
+        }
+
+
 
         public ContactBookEdmContainer Container
         {

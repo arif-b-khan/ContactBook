@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoMapper;
 
 namespace ContactBook.Db.Data
 {
-    public partial class CB_Email : IEquatable<CB_Email>, INewEntity<CB_Email>
+    public partial class CB_Email : IEquatable<CB_Email>, INewEntity<CB_Email>, IEntityCloneable<CB_Email>
     {
-        static Lazy<IEqualityComparer<CB_Email>> comparer = new Lazy<IEqualityComparer<CB_Email>>(true);
-
-        private class CB_EmailComparer : IEqualityComparer<CB_Email>
+        
+        public class CB_EmailComparer : IEqualityComparer<CB_Email>
         {
+            
             public bool Equals(CB_Email x, CB_Email y)
             {
                 if (x.EmailId.Equals(y.EmailId))
@@ -28,7 +29,7 @@ namespace ContactBook.Db.Data
         {
             get
             {
-                return comparer.Value;
+                return new CB_EmailComparer();
             }
         }
 
@@ -53,5 +54,20 @@ namespace ContactBook.Db.Data
             return false;
         }
 
+        public CB_Email Clone(object obj)
+        {
+            if (obj == null)
+            {
+                return default(CB_Email);
+            }
+            CB_Email actObj = obj as CB_Email;
+            CB_Email retObj = new CB_Email() {
+            ContactId = actObj.ContactId,
+            Email = actObj.Email,
+            EmailId = actObj.EmailId,
+            EmailTypeId = actObj.EmailTypeId
+            };
+            return retObj;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
             DbOperations<CB_IM>(mContact.CB_IMs, dContact.CB_IMs, _unitOfWork.GetEntityByType<CB_IM>(), CB_IM.Comparer);
         }
 
-        private void DbOperations<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> dbRepo, IEqualityComparer<T> tcomparer) where T : class, INewEntity<T>
+        private void DbOperations<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> dbRepo, IEqualityComparer<T> tcomparer) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
         {
             try
             {
@@ -49,7 +49,7 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
                         //populate delete collections
                         foreach (T item in collection2.Except(collection1, tcomparer))
                         {
-                            dbRepo.Delete(item);
+                            dbRepo.Delete(item.Clone(item));
                         }
                     }
                 });
@@ -58,7 +58,7 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
                 {
                     if (collection1 != null && collection2 != null)
                     {
-                        foreach (T item in collection1.Except(collection2, tcomparer))
+                        foreach (T item in collection1.Intersect(collection2, tcomparer))
                         {
                             T singleEmail = collection2.Where(t => tcomparer.Equals(t, item)).SingleOrDefault();
                             if (singleEmail != null && !singleEmail.Equals(item))

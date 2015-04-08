@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Db.Data
 {
-    public partial class CB_IM : IEquatable<CB_IM>, INewEntity<CB_IM>
+    public partial class CB_IM : IEquatable<CB_IM>, INewEntity<CB_IM>, IEntityCloneable<CB_IM>
     {
         static Lazy<IEqualityComparer<CB_IM>> comparer = new Lazy<IEqualityComparer<CB_IM>>(true);
 
@@ -18,7 +18,7 @@ namespace ContactBook.Db.Data
             }
         }
 
-        private class CBIMComparer : IEqualityComparer<CB_IM>
+        public class CBIMComparer : IEqualityComparer<CB_IM>
         {
             public bool Equals(CB_IM x, CB_IM y)
             {
@@ -54,6 +54,23 @@ namespace ContactBook.Db.Data
                 return true;
             }
             return false;
+        }
+
+        public CB_IM Clone(object obj)
+        {
+            if (obj == null)
+            {
+                return default(CB_IM);
+            }
+            
+            CB_IM actObj = obj as CB_IM;
+
+            return new CB_IM() { 
+            ContactId = actObj.ContactId,
+            IMId = actObj.IMId,
+            IMTypeId = actObj.IMTypeId,
+            Username = actObj.Username
+            };
         }
     }
 }

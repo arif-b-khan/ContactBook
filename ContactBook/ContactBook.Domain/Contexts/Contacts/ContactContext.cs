@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
+using ContactBook.Domain.Contexts.Contacts.Helpers;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 
@@ -15,7 +16,7 @@ namespace ContactBook.Domain.Contexts.Contacts
         private IContactBookRepositoryUow readOnlyUow;
         private IContactBookDbRepository<CB_Contact> contactRepo;
         private IContactBookDbRepository<CB_Contact> rContactRepo;
-        
+        private ChildEntityDbOperations childOperations;
         public ContactContext()
             : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
         {
@@ -25,6 +26,7 @@ namespace ContactBook.Domain.Contexts.Contacts
         {
             this.unitOfWork = unitOfWork;
             this.readOnlyUow = pReadOnlyUow;
+            childOperations = new ChildEntityDbOperations(unitOfWork);
             contactRepo = this.unitOfWork.GetEntityByType<CB_Contact>();
             rContactRepo = this.readOnlyUow.GetEntityByType<CB_Contact>();
             CBContactToContactMapping();
@@ -66,6 +68,9 @@ namespace ContactBook.Domain.Contexts.Contacts
         public void UpdateContact(Contact contact)
         {
             CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
+            CB_Contact dContact = rContactRepo.GetById(contact.ContactId);
+            if (dContact != null && cbContact != null)
+                childOperations.PerformOperations(cbContact, dContact);
             contactRepo.Update(cbContact);
             unitOfWork.Save();
         }

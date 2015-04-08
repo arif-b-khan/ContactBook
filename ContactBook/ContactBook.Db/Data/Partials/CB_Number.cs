@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Db.Data
 {
-    public partial class CB_Number : IEquatable<CB_Number>, INewEntity<CB_Number>
+    public partial class CB_Number : IEquatable<CB_Number>, INewEntity<CB_Number>, IEntityCloneable<CB_Number>
     {
-        static Lazy<CBNumberComparer> comparer = new Lazy<CBNumberComparer>(true);
-
         public static IEqualityComparer<CB_Number> Comparer
         {
             get
             {
-                return comparer.Value;
+                return new CBNumberComparer();
             }
         }
 
-        private class CBNumberComparer : IEqualityComparer<CB_Number>
+        public class CBNumberComparer : IEqualityComparer<CB_Number>
         {
+            public CBNumberComparer()
+            {
+
+            }
             public bool Equals(CB_Number x, CB_Number y)
             {
                 if (x.NumberId == y.NumberId)
@@ -55,5 +57,22 @@ namespace ContactBook.Db.Data
             }
             return false;
         }
+
+
+        public CB_Number Clone(object obj)
+        {
+            if (obj == null)
+            {
+                return default(CB_Number);
+            }
+            CB_Number actualNumber = obj as CB_Number;
+            CB_Number cloneNumber = new CB_Number();
+            cloneNumber.ContactId = actualNumber.ContactId;
+            cloneNumber.Number = actualNumber.Number;
+            cloneNumber.NumberId = actualNumber.NumberId;
+            cloneNumber.NumberTypeId = actualNumber.NumberTypeId;
+            return cloneNumber;
+        }
+
     }
 }

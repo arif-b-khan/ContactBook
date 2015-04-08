@@ -56,10 +56,12 @@ namespace ContactBook.WebApi.Test.Fixtures
             });
             return repository.Object;
         }
+
         public Mock<IContactBookDbRepository<T>> MockRepository<T>() where T : class
         {
             return new Mock<IContactBookDbRepository<T>>();
         }
+
         public Mock<IContactBookDbRepository<T>> MockRepositoryNeedList<T>(List<T> plist) where T : class
         {
             Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
@@ -104,7 +106,6 @@ namespace ContactBook.WebApi.Test.Fixtures
             });
             return repository;
         }
-
 
         public Mock<IContactBookRepositoryUow> MockUnitOfWork
         {
