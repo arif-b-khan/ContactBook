@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ContactBook.Domain.Validations;
 
 namespace ContactBook.Domain.Models
 {
@@ -29,7 +30,8 @@ namespace ContactBook.Domain.Models
         public string Notes { get; set; }
 
         public string NickName { get; set; }
-
+        
+        [ValidateBookId]
         public long BookId { get; set; }
 
         public ICollection<Address> Addresses { get; set; }
@@ -46,7 +48,7 @@ namespace ContactBook.Domain.Models
 
         public ICollection<Relationship> Relationships { get; set; }
 
-        public ICollection<SpecialDates> SpecialDates { get; set; }
+        public ICollection<SpecialDate> SpecialDates { get; set; }
 
         public ICollection<InternetCall> InternetCalls { get; set; }
     }

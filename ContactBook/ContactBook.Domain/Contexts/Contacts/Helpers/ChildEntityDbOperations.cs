@@ -21,9 +21,23 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
 
         public void PerformOperations(CB_Contact mContact, CB_Contact dContact)
         {
-            DbOperations<CB_Number>(mContact.CB_Numbers, dContact.CB_Numbers, _unitOfWork.GetEntityByType<CB_Number>(), CB_Number.Comparer);
-            DbOperations<CB_Email>(mContact.CB_Emails, dContact.CB_Emails, _unitOfWork.GetEntityByType<CB_Email>(), CB_Email.Comparer);
-            DbOperations<CB_IM>(mContact.CB_IMs, dContact.CB_IMs, _unitOfWork.GetEntityByType<CB_IM>(), CB_IM.Comparer);
+            DbOperationsCheck<CB_Number>(mContact.CB_Numbers, dContact.CB_Numbers);
+            DbOperationsCheck<CB_Email>(mContact.CB_Emails, dContact.CB_Emails);
+            DbOperationsCheck<CB_IM>(mContact.CB_IMs, dContact.CB_IMs);
+            DbOperationsCheck<CB_Address>(mContact.CB_Addresses, dContact.CB_Addresses);
+            DbOperationsCheck<CB_InternetCall>(mContact.CB_InternetCalls, dContact.CB_InternetCalls);
+            DbOperationsCheck<CB_Website>(mContact.CB_Websites, dContact.CB_Websites);
+            DbOperationsCheck<CB_Relationship>(mContact.CB_Relationships, dContact.CB_Relationships);
+            DbOperationsCheck<CB_SpecialDate>(mContact.CB_SpecialDates, dContact.CB_SpecialDates);
+            DbOperationsCheck<CB_ContactByGroup>(mContact.CB_ContactByGroups, dContact.CB_ContactByGroups);
+        }
+
+        private void DbOperationsCheck<T>(ICollection<T> collection1, ICollection<T> collection2) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
+        {
+            if (collection1 != null && collection2 != null && (collection1.Any() || collection2.Any()))
+            {
+                DbOperations<T>(collection1, collection2, _unitOfWork.GetEntityByType<T>(), ComparerFactory.GetComparer<T>());
+            }
         }
 
         private void DbOperations<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> dbRepo, IEqualityComparer<T> tcomparer) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
@@ -49,7 +63,7 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
                         //populate delete collections
                         foreach (T item in collection2.Except(collection1, tcomparer))
                         {
-                            dbRepo.Delete(item.Clone(item));
+                            dbRepo.Delete(item.Clone());
                         }
                     }
                 });
@@ -75,7 +89,7 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
             {
                 foreach (Exception ex in aggException.InnerExceptions)
                 {
-                    
+
                 }
             }
         }

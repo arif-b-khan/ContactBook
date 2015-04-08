@@ -42,6 +42,16 @@ namespace ContactBook.Domain.Contexts.Contacts
             return retContact;
         }
 
+        public Contact GetContact(long bookId, long contactId)
+        {
+            CB_Contact contact = rContactRepo.Get(con => con.ContactId == contactId && con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
+
+            Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
+
+            return retContact;
+        
+        }
+
         public List<Contact> GetContacts(long bookId)
         {
             List<CB_Contact> contacts = rContactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
@@ -60,7 +70,6 @@ namespace ContactBook.Domain.Contexts.Contacts
         public void DeleteContact(Contact contact)
         {
             CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
-            cbContact.CB_Numbers.First().CB_Contacts = cbContact;
             contactRepo.Delete(cbContact);
             unitOfWork.Save();
         }
@@ -88,25 +97,28 @@ namespace ContactBook.Domain.Contexts.Contacts
                 .ForMember(md => md.CB_Emails, cn => cn.MapFrom(m => m.Emails))
                 .ForMember(md => md.CB_SpecialDates, cn => cn.MapFrom(m => m.SpecialDates));
 
-            Mapper.CreateMap<Address, CB_Address>();
+            Mapper.CreateMap<Address, CB_Address>()
+                .ForMember(cad => cad.Address, ad => ad.MapFrom(a => a.AddressDescription));
 
             Mapper.CreateMap<Number, CB_Number>().ForMember(cb => cb.Number,
                 nm => nm.MapFrom(n => n.ContactNumber));
+
             Mapper.CreateMap<IM, CB_IM>();
 
             Mapper.CreateMap<InternetCall, CB_InternetCall>();
 
-            Mapper.CreateMap<Website, CB_Website>();
+            Mapper.CreateMap<Website, CB_Website>()
+                .ForMember(cbw => cbw.Website, wb => wb.MapFrom(w => w.WebsiteUrl));
 
             Mapper.CreateMap<Relationship, CB_Relationship>();
 
-            Mapper.CreateMap<SpecialDates, CB_SpecialDates>();
+            Mapper.CreateMap<SpecialDate, CB_SpecialDate>();
 
             Mapper.CreateMap<ContactByGroup, CB_ContactByGroup>();
 
-            Mapper.CreateMap<Email, CB_Email>();
+            Mapper.CreateMap<Email, CB_Email>()
+                .ForMember(c => c.Email, em => em.MapFrom(e => e.EmailAddress));
 
-            Mapper.CreateMap<AddressType, CB_AddressType>();
         }
 
         private static void CBContactToContactMapping()
@@ -125,7 +137,8 @@ namespace ContactBook.Domain.Contexts.Contacts
 
             Mapper.CreateMap<CB_Address, Address>()
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_AddressType, cbs => cbs.Ignore());
+                .ForSourceMember(cb => cb.CB_AddressType, cbs => cbs.Ignore())
+                .ForMember(cad => cad.AddressDescription, ad => ad.MapFrom(a => a.Address));
 
             Mapper.CreateMap<CB_Number, Number>()
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
@@ -140,13 +153,14 @@ namespace ContactBook.Domain.Contexts.Contacts
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore());
 
             Mapper.CreateMap<CB_Website, Website>()
-                .ForSourceMember(cb => cb.CB_Contact, cbs => cbs.Ignore());
+                .ForSourceMember(cb => cb.CB_Contact, cbs => cbs.Ignore())
+                .ForMember(cbw => cbw.WebsiteUrl, wb => wb.MapFrom(w => w.Website));
 
             Mapper.CreateMap<CB_Relationship, Relationship>()
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
                 .ForSourceMember(cb => cb.CB_RelationshipType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_SpecialDates, SpecialDates>()
+            Mapper.CreateMap<CB_SpecialDate, SpecialDate>()
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
                 .ForSourceMember(cb => cb.CB_SpecialDateType, cbs => cbs.Ignore());
 
@@ -156,7 +170,8 @@ namespace ContactBook.Domain.Contexts.Contacts
 
             Mapper.CreateMap<CB_Email, Email>()
                 .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_EmailType, cbs => cbs.Ignore());
+                .ForSourceMember(cb => cb.CB_EmailType, cbs => cbs.Ignore())
+                .ForMember(c => c.EmailAddress, em => em.MapFrom(e => e.Email));
 
             Mapper.CreateMap<CB_AddressType, AddressType>()
                 .ForSourceMember(cb => cb.CB_Address, cbs => cbs.Ignore())

@@ -103,7 +103,7 @@ namespace ContactBook.Domain.Test.Contexts
             //act
             IContactBookContext contactBook = new ContactBookContext(unitOfWorkMoq.Object);
 
-            ContactBookInfo bookInfo = contactBook.GetContactBook("1");
+            ContactBookInfo bookInfo = contactBook.GetContactBook("testuser");
 
             //Assert
             Assert.NotNull(bookInfo);

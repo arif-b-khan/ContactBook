@@ -37,7 +37,7 @@ namespace ContactBook.Db.Data
         {
             if (other.EmailId.Equals(this.EmailId)
                 && other.ContactId.Equals(this.ContactId)
-                && other.Email.Equals(this.Email)
+                && other.Email == this.Email
                 && other.EmailTypeId.Equals(this.EmailTypeId))
             {
                 return true;
@@ -54,18 +54,13 @@ namespace ContactBook.Db.Data
             return false;
         }
 
-        public CB_Email Clone(object obj)
+        public CB_Email Clone()
         {
-            if (obj == null)
-            {
-                return default(CB_Email);
-            }
-            CB_Email actObj = obj as CB_Email;
             CB_Email retObj = new CB_Email() {
-            ContactId = actObj.ContactId,
-            Email = actObj.Email,
-            EmailId = actObj.EmailId,
-            EmailTypeId = actObj.EmailTypeId
+            ContactId = this.ContactId,
+            Email = this.Email,
+            EmailId = this.EmailId,
+            EmailTypeId = this.EmailTypeId
             };
             return retObj;
         }

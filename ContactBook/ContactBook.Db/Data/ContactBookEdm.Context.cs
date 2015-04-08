@@ -39,7 +39,7 @@ namespace ContactBook.Db.Data
         public DbSet<CB_Website> CB_Website { get; set; }
         public DbSet<CB_Relationship> CB_Relationship { get; set; }
         public DbSet<CB_RelationshipType> CB_RelationshipType { get; set; }
-        public DbSet<CB_SpecialDates> CB_SpecialDates { get; set; }
+        public DbSet<CB_SpecialDate> CB_SpecialDate { get; set; }
         public DbSet<CB_SpecialDateType> CB_SpecialDateType { get; set; }
         public DbSet<CB_InternetCall> CB_InternetCall { get; set; }
         public DbSet<CB_ContactBook> CB_ContactBook { get; set; }

@@ -116,7 +116,7 @@
     <Compile Include="Data\CB_RelationshipType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\CB_SpecialDates.cs">
+    <Compile Include="Data\CB_SpecialDate.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CB_SpecialDateType.cs">
@@ -140,9 +140,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Partials\CB_Address.cs" />
+    <Compile Include="Data\Partials\CB_ContactByGroup.cs" />
     <Compile Include="Data\Partials\CB_Email.cs" />
     <Compile Include="Data\Partials\CB_IM.cs" />
+    <Compile Include="Data\Partials\CB_InternetCall.cs" />
     <Compile Include="Data\Partials\CB_Number.cs" />
+    <Compile Include="Data\Partials\CB_Relationship.cs" />
+    <Compile Include="Data\Partials\CB_SpecialDate.cs" />
+    <Compile Include="Data\Partials\CB_Website.cs" />
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Data\Partials\IEntityCloneable.cs" />
     <Compile Include="Data\Partials\INewEntity.cs" />

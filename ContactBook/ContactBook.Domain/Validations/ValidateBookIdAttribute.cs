@@ -54,12 +54,12 @@ namespace ContactBook.Domain.Validations
                     }
                     else
                     {
-                        return new ValidationResult(string.Format("BookId {0} is not match with bookid saved in database for this user", bookId));
+                        return new ValidationResult(string.Format("BookId {0} is not matching with bookid saved in database for this user", bookId));
                     }
                 }
                 else
                 {
-                    return new ValidationResult(string.Format("BookId {0} is not match with bookid saved in database for this user", bookId));
+                    return new ValidationResult(string.Format("BookId {0} is not matching with bookid saved in database for this user", bookId));
                 }
             }
             else

@@ -142,9 +142,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_SpecialDates">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDates)">
-        <MappingFragment StoreEntitySet="CB_SpecialDates">
+    <EntitySetMapping Name="CB_SpecialDate">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDate)">
+        <MappingFragment StoreEntitySet="CB_SpecialDate">
           <ScalarProperty Name="SpecialDateId" ColumnName="SpecialDateId" />
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="Dates" ColumnName="Dates" />

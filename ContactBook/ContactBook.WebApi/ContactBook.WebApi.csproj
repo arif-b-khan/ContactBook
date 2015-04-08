@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ApiRelationshipTypeController.cs" />
     <Compile Include="Controllers\ApiSpecialDateTypeController.cs" />
     <Compile Include="Controllers\Helpers\ApiHelper.cs" />
+    <Compile Include="Filters\BookIdValidationFilterAttribute.cs" />
     <Compile Include="Filters\ValidationModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

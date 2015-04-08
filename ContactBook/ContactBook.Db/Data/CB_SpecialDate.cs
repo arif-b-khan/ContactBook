@@ -12,7 +12,7 @@ namespace ContactBook.Db.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CB_SpecialDates
+    public partial class CB_SpecialDate
     {
         public int SpecialDateId { get; set; }
         public long ContactId { get; set; }

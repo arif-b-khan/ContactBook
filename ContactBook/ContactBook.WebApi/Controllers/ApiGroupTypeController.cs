@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ContactBook.WebApi.Filters;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -37,6 +38,7 @@ namespace ContactBook.WebApi.Controllers
         //Get api/GroupType/1
         [Route("{bookId}")]
         [ResponseType(typeof(List<GroupType>))]
+        [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
             List<GroupType> groupTypes = groupTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));

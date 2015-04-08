@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ContactBook.Db.Data
 {
-    public interface IEntityCloneable<out T> 
+    public interface IEntityCloneable<out T>
     {
-         T Clone(object obj);
+        T Clone();
     }
 }

@@ -26,6 +26,8 @@ namespace ContactBook.WebApi.Controllers
             }
         }
 
+        //todo: remove the username parameter from getcontactbook it is a security issuse
+        [Authorize]
         [Route("GetContactBook/{username}")]
         public IHttpActionResult GetContactBook(string username)
         {

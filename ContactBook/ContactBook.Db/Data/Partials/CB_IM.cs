@@ -8,13 +8,11 @@ namespace ContactBook.Db.Data
 {
     public partial class CB_IM : IEquatable<CB_IM>, INewEntity<CB_IM>, IEntityCloneable<CB_IM>
     {
-        static Lazy<IEqualityComparer<CB_IM>> comparer = new Lazy<IEqualityComparer<CB_IM>>(true);
-
         public static IEqualityComparer<CB_IM> Comparer
         {
             get
             {
-                return comparer.Value;
+                return new CBIMComparer();
             }
         }
 
@@ -48,7 +46,7 @@ namespace ContactBook.Db.Data
         {
             if (other.IMId.Equals(this.IMId) 
                 && other.IMTypeId.Equals(this.IMTypeId) 
-                && other.Username.Equals(this.Username)
+                && other.Username == this.Username
                 && other.ContactId.Equals(this.ContactId))
             {
                 return true;
@@ -56,20 +54,13 @@ namespace ContactBook.Db.Data
             return false;
         }
 
-        public CB_IM Clone(object obj)
+        public CB_IM Clone()
         {
-            if (obj == null)
-            {
-                return default(CB_IM);
-            }
-            
-            CB_IM actObj = obj as CB_IM;
-
             return new CB_IM() { 
-            ContactId = actObj.ContactId,
-            IMId = actObj.IMId,
-            IMTypeId = actObj.IMTypeId,
-            Username = actObj.Username
+            ContactId = this.ContactId,
+            IMId = this.IMId,
+            IMTypeId = this.IMTypeId,
+            Username = this.Username
             };
         }
     }

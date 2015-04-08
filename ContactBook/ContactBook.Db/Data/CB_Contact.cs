@@ -23,7 +23,7 @@ namespace ContactBook.Db.Data
             this.CB_IMs = new HashSet<CB_IM>();
             this.CB_Websites = new HashSet<CB_Website>();
             this.CB_Relationships = new HashSet<CB_Relationship>();
-            this.CB_SpecialDates = new HashSet<CB_SpecialDates>();
+            this.CB_SpecialDates = new HashSet<CB_SpecialDate>();
             this.CB_InternetCalls = new HashSet<CB_InternetCall>();
         }
     
@@ -48,7 +48,7 @@ namespace ContactBook.Db.Data
         public virtual ICollection<CB_IM> CB_IMs { get; set; }
         public virtual ICollection<CB_Website> CB_Websites { get; set; }
         public virtual ICollection<CB_Relationship> CB_Relationships { get; set; }
-        public virtual ICollection<CB_SpecialDates> CB_SpecialDates { get; set; }
+        public virtual ICollection<CB_SpecialDate> CB_SpecialDates { get; set; }
         public virtual ICollection<CB_InternetCall> CB_InternetCalls { get; set; }
         public virtual CB_ContactBook CB_ContactBook { get; set; }
     }

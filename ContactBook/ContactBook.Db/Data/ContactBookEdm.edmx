@@ -20,7 +20,7 @@
     <EntitySet Name="CB_Website" EntityType="ContactBookEdm.Store.CB_Website" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_Relationship" EntityType="ContactBookEdm.Store.CB_Relationship" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_RelationshipType" EntityType="ContactBookEdm.Store.CB_RelationshipType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CB_SpecialDates" EntityType="ContactBookEdm.Store.CB_SpecialDates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CB_SpecialDate" EntityType="ContactBookEdm.Store.CB_SpecialDate" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_SpecialDateType" EntityType="ContactBookEdm.Store.CB_SpecialDateType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_InternetCall" EntityType="ContactBookEdm.Store.CB_InternetCall" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_ContactBook" EntityType="ContactBookEdm.Store.CB_ContactBook" store:Type="Tables" Schema="dbo" />
@@ -78,11 +78,11 @@
     </AssociationSet>
     <AssociationSet Name="ContactBookContactSpecialDates" Association="ContactBookEdm.Store.ContactBookContactSpecialDates">
       <End Role="ContactBook" EntitySet="CB_Contact" />
-      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDate" />
     </AssociationSet>
     <AssociationSet Name="Custom_SpecialDateTypeContactSpecialDates" Association="ContactBookEdm.Store.Custom_SpecialDateTypeContactSpecialDates">
       <End Role="Custom_SpecialDateType" EntitySet="CB_SpecialDateType" />
-      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+      <End Role="ContactSpecialDates" EntitySet="CB_SpecialDate" />
     </AssociationSet>
     <AssociationSet Name="ContactBookContactInternetCall" Association="ContactBookEdm.Store.ContactBookContactInternetCall">
       <End Role="ContactBook" EntitySet="CB_Contact" />
@@ -248,7 +248,7 @@
     <Property Name="Relationship_TypeName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BookId" Type="bigint" Nullable="true" />
   </EntityType>
-  <EntityType Name="CB_SpecialDates">
+  <EntityType Name="CB_SpecialDate">
     <Key>
       <PropertyRef Name="SpecialDateId" />
     </Key>
@@ -456,7 +456,7 @@
     <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="ContactSpecialDates" Type="ContactBookEdm.Store.CB_SpecialDates" Multiplicity="*" />
+    <End Role="ContactSpecialDates" Type="ContactBookEdm.Store.CB_SpecialDate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactBook">
         <PropertyRef Name="ContactId" />
@@ -468,7 +468,7 @@
   </Association>
   <Association Name="Custom_SpecialDateTypeContactSpecialDates">
     <End Role="Custom_SpecialDateType" Type="ContactBookEdm.Store.CB_SpecialDateType" Multiplicity="1" />
-    <End Role="ContactSpecialDates" Type="ContactBookEdm.Store.CB_SpecialDates" Multiplicity="*" />
+    <End Role="ContactSpecialDates" Type="ContactBookEdm.Store.CB_SpecialDate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Custom_SpecialDateType">
         <PropertyRef Name="SpecialDateTpId" />
@@ -659,15 +659,15 @@
             <End Role="Custom_RelationshipType" EntitySet="CB_RelationshipType" />
             <End Role="ContactRelationship" EntitySet="CB_Relationship" />
           </AssociationSet>
-          <EntitySet Name="CB_SpecialDates" EntityType="ContactBookEdm.CB_SpecialDates" />
+          <EntitySet Name="CB_SpecialDate" EntityType="ContactBookEdm.CB_SpecialDate" />
           <AssociationSet Name="ContactBookContactSpecialDates" Association="ContactBookEdm.ContactBookContactSpecialDates">
             <End Role="ContactBook" EntitySet="CB_Contact" />
-            <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+            <End Role="ContactSpecialDates" EntitySet="CB_SpecialDate" />
           </AssociationSet>
           <EntitySet Name="CB_SpecialDateType" EntityType="ContactBookEdm.CB_SpecialDateType" />
           <AssociationSet Name="Custom_SpecialDateTypeContactSpecialDates" Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates">
             <End Role="Custom_SpecialDateType" EntitySet="CB_SpecialDateType" />
-            <End Role="ContactSpecialDates" EntitySet="CB_SpecialDates" />
+            <End Role="ContactSpecialDates" EntitySet="CB_SpecialDate" />
           </AssociationSet>
           <EntitySet Name="CB_InternetCall" EntityType="ContactBookEdm.CB_InternetCall" />
           <AssociationSet Name="ContactBookContactInternetCall" Association="ContactBookEdm.ContactBookContactInternetCall">
@@ -825,7 +825,7 @@
           <NavigationProperty Name="CB_Contacts" Relationship="ContactBookEdm.ContactBookContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactBook" />
           <Property Type="Int64" Name="ContactId" Nullable="false" />
           <NavigationProperty Name="CB_GroupTypes" Relationship="ContactBookEdm.ContactGroupContactBookAndGroup" FromRole="ContactBookAndGroup" ToRole="ContactGroup" />
-          <Property Type="Int32" Name="GroupId" Nullable="true" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
         </EntityType>
         <Association Name="ContactBookContactBookAndGroup">
           <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" >
@@ -842,7 +842,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ContactGroupContactBookAndGroup">
-          <End Type="ContactBookEdm.CB_GroupType" Role="ContactGroup" Multiplicity="0..1" />
+          <End Type="ContactBookEdm.CB_GroupType" Role="ContactGroup" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ContactBookEdm.CB_ContactByGroup" Role="ContactBookAndGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactGroup">
@@ -1040,7 +1042,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CB_SpecialDates">
+        <EntityType Name="CB_SpecialDate">
           <Key>
             <PropertyRef Name="SpecialDateId" />
           </Key>
@@ -1055,7 +1057,7 @@
           <End Type="ContactBookEdm.CB_Contact" Role="ContactBook" Multiplicity="1" >
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_SpecialDate" Role="ContactSpecialDates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContactBook">
               <PropertyRef Name="ContactId" />
@@ -1077,7 +1079,7 @@
         </EntityType>
         <Association Name="Custom_SpecialDateTypeContactSpecialDates">
           <End Type="ContactBookEdm.CB_SpecialDateType" Role="Custom_SpecialDateType" Multiplicity="1" />
-          <End Type="ContactBookEdm.CB_SpecialDates" Role="ContactSpecialDates" Multiplicity="*" />
+          <End Type="ContactBookEdm.CB_SpecialDate" Role="ContactSpecialDates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Custom_SpecialDateType">
               <PropertyRef Name="SpecialDateTpId" />
@@ -1370,9 +1372,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CB_SpecialDates">
-      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDates)">
-        <MappingFragment StoreEntitySet="CB_SpecialDates">
+    <EntitySetMapping Name="CB_SpecialDate">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_SpecialDate)">
+        <MappingFragment StoreEntitySet="CB_SpecialDate">
           <ScalarProperty Name="SpecialDateId" ColumnName="SpecialDateId" />
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ScalarProperty Name="Dates" ColumnName="Dates" />

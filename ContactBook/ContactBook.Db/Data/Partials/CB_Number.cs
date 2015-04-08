@@ -40,9 +40,9 @@ namespace ContactBook.Db.Data
         public bool Equals(CB_Number other)
         {
             if (other.NumberId.Equals(this.NumberId)
-                && other.Number.Equals(this.Number)
+                && other.Number == this.Number
                 && other.NumberTypeId.Equals(this.NumberTypeId)
-                && other.NumberTypeId.Equals(this.ContactId))
+                && other.ContactId.Equals(this.ContactId))
             {
                 return true;
             }
@@ -58,19 +58,13 @@ namespace ContactBook.Db.Data
             return false;
         }
 
-
-        public CB_Number Clone(object obj)
+        public CB_Number Clone()
         {
-            if (obj == null)
-            {
-                return default(CB_Number);
-            }
-            CB_Number actualNumber = obj as CB_Number;
             CB_Number cloneNumber = new CB_Number();
-            cloneNumber.ContactId = actualNumber.ContactId;
-            cloneNumber.Number = actualNumber.Number;
-            cloneNumber.NumberId = actualNumber.NumberId;
-            cloneNumber.NumberTypeId = actualNumber.NumberTypeId;
+            cloneNumber.ContactId = this.ContactId;
+            cloneNumber.Number = this.Number;
+            cloneNumber.NumberId = this.NumberId;
+            cloneNumber.NumberTypeId = this.NumberTypeId;
             return cloneNumber;
         }
 

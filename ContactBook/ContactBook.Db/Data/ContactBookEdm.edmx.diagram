@@ -32,7 +32,7 @@
         <AssociationConnector Association="ContactBookEdm.ContactBookContactRelationship" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_RelationshipType" Width="2.5" PointX="2" PointY="7.25" />
         <AssociationConnector Association="ContactBookEdm.Custom_RelationshipTypeContactRelationship" />
-        <EntityTypeShape EntityType="ContactBookEdm.CB_SpecialDates" Width="1.5" PointX="5.25" PointY="16.125" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_SpecialDate" Width="1.5" PointX="5.25" PointY="16.125" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactSpecialDates" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_SpecialDateType" Width="3" PointX="1.5" PointY="25.25" />
         <AssociationConnector Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" />

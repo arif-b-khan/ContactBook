@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/06/2015 01:18:22
+-- Date Created: 04/08/2015 02:48:26
 -- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
@@ -280,8 +280,8 @@ CREATE TABLE [dbo].[CB_RelationshipType] (
 );
 GO
 
--- Creating table 'CB_SpecialDates'
-CREATE TABLE [dbo].[CB_SpecialDates] (
+-- Creating table 'CB_SpecialDate'
+CREATE TABLE [dbo].[CB_SpecialDate] (
     [SpecialDateId] int IDENTITY(1,1) NOT NULL,
     [ContactId] bigint  NOT NULL,
     [Dates] datetime  NOT NULL,
@@ -402,9 +402,9 @@ ADD CONSTRAINT [PK_CB_RelationshipType]
     PRIMARY KEY CLUSTERED ([RelationshipTypeId] ASC);
 GO
 
--- Creating primary key on [SpecialDateId] in table 'CB_SpecialDates'
-ALTER TABLE [dbo].[CB_SpecialDates]
-ADD CONSTRAINT [PK_CB_SpecialDates]
+-- Creating primary key on [SpecialDateId] in table 'CB_SpecialDate'
+ALTER TABLE [dbo].[CB_SpecialDate]
+ADD CONSTRAINT [PK_CB_SpecialDate]
     PRIMARY KEY CLUSTERED ([SpecialDateId] ASC);
 GO
 
@@ -612,8 +612,8 @@ ON [dbo].[CB_Relationship]
     ([RelationshipTypeId]);
 GO
 
--- Creating foreign key on [ContactId] in table 'CB_SpecialDates'
-ALTER TABLE [dbo].[CB_SpecialDates]
+-- Creating foreign key on [ContactId] in table 'CB_SpecialDate'
+ALTER TABLE [dbo].[CB_SpecialDate]
 ADD CONSTRAINT [FK_ContactBookContactSpecialDates]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[CB_Contact]
@@ -622,12 +622,12 @@ ADD CONSTRAINT [FK_ContactBookContactSpecialDates]
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactBookContactSpecialDates'
 CREATE INDEX [IX_FK_ContactBookContactSpecialDates]
-ON [dbo].[CB_SpecialDates]
+ON [dbo].[CB_SpecialDate]
     ([ContactId]);
 GO
 
--- Creating foreign key on [SpecialDateTpId] in table 'CB_SpecialDates'
-ALTER TABLE [dbo].[CB_SpecialDates]
+-- Creating foreign key on [SpecialDateTpId] in table 'CB_SpecialDate'
+ALTER TABLE [dbo].[CB_SpecialDate]
 ADD CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates]
     FOREIGN KEY ([SpecialDateTpId])
     REFERENCES [dbo].[CB_SpecialDateType]
@@ -636,7 +636,7 @@ ADD CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates]
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Custom_SpecialDateTypeContactSpecialDates'
 CREATE INDEX [IX_FK_Custom_SpecialDateTypeContactSpecialDates]
-ON [dbo].[CB_SpecialDates]
+ON [dbo].[CB_SpecialDate]
     ([SpecialDateTpId]);
 GO
 

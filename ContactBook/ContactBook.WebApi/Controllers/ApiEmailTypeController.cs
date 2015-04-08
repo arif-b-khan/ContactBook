@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ContactBook.WebApi.Filters;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -37,6 +38,7 @@ namespace ContactBook.WebApi.Controllers
         //Get api/EmailType/1
         [Route("{bookId}")]
         [ResponseType(typeof(List<EmailType>))]
+        [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
             List<EmailType> emailTypes = emailTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));

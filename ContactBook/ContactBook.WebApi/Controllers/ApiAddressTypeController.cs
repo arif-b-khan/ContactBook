@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ContactBook.WebApi.Filters;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -36,6 +37,7 @@ namespace ContactBook.WebApi.Controllers
         // GET api/AddressType/GetTypes/1
         [Route("GetTypes/{bookId}")]
         [ResponseType(typeof(List<AddressType>))]
+        [BookIdValidationFilter("bookId")]
         [HttpGet]
         public IHttpActionResult Get(long bookId)
         {
