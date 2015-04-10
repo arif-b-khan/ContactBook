@@ -194,6 +194,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ContactIdentity.mdf" />
+    <Content Include="App_Data\ContactIdentity_log.ldf">
+      <DependentUpon>ContactIdentity.mdf</DependentUpon>
+    </Content>
     <Content Include="default.html" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -218,9 +222,9 @@
     <Compile Include="Controllers\ApiContactBookController.cs" />
     <Compile Include="Controllers\ApiContactController.cs" />
     <Compile Include="Controllers\ApiEmailTypeController.cs" />
+    <Compile Include="Controllers\ApiGroupTypeController.cs" />
     <Compile Include="Controllers\ApiIMTypeController.cs" />
     <Compile Include="Controllers\ApiNumberTypeController.cs" />
-    <Compile Include="Controllers\ApiGroupTypeController.cs" />
     <Compile Include="Controllers\ApiRelationshipTypeController.cs" />
     <Compile Include="Controllers\ApiSpecialDateTypeController.cs" />
     <Compile Include="Controllers\Helpers\ApiHelper.cs" />
@@ -235,11 +239,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\web.config" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -247,9 +251,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ContactBook.Db\ContactBook.Db.csproj">
       <Project>{5cb257b9-2ec1-4e59-94d3-fa40f0016bbc}</Project>
