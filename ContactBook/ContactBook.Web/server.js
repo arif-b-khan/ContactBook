@@ -1,5 +1,4 @@
-﻿#!/usr/bin/env node
-
+﻿
 var util = require('util'),
     http = require('http'),
     fs = require('fs'),
