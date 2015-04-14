@@ -1,12 +1,13 @@
-﻿
+
 (function () {
     'use strict';
 
     var loginConfiguration = function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: "views/Account/login.html",
+            templateUrl: "views/Account/Login.html",
             controller: 'loginController'
-        }).when('/register', {
+        })
+        .when('/register', {
             templateUrl: "views/Account/Register.html",
             controller: 'registerController'
         });

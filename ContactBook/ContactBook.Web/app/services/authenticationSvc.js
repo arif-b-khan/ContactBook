@@ -1,6 +1,6 @@
-﻿(function () {
+(function () {
     "use strict";
-    cbService.factory("authenticationSvc", ['$http', '$q', '$rootScope', 'localStorageService', 'cbSettings',  function ($http, $q, $rootScope, localStorageService, cbSettings) {
+    cbServices.factory("authenticationSvc", ['$http', '$q', '$rootScope', 'localStorageService', 'cbSettings',  function ($http, $q, $rootScope, localStorageService, cbSettings) {
         var USERINFO_KEY = 'contactbook.userinfo';
         
         var url = cbSettings.serviceBase;

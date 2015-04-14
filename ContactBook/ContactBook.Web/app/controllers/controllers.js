@@ -2,4 +2,4 @@
 
 /* Controllers */
 
-var cbController = angular.module('contactbook.controllers', []);
+var cbControllers = angular.module('contactbook.controllers', []);
