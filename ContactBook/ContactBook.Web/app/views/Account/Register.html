@@ -1,1 +1,33 @@
-<p>Register account</p>
+<form name="registerFrm" class="form-register form-css" novalidate>
+    <div class="form-group" ng-class="{'has-error': registerFrm.usernameField.$dirty && registerFrm.usernameField.$invalid}">
+        <label for="userName">Username</label>
+        <input type="text" class="form-control" name="usernameField" ng-model="user.username" placeholder="Username" ng-model-options="{updateOn: 'blur' }" required="" ui-validate="{userExists: 'usernameExists($value)' }" min-length="7" max-length="20" />
+        <div class="alert alert-danger" role="alert" ng-show="registerFrm.usernameField.$touched && registerFrm.usernameField.$invalid">
+            <div ng-show="registerFrm.usernameField.$error.required"><span class="sr-only">Error:</span> Username required</div>
+            <div ng-show="registerFrm.usernameField.$error.userExists"><span class="sr-only">Error:</span> Username already exists</div>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': registerFrm.passwordField.$dirty && registerFrm.passwordField.$invalid }">
+        <label for="passwordField">Password</label>
+        <input type="password" class="form-control" name="passwordField" ng-model="user.pwd" required="" ng-minlength="7" ng-maxlength="15" />
+        <div class="alert alert-danger" role="alert" ng-show="registerFrm.passwordField.$touched && registerFrm.passwordField.$invalid">
+            <div ng-show="registerFrm.passwordField.$error.required"><span class="sr-only">Error:</span>Password required</div>
+            <div ng-show="registerFrm.passwordField.$error.minlength"> <span class="sr-only">Error:</span>Minimum 7 characters required</div>
+            <div ng-show="registerFrm.passwordField.$error.maxlength"> <span class="sr-only">Error:</span>Maximum 15 characters</div>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': registerFrm.$submitted && registerFrm.confirmPassword.$touched }">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" class="form-control" ng-model="user.cpwd" required="" ui-validate=" '$value==user.pwd' " ui-validate-watch=" 'user.pwd' " ng-minlength="7" ng-maxlength="15" /> 
+        <div class="alert alert-danger" role="alert" ng-show="registerFrm.confirmPassword.$touched && registerFrm.confirmPassword.$invalid">
+            <div ng-show="registerFrm.confirmPassword.$error.required"><span class="sr-only">Error:</span>Password required</div>
+            <div ng-show="registerFrm.confirmPassword.$error.minlength"> <span class="sr-only">Error:</span>Minimum 7 characters required</div>
+            <div ng-show="registerFrm.confirmPassword.$error.maxlength"> <span class="sr-only">Error:</span>Maximum 15 characters</div>
+            <div ng-show="!!registerFrm.confirmPassword.$error.validator"> <span class="sr-only">Error:</span>Passwords don't match.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" id="btnReset" class="btn btn-default" ng-click="reset(registerFrm)" value="Reset" />
+        <input type="submit" id="btnSubmit" class="btn btn-default" ng-disabled="registerFrm.$invalid" ng-click="register(user, registerFrm)" value="Register" />
+    </div>
+</form>

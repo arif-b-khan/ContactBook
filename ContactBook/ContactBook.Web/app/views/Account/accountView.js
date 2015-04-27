@@ -15,6 +15,6 @@
 
     loginConfiguration.$inject = ['$routeProvider'];
 
-    angular.module("account.view", ['ngRoute'])
+    angular.module("account.view", ['ngRoute', 'ui.validate'])
     .config(loginConfiguration);
 })();

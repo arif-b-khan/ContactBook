@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="contactbook" class="no-js">
 <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +32,8 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+
+<body ng-controller="mainCbController">
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
@@ -43,21 +45,24 @@
                         <a class="navbar-brand" href="#">Contact Book</a>
                     </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                        <ul class="nav navbar-nav" ng-show="isAuthenticated">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact<strong class="caret"></strong></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown">Contact<strong class="caret"></strong></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="#">New Contact</a>
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#"></a>
+                            </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userInfo.username}}<strong class="caret"></strong></a>
+                            <li class="dropdown" ng-show="isAuthenticated">
+                                <a class="dropdown-toggle" data-toggle="dropdown">{{userInfo.Username}}<strong class="caret"></strong></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="#">Manage Account</a>
@@ -67,6 +72,12 @@
                                         <a href="#">Log Out</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li ng-hide="isAuthenticated">
+                                <a href="#/register">Register</a>
+                            </li>
+                            <li ng-hide="isAuthenticated">
+                                <a href="#/login">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -82,19 +93,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-muted">Created by: <a target="_blank" href="#">Arif Khan</a></p>
+                    <p class="text-muted">Created by: <a target="_blank" href="#">Arif Khan</a>
+                    </p>
                 </div>
                 <div class="col-md-6">
                 </div>
             </div>
         </div>
     </div>
-    <script src="../Scripts/angular.js"></script>
-    <script src="../Scripts/angular-route.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-ui-utils/ui-utils.min.js"></script>
     <script src="../bower_components/angular-bindonce/bindonce.min.js"></script>
     <script src="../bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="app.js"></script>
     <script src="controllers/controllers.js"></script>
+    <script src="controllers/mainCbController.js"></script>
     <script src="controllers/AccountController/loginController.js"></script>
     <script src="controllers/AccountController/registerController.js"></script>
     <script src="services/services.js"></script>
@@ -103,4 +118,5 @@
     <script src="services/authenticationSvc.js"></script>
     <script src="views/Account/accountView.js"></script>
 </body>
+
 </html>
