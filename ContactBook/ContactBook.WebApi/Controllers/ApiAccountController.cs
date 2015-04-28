@@ -58,6 +58,7 @@ namespace ContactBook.WebApi.Controllers
             };
         }
 
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -326,7 +327,8 @@ namespace ContactBook.WebApi.Controllers
 
             IdentityUser user = new IdentityUser
             {
-                UserName = model.UserName
+                UserName = model.UserName,
+                Email = model.Email
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -345,6 +347,8 @@ namespace ContactBook.WebApi.Controllers
                     context.CreateContactBook(model.UserName, identityUser.Id);
                     uow.Save();
                 }
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
+
             }
 
             return Ok();

@@ -10,6 +10,7 @@ using Owin;
 using System;
 using System.Threading.Tasks;
 using System.Web.Cors;
+using ContactBook.WebApi.App_Start;
 
 namespace ContactBook.WebApi
 {
@@ -19,7 +20,10 @@ namespace ContactBook.WebApi
         {
             PublicClientId = "self";
 
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()));
+            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()))
+            {
+                EmailService = new GmailEmailService();
+            };
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
