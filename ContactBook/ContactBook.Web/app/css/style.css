@@ -6,30 +6,25 @@
   margin-bottom: 2em;
   padding: 0 0 0.5em;
 }
-
 .menu:before {
   content: "[";
 }
-
 .menu:after {
   content: "]";
 }
-
 .menu > li {
   display: inline;
 }
-
 .menu > li:before {
   content: "|";
   padding-right: 0.3em;
 }
-
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
 }
-
 /*Login CS*/
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -46,8 +41,8 @@
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
 }
@@ -64,14 +59,21 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.form-signin #register{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: bold;
+.form-signin #register {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
 }
-
 /*from register*/
+
 .form-register {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+/*error summary container*/
+
+.error-summary {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;

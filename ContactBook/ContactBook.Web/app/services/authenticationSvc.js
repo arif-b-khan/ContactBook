@@ -5,12 +5,12 @@
         var url = cbSettings.serviceBase;
 
         var authUrls = {
-            loginUrl: url + "\token",
-            registUrl: url + "\register"
+            loginUrl: url + "/Token",
+            registUrl: url + "/Register"
         };
 
         var _login = function(username, pwd) {
-            var data = "gran_type=password&Username=" + username + "&Password=" + pwd;
+            var data = "Username=" + username + "&Password=" + pwd+"&grant_type=password";
             var deferred = $q.defer();
 
             $http.post(authUrls.loginUrl, data, {
@@ -32,13 +32,14 @@
                 .error(function(err, status) {
                     _logout();
                     deferred.reject(err);
+                    $rootScope.isAuthenticated = false;
                 });
 
             return deferred.promise;
         };
 
         var _logout = function() {
-            delete $rootScope.Userinfo;
+            delete $rootScope.userInfo;
             localStorageService.remove(storageSettings.USERINFO_KEY);
             $rootScope.isAuthenticated = false;
         }

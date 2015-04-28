@@ -10,7 +10,8 @@ var cbApp = angular.module('contactbook', [
     'LocalStorageModule',
     'contactbook.controllers',
     'contactbook.services',
-    "account.view"
+    "account.view.account",
+    "account.view.main"
 ]).
 config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
     $routeProvider.otherwise({
@@ -29,10 +30,15 @@ cbApp.constant('cbSettings', {
     clientId: 'ng-contactbook'
 });
 
+cbApp.config(function($httpProvider) {
+    $httpProvider.interceptors.push("httpInterceptorSvc");
+});
+
 cbApp.constant('storageSettings', {
         USERINFO_KEY: 'contactbook.userinfo'
     })
-    .run(function($rootScope, localStorageService, storageSettings) {
+    .run(function($rootScope, $location, localStorageService, storageSettings) {
+        $rootScope.returnUrl = "";
         $rootScope.userInfo = localStorageService.get(storageSettings.USERINFO_KEY);
         if ($rootScope.userInfo == null) {
             $rootScope.isAuthenticated = false;
@@ -40,4 +46,16 @@ cbApp.constant('storageSettings', {
         else {
             $rootScope.isAuthenticated = true;
         }
+
+        $rootScope.$on("$routeChangeStart", function(event, next) {
+            if (angular.isDefined(next.access) && next.access.isRequired && !$rootScope.isAuthenticated) {
+                $location.path("/login");
+                $rootScope.returnUrl = next.$$route.originalPath;
+            }
+
+            if ($rootScope.isAuthenticated && (angular.isDefined(next.access) && next.access.hideWhenLoggedin)) {
+               $location.path("/main");
+            }
+        });
+
     });

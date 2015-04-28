@@ -23,10 +23,17 @@
         };
 
         var login = function(username, password) {
-            var obj = {};
-            obj.usr = username;
-            obj.pwd = password;
-            $window.alert(angular.toJson(obj));
+            var data = "grant_type=password&username=" + username + "&password=" + password;
+            
+            var deferred = $q.defer();
+            $http.post(accountUrl.Login, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+            .success(function(response){
+                
+            })
+            .error(function(error){
+                
+            });
+            return deferred.promise;
         };
 
         var userExists = function(username) {
