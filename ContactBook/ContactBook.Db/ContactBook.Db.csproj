@@ -116,6 +116,9 @@
     <Compile Include="Data\CB_RelationshipType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\CB_Secret.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\CB_SpecialDate.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Data\ContactBookEdm.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>

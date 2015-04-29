@@ -115,6 +115,7 @@
       <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
       <End Role="CB_IMType" EntitySet="CB_IMType" />
     </AssociationSet>
+    <EntitySet Name="CB_Secret" EntityType="ContactBookEdm.CB_Secret" />
   </EntityContainer>
   <EntityType Name="CB_Contact">
     <Key>
@@ -633,4 +634,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="CB_Secret">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="SecretKey" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="SecretValue" Nullable="false" MaxLength="200" />
+  </EntityType>
 </Schema>

@@ -180,5 +180,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CB_Secret">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Secret)">
+        <MappingFragment StoreEntitySet="CB_Secret">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+          <ScalarProperty Name="SecretValue" ColumnName="SecretValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

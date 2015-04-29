@@ -73,3 +73,4 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\ContactBook.Domain.Test.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\ContactBook.Domain.Test.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\TestDb\TestDb.mdf
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\TestDb\TestDb.mdf

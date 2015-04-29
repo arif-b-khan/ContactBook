@@ -1,4 +1,5 @@
-﻿using ContactBook.Db.Data;
+﻿using System.Linq;
+using ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Contexts;
 using ContactBook.Domain.Models;
@@ -336,7 +337,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (errorResult != null)
             {
-                return errorResult;
+                return InternalServerError();
             }
             else
             {
@@ -348,11 +349,32 @@ namespace ContactBook.WebApi.Controllers
                     uow.Save();
                 }
                 var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
-                var url = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                string link = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                await UserManager.SendEmailAsync(identityUser.Id, "Contactbook confirmation", link);
 
-                //return CreatedAtRoute<RegisterBindingModel>("DefaultApi",);
+                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
             }
-            return Ok();
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        public async Task<IHttpActionResult> GetConfirmEmail(string id, string code)
+        {
+           IdentityResult idResult = await UserManager.ConfirmEmailAsync(id, code);
+           if (idResult.Succeeded)
+           {
+               return Ok();
+           }
+           else
+           {
+               if (idResult.Errors.Any())
+               {
+                   return InternalServerError();
+               }
+               return NotFound();
+           }
         }
 
         // POST api/Account/RegisterExternal

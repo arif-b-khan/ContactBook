@@ -24,6 +24,7 @@
     <EntitySet Name="CB_SpecialDateType" EntityType="ContactBookEdm.Store.CB_SpecialDateType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_InternetCall" EntityType="ContactBookEdm.Store.CB_InternetCall" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CB_ContactBook" EntityType="ContactBookEdm.Store.CB_ContactBook" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CB_Secret" EntityType="ContactBookEdm.Store.CB_Secret" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ContactBookContactNumber" Association="ContactBookEdm.Store.ContactBookContactNumber">
       <End Role="ContactBook" EntitySet="CB_Contact" />
       <End Role="ContactNumber" EntitySet="CB_Number" />
@@ -188,7 +189,7 @@
     </Key>
     <Property Name="GroupRelationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ContactId" Type="bigint" Nullable="false" />
-    <Property Name="GroupId" Type="int" Nullable="true" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CB_AddressType">
     <Key>
@@ -282,6 +283,14 @@
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
+  <EntityType Name="CB_Secret">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SecretKey" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="SecretValue" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
   <Association Name="ContactBookContactNumber">
     <End Role="ContactBook" Type="ContactBookEdm.Store.CB_Contact" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -325,7 +334,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ContactGroupContactBookAndGroup">
-    <End Role="ContactGroup" Type="ContactBookEdm.Store.CB_GroupType" Multiplicity="0..1" />
+    <End Role="ContactGroup" Type="ContactBookEdm.Store.CB_GroupType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ContactBookAndGroup" Type="ContactBookEdm.Store.CB_ContactByGroup" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContactGroup">
@@ -707,6 +718,8 @@
             <End Role="CB_ContactBook" EntitySet="CB_ContactBook" />
             <End Role="CB_IMType" EntitySet="CB_IMType" />
           </AssociationSet>
+          <EntitySet Name="CB_Secret" EntityType="ContactBookEdm.CB_Secret" />
+          <EntitySet Name="Logs" EntityType="ContactBookEdm.Log" />
         </EntityContainer>
         <EntityType Name="CB_Contact">
           <Key>
@@ -1225,6 +1238,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CB_Secret">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SecretKey" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="SecretValue" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Type="Guid" Name="LogId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Logger" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="LoggerLevel" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CallSite" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="Max" />
+          <Property Type="Time" Name="TimeStamp" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1407,6 +1439,15 @@
           <ScalarProperty Name="BookName" ColumnName="BookName" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CB_Secret">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactBookEdm.CB_Secret)">
+        <MappingFragment StoreEntitySet="CB_Secret">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+          <ScalarProperty Name="SecretValue" ColumnName="SecretValue" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

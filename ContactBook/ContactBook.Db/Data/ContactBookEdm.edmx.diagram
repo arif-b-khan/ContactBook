@@ -38,7 +38,7 @@
         <AssociationConnector Association="ContactBookEdm.Custom_SpecialDateTypeContactSpecialDates" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_InternetCall" Width="1.5" PointX="5.25" PointY="26.5" />
         <AssociationConnector Association="ContactBookEdm.ContactBookContactInternetCall" />
-        <EntityTypeShape EntityType="ContactBookEdm.CB_ContactBook" Width="2.625" PointX="7.875" PointY="3" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_ContactBook" Width="2.625" PointX="11.125" PointY="3.25" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_Contacts" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_RelationshipType" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_NumberType" />
@@ -47,6 +47,8 @@
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_EmailType" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_Group" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_IMType" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_Secret" Width="1.5" PointX="5.375" PointY="1.75" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_Log" Width="1.5" PointX="8.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
