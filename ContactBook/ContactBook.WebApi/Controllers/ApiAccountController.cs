@@ -348,9 +348,10 @@ namespace ContactBook.WebApi.Controllers
                     uow.Save();
                 }
                 var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
+                var url = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
 
+                //return CreatedAtRoute<RegisterBindingModel>("DefaultApi",);
             }
-
             return Ok();
         }
 

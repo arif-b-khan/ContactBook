@@ -77,7 +77,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (status)
             {
-                return CreatedAtRoute<AddressType>("DefaultApi", new { controller = "AddressType", action = "GetTypes", bookid = 1 }, addressType);
+                return CreatedAtRoute<AddressType>("DefaultApi", new { controller = "AddressType", action = "GetTypes", bookid = addressType.BookId }, addressType);
             }
             else
             {

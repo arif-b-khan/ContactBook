@@ -328,4 +328,3 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
-D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.Net4.dll

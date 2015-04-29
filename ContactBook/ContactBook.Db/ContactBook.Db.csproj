@@ -170,7 +170,6 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <None Include="Data\ContactBookEdm.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactBookEdm.edmx</DependentUpon>
