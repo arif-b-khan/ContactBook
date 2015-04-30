@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using System.Transactions;
+using ContactBook.Domain.Common.Logging;
+using NLog;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -321,6 +324,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            bool registerSuccess = false;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -331,30 +335,53 @@ namespace ContactBook.WebApi.Controllers
                 UserName = model.UserName,
                 Email = model.Email
             };
+            
+            IdentityResult result;
+            IdentityUser identityUser = null;
+            IHttpActionResult errorResult = null;
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            IHttpActionResult errorResult = GetErrorResult(result);
-
-            if (errorResult != null)
+            using (TransactionScope tranScope = new TransactionScope())
             {
-                return InternalServerError();
+                result = await UserManager.CreateAsync(user, model.Password);
+                errorResult = GetErrorResult(result);
+
+                if (errorResult != null)
+                {
+                    identityUser = await UserManager.FindAsync(user.UserName, model.Password);
+
+                    using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer()))
+                    {
+                        IContactBookContext context = new ContactBookContext(uow);
+                        context.CreateContactBook(model.UserName, identityUser.Id);
+                        uow.Save();
+                    }
+                    registerSuccess = true;
+                }
+                tranScope.Complete();
+            }
+
+            if (registerSuccess)
+            {
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
+                string link = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                
+                CBLogger.Instance.Info("Account GenereatedLink: " + link);
+                
+                try
+                {
+                    await UserManager.SendEmailAsync(identityUser.Id, "Contactbook confirmation", link);
+                }
+                catch (Exception ex)
+                {
+                    CBLogger.Instance.Error(ex.TargetSite.Name, ex);
+                }
+
+                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code }, model);
             }
             else
             {
-                IdentityUser identityUser = await UserManager.FindAsync(user.UserName, model.Password);
-                using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer()))
-                {
-                    IContactBookContext context = new ContactBookContext(uow);
-                    context.CreateContactBook(model.UserName, identityUser.Id);
-                    uow.Save();
-                }
-                var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
-                string link = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
-                await UserManager.SendEmailAsync(identityUser.Id, "Contactbook confirmation", link);
-
-                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                return errorResult;
             }
-
         }
 
         [HttpGet]
@@ -362,19 +389,9 @@ namespace ContactBook.WebApi.Controllers
         [Route("ConfirmEmail")]
         public async Task<IHttpActionResult> GetConfirmEmail(string id, string code)
         {
-           IdentityResult idResult = await UserManager.ConfirmEmailAsync(id, code);
-           if (idResult.Succeeded)
-           {
-               return Ok();
-           }
-           else
-           {
-               if (idResult.Errors.Any())
-               {
-                   return InternalServerError();
-               }
-               return NotFound();
-           }
+            IdentityResult idResult = await UserManager.ConfirmEmailAsync(id, code);
+            IHttpActionResult result = GetErrorResult(idResult);
+            return result;
         }
 
         // POST api/Account/RegisterExternal
@@ -444,6 +461,7 @@ namespace ContactBook.WebApi.Controllers
                     foreach (string error in result.Errors)
                     {
                         ModelState.AddModelError("", error);
+                        CBLogger.Instance.Error("MethodName: GetErrorResult Message: "+ error);
                     }
                 }
 

@@ -29,7 +29,7 @@ namespace ContactBook.WebApi.Common
             string password = await ContactBookCrypto.DecryptAsync(smtpSec.Network.Password);
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress();
+            msg.From = new MailAddress(emailFrom);
             msg.To.Add(new MailAddress(message.Destination));
             msg.Subject = message.Subject;
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
@@ -47,7 +47,7 @@ namespace ContactBook.WebApi.Common
             {
                 smtpClient.SendAsync(msg, null);
             });
-            return retSend;
+            
         }
     }
 }

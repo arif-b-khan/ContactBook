@@ -56,3 +56,5 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\Syste
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Net.Http.Formatting.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\System.Web.Http.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\NLog.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Domain\bin\Debug\NLog.xml
