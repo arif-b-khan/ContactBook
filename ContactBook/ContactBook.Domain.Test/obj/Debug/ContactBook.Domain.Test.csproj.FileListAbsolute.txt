@@ -76,3 +76,5 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\TestDb\TestDb.mdf
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\NLog.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\NLog.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\NLog.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Domain.Test\bin\Debug\NLog.xml

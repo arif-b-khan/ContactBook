@@ -1040,6 +1040,7 @@
     <Content Include="bower_components\spin.js\.npmignore" />
     <Content Include="bower_components\spin.js\bower.json" />
     <Content Include="bower_components\spin.js\README.md" />
+    <None Include="Properties\PublishProfiles\contactbook.web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
