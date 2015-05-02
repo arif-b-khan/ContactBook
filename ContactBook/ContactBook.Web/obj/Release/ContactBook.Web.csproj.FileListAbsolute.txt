@@ -13,3 +13,4 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Web
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Helpers.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.csprojResolveAssemblyReference.cache
