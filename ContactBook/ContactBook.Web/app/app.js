@@ -3,6 +3,7 @@
 var baseSvc = 'http://contactbookapi.azurewebsites.net';
 // var baseSvc = "http://contactbook.com/contactbook.webapi";
 
+
 // Declare app level module which depends on filters, and services
 var cbApp = angular.module('contactbook', [
     'pasvaz.bindonce',
