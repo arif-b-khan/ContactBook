@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace ContactBook.WebApi.Controllers
 {
-    [RoutePrefix("api/ContactBook")]
+    [RoutePrefix("api/ApiContactBook")]
     public class ApiContactBookController : ApiController
     {
         private IContactBookRepositoryUow unitOfWork = null;

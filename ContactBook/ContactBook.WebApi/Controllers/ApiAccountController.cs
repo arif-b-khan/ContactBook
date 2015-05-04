@@ -33,6 +33,7 @@ namespace ContactBook.WebApi.Controllers
     {
         private const string Category = "ApiAccountController";
         private const string LocalLoginProvider = "Local";
+        private readonly ICBLogger _logger;
 
         public UserManager<IdentityUser> UserManager { get; private set; }
 
@@ -48,6 +49,7 @@ namespace ContactBook.WebApi.Controllers
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+            _logger = DependencyFactory.Resolve<ICBLogger>();
         }
 
         //Get api/Account/UserExists
@@ -411,20 +413,20 @@ namespace ContactBook.WebApi.Controllers
 
             if (registerSuccess)
             {
-                var code = UserManager.GenerateEmailConfirmationToken(identityUser.Id);
-                string link = this.Url.Link("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
-                
-                Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
-                
+                string code = string.Empty;
                 try
                 {
+                    code = UserManager.GenerateEmailConfirmationToken(identityUser.Id);
+                    string link = this.Url.Link("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
                     UserManager.SendEmail(identityUser.Id, "Contactbook confirmation", link);
+        
                 }
                 catch (Exception ex)
                 {
                     Configuration.Services.GetTraceWriter().Error(Request, Category, ex);
+                    _logger.Error("Unable to send email Message", ex);
                 }
-
                 return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code }, model);
             }
             else

@@ -12,7 +12,7 @@ using ContactBook.WebApi.Filters;
 
 namespace ContactBook.WebApi.Controllers
 {
-    [RoutePrefix("api/AddressType")]
+    [RoutePrefix("api/ApiAddressType")]
     [Authorize]
     public class ApiAddressTypeController : ApiController
     {
@@ -35,7 +35,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // GET api/AddressType/GetTypes/1
-        [Route("GetTypes/{bookId}")]
+        [Route("{bookId}")]
         [ResponseType(typeof(List<AddressType>))]
         [BookIdValidationFilter("bookId")]
         [HttpGet]
@@ -52,9 +52,8 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/AddressType/InsertType
-        [Route("InsertType")]
         [HttpPost]
-        public IHttpActionResult InsertAddressTypes([FromBody]AddressType addressType)
+        public IHttpActionResult Post([FromBody]AddressType addressType)
         {
             Exception retException = null;
             bool status = true;
@@ -86,7 +85,6 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        [Route("UpdateType")]
         [HttpPut]
         public IHttpActionResult Put([FromBody]AddressType addressType)
         {
@@ -134,7 +132,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //    // DELETE api/DeleteType/5
-        [Route("DeleteType/{addressTypeId}/{bookId}")]
+        [Route("{addressTypeId}/{bookId}")]
         [HttpDelete]
         public IHttpActionResult Delete(int addressTypeId, long bookId)
         {
