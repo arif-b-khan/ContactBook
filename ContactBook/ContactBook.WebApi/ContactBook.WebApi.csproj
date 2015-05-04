@@ -203,7 +203,7 @@
     <Content Include="App_Data\ContactIdentity_log.ldf">
       <DependentUpon>ContactIdentity.mdf</DependentUpon>
     </Content>
-    <Content Include="default.html" />
+    <Content Include="test.html" />
     <Content Include="Global.asax" />
     <Content Include="NLog.config" />
     <None Include="Properties\PublishProfiles\Contactbook.webapi.pubxml" />
@@ -252,9 +252,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\web.config" />
-    <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
