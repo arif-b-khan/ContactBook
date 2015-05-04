@@ -1,0 +1,16 @@
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\ContactBook.Web.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\ContactBook.Web.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Helpers.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Razor.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.Deployment.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.Razor.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Razor.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.Deployment.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Webpages.Razor.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Helpers.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Release\ContactBook.Web.csprojResolveAssemblyReference.cache

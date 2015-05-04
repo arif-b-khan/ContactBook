@@ -1,6 +1,7 @@
 ﻿using ContactBook.WebApi.Context;
 using ContactBook.WebApi.Providers;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -10,6 +11,9 @@ using Owin;
 using System;
 using System.Threading.Tasks;
 using System.Web.Cors;
+using ContactBook.WebApi.Common;
+using ContactBook.Domain.IoC;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace ContactBook.WebApi
 {
@@ -18,8 +22,20 @@ namespace ContactBook.WebApi
         static Startup()
         {
             PublicClientId = "self";
+            var passwordValidator = new PasswordValidator();
+            passwordValidator.RequireDigit = true;
+            passwordValidator.RequiredLength = 7;
+            var dataProvider = new DpapiDataProtectionProvider("ContactBook");
+            var protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProvider.Create("EmailConfirmation"));
 
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()));
+            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()))
+            {
+                PasswordValidator = passwordValidator,
+                EmailService = new ContactbookEmailService(),
+                UserTokenProvider = protectionProvider 
+            };
+
+            RoleManagerFactory = () => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new CBIndentityDbContext()));
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
@@ -34,12 +50,12 @@ namespace ContactBook.WebApi
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static Func<UserManager<IdentityUser>> UserManagerFactory { get; set; }
-
+        public static Func<RoleManager<IdentityRole>> RoleManagerFactory { get; set; }
         public static string PublicClientId { get; private set; }
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            //app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
             // restrict policy to an end point if webapi cors is enabled...
             app.UseCors(new CorsOptions()
             {

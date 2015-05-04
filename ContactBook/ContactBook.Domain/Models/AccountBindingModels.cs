@@ -17,10 +17,11 @@ namespace ContactBook.Domain.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
@@ -36,9 +37,13 @@ namespace ContactBook.Domain.Models
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
+        
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 7)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -70,7 +75,7 @@ namespace ContactBook.Domain.Models
     public class SetPasswordBindingModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 7)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }

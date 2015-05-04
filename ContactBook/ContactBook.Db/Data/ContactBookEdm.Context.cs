@@ -43,5 +43,6 @@ namespace ContactBook.Db.Data
         public DbSet<CB_SpecialDateType> CB_SpecialDateType { get; set; }
         public DbSet<CB_InternetCall> CB_InternetCall { get; set; }
         public DbSet<CB_ContactBook> CB_ContactBook { get; set; }
+        public DbSet<CB_Secret> CB_Secret { get; set; }
     }
 }

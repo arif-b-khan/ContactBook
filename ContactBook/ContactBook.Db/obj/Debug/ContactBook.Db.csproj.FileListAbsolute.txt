@@ -8,7 +8,6 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBo
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll.config
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.SqlServer.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.SqlServer.xml
-D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll.config
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.dll
@@ -23,3 +22,13 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMappe
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.pdb
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.xml
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.Net4.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.Net4.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.Net4.pdb
+C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll.config
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.xml

@@ -59,8 +59,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -71,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\ConnectionString.cs" />
     <Compile Include="Data\CB_Address.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
@@ -114,6 +119,9 @@
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CB_RelationshipType.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CB_Secret.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CB_SpecialDate.cs">

@@ -1,0 +1,17 @@
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\AutoMapper.Net4.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\ContactBook.Db.dll.config
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\ContactBook.Db.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\ContactBook.Db.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\AutoMapper.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\EntityFramework.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\EntityFramework.SqlServer.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\NLog.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\AutoMapper.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\AutoMapper.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\AutoMapper.Net4.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\EntityFramework.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\EntityFramework.SqlServer.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Release\NLog.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Release\ContactBook.Db.csprojResolveAssemblyReference.cache
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Release\ContactBook.Db.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Release\ContactBook.Db.pdb

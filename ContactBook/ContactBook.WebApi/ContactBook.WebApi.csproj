@@ -114,6 +114,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=3.2.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -128,6 +132,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Spatial.5.6.3\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -200,6 +205,8 @@
     </Content>
     <Content Include="default.html" />
     <Content Include="Global.asax" />
+    <Content Include="NLog.config" />
+    <None Include="Properties\PublishProfiles\Contactbook.webapi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -216,6 +223,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\CBExceptionFilterAttribute.cs" />
+    <Compile Include="Common\CBTraceWriter.cs" />
+    <Compile Include="Common\ContactbookEmailService.cs" />
     <Compile Include="Context\CBIndentityDbContext.cs" />
     <Compile Include="Controllers\ApiAccountController.cs" />
     <Compile Include="Controllers\ApiAddressTypeController.cs" />
@@ -226,6 +236,7 @@
     <Compile Include="Controllers\ApiIMTypeController.cs" />
     <Compile Include="Controllers\ApiNumberTypeController.cs" />
     <Compile Include="Controllers\ApiRelationshipTypeController.cs" />
+    <Compile Include="Controllers\ApiRoleController.cs" />
     <Compile Include="Controllers\ApiSpecialDateTypeController.cs" />
     <Compile Include="Controllers\Helpers\ApiHelper.cs" />
     <Compile Include="Filters\BookIdValidationFilterAttribute.cs" />

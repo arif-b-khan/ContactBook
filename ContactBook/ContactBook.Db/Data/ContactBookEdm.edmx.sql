@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/08/2015 02:48:26
+-- Date Created: 04/29/2015 07:33:57
 -- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
@@ -57,10 +57,10 @@ IF OBJECT_ID(N'[dbo].[FK_Custom_RelationshipTypeContactRelationship]', 'F') IS N
     ALTER TABLE [dbo].[CB_Relationship] DROP CONSTRAINT [FK_Custom_RelationshipTypeContactRelationship];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactBookContactSpecialDates]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_ContactBookContactSpecialDates];
+    ALTER TABLE [dbo].[CB_SpecialDate] DROP CONSTRAINT [FK_ContactBookContactSpecialDates];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Custom_SpecialDateTypeContactSpecialDates]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CB_SpecialDates] DROP CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates];
+    ALTER TABLE [dbo].[CB_SpecialDate] DROP CONSTRAINT [FK_Custom_SpecialDateTypeContactSpecialDates];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContactBookContactInternetCall]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CB_InternetCall] DROP CONSTRAINT [FK_ContactBookContactInternetCall];
@@ -136,8 +136,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_RelationshipType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_RelationshipType];
 GO
-IF OBJECT_ID(N'[dbo].[CB_SpecialDates]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CB_SpecialDates];
+IF OBJECT_ID(N'[dbo].[CB_SpecialDate]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_SpecialDate];
 GO
 IF OBJECT_ID(N'[dbo].[CB_SpecialDateType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_SpecialDateType];
@@ -147,6 +147,12 @@ IF OBJECT_ID(N'[dbo].[CB_InternetCall]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CB_ContactBook]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_ContactBook];
+GO
+IF OBJECT_ID(N'[dbo].[CB_Secret]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Secret];
+GO
+IF OBJECT_ID(N'[dbo].[Logs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Logs];
 GO
 
 -- --------------------------------------------------
@@ -218,7 +224,7 @@ GO
 CREATE TABLE [dbo].[CB_ContactByGroup] (
     [GroupRelationId] int IDENTITY(1,1) NOT NULL,
     [ContactId] bigint  NOT NULL,
-    [GroupId] int  NULL
+    [GroupId] int  NOT NULL
 );
 GO
 
@@ -311,6 +317,25 @@ CREATE TABLE [dbo].[CB_ContactBook] (
     [BookName] nvarchar(300)  NOT NULL,
     [Enabled] bit  NOT NULL,
     [Username] nvarchar(128)  NOT NULL
+);
+GO
+
+-- Creating table 'CB_Secret'
+CREATE TABLE [dbo].[CB_Secret] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [SecretKey] nvarchar(200)  NOT NULL,
+    [SecretValue] nvarchar(200)  NOT NULL
+);
+GO
+
+-- Creating table 'CB_Log'
+CREATE TABLE [dbo].[CB_Log] (
+    [LogId] uniqueidentifier  NOT NULL,
+    [Logger] nvarchar(200)  NOT NULL,
+    [LoggerLevel] nvarchar(100)  NOT NULL,
+    [CallSite] nvarchar(300)  NOT NULL,
+    [Message] nvarchar(max)  NOT NULL,
+    [TimeStamp] timestamp  NOT NULL
 );
 GO
 
@@ -426,6 +451,18 @@ ADD CONSTRAINT [PK_CB_ContactBook]
     PRIMARY KEY CLUSTERED ([BookId] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'CB_Secret'
+ALTER TABLE [dbo].[CB_Secret]
+ADD CONSTRAINT [PK_CB_Secret]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [LogId] in table 'CB_Log'
+ALTER TABLE [dbo].[CB_Log]
+ADD CONSTRAINT [PK_CB_Log]
+    PRIMARY KEY CLUSTERED ([LogId] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -478,7 +515,7 @@ ADD CONSTRAINT [FK_ContactGroupContactBookAndGroup]
     FOREIGN KEY ([GroupId])
     REFERENCES [dbo].[CB_GroupType]
         ([GroupId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactGroupContactBookAndGroup'
 CREATE INDEX [IX_FK_ContactGroupContactBookAndGroup]

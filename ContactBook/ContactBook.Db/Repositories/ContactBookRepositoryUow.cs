@@ -5,6 +5,8 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using NLog;
 
 namespace ContactBook.Db.Repositories
 {
@@ -14,9 +16,16 @@ namespace ContactBook.Db.Repositories
         private DbContext container;
         private IDictionary<string, Type> entityDictionary = new Dictionary<string, Type>();
         private IDictionary<string, object> cachedInstance = new Dictionary<string, object>();
+        private static readonly Logger _logger;
+
+        static ContactBookRepositoryUow()
+        {
+            _logger = LogManager.GetLogger("ContactBook.Db");
+        }
 
         public ContactBookRepositoryUow(DbContext container)
         {
+
             this.container = container;
 
             var types = Assembly.Load("ContactBook.Db").GetTypes()
@@ -24,9 +33,12 @@ namespace ContactBook.Db.Repositories
                 {
                     return w.Namespace.Equals("ContactBook.Db.Data");
                 });
+
+            _logger.Info("ContactBookRepositryUow: Registering Context");
             foreach (Type itemType in types)
             {
                 entityDictionary.Add(itemType.Name, itemType);
+                _logger.Info(string.Format("Name: {0}, Type: {1}", itemType.Name, itemType.ToString()));
             }
         }
 
@@ -43,7 +55,9 @@ namespace ContactBook.Db.Repositories
                         if (!cachedInstance.ContainsKey(key))
                         {
                             var contactDbRepoType = typeof(ContactBookDbRepository<>).MakeGenericType(entityDictionary[key]);
+                            
                             cachedInstance.Add(key, Activator.CreateInstance(contactDbRepoType, container));
+                            _logger.Info("Creating instance of \""+key+"\"");
                         }
                     }
                 }
@@ -63,23 +77,30 @@ namespace ContactBook.Db.Repositories
             }
             catch (InvalidOperationException inex)
             {
+                _logger.Error(inex.Message, inex);
                 throw;
             }
             catch (DbEntityValidationException vdExec)
             {
+                StringBuilder errorbuilder = new StringBuilder();
                 foreach (var item in vdExec.EntityValidationErrors)
                 {
-                    Debug.WriteLine(item.Entry.Entity.ToString());
-                    Debug.WriteLine(item.IsValid.ToString());
+                    errorbuilder.Append(string.Format("Entity Name: {0}, IsValue: {1}", item.Entry.Entity.ToString(), item.IsValid.ToString()));
+                    errorbuilder.AppendLine();
+                    errorbuilder.Append("ValidationErrors: ");
                     foreach (var error in item.ValidationErrors)
                     {
-                        Debug.WriteLine(error.PropertyName);
-                        Debug.WriteLine(error.ErrorMessage);
+                        errorbuilder.Append(string.Format("PropertyName:{0}, ErrorMessage: {1}", error.PropertyName, error.ErrorMessage));
+                        errorbuilder.AppendLine();
                     }
                 }
+
+                _logger.Error(string.Format("MethodName:{0} Message:{1}", vdExec.TargetSite.Name, errorbuilder.ToString()), vdExec);
+                throw;
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message, ex);
                 throw;
             }
 
