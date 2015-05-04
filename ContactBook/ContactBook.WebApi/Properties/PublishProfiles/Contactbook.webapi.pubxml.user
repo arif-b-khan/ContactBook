@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\wwwroot\contactbook.webapi</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Development\inetpub\wwwroot\contactbook.webapi</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/ContactIdentity.mdf">
@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2015 15:32:38</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.dll">
-      <publishTime>05/02/2015 15:32:40</publishTime>
+      <publishTime>05/03/2015 18:30:34</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>05/02/2015 15:47:01</publishTime>
+      <publishTime>05/03/2015 19:16:30</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -234,8 +234,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>03/18/2015 10:13:22</publishTime>
     </File>
+    <File Include="NLog.config">
+      <publishTime>05/03/2015 18:27:22</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>05/01/2015 10:44:15</publishTime>
+      <publishTime>05/03/2015 11:44:16</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>04/05/2015 14:28:59</publishTime>
@@ -271,7 +274,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/05/2015 14:29:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/02/2015 15:56:14</publishTime>
+      <publishTime>05/03/2015 13:57:07</publishTime>
     </File>
   </ItemGroup>
 </Project>

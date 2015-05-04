@@ -205,6 +205,7 @@
     </Content>
     <Content Include="default.html" />
     <Content Include="Global.asax" />
+    <Content Include="NLog.config" />
     <None Include="Properties\PublishProfiles\Contactbook.webapi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -222,6 +223,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\CBExceptionFilterAttribute.cs" />
+    <Compile Include="Common\CBTraceWriter.cs" />
     <Compile Include="Common\ContactbookEmailService.cs" />
     <Compile Include="Context\CBIndentityDbContext.cs" />
     <Compile Include="Controllers\ApiAccountController.cs" />
@@ -233,6 +236,7 @@
     <Compile Include="Controllers\ApiIMTypeController.cs" />
     <Compile Include="Controllers\ApiNumberTypeController.cs" />
     <Compile Include="Controllers\ApiRelationshipTypeController.cs" />
+    <Compile Include="Controllers\ApiRoleController.cs" />
     <Compile Include="Controllers\ApiSpecialDateTypeController.cs" />
     <Compile Include="Controllers\Helpers\ApiHelper.cs" />
     <Compile Include="Filters\BookIdValidationFilterAttribute.cs" />

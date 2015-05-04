@@ -6,20 +6,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\wwwroot\contactbook.web</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Development\inetpub\wwwroot\contactbook.web</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include=".travis.yml">
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/app.js">
-      <publishTime>05/02/2015 22:47:00</publishTime>
+      <publishTime>05/03/2015 13:06:09</publishTime>
     </File>
     <File Include="app/controllers/AccountController/loginController.js">
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/controllers/AccountController/registerController.js">
-      <publishTime>04/29/2015 08:27:37</publishTime>
+      <publishTime>05/03/2015 15:36:00</publishTime>
     </File>
     <File Include="app/controllers/controllers.js">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -52,7 +52,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/services/accountSvc.js">
-      <publishTime>05/02/2015 15:51:01</publishTime>
+      <publishTime>05/03/2015 15:37:31</publishTime>
     </File>
     <File Include="app/services/authenticationSvc.js">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -73,7 +73,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/views/Account/Register.html">
-      <publishTime>04/29/2015 08:27:37</publishTime>
+      <publishTime>05/03/2015 15:28:24</publishTime>
     </File>
     <File Include="app/views/Home.html">
       <publishTime>04/29/2015 08:27:37</publishTime>

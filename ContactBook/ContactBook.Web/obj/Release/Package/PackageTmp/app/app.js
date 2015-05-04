@@ -1,7 +1,7 @@
 'use strict';
 
-var baseSvc = 'http://contactbookapi.azurewebsites.net';
-//var baseSvc = "http://contactbook.com/contactbook.webapi";
+//var baseSvc = 'http://contactbookapi.azurewebsites.net';
+var baseSvc = "http://contactbook.com/contactbook.webapi";
 
 // Declare app level module which depends on filters, and services
 var cbApp = angular.module('contactbook', [
@@ -23,7 +23,7 @@ config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider
         .setPrefix('contactbook')
         .setStorageType('localStorage')
         .setStorageCookie(7, '/')
-        .setStorageCookieDomain('contactbookweb.azurewebsites.net');
+        .setStorageCookieDomain(baseSvc);
 }]);
 
 cbApp.constant('cbSettings', {

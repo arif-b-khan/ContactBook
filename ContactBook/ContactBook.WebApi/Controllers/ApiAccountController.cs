@@ -22,6 +22,8 @@ using System.Web.Http.ModelBinding;
 using System.Transactions;
 using ContactBook.Domain.Common.Logging;
 using NLog;
+using System.Web.Http.Tracing;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -29,6 +31,7 @@ namespace ContactBook.WebApi.Controllers
     [RoutePrefix("api/Account")]
     public class ApiAccountController : ApiController
     {
+        private const string Category = "ApiAccountController";
         private const string LocalLoginProvider = "Local";
 
         public UserManager<IdentityUser> UserManager { get; private set; }
@@ -47,6 +50,43 @@ namespace ContactBook.WebApi.Controllers
             AccessTokenFormat = accessTokenFormat;
         }
 
+        //Get api/Account/UserExists
+        [AllowAnonymous]
+        [Route("UserExists")]
+        public async Task<IHttpActionResult> GetUserExists(string username)
+        {
+            IdentityUser user = await UserManager.FindByNameAsync(username);
+            if (user != null)
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Username {0} found in the database send not found", username);
+                return NotFound();
+            }
+            else
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Username {0} not found", username);
+                return Ok();
+
+            }
+        }
+
+        //Get api/Account/EmailExists
+        [AllowAnonymous]
+        [Route("EmailExists")]
+        public async Task<IHttpActionResult> GetEmailExists(string email)
+        {
+            IdentityUser user = await UserManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Email doesn't Exists:{0}", email);
+                return Ok();
+            }
+            else
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Email Exists:{0}", email);
+                return NotFound();
+            }
+        }
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -62,12 +102,12 @@ namespace ContactBook.WebApi.Controllers
             };
         }
 
-
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
-        {
+        {  
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            Configuration.Services.GetTraceWriter().Info(Request, Category, "Username:{0}, Loging out", User.Identity.Name);
             return Ok();
         }
 
@@ -79,6 +119,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (user == null)
             {
+                Configuration.Services.GetTraceWriter().Warn(Request, Category, "ManageInfo: User not found");
                 return null;
             }
 
@@ -117,6 +158,7 @@ namespace ContactBook.WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Configuration.Services.GetTraceWriter().Warn(Request, Category, "ChangePassword: ModelError {0}", string.Join("; ",ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage)));
                 return BadRequest(ModelState);
             }
 
@@ -322,7 +364,7 @@ namespace ContactBook.WebApi.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public IHttpActionResult Register(RegisterBindingModel model)
         {
             bool registerSuccess = false;
             if (!ModelState.IsValid)
@@ -342,41 +384,48 @@ namespace ContactBook.WebApi.Controllers
 
             using (TransactionScope tranScope = new TransactionScope())
             {
-                result = await UserManager.CreateAsync(user, model.Password);
+                result = UserManager.Create(user, model.Password);
                 errorResult = GetErrorResult(result);
 
-                if (errorResult != null)
+                if (errorResult == null)
                 {
-                    identityUser = await UserManager.FindAsync(user.UserName, model.Password);
+                    identityUser = UserManager.Find(user.UserName, model.Password);
 
-                    using (IContactBookRepositoryUow uow = new ContactBookRepositoryUow(new ContactBookEdmContainer()))
+                    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
                     {
                         IContactBookContext context = new ContactBookContext(uow);
                         context.CreateContactBook(model.UserName, identityUser.Id);
                         uow.Save();
                     }
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", identityUser.UserName, model.UserName + identityUser.Id);
                     registerSuccess = true;
                 }
+                else
+                {
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registration failed.");
+                    
+                }
+
                 tranScope.Complete();
             }
 
             if (registerSuccess)
             {
-                var code = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser.Id);
-                string link = this.Url.Link("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                var code = UserManager.GenerateEmailConfirmationToken(identityUser.Id);
+                string link = this.Url.Link("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
                 
-                CBLogger.Instance.Info("Account GenereatedLink: " + link);
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
                 
                 try
                 {
-                    await UserManager.SendEmailAsync(identityUser.Id, "Contactbook confirmation", link);
+                    UserManager.SendEmail(identityUser.Id, "Contactbook confirmation", link);
                 }
                 catch (Exception ex)
                 {
-                    CBLogger.Instance.Error(ex.TargetSite.Name, ex);
+                    Configuration.Services.GetTraceWriter().Error(Request, Category, ex);
                 }
 
-                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "ApiAccount", Action = "ConfirmEmail", userId = identityUser.Id, code = code }, model);
+                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code }, model);
             }
             else
             {
@@ -387,11 +436,18 @@ namespace ContactBook.WebApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("ConfirmEmail")]
-        public async Task<IHttpActionResult> GetConfirmEmail(string id, string code)
+        public async Task<IHttpActionResult> GetConfirmEmail(string userId, string code)
         {
-            IdentityResult idResult = await UserManager.ConfirmEmailAsync(id, code);
+            IdentityResult idResult = await UserManager.ConfirmEmailAsync(userId, code);
             IHttpActionResult result = GetErrorResult(idResult);
-            return result;
+            if (result == null)
+            {
+                return Ok();
+            }
+            else
+            {
+                return result;
+            }
         }
 
         // POST api/Account/RegisterExternal
@@ -461,7 +517,7 @@ namespace ContactBook.WebApi.Controllers
                     foreach (string error in result.Errors)
                     {
                         ModelState.AddModelError("", error);
-                        CBLogger.Instance.Error("MethodName: GetErrorResult Message: "+ error);
+                        Configuration.Services.GetTraceWriter().Error(Request, Category, "MethodName: GetErrorResult Message: {0}", error);
                     }
                 }
 

@@ -9,7 +9,11 @@ GO
  
 SET ANSI_PADDING ON
 GO
-
+IF OBJECT_ID(N'[dbo].[CB_Log]', 'U') IS NOT NULL
+BEGIN
+DROP TABLE CB_Log
+END
+GO
 CREATE TABLE [dbo].[CB_Log](
 	[LoggingId] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
 	[Date] [datetime] NULL,

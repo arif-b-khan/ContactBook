@@ -81,7 +81,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ContactBookConstants.cs" />
     <Compile Include="Common\Logging\CBLogger.cs" />
+    <Compile Include="Common\Logging\ICBLogger.cs" />
     <Compile Include="Contexts\Addresses\AddressContext.cs" />
     <Compile Include="Contexts\Addresses\IAddressContext.cs" />
     <Compile Include="Contexts\ContactBookContext.cs" />

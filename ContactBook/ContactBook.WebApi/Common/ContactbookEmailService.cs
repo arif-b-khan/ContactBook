@@ -28,9 +28,9 @@ namespace ContactBook.WebApi.Common
             string userName = await ContactBookCrypto.DecryptAsync(smtpSec.Network.UserName);
             string password = await ContactBookCrypto.DecryptAsync(smtpSec.Network.Password);
 
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(emailFrom);
-            msg.To.Add(new MailAddress(message.Destination));
+            MailMessage msg = new MailMessage(emailFrom, message.Destination);
+            //msg.From = new MailAddress(emailFrom);
+            //msg.To.Add(new MailAddress(message.Destination));
             msg.Subject = message.Subject;
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
