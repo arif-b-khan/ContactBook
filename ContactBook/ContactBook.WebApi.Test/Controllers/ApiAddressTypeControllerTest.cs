@@ -142,7 +142,7 @@ namespace ContactBook.WebApi.Test.Controllers
             ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
 
             //Act
-            addressController.InsertAddressTypes(addressType);
+            addressController.Post(addressType);
 
             //Assert
             Assert.NotEmpty(addressTypeResult);
@@ -192,7 +192,7 @@ namespace ContactBook.WebApi.Test.Controllers
             ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
 
             //Act
-            addressController.InsertAddressTypes(addressType);
+            addressController.Post(addressType);
 
             //Assert
             Assert.NotEmpty(addressTypeResult);
@@ -251,7 +251,7 @@ namespace ContactBook.WebApi.Test.Controllers
             addressController.Url = urlHelperMock.Object;
 
             //Act
-            HttpResponseMessage resMsg = ControllerFixture.GetResponseMessage(addressController.InsertAddressTypes(addressType), cts.Token);
+            HttpResponseMessage resMsg = ControllerFixture.GetResponseMessage(addressController.Post(addressType), cts.Token);
 
             //Assert
             Assert.True(saveCalled);

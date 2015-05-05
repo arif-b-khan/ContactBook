@@ -23,7 +23,6 @@ namespace ContactBook.WebApi
         {
             PublicClientId = "self";
             var passwordValidator = new PasswordValidator();
-            passwordValidator.RequireDigit = true;
             passwordValidator.RequiredLength = 7;
             var dataProvider = new DpapiDataProtectionProvider("ContactBook");
             var protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProvider.Create("EmailConfirmation"));
@@ -55,7 +54,7 @@ namespace ContactBook.WebApi
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            //app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
             // restrict policy to an end point if webapi cors is enabled...
             app.UseCors(new CorsOptions()
             {

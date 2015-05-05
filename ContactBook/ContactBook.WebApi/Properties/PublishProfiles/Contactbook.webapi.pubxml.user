@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2015 00:58:35</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>05/04/2015 02:29:08</publishTime>
+      <publishTime>05/04/2015 06:26:29</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/16/2015 07:07:09</publishTime>
@@ -238,7 +238,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/17/2015 01:09:25</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>05/04/2015 02:45:49</publishTime>
+      <publishTime>05/04/2015 05:47:46</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>04/30/2015 08:06:14</publishTime>
