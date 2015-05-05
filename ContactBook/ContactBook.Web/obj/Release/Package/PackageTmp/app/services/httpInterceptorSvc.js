@@ -6,7 +6,7 @@ cbServices.factory("httpInterceptorSvc", ['$q', '$location', '$injector', '$root
         
         if($rootScope.userInfo != null)
         {
-            config.headers.Authorization = "Bearer "+ $rootScope.Token;            
+            config.headers.Authorization = "Bearer " + $rootScope.userInfo.Token;
         }else{
             var _userInfo = localStorageService.get(storageSettings.USERINFO_KEY);
             if(_userInfo){

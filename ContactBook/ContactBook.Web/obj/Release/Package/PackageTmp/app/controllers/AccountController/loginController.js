@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    cbControllers.controller('loginController', ['$scope', '$location', '$rootScope', 'usSpinnerService', 'authenticationSvc', function($scope, $location, $rootScope, usSpinnerService, authenticationSvc) {
+    cbControllers.controller('loginController', ['$scope', '$location', '$rootScope', 'contactBookSpinner', 'authenticationSvc', function($scope, $location, $rootScope, contactBookSpinner, authenticationSvc) {
         $scope.signinDisable = false;
         $scope.registerHref = "#/register";
         $scope.loginError = {};
@@ -29,14 +29,14 @@
             }
         };
         var afterLoginCall = function() {
-            usSpinnerService.stop("login-spinner");
+            contactBookSpinner.stop();
             $scope.signinDisable = false;
             $scope.registerHref = "#/register";
         };
 
         var beforeLoginCall = function() {
             $scope.loginError.success = false;
-            usSpinnerService.spin("login-spinner");
+            contactBookSpinner.spin("login-spinner");
             $scope.signinDisable = true;
             $scope.registerHref = "";
 

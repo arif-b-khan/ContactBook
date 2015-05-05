@@ -199,13 +199,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ContactIdentity.mdf" />
-    <Content Include="App_Data\ContactIdentity_log.ldf">
-      <DependentUpon>ContactIdentity.mdf</DependentUpon>
-    </Content>
     <Content Include="test.html" />
     <Content Include="Global.asax" />
-    <Content Include="NLog.config" />
+    <Content Include="NLog.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Contactbook.webapi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -226,6 +224,7 @@
     <Compile Include="Common\CBExceptionFilterAttribute.cs" />
     <Compile Include="Common\CBTraceWriter.cs" />
     <Compile Include="Common\ContactbookEmailService.cs" />
+    <Compile Include="Common\ContactBookMachineKeyDataProvider.cs" />
     <Compile Include="Context\CBIndentityDbContext.cs" />
     <Compile Include="Controllers\ApiAccountController.cs" />
     <Compile Include="Controllers\ApiAddressTypeController.cs" />
@@ -259,7 +258,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ContactBook.Db\ContactBook.Db.csproj">
       <Project>{5cb257b9-2ec1-4e59-94d3-fa40f0016bbc}</Project>

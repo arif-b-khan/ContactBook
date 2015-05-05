@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\AccountController\changePasswordCntrl.js" />
     <Content Include="app\controllers\AccountController\loginController.js" />
     <Content Include="app\controllers\AccountController\registerController.js" />
     <Content Include="app\controllers\homeController.js" />
@@ -94,9 +95,11 @@
     <Content Include="app\filters\filters.js" />
     <Content Include="app\services\accountSvc.js" />
     <Content Include="app\services\authenticationSvc.js" />
+    <Content Include="app\services\contactBookSpinner.js" />
     <Content Include="app\services\httpInterceptorSvc.js" />
     <Content Include="app\services\pubsubSvc.js" />
     <Content Include="app\services\services.js" />
+    <Content Include="app\views\Account\ChangePassword.html" />
     <Content Include="app\views\Account\Login.html" />
     <Content Include="app\views\Account\accountView.js" />
     <Content Include="app\views\Account\Register.html" />

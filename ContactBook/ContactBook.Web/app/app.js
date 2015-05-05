@@ -1,7 +1,7 @@
 'use strict';
 
-//var baseSvc = 'http://contactbookapi.azurewebsites.net';
-var baseSvc = "http://contactbook.com/Webapi";
+var baseSvc = 'http://contactbookapi.azurewebsites.net';
+//var baseSvc = "http://contactbook.com/Webapi";
 
 
 // Declare app level module which depends on filters, and services

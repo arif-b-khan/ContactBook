@@ -45,7 +45,7 @@
                         <a class="navbar-brand" href="#">Contact Book</a>
                     </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" ng-show="isAuthenticated">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown">Contact<strong class="caret"></strong></a>
@@ -65,11 +65,11 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown">{{userInfo.Username}}<strong class="caret"></strong></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#">Manage Account</a>
+                                        <a href="#/changePassword">Change Password</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="#/login" ng-click="mainLogout()">Log Out</a>
+                                        <a href="#/login" ng-click="homeLogout()">Log Out</a>
                                     </li>
                                 </ul>
                             </li>
@@ -114,11 +114,13 @@
     <script src="controllers/homeController.js"></script>
     <script src="controllers/AccountController/loginController.js"></script>
     <script src="controllers/AccountController/registerController.js"></script>
+    <script src="controllers/AccountController/changePasswordCntrl.js"></script>
     <script src="services/services.js"></script>
     <script src="services/pubsubSvc.js"></script>
     <script src="services/accountSvc.js"></script>
     <script src="services/authenticationSvc.js"></script>
     <script src="services/httpInterceptorSvc.js"></script>
+    <script src="services/contactBookSpinner.js"></script>
     <script src="views/Account/accountView.js"></script>
     <script src="views/mainView.js"></script>
 </body>

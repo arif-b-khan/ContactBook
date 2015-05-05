@@ -16,6 +16,13 @@
             access:{
                 hideWhenLoggedin: true
             }
+        }).when('/changePassword', {
+           templateUrl: 'views/Account/ChangePassword.html',
+           controller: 'changePasswordCntrl',
+           access:{
+               hideWhenLoggedin: false,
+               isRequired: true
+           }
         });
     };
 

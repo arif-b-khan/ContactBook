@@ -20,7 +20,8 @@
            templateUrl: 'views/Account/ChangePassword.html',
            controller: 'changePasswordCntrl',
            access:{
-               hideWhenLoggedin: false
+               hideWhenLoggedin: false,
+               isRequired: true
            }
         });
     };

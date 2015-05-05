@@ -24,7 +24,7 @@ namespace ContactBook.WebApi
             PublicClientId = "self";
             var passwordValidator = new PasswordValidator();
             passwordValidator.RequiredLength = 7;
-            var dataProvider = new DpapiDataProtectionProvider("ContactBook");
+            var dataProvider = new ContactBookMachineKeyDataProvider();
             var protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProvider.Create("EmailConfirmation"));
 
             UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()))
