@@ -1,4 +1,4 @@
-<form name="registerFrm" class="form-container form-css" us-spinner spinner-key="register-spinner" style="position: relative;" novalidate>
+<form name="registerFrm" class="form-container form-css" us-spinner spinner-key="register-spinner" style="position: relative;"  novalidate>
     <div class="alert alert-danger" role="alert" ng-show="registrationFailed">
         <div><span class="sr-only">Error:</span>{{errorMessage}}</div>
     </div>
@@ -32,7 +32,7 @@
             <div ng-show="registerFrm.passwordField.$error.maxlength"><span class="sr-only">Error:</span>Maximum 15 characters</div>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': registerFrm.$submitted && registerFrm.confirmPasswordField.$touched }">
+    <div class="form-group" ng-class="{'has-error': registerFrm.confirmPasswordField.$dirty && registerFrm.confirmPasswordField.$invalid }">
         <label for="confirmPasswordField">Confirm Password</label>
         <input type="password" name="confirmPasswordField" class="form-control" ng-model="user.ConfirmPassword" required="" ui-validate=" '$value==user.Password' " ui-validate-watch=" 'user.Password' " ng-minlength="7" ng-maxlength="15" />
         <div class="alert alert-danger" role="alert" ng-show="registerFrm.confirmPasswordField.$touched && registerFrm.confirmPasswordField.$invalid">

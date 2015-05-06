@@ -1,41 +1,39 @@
-(function() {
+(function () {
     "use strict";
-    var registerController = function($scope, $location, $timeout, usSpinnerService, accountSvc) {
-       var spinnerName = "register-spinner";
+    var registerController = function ($scope, $location, $timeout, contactBookSpinner, accountSvc) {
+        var spinnerName = "register-spinner";
         $scope.user = {};
         $scope.registrationFailed = false;
-       
-        $scope.usernameExists = function(username) {
+
+        $scope.usernameExists = function (username) {
             return accountSvc.UserExists(username);
         };
 
-        $scope.userEmailExists = function(email) {
+        $scope.userEmailExists = function (email) {
             return accountSvc.EmailExists(email);
         };
 
-        $scope.register = function(registerInfo, frm) {
+        $scope.register = function (registerInfo, frm) {
             if (!frm.$invalid) {
-                usSpinnerService.spin(spinnerName);
+                contactBookSpinner.spin(spinnerName);
+
+                registerInfo.ConfirmUrl = $location.$$protocol + '://' + $location.$$host + '/app#/confirmEmail';
+
                 var result = accountSvc.Register(registerInfo);
-                var spinStopped = false;
-                result.then(function(data) {
-                        $location.path("/login").replace();
-                        usSpinnerService.stop(spinnerName);
-                    },
-                    function(error) {
+                
+                result.then(function (data) {
+                    $location.path("/login").replace();
+                    contactBookSpinner.stop(spinnerName);
+                },
+                    function (error) {
                         $scope.registrationFailed = true;
                         $scope.errorMessage = error;
-                        usSpinnerService.stop(spinnerName);
+                        contactBookSpinner.stop(spinnerName);
                     });
-                    $timeout(function(){
-                        if(!spinStopped){
-                            usSpinnerService.stop(spinnerName);
-                        }
-                    }, 60000);
             }
         };
 
-        $scope.reset = function(frm) {
+        $scope.reset = function (frm) {
             $scope.user.pwd = "";
             $scope.user.cpwd = "";
             $scope.user.username = "";
@@ -45,7 +43,7 @@
 
     };
 
-    registerController.$inject = ['$scope', '$location', '$timeout', 'usSpinnerService', 'accountSvc'];
+    registerController.$inject = ['$scope', '$location', '$timeout', 'contactBookSpinner', 'accountSvc'];
 
     cbControllers.controller("registerController", registerController);
 

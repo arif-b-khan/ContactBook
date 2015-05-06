@@ -417,10 +417,15 @@ namespace ContactBook.WebApi.Controllers
                 try
                 {
                     code = UserManager.GenerateEmailConfirmationToken(identityUser.Id);
-                    string link = this.Url.Link("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code });
+                    _logger.Info("Generate confiruation token: " + code);
+
+                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", identityUser.Id, code);
                     Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
+                    
                     UserManager.SendEmail(identityUser.Id, "Contactbook confirmation", link);
-        
+                    IdentityResult emailResult = UserManager.ConfirmEmail(identityUser.Id, code);
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "Email sent to user on this email address: " + model.Email);
+
                 }
                 catch (Exception ex)
                 {

@@ -17,7 +17,12 @@
             Register: url + '/api/Account/Register',
             UserExists: url + '/api/Account/UserExists?username=',
             EmailExists: url + '/api/Account/EmailExists?email=',
-            ChangePassword: url + '/api/Account/ChangePassword'
+            ChangePassword: url + '/api/Account/ChangePassword',
+            ConfirmEmail: url+'/api/Account/ConfirmEmail'
+        };
+
+        var confirmEmail = function (userId, code) {
+            return $http.get(accountUrl.ConfirmEmail + '?userId=' + userId + "&code=" + code);
         };
 
         var changePassword = function(passwordModel) {
@@ -88,7 +93,8 @@
             Login: login,
             UserExists: userExists,
             EmailExists: emailExists,
-            ChangePassword: changePassword
+            ChangePassword: changePassword,
+            ConfirmEmail: confirmEmail
         };
     }]);
 

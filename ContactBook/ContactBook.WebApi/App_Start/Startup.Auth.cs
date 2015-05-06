@@ -19,23 +19,32 @@ namespace ContactBook.WebApi
 {
     public partial class Startup
     {
-        static Startup()
+        
+        private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             PublicClientId = "self";
             var passwordValidator = new PasswordValidator();
             passwordValidator.RequiredLength = 7;
-            var dataProvider = new ContactBookMachineKeyDataProvider();
-            var protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProvider.Create("EmailConfirmation"));
+            
+            var dataProtectionProvider = app.GetDataProtectionProvider();
 
+            DataProtectorTokenProvider<IdentityUser> protectionProvider = null;
+            if (dataProtectionProvider != null)
+            {
+               protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProtectionProvider.Create("EmailConfirmation"))
+                {
+                    //Code for email confirmation and reset password life time
+                    TokenLifespan = TimeSpan.FromHours(6)
+                };
+            }
+            
             UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()))
             {
                 PasswordValidator = passwordValidator,
                 EmailService = new ContactbookEmailService(),
-                UserTokenProvider = protectionProvider 
+                UserTokenProvider = protectionProvider
             };
-
-            RoleManagerFactory = () => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new CBIndentityDbContext()));
-
+            
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
@@ -44,8 +53,8 @@ namespace ContactBook.WebApi
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
+            app.UseOAuthBearerTokens(OAuthOptions);
         }
-
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static Func<UserManager<IdentityUser>> UserManagerFactory { get; set; }
@@ -54,6 +63,7 @@ namespace ContactBook.WebApi
 
         public void ConfigureAuth(IAppBuilder app)
         {
+            //app.CreatePerOwinContext<UserManager>(
             app.UseCors(CorsOptions.AllowAll);
             // restrict policy to an end point if webapi cors is enabled...
             app.UseCors(new CorsOptions()
@@ -80,7 +90,7 @@ namespace ContactBook.WebApi
             //});
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-            app.UseOAuthBearerTokens(OAuthOptions);
+            ConfigureOAuthTokenGeneration(app);
         }
     }
 }

@@ -13,16 +13,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 05:03:21</publishTime>
     </File>
     <File Include="app/app.js">
-      <publishTime>05/05/2015 08:41:29</publishTime>
+      <publishTime>05/06/2015 07:50:03</publishTime>
     </File>
     <File Include="app/controllers/AccountController/changePasswordCntrl.js">
-      <publishTime>05/05/2015 08:39:41</publishTime>
+      <publishTime>05/05/2015 08:48:47</publishTime>
+    </File>
+    <File Include="app/controllers/AccountController/confirmEmailCntrl.js">
+      <publishTime>05/06/2015 06:02:33</publishTime>
     </File>
     <File Include="app/controllers/AccountController/loginController.js">
       <publishTime>05/05/2015 05:23:10</publishTime>
     </File>
     <File Include="app/controllers/AccountController/registerController.js">
-      <publishTime>05/05/2015 05:23:10</publishTime>
+      <publishTime>05/06/2015 05:49:56</publishTime>
     </File>
     <File Include="app/controllers/controllers.js">
       <publishTime>04/14/2015 01:02:52</publishTime>
@@ -52,10 +55,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 05:03:21</publishTime>
     </File>
     <File Include="app/index.html">
-      <publishTime>05/05/2015 06:02:40</publishTime>
+      <publishTime>05/06/2015 05:06:54</publishTime>
     </File>
     <File Include="app/services/accountSvc.js">
-      <publishTime>05/05/2015 05:23:10</publishTime>
+      <publishTime>05/06/2015 06:03:02</publishTime>
     </File>
     <File Include="app/services/authenticationSvc.js">
       <publishTime>04/28/2015 08:19:24</publishTime>
@@ -73,16 +76,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 01:02:52</publishTime>
     </File>
     <File Include="app/views/Account/accountView.js">
-      <publishTime>05/05/2015 05:56:23</publishTime>
+      <publishTime>05/06/2015 05:57:00</publishTime>
     </File>
     <File Include="app/views/Account/ChangePassword.html">
       <publishTime>05/05/2015 08:31:23</publishTime>
     </File>
+    <File Include="app/views/Account/ConfirmEmail.html">
+      <publishTime>05/06/2015 06:02:02</publishTime>
+    </File>
     <File Include="app/views/Account/Login.html">
-      <publishTime>04/28/2015 08:19:24</publishTime>
+      <publishTime>05/06/2015 04:09:28</publishTime>
     </File>
     <File Include="app/views/Account/Register.html">
-      <publishTime>05/05/2015 05:52:00</publishTime>
+      <publishTime>05/06/2015 04:37:46</publishTime>
     </File>
     <File Include="app/views/Home.html">
       <publishTime>04/28/2015 08:19:24</publishTime>
@@ -91,7 +97,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 08:19:24</publishTime>
     </File>
     <File Include="bin/ContactBook.Web.dll">
-      <publishTime>05/05/2015 05:25:19</publishTime>
+      <publishTime>05/06/2015 07:50:17</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>03/16/2015 01:30:38</publishTime>

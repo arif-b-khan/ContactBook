@@ -6,28 +6,31 @@
         $routeProvider.when('/login', {
             templateUrl: "views/Account/Login.html",
             controller: 'loginController',
-            access:{
+            access: {
                 hideWhenLoggedin: true
             }
         })
         .when('/register', {
             templateUrl: "views/Account/Register.html",
             controller: 'registerController',
-            access:{
+            access: {
                 hideWhenLoggedin: true
             }
         }).when('/changePassword', {
-           templateUrl: 'views/Account/ChangePassword.html',
-           controller: 'changePasswordCntrl',
-           access:{
-               hideWhenLoggedin: false,
-               isRequired: true
-           }
+            templateUrl: 'views/Account/ChangePassword.html',
+            controller: 'changePasswordCntrl',
+            access: {
+                hideWhenLoggedin: false,
+                isRequired: true
+            }
+        }).when('/confirmEmail', {
+            templateUrl: 'views/Account/ConfirmEmail.html',
+            controller: 'confirmEmailCntrl'
         });
     };
 
     loginConfiguration.$inject = ['$routeProvider'];
 
-    angular.module("account.view.account", ['ngRoute', 'ui.validate', 'angularSpinner'])
+    angular.module("account.view.account", ['ngRoute', 'ui.validate', 'ui.keypress', 'angularSpinner'])
     .config(loginConfiguration);
 })();

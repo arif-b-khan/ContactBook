@@ -221,6 +221,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\ApplicationUserManager.cs" />
     <Compile Include="Common\CBExceptionFilterAttribute.cs" />
     <Compile Include="Common\CBTraceWriter.cs" />
     <Compile Include="Common\ContactbookEmailService.cs" />

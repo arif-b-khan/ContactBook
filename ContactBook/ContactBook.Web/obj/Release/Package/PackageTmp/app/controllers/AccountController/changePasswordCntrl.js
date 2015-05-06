@@ -43,6 +43,7 @@
             changePasswordInternal.resetFields();
             frm.$setPristine();
             frm.$setUntouched();
+            $scope.errorMessages = new Array();
         };
 
         var changePasswordInternal = {
