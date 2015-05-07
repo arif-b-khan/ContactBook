@@ -334,3 +334,5 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\NLog.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\NLog.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGrid.SmtpApi.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGridMail.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGrid.SmtpApi.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGridMail.dll

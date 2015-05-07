@@ -6,6 +6,7 @@ using ContactBook.Domain.Models;
 using ContactBook.WebApi.Providers;
 using ContactBook.WebApi.Results;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -24,6 +25,8 @@ using ContactBook.Domain.Common.Logging;
 using NLog;
 using System.Web.Http.Tracing;
 using ContactBook.Domain.IoC;
+using ContactBook.WebApi.Common;
+using ContactBook.WebApi.Model;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -47,7 +50,7 @@ namespace ContactBook.WebApi.Controllers
         public ApiAccountController(UserManager<IdentityUser> userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            UserManager = userManager;
+            UserManager = HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
             AccessTokenFormat = accessTokenFormat;
             _logger = DependencyFactory.Resolve<ICBLogger>();
         }
@@ -381,7 +384,7 @@ namespace ContactBook.WebApi.Controllers
             };
             
             IdentityResult result;
-            IdentityUser identityUser = null;
+
             IHttpActionResult errorResult = null;
 
             using (TransactionScope tranScope = new TransactionScope())
@@ -391,15 +394,14 @@ namespace ContactBook.WebApi.Controllers
 
                 if (errorResult == null)
                 {
-                    identityUser = UserManager.Find(user.UserName, model.Password);
-
+                    
                     using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
                     {
                         IContactBookContext context = new ContactBookContext(uow);
-                        context.CreateContactBook(model.UserName, identityUser.Id);
+                        context.CreateContactBook(model.UserName, user.Id);
                         uow.Save();
                     }
-                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", identityUser.UserName, model.UserName + identityUser.Id);
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", user.UserName, model.UserName + user.Id);
                     registerSuccess = true;
                 }
                 else
@@ -416,14 +418,17 @@ namespace ContactBook.WebApi.Controllers
                 string code = string.Empty;
                 try
                 {
-                    code = UserManager.GenerateEmailConfirmationToken(identityUser.Id);
+
+                    UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
+                    string userIdentityId = user.Id;
+                    code = HttpUtility.UrlEncode(UserManager.GenerateEmailConfirmationToken(userIdentityId));
                     _logger.Info("Generate confiruation token: " + code);
 
-                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", identityUser.Id, code);
+                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", HttpUtility.UrlEncode(userIdentityId), code);
                     Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
-                    
-                    UserManager.SendEmail(identityUser.Id, "Contactbook confirmation", link);
-                    IdentityResult emailResult = UserManager.ConfirmEmail(identityUser.Id, code);
+
+                    UserManager.SendEmail(userIdentityId, "Contactbook confirmation", link);
+                    //IdentityResult emailResult = UserManager.ConfirmEmail(user.Id, code);
                     Configuration.Services.GetTraceWriter().Info(Request, Category, "Email sent to user on this email address: " + model.Email);
 
                 }
@@ -432,7 +437,7 @@ namespace ContactBook.WebApi.Controllers
                     Configuration.Services.GetTraceWriter().Error(Request, Category, ex);
                     _logger.Error("Unable to send email Message", ex);
                 }
-                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = identityUser.Id, code = code }, model);
+                return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = user.Id, code = code }, model);
             }
             else
             {
@@ -445,6 +450,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("ConfirmEmail")]
         public async Task<IHttpActionResult> GetConfirmEmail(string userId, string code)
         {
+            UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
             IdentityResult idResult = await UserManager.ConfirmEmailAsync(userId, code);
             IHttpActionResult result = GetErrorResult(idResult);
             if (result == null)
@@ -611,4 +617,5 @@ namespace ContactBook.WebApi.Controllers
             }
         }
     }
+
 }

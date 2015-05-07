@@ -14,52 +14,37 @@ using System.Web.Cors;
 using ContactBook.WebApi.Common;
 using ContactBook.Domain.IoC;
 using Microsoft.Owin.Security.DataProtection;
+using System.Web;
 
 namespace ContactBook.WebApi
 {
     public partial class Startup
     {
-        
+        public static Func<UserManager<IdentityUser>> UserManagerFactory;
+        public static string PublicClientId = "Public";
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
-            PublicClientId = "self";
-            var passwordValidator = new PasswordValidator();
-            passwordValidator.RequiredLength = 7;
+            app.CreatePerOwinContext(CBIndentityDbContext.Create);
+            app.CreatePerOwinContext<UserManager<IdentityUser>>((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) => ApplicationUserManager.Create(opt, con));
 
-            var dataProtectionProvider = new ContactBookMachineKeyDataProvider();
-
-            DataProtectorTokenProvider<IdentityUser> protectionProvider = null;
-            if (dataProtectionProvider != null)
+            UserManagerFactory = () =>
             {
-               protectionProvider = new DataProtectorTokenProvider<IdentityUser>(dataProtectionProvider.Create("EmailConfirmation"))
-                {
-                    //Code for email confirmation and reset password life time
-                    TokenLifespan = TimeSpan.FromHours(6)
-                };
-            }
-            
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new CBIndentityDbContext()))
-            {
-                PasswordValidator = passwordValidator,
-                EmailService = new ContactbookEmailService(),
-                UserTokenProvider = protectionProvider
+               UserManager<IdentityUser> userManager =  HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
+               return userManager;
             };
-            
+
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory),
+                Provider = new ApplicationOAuthProvider(),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
             app.UseOAuthBearerTokens(OAuthOptions);
         }
-        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
-        public static Func<UserManager<IdentityUser>> UserManagerFactory { get; set; }
-        public static Func<RoleManager<IdentityRole>> RoleManagerFactory { get; set; }
-        public static string PublicClientId { get; private set; }
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public void ConfigureAuth(IAppBuilder app)
         {

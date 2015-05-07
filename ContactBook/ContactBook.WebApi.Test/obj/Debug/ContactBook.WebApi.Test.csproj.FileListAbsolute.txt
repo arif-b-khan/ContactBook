@@ -158,3 +158,5 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\NLog.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\NLog.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\NLog.xml
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Development\github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -14,25 +15,24 @@ namespace ContactBook.WebApi.Controllers
     public class ApiRoleController : ApiController
     {
         public UserManager<IdentityUser> UserManager { get; private set; }
-        public RoleManager<IdentityRole> RoleManager { get; private set; }
-        public ApiRoleController(): this(Startup.UserManagerFactory(), Startup.RoleManagerFactory())
+        public ApiRoleController(): this(Startup.UserManagerFactory())
         {
-
+            
         }
 
-        public ApiRoleController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public ApiRoleController(UserManager<IdentityUser> userManager)
         {
             UserManager = userManager;
-            RoleManager = roleManager;
+
         }
 
-        [HttpGet]
-        [Route("Roles")]
-        public List<IdentityRole> Get()
-        {
-            List<IdentityRole> roles = RoleManager.Roles.Select(e => e).ToList();
-            return roles;
-        }
+        //[HttpGet]
+        //[Route("Roles")]
+        //public List<IdentityRole> Get()
+        //{
+        //    //List<IdentityRole> roles = RoleManager.Roles.Select(e => e).ToList();
+        //    return roles;
+        //}
 
     }
 }

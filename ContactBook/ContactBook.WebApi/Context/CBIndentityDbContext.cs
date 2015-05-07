@@ -8,5 +8,10 @@ namespace ContactBook.WebApi.Context
             : base("name=DefaultConnection")
         {
         }
+
+        public static CBIndentityDbContext Create()
+        {
+            return new CBIndentityDbContext();
+        }
     }
 }
