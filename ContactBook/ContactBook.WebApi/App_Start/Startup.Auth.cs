@@ -25,8 +25,8 @@ namespace ContactBook.WebApi
             PublicClientId = "self";
             var passwordValidator = new PasswordValidator();
             passwordValidator.RequiredLength = 7;
-            
-            var dataProtectionProvider = app.GetDataProtectionProvider();
+
+            var dataProtectionProvider = new ContactBookMachineKeyDataProvider();
 
             DataProtectorTokenProvider<IdentityUser> protectionProvider = null;
             if (dataProtectionProvider != null)
