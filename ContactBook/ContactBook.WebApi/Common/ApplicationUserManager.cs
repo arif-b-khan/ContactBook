@@ -14,6 +14,7 @@ namespace ContactBook.WebApi.Common
     public class ApplicationUserManager : UserManager<IdentityUser>
     {
         public static IDataProtectionProvider DataProvider;
+
         public ApplicationUserManager(IUserStore<IdentityUser> store)
             : base(store)
         {
@@ -46,14 +47,14 @@ namespace ContactBook.WebApi.Common
             DataProvider = new DpapiDataProtectionProvider();
 #endif
 
-            //if (DataProvider != null)
-            //{
-            //    appUserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(DataProvider.Create("ASP.NET Identity"))
-            //    {
-            //        //Code for email confirmation and reset password life time
-            //        TokenLifespan = TimeSpan.FromHours(6)
-            //    };
-            //}
+            if (DataProvider != null)
+            {
+                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(DataProvider.Create("UserToken"))
+                {
+                    //Code for email confirmation and reset password life time
+                    TokenLifespan = TimeSpan.FromHours(6)
+                };
+            }
 
             return appUserManager;
         }

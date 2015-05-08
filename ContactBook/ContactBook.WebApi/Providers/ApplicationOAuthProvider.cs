@@ -15,16 +15,17 @@ namespace ContactBook.WebApi.Providers
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        private readonly Func<UserManager<IdentityUser>> userManagerInstance;
 
-        public ApplicationOAuthProvider()
+        public ApplicationOAuthProvider(Func<UserManager<IdentityUser>> puserManagerInstance)
         {
+            userManagerInstance = puserManagerInstance;
             _publicClientId = "Self";
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            UserManager<IdentityUser> userManager = context.OwinContext.GetUserManager<UserManager<IdentityUser>>();
-            using (userManager)
+            using (UserManager<IdentityUser> userManager = userManagerInstance())
             {
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
 

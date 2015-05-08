@@ -21,22 +21,27 @@ namespace ContactBook.WebApi
     public partial class Startup
     {
         public static Func<UserManager<IdentityUser>> UserManagerFactory;
+        
         public static string PublicClientId = "Public";
+
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             app.CreatePerOwinContext(CBIndentityDbContext.Create);
-            app.CreatePerOwinContext<UserManager<IdentityUser>>((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) => ApplicationUserManager.Create(opt, con));
+            app.CreatePerOwinContext<UserManager<IdentityUser>>((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) =>
+                {
+                    UserManager<IdentityUser> retUserManager = ApplicationUserManager.Create(opt, con);
+                    UserManagerFactory = () =>
+                    {
+                        return retUserManager;
+                    };
+                    return retUserManager;
+                });
 
-            UserManagerFactory = () =>
-            {
-               UserManager<IdentityUser> userManager =  HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
-               return userManager;
-            };
-
+           
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(),
+                Provider = new ApplicationOAuthProvider(UserManagerFactory),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true

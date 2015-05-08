@@ -50,7 +50,7 @@ namespace ContactBook.WebApi.Controllers
         public ApiAccountController(UserManager<IdentityUser> userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            UserManager = HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
+            UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
             _logger = DependencyFactory.Resolve<ICBLogger>();
         }
@@ -110,7 +110,7 @@ namespace ContactBook.WebApi.Controllers
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
-        {  
+        {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             Configuration.Services.GetTraceWriter().Info(Request, Category, "Username:{0}, Loging out", User.Identity.Name);
             return Ok();
@@ -163,7 +163,7 @@ namespace ContactBook.WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Configuration.Services.GetTraceWriter().Warn(Request, Category, "ChangePassword: ModelError {0}", string.Join("; ",ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage)));
+                Configuration.Services.GetTraceWriter().Warn(Request, Category, "ChangePassword: ModelError {0}", string.Join("; ", ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage)));
                 return BadRequest(ModelState);
             }
 
@@ -371,7 +371,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("Register")]
         public IHttpActionResult Register(RegisterBindingModel model)
         {
-            bool registerSuccess = false;
+            bool registerSuccess = true;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -382,36 +382,36 @@ namespace ContactBook.WebApi.Controllers
                 UserName = model.UserName,
                 Email = model.Email
             };
-            
+
             IdentityResult result;
 
             IHttpActionResult errorResult = null;
 
-            using (TransactionScope tranScope = new TransactionScope())
-            {
-                result = UserManager.Create(user, model.Password);
-                errorResult = GetErrorResult(result);
+            //using (TransactionScope tranScope = new TransactionScope())
+            //{
+            result = UserManager.Create(user, model.Password);
+            errorResult = GetErrorResult(result);
 
-                if (errorResult == null)
-                {
-                    
-                    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
-                    {
-                        IContactBookContext context = new ContactBookContext(uow);
-                        context.CreateContactBook(model.UserName, user.Id);
-                        uow.Save();
-                    }
-                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", user.UserName, model.UserName + user.Id);
-                    registerSuccess = true;
-                }
-                else
-                {
-                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registration failed.");
-                    
-                }
+            //if (errorResult == null)
+            //{
 
-                tranScope.Complete();
-            }
+            //    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
+            //    {
+            //        IContactBookContext context = new ContactBookContext(uow);
+            //        context.CreateContactBook(model.UserName, user.Id);
+            //        uow.Save();
+            //    }
+            //    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", user.UserName, model.UserName + user.Id);
+            //    registerSuccess = true;
+            //}
+            //else
+            //{
+            //    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registration failed.");
+
+            //}
+
+            //    tranScope.Complete();
+            //}
 
             if (registerSuccess)
             {
@@ -419,12 +419,12 @@ namespace ContactBook.WebApi.Controllers
                 try
                 {
 
-                    UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
+                    //UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
                     string userIdentityId = user.Id;
-                    code = HttpUtility.UrlEncode(UserManager.GenerateEmailConfirmationToken(userIdentityId));
+                    code = UserManager.GenerateEmailConfirmationToken(userIdentityId);
                     _logger.Info("Generate confiruation token: " + code);
 
-                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", HttpUtility.UrlEncode(userIdentityId), code);
+                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", HttpUtility.UrlEncode(userIdentityId), HttpUtility.UrlEncode(code));
                     Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
 
                     UserManager.SendEmail(userIdentityId, "Contactbook confirmation", link);
@@ -448,10 +448,9 @@ namespace ContactBook.WebApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("ConfirmEmail")]
-        public async Task<IHttpActionResult> GetConfirmEmail(string userId, string code)
+        public IHttpActionResult GetConfirmEmail(string userId, string code)
         {
-            UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
-            IdentityResult idResult = await UserManager.ConfirmEmailAsync(userId, code);
+            IdentityResult idResult = UserManager.ConfirmEmail(userId, code);
             IHttpActionResult result = GetErrorResult(idResult);
             if (result == null)
             {
