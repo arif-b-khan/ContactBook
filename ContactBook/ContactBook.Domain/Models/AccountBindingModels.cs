@@ -87,5 +87,18 @@ namespace ContactBook.Domain.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string Identifier { get; set; }
+    }
+
+    public class ForgotPasswordBindingModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Link { get; set; }
     }
 }

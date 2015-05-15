@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ContactBook.WebApi.Controllers
     public class ApiRoleController : ApiController
     {
         public UserManager<IdentityUser> UserManager { get; private set; }
-        public ApiRoleController(): this(Startup.UserManagerFactory())
+        public ApiRoleController(): this(HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>())
         {
             
         }

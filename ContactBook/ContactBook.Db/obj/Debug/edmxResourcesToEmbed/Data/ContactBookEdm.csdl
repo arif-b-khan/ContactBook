@@ -116,6 +116,7 @@
       <End Role="CB_IMType" EntitySet="CB_IMType" />
     </AssociationSet>
     <EntitySet Name="CB_Secret" EntityType="ContactBookEdm.CB_Secret" />
+    <EntitySet Name="CB_Tokens" EntityType="ContactBookEdm.CB_Tokens" />
   </EntityContainer>
   <EntityType Name="CB_Contact">
     <Key>
@@ -641,5 +642,15 @@
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="SecretKey" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="SecretValue" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CB_Tokens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserId" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Token" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TokenType" Nullable="true" />
+    <Property Type="Guid" Name="Identifier" Nullable="false" />
   </EntityType>
 </Schema>

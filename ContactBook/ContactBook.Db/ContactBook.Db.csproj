@@ -130,6 +130,9 @@
     <Compile Include="Data\CB_SpecialDateType.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\CB_Tokens.cs">
+      <DependentUpon>ContactBookEdm.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\CB_Website.cs">
       <DependentUpon>ContactBookEdm.tt</DependentUpon>
     </Compile>

@@ -97,6 +97,8 @@
     <Compile Include="Contexts\IContactBookContext.cs" />
     <Compile Include="Contexts\IContactBookSecretContext.cs" />
     <Compile Include="Contexts\IUnitOfWork.cs" />
+    <Compile Include="Contexts\Token\ContactBookToken.cs" />
+    <Compile Include="Contexts\Token\IContactBookToken.cs" />
     <Compile Include="IoC\DependencyFactory.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

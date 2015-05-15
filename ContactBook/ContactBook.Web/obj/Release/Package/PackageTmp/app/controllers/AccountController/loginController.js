@@ -4,6 +4,7 @@
     cbControllers.controller('loginController', ['$scope', '$location', '$rootScope', 'contactBookSpinner', 'authenticationSvc', function($scope, $location, $rootScope, contactBookSpinner, authenticationSvc) {
         $scope.signinDisable = false;
         $scope.registerHref = "#/register";
+        $scope.forgotPasswordHref = "#/retrievePassword";
         $scope.loginError = {};
         $scope.loginError.success = false;
 
@@ -20,9 +21,14 @@
                         }
                         afterLoginCall();
                     },
-                    function(error) {
+                    function (error) {
                         $scope.loginError.success = true;
-                        $scope.loginError.message = "Invalid credentials";
+
+                        if (angular.isDefined(error.error_description)) {
+                            $scope.loginError.message = error.error_description;
+                        } else {
+                            $scope.loginError.message = "Invalid Credentials";
+                        }
                         afterLoginCall();
                     }
                 );
@@ -39,7 +45,7 @@
             contactBookSpinner.spin("login-spinner");
             $scope.signinDisable = true;
             $scope.registerHref = "";
-
+            $scope.forgotPasswordHref = "";
         };
     }])
 })();

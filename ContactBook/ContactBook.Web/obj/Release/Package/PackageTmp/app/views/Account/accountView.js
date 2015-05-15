@@ -25,7 +25,28 @@
             }
         }).when('/confirmEmail', {
             templateUrl: 'views/Account/ConfirmEmail.html',
-            controller: 'confirmEmailCntrl'
+            controller: 'confirmEmailCntrl',
+            access: {
+                hideWhenLoggedin: true
+            }
+        }).when('/registerSuccess', {
+            templateUrl: 'views/Account/RegisterSuccess.html',
+            controller: 'registerSuccessCntrl',
+            access: {
+                hideWhenLoggedin: true
+            }
+        }).when('/retrievePassword', {
+            templateUrl: 'views/Account/RetrievePassword.html',
+            controller: 'retrievePasswordCntrl',
+            access: {
+                hideWhenLoggedin: true
+            }
+        }).when('/resetPassword', {
+            templateUrl: 'views/Account/ResetPassword.html',
+            controller: 'resetPasswordCntrl',
+            access: {
+                hideWhenLoggedin: true
+            }
         });
     };
 

@@ -48,6 +48,7 @@
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_Group" />
         <AssociationConnector Association="ContactBookEdm.CB_ContactBookCB_IMType" />
         <EntityTypeShape EntityType="ContactBookEdm.CB_Secret" Width="1.5" PointX="5.375" PointY="1.75" />
+        <EntityTypeShape EntityType="ContactBookEdm.CB_Tokens" Width="1.5" PointX="2.75" PointY="1.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

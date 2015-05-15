@@ -20,7 +20,6 @@ namespace ContactBook.WebApi
 {
     public partial class Startup
     {
-        public static Func<UserManager<IdentityUser>> UserManagerFactory;
         
         public static string PublicClientId = "Public";
 
@@ -30,10 +29,6 @@ namespace ContactBook.WebApi
             app.CreatePerOwinContext<UserManager<IdentityUser>>((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) =>
                 {
                     UserManager<IdentityUser> retUserManager = ApplicationUserManager.Create(opt, con);
-                    UserManagerFactory = () =>
-                    {
-                        return retUserManager;
-                    };
                     return retUserManager;
                 });
 
@@ -41,7 +36,7 @@ namespace ContactBook.WebApi
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(UserManagerFactory),
+                Provider = new ApplicationOAuthProvider(),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true

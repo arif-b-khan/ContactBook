@@ -336,3 +336,6 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGrid.Sm
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGridMail.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGrid.SmtpApi.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGridMail.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\AutoMapper.Net4.dll

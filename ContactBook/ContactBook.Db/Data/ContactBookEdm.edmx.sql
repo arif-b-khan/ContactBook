@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/29/2015 07:33:57
--- Generated from EDMX file: C:\Development\github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
+-- Date Created: 05/14/2015 19:21:40
+-- Generated from EDMX file: D:\Development\Github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -151,8 +151,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CB_Secret]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CB_Secret];
 GO
-IF OBJECT_ID(N'[dbo].[Logs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Logs];
+IF OBJECT_ID(N'[dbo].[CB_Tokens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CB_Tokens];
 GO
 
 -- --------------------------------------------------
@@ -328,14 +328,13 @@ CREATE TABLE [dbo].[CB_Secret] (
 );
 GO
 
--- Creating table 'CB_Log'
-CREATE TABLE [dbo].[CB_Log] (
-    [LogId] uniqueidentifier  NOT NULL,
-    [Logger] nvarchar(200)  NOT NULL,
-    [LoggerLevel] nvarchar(100)  NOT NULL,
-    [CallSite] nvarchar(300)  NOT NULL,
-    [Message] nvarchar(max)  NOT NULL,
-    [TimeStamp] timestamp  NOT NULL
+-- Creating table 'CB_Tokens'
+CREATE TABLE [dbo].[CB_Tokens] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserId] nvarchar(100)  NULL,
+    [Token] nvarchar(500)  NULL,
+    [TokenType] nvarchar(max)  NULL,
+    [Identifier] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -457,10 +456,10 @@ ADD CONSTRAINT [PK_CB_Secret]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [LogId] in table 'CB_Log'
-ALTER TABLE [dbo].[CB_Log]
-ADD CONSTRAINT [PK_CB_Log]
-    PRIMARY KEY CLUSTERED ([LogId] ASC);
+-- Creating primary key on [Id] in table 'CB_Tokens'
+ALTER TABLE [dbo].[CB_Tokens]
+ADD CONSTRAINT [PK_CB_Tokens]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------

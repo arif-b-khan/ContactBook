@@ -10,44 +10,72 @@ using System.Net.Configuration;
 using System.Configuration;
 using System.Net;
 using ContactBook.Domain.Security;
+using ContactBook.Domain.Common.Logging;
+using ContactBook.Domain.IoC;
+using SendGrid;
 
 namespace ContactBook.WebApi.Common
 {
     public class ContactbookEmailService : IIdentityMessageService
     {
+        public  readonly ICBLogger _logger;
+
+        public ContactbookEmailService()
+        {
+            _logger = DependencyFactory.Resolve<ICBLogger>();
+        }
+
         public async Task SendAsync(IdentityMessage message)
         {
-            #region formatter
-            string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-            string html = "Please confirm your account by clicking this link: <a href=\"" + message.Body + "\">link</a><br/>";
-
-            html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + message.Body);
-            #endregion
-            var smtpSec = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-            string emailFrom = await ContactBookCrypto.DecryptAsync(smtpSec.From);
-            string userName = await ContactBookCrypto.DecryptAsync(smtpSec.Network.UserName);
-            string password = await ContactBookCrypto.DecryptAsync(smtpSec.Network.Password);
-
-            MailMessage msg = new MailMessage(emailFrom, message.Destination);
-            //msg.From = new MailAddress(emailFrom);
-            //msg.To.Add(new MailAddress(message.Destination));
-            msg.Subject = message.Subject;
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
-            
-            SmtpClient smtpClient = new SmtpClient();
-
-            NetworkCredential networkCredential = new NetworkCredential(userName, password);
-            smtpClient.Host = smtpSec.Network.Host;
-            smtpClient.Port = smtpSec.Network.Port;
-            smtpClient.EnableSsl = smtpSec.Network.EnableSsl;
-            smtpClient.Credentials = networkCredential;
-
-            Task retSend = Task.Run(() =>
+            try
             {
-                smtpClient.SendAsync(msg, null);
-            });
-            
+
+                #region formatter
+                string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
+                string html = "Please click on this link: <a href=\"" + message.Body + "\">link</a><br/>";
+
+                html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + message.Body);
+                #endregion
+
+ 
+                var smtpSec = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+                string emailFrom = smtpSec.From;
+                string userName = await ContactBookCrypto.DecryptAsync(smtpSec.Network.UserName);
+                string password = await ContactBookCrypto.DecryptAsync(smtpSec.Network.Password);
+                
+                var mailFrom = new MailAddress(emailFrom);
+                var mailTo = new MailAddress(message.Destination);
+                
+                var sendGridMessage = new SendGridMessage();
+                var mailMessage = new MailMessage();
+                sendGridMessage.Subject = message.Subject;
+                sendGridMessage.AddTo(message.Destination);
+                sendGridMessage.From = new MailAddress(emailFrom);
+                sendGridMessage.Text = text;
+                sendGridMessage.Html = html;
+                
+                //SmtpClient smtpClient = new SmtpClient();
+
+                NetworkCredential networkCredential = new NetworkCredential(userName, password);
+                var webTransport = new Web(networkCredential);
+
+                Task retSend = webTransport.DeliverAsync(sendGridMessage);
+
+                retSend.Wait();
+            }
+            catch (AggregateException ex)
+            {
+                ex.Handle(hex =>
+                {
+                    _logger.Error("SendAynsc (AggregateException): " + hex.Message, hex);
+                    return true;
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("SendAysnc: " + ex.Message, ex);
+            }
+
         }
     }
 }

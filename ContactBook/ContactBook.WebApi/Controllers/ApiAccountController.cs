@@ -27,6 +27,7 @@ using System.Web.Http.Tracing;
 using ContactBook.Domain.IoC;
 using ContactBook.WebApi.Common;
 using ContactBook.WebApi.Model;
+using ContactBook.Domain.Contexts.Token;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -43,7 +44,7 @@ namespace ContactBook.WebApi.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         public ApiAccountController()
-            : this(Startup.UserManagerFactory(), Startup.OAuthOptions.AccessTokenFormat)
+            : this(HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>(), Startup.OAuthOptions.AccessTokenFormat)
         {
         }
 
@@ -81,6 +82,24 @@ namespace ContactBook.WebApi.Controllers
         {
             IdentityUser user = await UserManager.FindByEmailAsync(email);
             if (user == null)
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Email doesn't Exists:{0}", email);
+                return Ok();
+            }
+            else
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Email Exists:{0}", email);
+                return NotFound();
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("ForgotEmailExists")]
+        public async Task<IHttpActionResult> GetForgotEmailExists(string email)
+        {
+            IdentityUser user = await UserManager.FindByEmailAsync(email);
+
+            if (user != null)
             {
                 Configuration.Services.GetTraceWriter().Info(Request, Category, "Email doesn't Exists:{0}", email);
                 return Ok();
@@ -179,24 +198,81 @@ namespace ContactBook.WebApi.Controllers
             return Ok();
         }
 
-        // POST api/Account/SetPassword
-        [Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgotPassword")]
+        public async Task<IHttpActionResult> ForgotPassword(ForgotPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            IdentityUser user = await UserManager.FindByEmailAsync(model.Email);
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-            IHttpActionResult errorResult = GetErrorResult(result);
-
-            if (errorResult != null)
+            if (user == null)
             {
-                return errorResult;
+                return NotFound();
+            }
+
+            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+            try
+            {
+                Guid retGuid;
+                bool savedToken = SaveGeneratedToken(user, code, ContactBookToken.PasswordToken, out retGuid);
+                if (savedToken)
+                {
+                    string link = string.Format(model.Link + "?identifier={0}", HttpUtility.UrlEncode(retGuid.ToString()));
+                    Task mailTask = UserManager.SendEmailAsync(user.Id, "Reset password", link);
+                    mailTask.Wait();
+                }
+            }
+            catch (AggregateException ex)
+            {
+                ex.Handle(e =>
+                {
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "Send mail failure " + e.Message);
+                    return true;
+                });
+            }
+            catch (Exception ex)
+            {
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "ForgotPassword: Saved token failed: " + ex.Message);
             }
 
             return Ok();
+        }
+
+        // POST api/Account/SetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(SetPasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contactToken = new ContactBookToken();
+            CB_Tokens userToken = contactToken.GetToken(model.Identifier);
+
+            if (userToken != null)
+            {
+
+                IdentityResult result = await UserManager.ResetPasswordAsync(userToken.UserId, userToken.Token, model.NewPassword);
+                IHttpActionResult errorResult = GetErrorResult(result);
+
+                if (errorResult != null)
+                {
+                    return errorResult;
+                }
+                contactToken.DeleteToken(userToken.UserId);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST api/Account/AddExternalLogin
@@ -387,31 +463,31 @@ namespace ContactBook.WebApi.Controllers
 
             IHttpActionResult errorResult = null;
 
-            //using (TransactionScope tranScope = new TransactionScope())
-            //{
-            result = UserManager.Create(user, model.Password);
-            errorResult = GetErrorResult(result);
+            using (TransactionScope tranScope = new TransactionScope())
+            {
+                result = UserManager.Create(user, model.Password);
+                errorResult = GetErrorResult(result);
 
-            //if (errorResult == null)
-            //{
+                if (errorResult == null)
+                {
 
-            //    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
-            //    {
-            //        IContactBookContext context = new ContactBookContext(uow);
-            //        context.CreateContactBook(model.UserName, user.Id);
-            //        uow.Save();
-            //    }
-            //    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", user.UserName, model.UserName + user.Id);
-            //    registerSuccess = true;
-            //}
-            //else
-            //{
-            //    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registration failed.");
+                    using (IContactBookRepositoryUow uow = DependencyFactory.Resolve<IContactBookRepositoryUow>())
+                    {
+                        IContactBookContext context = new ContactBookContext(uow);
+                        context.CreateContactBook(model.UserName, user.Id);
+                        uow.Save();
+                    }
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registered: Username: {0}, ContactBook: {1}", user.UserName, model.UserName + user.Id);
+                    registerSuccess = true;
+                }
+                else
+                {
+                    Configuration.Services.GetTraceWriter().Info(Request, Category, "User registration failed.");
 
-            //}
+                }
 
-            //    tranScope.Complete();
-            //}
+                tranScope.Complete();
+            }
 
             if (registerSuccess)
             {
@@ -419,24 +495,29 @@ namespace ContactBook.WebApi.Controllers
                 try
                 {
 
-                    //UserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(ApplicationUserManager.DataProvider.Create("UserToken"));
                     string userIdentityId = user.Id;
                     code = UserManager.GenerateEmailConfirmationToken(userIdentityId);
-                    _logger.Info("Generate confiruation token: " + code);
+                    Guid retGuid;
+                    bool saveToken = SaveGeneratedToken(user, code, ContactBookToken.EmailToken, out retGuid);
 
-                    string link = model.ConfirmUrl + string.Format("?userId={0}&code={1}", HttpUtility.UrlEncode(userIdentityId), HttpUtility.UrlEncode(code));
-                    Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
+                    if (saveToken)
+                    {
+                        _logger.Info("Generate confiruation token: " + code);
 
-                    UserManager.SendEmail(userIdentityId, "Contactbook confirmation", link);
-                    //IdentityResult emailResult = UserManager.ConfirmEmail(user.Id, code);
-                    Configuration.Services.GetTraceWriter().Info(Request, Category, "Email sent to user on this email address: " + model.Email);
+                        string link = model.ConfirmUrl + string.Format("?identifier={0}", HttpUtility.UrlEncode(retGuid.ToString()));
+                        Configuration.Services.GetTraceWriter().Info(Request, Category, "Account GenereatedLink: " + link);
 
+                        UserManager.SendEmail(userIdentityId, "Contactbook confirmation", link);
+
+                        Configuration.Services.GetTraceWriter().Info(Request, Category, "Email sent to user on this email address: " + model.Email);
+                    }
                 }
                 catch (Exception ex)
                 {
                     Configuration.Services.GetTraceWriter().Error(Request, Category, ex);
                     _logger.Error("Unable to send email Message", ex);
                 }
+
                 return CreatedAtRoute<RegisterBindingModel>("DefaultApi", new { Controller = "Account", Action = "ConfirmEmail", userId = user.Id, code = code }, model);
             }
             else
@@ -445,15 +526,39 @@ namespace ContactBook.WebApi.Controllers
             }
         }
 
+        private static bool SaveGeneratedToken(IdentityUser user, string code, string tokenType, out Guid guid)
+        {
+            IContactBookToken tokenDb = new ContactBookToken();
+            guid = Guid.NewGuid();
+            bool saveToken = tokenDb.SaveToken(user.Id, code, tokenType, guid);
+            return saveToken;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("ConfirmEmail")]
-        public IHttpActionResult GetConfirmEmail(string userId, string code)
+        public IHttpActionResult GetConfirmEmail(string identifier)
         {
-            IdentityResult idResult = UserManager.ConfirmEmail(userId, code);
+
+            var contactToken = new ContactBookToken();
+            CB_Tokens cbToken = contactToken.GetToken(identifier);
+
+            IdentityResult idResult = null;
+
+            if (cbToken != null && !string.IsNullOrEmpty(cbToken.UserId))
+            {
+                idResult = UserManager.ConfirmEmail(cbToken.UserId, cbToken.Token);
+            }
+            else
+            {
+                return InternalServerError(new Exception("Unable to find token information"));
+            }
+
             IHttpActionResult result = GetErrorResult(idResult);
+
             if (result == null)
             {
+                contactToken.DeleteToken(cbToken.UserId);
                 return Ok();
             }
             else

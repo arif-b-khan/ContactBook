@@ -41,19 +41,15 @@ namespace ContactBook.WebApi.Common
 
             appUserManager.EmailService = new ContactbookEmailService();
 
-#if Azure
+//#if Azure
             DataProvider = options.DataProtectionProvider;
-#else
-            DataProvider = new DpapiDataProtectionProvider();
-#endif
+//#else
+//            DataProvider = new DpapiDataProtectionProvider();
+//#endif
 
             if (DataProvider != null)
             {
-                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(DataProvider.Create("UserToken"))
-                {
-                    //Code for email confirmation and reset password life time
-                    TokenLifespan = TimeSpan.FromHours(6)
-                };
+                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(DataProvider.Create("UserToken"));
             }
 
             return appUserManager;

@@ -76,15 +76,15 @@
     <Reference Include="System.Web.Helpers">
       <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\controllers\AccountController\changePasswordCntrl.js" />
     <Content Include="app\controllers\AccountController\confirmEmailCntrl.js" />
     <Content Include="app\controllers\AccountController\loginController.js" />
     <Content Include="app\controllers\AccountController\registerController.js" />
+    <Content Include="app\controllers\AccountController\registerSuccessCntrl.js" />
+    <Content Include="app\controllers\AccountController\retrievePasswordCntrl.js" />
+    <Content Include="app\controllers\AccountController\resetPasswordCntrl.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\css\app.css" />
     <Content Include="app\css\style.css" />
@@ -105,6 +105,9 @@
     <Content Include="app\views\Account\Login.html" />
     <Content Include="app\views\Account\accountView.js" />
     <Content Include="app\views\Account\Register.html" />
+    <Content Include="app\views\Account\RegisterSuccess.html" />
+    <Content Include="app\views\Account\RetrievePassword.html" />
+    <Content Include="app\views\Account\ResetPassword.html" />
     <Content Include="app\views\Home.html" />
     <Content Include="app\views\mainView.js" />
     <Content Include="bower_components\angular-bindonce\bindonce.js" />
@@ -240,6 +243,7 @@
     <Content Include="bower_components\spin.js\spin.js" />
     <Content Include="config\karma-e2e.conf.js" />
     <Content Include="config\karma.conf.js" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />

@@ -15,20 +15,18 @@ namespace ContactBook.WebApi.Providers
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
-        private readonly Func<UserManager<IdentityUser>> userManagerInstance;
-
-        public ApplicationOAuthProvider(Func<UserManager<IdentityUser>> puserManagerInstance)
+        
+        public ApplicationOAuthProvider()
         {
-            userManagerInstance = puserManagerInstance;
             _publicClientId = "Self";
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            using (UserManager<IdentityUser> userManager = userManagerInstance())
+            using (UserManager<IdentityUser> userManager = context.OwinContext.GetUserManager<UserManager<IdentityUser>>())
             {
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
-
+                
                 if (user == null)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
@@ -36,7 +34,17 @@ namespace ContactBook.WebApi.Providers
                 }
                 else
                 {
-                    user.Claims.Add(new IdentityUserClaim() { ClaimType = "BookId", ClaimValue = "101" });
+                    bool emailConfirmed = await userManager.IsEmailConfirmedAsync(user.Id);
+                    if (!emailConfirmed)
+                    {
+                        context.SetError("invalid_grant", "Email not confirmed. Please verify your email address.");
+                        return;
+                    }
+                    else
+                    {
+
+                        user.Claims.Add(new IdentityUserClaim() { ClaimType = "BookId", ClaimValue = "101" });
+                    }
                 }
 
                 ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user,

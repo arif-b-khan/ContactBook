@@ -5,13 +5,11 @@
         $scope.confirmFailed = false;
         $scope.invalidUrl = false;
         $scope.confirmEmailOnLoad = function () {
-            var userId = $location.search().userId;
-            var code = $location.search().code;
+            var identity = $location.search().identifier;
+            contactBookSpinner.spin("confirm-email-spinner");
 
-            if (angular.isDefined(userId) && angular.isDefined(code)) {
-                var resultPromise = accountSvc.ConfirmEmail(userId, code);
-
-                contactBookSpinner.spin("confirm-email-spinner");
+            if (angular.isDefined(identity)) {
+                var resultPromise = accountSvc.ConfirmEmail(identity);
 
                 resultPromise.then(function (result) {
                     $scope.confirmSuccess = true;

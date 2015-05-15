@@ -20,9 +20,9 @@
                 registerInfo.ConfirmUrl = $location.$$protocol + '://' + $location.$$host + '/app#/confirmEmail';
 
                 var result = accountSvc.Register(registerInfo);
-                
+
                 result.then(function (data) {
-                    $location.path("/login").replace();
+                    $location.path("/registerSuccess").search("username", data.userName).search("email", data.email).replace();
                     contactBookSpinner.stop(spinnerName);
                 },
                     function (error) {

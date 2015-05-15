@@ -16,7 +16,6 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFra
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\EntityFramework.SqlServer.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.pdb
-D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.csprojResolveAssemblyReference.cache
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.Net4.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.dll
 C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\AutoMapper.pdb
@@ -32,3 +31,4 @@ C:\Development\github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\ContactBook.Db.dll.config
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Db\bin\Debug\NLog.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.Db\obj\Debug\ContactBook.Db.csprojResolveAssemblyReference.cache
