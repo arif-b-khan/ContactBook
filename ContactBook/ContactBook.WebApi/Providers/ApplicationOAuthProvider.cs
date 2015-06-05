@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ContactBook.WebApi.Common;
+using ContactBook.Domain.Contexts;
 
 namespace ContactBook.WebApi.Providers
 {
@@ -93,14 +94,27 @@ namespace ContactBook.WebApi.Providers
 
             return Task.FromResult<object>(null);
         }
-
+       
         public static AuthenticationProperties CreateProperties(string userName)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "userName", userName }
             };
+            data.Add("bookId", GetContactBookNumber(userName));
+        
             return new AuthenticationProperties(data);
+        }
+
+        public static string GetContactBookNumber(string userName)
+        {
+            var cbContext = new ContactBookContext();
+            var cbInfo = cbContext.GetContactBook(userName);
+            if (cbInfo != null)
+            {
+                return cbInfo.BookId.ToString();
+            }
+            return "0";
         }
     }
 }

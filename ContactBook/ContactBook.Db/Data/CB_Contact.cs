@@ -40,6 +40,8 @@ namespace ContactBook.Db.Data
         public string Notes { get; set; }
         public string NickName { get; set; }
         public long BookId { get; set; }
+        public string ImagePath { get; set; }
+        public string ThumbnailPath { get; set; }
     
         public virtual ICollection<CB_Number> CB_Numbers { get; set; }
         public virtual ICollection<CB_Email> CB_Emails { get; set; }

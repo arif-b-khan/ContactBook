@@ -85,6 +85,8 @@
     <Content Include="app\controllers\AccountController\registerSuccessCntrl.js" />
     <Content Include="app\controllers\AccountController\retrievePasswordCntrl.js" />
     <Content Include="app\controllers\AccountController\resetPasswordCntrl.js" />
+    <Content Include="app\controllers\ContactsController\newContactCntrl.js" />
+    <Content Include="app\controllers\ContactsController\testController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\css\app.css" />
     <Content Include="app\css\style.css" />
@@ -96,6 +98,7 @@
     <Content Include="app\filters\filters.js" />
     <Content Include="app\services\accountSvc.js" />
     <Content Include="app\services\authenticationSvc.js" />
+    <Content Include="app\services\cbUploader.js" />
     <Content Include="app\services\contactBookSpinner.js" />
     <Content Include="app\services\httpInterceptorSvc.js" />
     <Content Include="app\services\pubsubSvc.js" />
@@ -108,6 +111,9 @@
     <Content Include="app\views\Account\RegisterSuccess.html" />
     <Content Include="app\views\Account\RetrievePassword.html" />
     <Content Include="app\views\Account\ResetPassword.html" />
+    <Content Include="app\views\Contacts\contactsView.js" />
+    <Content Include="app\views\Contacts\NewContact.html" />
+    <Content Include="app\views\Contacts\Test.html" />
     <Content Include="app\views\Home.html" />
     <Content Include="app\views\mainView.js" />
     <Content Include="bower_components\angular-bindonce\bindonce.js" />

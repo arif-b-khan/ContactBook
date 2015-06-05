@@ -135,6 +135,8 @@
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NickName" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="BookId" Type="bigint" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ThumbnailPath" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="CB_Number">
     <Key>

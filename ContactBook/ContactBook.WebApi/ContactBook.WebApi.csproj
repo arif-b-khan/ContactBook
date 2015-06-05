@@ -222,6 +222,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\avatars\Male1.png" />
+    <Content Include="Images\avatars\Male2.png" />
+    <Content Include="Images\avatars\Male3.png" />
+    <Content Include="Images\avatars\Male4.png" />
+    <Content Include="Images\characters_B.jpg" />
     <Content Include="test.html" />
     <Content Include="Global.asax" />
     <Content Include="NLog.config">
@@ -256,6 +261,7 @@
     <Compile Include="Controllers\ApiContactController.cs" />
     <Compile Include="Controllers\ApiEmailTypeController.cs" />
     <Compile Include="Controllers\ApiGroupTypeController.cs" />
+    <Compile Include="Controllers\ApiImagesController.cs" />
     <Compile Include="Controllers\ApiIMTypeController.cs" />
     <Compile Include="Controllers\ApiNumberTypeController.cs" />
     <Compile Include="Controllers\ApiRelationshipTypeController.cs" />

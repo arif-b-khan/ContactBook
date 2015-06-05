@@ -96,6 +96,12 @@
     padding: 15px;
     margin: 0 auto;
 }
+/*Search Container*/
+.search-container {
+    max-width: 300px;
+    padding: 10px;
+    margin: 0 auto;
+}
 /*error summary container*/
 
 .error-summary {
@@ -106,7 +112,35 @@
 
 /*Padding */
 .pd-t10-b10 {
-padding-top: 10px;
-padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
+/*Contact list panel*/
+.contact-panel {
+    max-width: 250px;
+    max-height: 200px;
+}
+
+.contact-panel-body-img {
+    float: left;
+}
+
+    .contact-panel-body-img img {
+        width: 50px;
+        height: 50px;
+    }
+
+.contact-panel-body-content {
+    float: right;
+    word-break: break-all;
+    word-wrap:break-word;
+}
+
+/*Contact container*/
+.contact-container {
+
+}
+
+.contact-box {
+}

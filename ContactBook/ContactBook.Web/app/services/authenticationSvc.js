@@ -22,7 +22,8 @@
 
                     $rootScope.userInfo = {
                         Token: pUserinfo.access_token,
-                        Username: pUserinfo.userName
+                        Username: pUserinfo.userName,
+                        BookId: pUserinfo.bookId
                     };
 
                     localStorageService.set(storageSettings.USERINFO_KEY, angular.copy($rootScope.userInfo));

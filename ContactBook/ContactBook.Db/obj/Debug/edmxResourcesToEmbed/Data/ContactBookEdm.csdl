@@ -145,6 +145,8 @@
     <NavigationProperty Name="CB_InternetCalls" Relationship="ContactBookEdm.ContactBookContactInternetCall" FromRole="ContactBook" ToRole="ContactInternetCall" />
     <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.CB_ContactBookCB_Contacts" FromRole="CB_Contacts" ToRole="CB_ContactBook" />
     <Property Type="Int64" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="ImagePath" Nullable="true" MaxLength="10000" />
+    <Property Type="String" Name="ThumbnailPath" Nullable="true" MaxLength="10000" />
   </EntityType>
   <EntityType Name="CB_Number">
     <Key>

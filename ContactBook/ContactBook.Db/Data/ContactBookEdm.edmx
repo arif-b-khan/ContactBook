@@ -140,6 +140,8 @@
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NickName" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="BookId" Type="bigint" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ThumbnailPath" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="CB_Number">
     <Key>
@@ -759,6 +761,8 @@
           <NavigationProperty Name="CB_InternetCalls" Relationship="ContactBookEdm.ContactBookContactInternetCall" FromRole="ContactBook" ToRole="ContactInternetCall" />
           <NavigationProperty Name="CB_ContactBook" Relationship="ContactBookEdm.CB_ContactBookCB_Contacts" FromRole="CB_Contacts" ToRole="CB_ContactBook" />
           <Property Type="Int64" Name="BookId" Nullable="false" />
+          <Property Type="String" Name="ImagePath" Nullable="true" MaxLength="10000" />
+          <Property Type="String" Name="ThumbnailPath" Nullable="true" MaxLength="10000" />
         </EntityType>
         <EntityType Name="CB_Number">
           <Key>
@@ -1289,6 +1293,8 @@
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="NickName" ColumnName="NickName" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

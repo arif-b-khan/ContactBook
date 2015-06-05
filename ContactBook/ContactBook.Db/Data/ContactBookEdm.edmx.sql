@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/14/2015 19:21:40
+-- Date Created: 05/18/2015 22:11:18
 -- Generated from EDMX file: D:\Development\Github\contactbook\ContactBook\ContactBook.Db\Data\ContactBookEdm.edmx
 -- --------------------------------------------------
 
@@ -173,7 +173,9 @@ CREATE TABLE [dbo].[CB_Contact] (
     [JobTitle] nvarchar(max)  NULL,
     [Notes] nvarchar(max)  NULL,
     [NickName] nvarchar(50)  NULL,
-    [BookId] bigint  NOT NULL
+    [BookId] bigint  NOT NULL,
+    [ImagePath] nvarchar(max)  NULL,
+    [ThumbnailPath] nvarchar(max)  NULL
 );
 GO
 

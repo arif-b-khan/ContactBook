@@ -17,6 +17,8 @@
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="NickName" ColumnName="NickName" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

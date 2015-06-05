@@ -8,7 +8,7 @@ namespace ContactBook.Domain.Common
 {
     public class ContactBookConstants
     {
-
+        public const string AppSettings_FileUploadExtensions = "FileUploadExtensions";
         
     }
 }
