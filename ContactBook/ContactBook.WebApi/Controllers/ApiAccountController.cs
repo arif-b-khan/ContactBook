@@ -64,14 +64,13 @@ namespace ContactBook.WebApi.Controllers
             IdentityUser user = await UserManager.FindByNameAsync(username);
             if (user != null)
             {
-                Configuration.Services.GetTraceWriter().Info(Request, Category, "Username {0} found in the database send not found", username);
+                Configuration.Services.GetTraceWriter().Info(Request, Category, "Username {0} found in the database", username);
                 return NotFound();
             }
             else
             {
                 Configuration.Services.GetTraceWriter().Info(Request, Category, "Username {0} not found", username);
                 return Ok();
-
             }
         }
 

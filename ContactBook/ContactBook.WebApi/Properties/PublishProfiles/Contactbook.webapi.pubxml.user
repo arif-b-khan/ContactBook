@@ -46,22 +46,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2015 12:06:45</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.dll">
-      <publishTime>05/18/2015 22:13:35</publishTime>
+      <publishTime>08/30/2015 11:20:02</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.pdb">
-      <publishTime>05/18/2015 22:13:35</publishTime>
+      <publishTime>08/30/2015 11:20:02</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.dll">
-      <publishTime>05/21/2015 21:00:03</publishTime>
+      <publishTime>08/30/2015 11:20:07</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.pdb">
-      <publishTime>05/21/2015 21:00:03</publishTime>
+      <publishTime>08/30/2015 11:20:06</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>05/21/2015 21:01:50</publishTime>
+      <publishTime>08/30/2015 11:20:15</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.pdb">
-      <publishTime>05/21/2015 21:01:49</publishTime>
+      <publishTime>08/30/2015 11:20:14</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -547,7 +547,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/21/2015 21:02:20</publishTime>
+      <publishTime>08/30/2015 11:20:17</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>04/05/2015 14:29:30</publishTime>
