@@ -58,10 +58,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/30/2015 11:20:06</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>08/30/2015 11:20:15</publishTime>
+      <publishTime>09/08/2015 22:44:13</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.pdb">
-      <publishTime>08/30/2015 11:20:14</publishTime>
+      <publishTime>09/08/2015 22:44:13</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -547,7 +547,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/30/2015 11:20:17</publishTime>
+      <publishTime>09/08/2015 22:44:16</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>04/05/2015 14:29:30</publishTime>

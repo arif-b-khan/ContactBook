@@ -1,46 +1,50 @@
-﻿<div class="row">
-    <div class="col-md-3 col-sm-12">
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                Search
-            </div>
-            <div class="search-container">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" ng-model="search.name" />
+﻿<div class="container">
+    <div class="row cardContainer">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Search
                 </div>
-                <div class="form-group">
-                    <label for="phnNumber">Phone Number</label>
-                    <input class="form-control" type="text" name="phnNumber" ng-model="search.phone" />
+                <div class="search-container">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" ng-model="search.name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phnNumber">Phone Number</label>
+                        <input class="form-control" type="text" name="phnNumber" ng-model="search.phone" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" ng-model="search.email" />
+                    </div>
+                    <button class="btn btn-default" ng-click="changeObj(search)">
+                        <span class="glyphicon glyphicon-search"></span>Search</button>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" type="text" name="email" ng-model="search.email" />
-                </div>
-                <button class="btn btn-default" ng-click="changeObj(search)">
-                    <span class="glyphicon glyphicon-search"></span>Search</button>
             </div>
         </div>
-    </div>
-    <div class="col-md-9 col-sm-12 contact-container">
-        <div class="row" ng-repeat="contacts in contactList">
-            <div class="col-md-4 col-sm-4 contact-box" bindonce ng-repeat="contact in contacts">
-                <div class="thumbnail">
-
-                    <img ng-src="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" style="height: 200px; width: 100%; display: block;" />
-                    <div class="caption">
-                        <h3 class="thumbnail-label">{{contact.name}}</h3>
-                        <div class="list-group">
-                            <div class="list-group-item"><span class="glyphicon glyphicon-earphone"></span>: {{contact.phone}}</div>
-                            <div class="list-group-item">
-                                <label>@</label>: {{contact.email}}
+        <div class="col-sm-12 col-md-8 col-lg-9">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 col-lg-4" ng-repeat="contact in contactList">
+                    <div class="card">
+                        <button class="btn close cardClose" title="Delete Customer" data-ng-click="vm.deleteCustomer(customer.id)">&times;</button>
+                        <div class="cardHeader"><a href="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="white">{{contact.name}} <i class="icon-edit icon-white editIcon"></i></a></div>
+                        <div class="cardBody">
+                            <div class="clearfix">
+                                <div class="pull-left cardBodyLeft">
+                                    <a href="#/customeredit/{{customer.id}}" class="white">
+                                        <img ng-src="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="image-rounded cardImage" /></a>
+                                </div>
+                                <div class="pull-left cardBodyRight">
+                                    <div class="cardBodyContent">{{contact.phone}}</div>
+                                    <div class="cardBodyContent">{{contact.email}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-
     </div>
 </div>

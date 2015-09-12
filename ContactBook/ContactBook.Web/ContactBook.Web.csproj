@@ -90,6 +90,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\css\app.css" />
     <Content Include="app\css\style.css" />
+    <None Include="app\data\contactslist.json" />
     <Content Include="app\index-async.html" />
     <Content Include="app\index.html" />
     <Content Include="app\app.js" />
@@ -100,6 +101,7 @@
     <Content Include="app\services\authenticationSvc.js" />
     <Content Include="app\services\cbUploader.js" />
     <Content Include="app\services\contactBookSpinner.js" />
+    <Content Include="app\services\contactsSvc.js" />
     <Content Include="app\services\httpInterceptorSvc.js" />
     <Content Include="app\services\pubsubSvc.js" />
     <Content Include="app\services\services.js" />
