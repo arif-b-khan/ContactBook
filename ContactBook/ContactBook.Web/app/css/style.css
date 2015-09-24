@@ -192,3 +192,17 @@
 .cardImage {
     height:50px;width:50px;margin-top:10px;
 }
+
+.alphabetMenu{
+    width: 30px;
+    height: 30px;
+}
+
+.alphabetMenuList ul{
+     list-style-type:none;
+}
+.alphabetMenuList ul li{
+     display: inline;
+     padding-right: 2px;
+     padding-left: 2px;
+}
