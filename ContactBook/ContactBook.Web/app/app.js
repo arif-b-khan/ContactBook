@@ -6,8 +6,9 @@ var baseSvc = 'http://contactbookapi.azurewebsites.net';
 
 // Declare app level module which depends on filters, and services
 var cbApp = angular.module('contactbook', [
+    'ngAnimate',
+    'ui.bootstrap',
     'pasvaz.bindonce',
-    "ui.bootstrap",
     'ngRoute',
     'LocalStorageModule',
     'contactbook.controllers',
@@ -16,8 +17,8 @@ var cbApp = angular.module('contactbook', [
     "account.view.account",
     "account.view.main",
     "account.view.contacts"
-]).
-config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
+])
+.config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
     $routeProvider.otherwise({
         redirectTo: '/login'
     });

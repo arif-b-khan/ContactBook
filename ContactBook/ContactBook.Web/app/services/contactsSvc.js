@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use stricts';
 
     cbServices.factory("contactsSvc", ['$http', '$q', 'cbSettings', function ($http, $q, cbSettings) {
@@ -12,9 +12,22 @@
             return deferred.promise;
         };
         
+        var deleteContact = function(contactId){
+                // var deferred = $q.defer();
+                // getContacts().then(function(data){
+                    
+                // },
+                // function(err){
+                    
+                // }
+                // );
+                // angular.forEach()
+                // return deferred.promise;
+        };
         
         return {
-            GetContacts: getContacts
+            GetContacts: getContacts,
+            DeleteContact: deleteContact
         };
     }]);
 
