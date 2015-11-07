@@ -20,7 +20,7 @@
         var init = function() {
             populateLetters();
             contactsSvc.GetContacts().then(onSuccess, onError);
-            $scope.onlyNumbers = /^\d+$/;;
+            $scope.onlyNumbers = /^\d+$/;
         };
 
         var onSuccess = function(data) {
