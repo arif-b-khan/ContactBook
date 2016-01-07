@@ -12,11 +12,6 @@ namespace ContactBook.WebApi.Controllers
     {
         private IContactBookRepositoryUow unitOfWork = null;
 
-        public ApiContactBookController()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
-
         public ApiContactBookController(IContactBookRepositoryUow unitOfWork)
         {
             if (unitOfWork != null)

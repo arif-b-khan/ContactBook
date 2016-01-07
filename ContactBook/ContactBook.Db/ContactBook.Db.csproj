@@ -163,6 +163,7 @@
     <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
     <Compile Include="Data\Partials\IEntityCloneable.cs" />
     <Compile Include="Data\Partials\INewEntity.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

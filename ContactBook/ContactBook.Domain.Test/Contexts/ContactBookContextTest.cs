@@ -110,11 +110,21 @@ namespace ContactBook.Domain.Test.Contexts
             Assert.True(bookInfo.Username == "testuser");
         }
 
+        public virtual void Dispose(bool dispose)
+        {
+            if (dispose) // cleans up managed resources
+            {
+                contactFixture.DeleteContactBookModel(modelContact);
+            }
+
+            //put code here to clean unmanaged resources
+        }
+
         public void Dispose()
         {
             if (!disposed)
             {
-                contactFixture.DeleteContactBookModel(modelContact);
+                Dispose(true);
                 disposed = true;
             }
         }

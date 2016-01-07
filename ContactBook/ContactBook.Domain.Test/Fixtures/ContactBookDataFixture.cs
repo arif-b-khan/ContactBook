@@ -67,7 +67,7 @@ namespace ContactBook.Domain.Test.Fixtures
 
         public Mock<IContactBookDbRepository<T>> MockRepository<T>(List<T> plist) where T : class
         {
-            Mock<IContactBookDbRepository<T>> repository = new Mock<IContactBookDbRepository<T>>();
+            var repository = new Mock<IContactBookDbRepository<T>>();
 
             repository.Setup(rp => rp.Get()).Returns(() =>
             {
@@ -144,12 +144,20 @@ namespace ContactBook.Domain.Test.Fixtures
             uow.Save();
         }
 
+        public virtual void Dispose(bool dispose)
+        {
+            if (dispose)
+            {
+                uow.Dispose();
+                container.Dispose();
+            }
+        }
+
         public void Dispose()
         {
             if (!disposed)
             {
-                uow.Dispose();
-                container.Dispose();
+                Dispose(true);
                 disposed = true;
             }
         }

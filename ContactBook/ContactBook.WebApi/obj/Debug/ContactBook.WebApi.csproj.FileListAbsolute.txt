@@ -338,3 +338,11 @@ C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGrid.Sm
 C:\Development\github\contactbook\ContactBook\ContactBook.WebApi\bin\SendGridMail.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\System.Web.Mvc.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.WebApi.dll.CodeAnalysisLog.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.WebApi.dll.lastcodeanalysissucceeded
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.WebApi.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\WebActivatorEx.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.ServiceLocation.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.ServiceLocation.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.WebApi.xml

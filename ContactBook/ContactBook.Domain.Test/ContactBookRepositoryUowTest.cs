@@ -30,11 +30,19 @@ namespace ContactBook.Domain.Test
             Assert.NotNull(address);
         }
 
+        public virtual void Dispose(bool dispose)
+        {
+            if (dispose)
+            {
+                dataFixture.Dispose();
+            }
+        }
+
         public void Dispose()
         {
             if (!disposed)
             {
-                dataFixture.Dispose();
+                Dispose(true);
                 disposed = true;
             }
         }

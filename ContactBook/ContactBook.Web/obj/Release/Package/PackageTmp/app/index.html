@@ -35,6 +35,18 @@
 
 <body ng-controller="homeController">
     <div class="container">
+        <script type="text/ng-template" id="deleteModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Are you sure you want to delete?!</h3>
+            </div>
+            <div class="modal-body">
+                <p>You are about to delete {{name}}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <nav class="navbar navbar-default" role="navigation">
@@ -104,13 +116,14 @@
     </div>
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="../bower_components/angular-bindonce/bindonce.min.js"></script>
     <script src="../bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="../bower_components/spin.js/spin.js"></script>
     <script src="../bower_components/angular-spinner/angular-spinner.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
     <script src="app.js"></script>
     <script src="controllers/controllers.js"></script>
     <script src="filters/filters.js"></script>
@@ -132,6 +145,8 @@
     <script src="services/httpInterceptorSvc.js"></script>
     <script src="services/cbUploader.js"></script>
     <script src="services/contactBookSpinner.js"></script>
+    <script src="services/contactsSvc.js"></script>
+
     <script src="views/Account/accountView.js"></script>
     <script src="views/mainView.js"></script>
     <script src="views/Contacts/contactsView.js"></script>

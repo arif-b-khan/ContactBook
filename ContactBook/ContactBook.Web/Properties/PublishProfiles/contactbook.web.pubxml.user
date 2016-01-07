@@ -13,7 +13,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/app.js">
-      <publishTime>05/18/2015 20:41:47</publishTime>
+      <publishTime>11/12/2015 18:17:47</publishTime>
     </File>
     <File Include="app/controllers/AccountController/changePasswordCntrl.js">
       <publishTime>05/07/2015 09:52:03</publishTime>
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/15/2015 17:46:28</publishTime>
     </File>
     <File Include="app/controllers/ContactsController/newContactCntrl.js">
-      <publishTime>05/22/2015 22:20:47</publishTime>
+      <publishTime>11/07/2015 11:09:56</publishTime>
     </File>
     <File Include="app/controllers/ContactsController/testController.js">
       <publishTime>05/19/2015 17:08:44</publishTime>
@@ -55,13 +55,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/css/style.css">
-      <publishTime>05/22/2015 22:32:06</publishTime>
+      <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="app/directives/directives.js">
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/filters/filters.js">
-      <publishTime>05/18/2015 20:41:26</publishTime>
+      <publishTime>09/24/2015 20:15:12</publishTime>
     </File>
     <File Include="app/img/.gitkeep">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/index.html">
-      <publishTime>08/30/2015 11:36:01</publishTime>
+      <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="app/services/accountSvc.js">
-      <publishTime>05/15/2015 17:45:51</publishTime>
+      <publishTime>08/30/2015 13:01:02</publishTime>
     </File>
     <File Include="app/services/authenticationSvc.js">
       <publishTime>05/18/2015 22:01:43</publishTime>
@@ -83,6 +83,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="app/services/contactBookSpinner.js">
       <publishTime>05/07/2015 09:52:03</publishTime>
+    </File>
+    <File Include="app/services/contactsSvc.js">
+      <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="app/services/httpInterceptorSvc.js">
       <publishTime>05/07/2015 09:52:03</publishTime>
@@ -121,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2015 20:46:25</publishTime>
     </File>
     <File Include="app/views/Contacts/NewContact.html">
-      <publishTime>08/30/2015 11:35:11</publishTime>
+      <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="app/views/Contacts/Test.html">
       <publishTime>05/19/2015 17:55:08</publishTime>
@@ -133,7 +136,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="bin/ContactBook.Web.dll">
-      <publishTime>08/30/2015 11:40:43</publishTime>
+      <publishTime>11/12/2015 18:19:34</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>03/18/2015 10:14:20</publishTime>
@@ -155,6 +158,30 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.Webpages.Razor.dll">
       <publishTime>03/18/2015 10:13:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/.bower.json">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/angular-animate.js">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/angular-animate.min.js">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/angular-animate.min.js.map">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/bower.json">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/index.js">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/package.json">
+      <publishTime>10/25/2015 13:11:58</publishTime>
+    </File>
+    <File Include="bower_components/angular-animate/README.md">
+      <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="bower_components/angular-bindonce/.bower.json">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -706,7 +733,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:41</publishTime>
     </File>
     <File Include="config/karma.conf.js">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>11/07/2015 14:36:34</publishTime>
     </File>
     <File Include="Index.html">
       <publishTime>05/15/2015 18:10:42</publishTime>
@@ -3043,7 +3070,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:41</publishTime>
     </File>
     <File Include="test/unit/controllersSpec.js">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>11/11/2015 10:53:51</publishTime>
     </File>
     <File Include="test/unit/directivesSpec.js">
       <publishTime>04/29/2015 08:27:41</publishTime>

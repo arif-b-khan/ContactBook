@@ -14,18 +14,15 @@ namespace ContactBook.Domain.Security
     {
         static readonly byte[] key;
         static readonly byte[] pValue;
-        
+
         static ContactBookCrypto()
         {
             Dictionary<string, string> secretResult = new ContactBookSecretContext().GetKeyValue();
-            
-            if (!secretResult.ContainsKey("SecretKey") && !secretResult.ContainsKey("SecretValue"))
+            if (secretResult != null && secretResult.ContainsKey("SecretKey") && secretResult.ContainsKey("SecretValue"))
             {
-                throw new Exception("Unable to secret key and value in CB_Secret table");
+                key = Convert.FromBase64String(secretResult["SecretKey"]);
+                pValue = Convert.FromBase64String(secretResult["SecretValue"]);
             }
-
-            key = Convert.FromBase64String(secretResult["SecretKey"]);
-            pValue = Convert.FromBase64String(secretResult["SecretValue"]);
 
         }
 

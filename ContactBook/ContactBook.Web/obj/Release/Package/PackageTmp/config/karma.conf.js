@@ -5,7 +5,7 @@ module.exports = function (config) {
         files: [
             'Scripts/angular.js',
             'Scripts/angular-*.js',
-            'app/js/**/*.js',
+            'app/controllers/**/*.js',
             'test/unit/**/*.js'
         ],
         exclude: ['**/*scenario.js'],
