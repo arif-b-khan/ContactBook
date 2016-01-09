@@ -1,9 +1,9 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
 namespace ContactBook.WebApi
 {
-    [assembly: OwinStartup(typeof(ContactBook.WebApi.Startup))]
+    //[assembly: OwinStartup(typeof(ContactBook.WebApi.Startup))]
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

@@ -162,3 +162,12 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\SendGrid.SmtpApi.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.WebApi.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\WebActivatorEx.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\System.Web.Mvc.dll
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\Microsoft.Practices.Unity.WebApi.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi.Test\bin\Debug\System.Web.Mvc.xml

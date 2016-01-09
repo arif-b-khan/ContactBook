@@ -32,3 +32,4 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\System.Web.Hel
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Debug\ContactBook.Web.dll
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Debug\ContactBook.Web.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.Web\obj\Debug\ContactBook.Web.csprojResolveAssemblyReference.cache
+D:\Development\Github\contactbook\ContactBook\ContactBook.Web\bin\ContactBook.Web.dll.config

@@ -346,3 +346,4 @@ D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\WebActivato
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.ServiceLocation.pdb
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.ServiceLocation.xml
 D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\Microsoft.Practices.Unity.WebApi.xml
+D:\Development\Github\contactbook\ContactBook\ContactBook.WebApi\bin\ContactBook.WebApi.dll.config
