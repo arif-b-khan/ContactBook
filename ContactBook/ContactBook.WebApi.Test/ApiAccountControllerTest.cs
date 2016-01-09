@@ -11,7 +11,7 @@ namespace ContactBook.WebApi.Test
 {
    public class ApiAccountControllerTest
     {
-       [Fact]
+       [Fact(Skip ="Skipping this test")]
        public void GetUserInfoTest()
        {
            var controller = new ApiAccountController();

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<unity xmlns="http://schema.microsoft.com/practices/2010/unity">
+  <assembly name="ContactBook.Db" />
+  <assembly name="ContactBook.Domain" />
+  <assembly name="EntityFramework" />
+
+  <containers>
+    <container>
+      <register type="System.Data.Entity.DbContext" mapTo="ContactBook.Db.Data.ContactBookEdmContainer">
+        <constructor>
+          <param name="connectionName" value="ContactBookEdmContainerTestFile">
+          </param>
+        </constructor>
+      </register>
+      <register type="ContactBook.Db.Repositories.IContactBookRepositoryUow" mapTo="ContactBook.Db.Repositories.ContactBookRepositoryUow">
+      </register>
+      <register type="ContactBook.Domain.Contexts.Contacts.IContactContext" mapTo="ContactBook.Domain.Contexts.Contacts.ContactContext"></register>
+      <register type="ContactBook.Domain.Contexts.IContactBookContext" mapTo="ContactBook.Domain.Contexts.ContactBookContext"></register>
+    </container>
+  </containers>
+</unity>

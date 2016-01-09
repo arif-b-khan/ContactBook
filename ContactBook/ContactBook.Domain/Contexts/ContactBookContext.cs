@@ -13,11 +13,6 @@ namespace ContactBook.Domain.Contexts
         private IContactBookRepositoryUow unitOfWork;
         private IContactBookDbRepository<CB_ContactBook> conBookRepo;
 
-        public ContactBookContext()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
-
         public ContactBookContext(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;

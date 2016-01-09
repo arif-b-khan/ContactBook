@@ -48,7 +48,7 @@ namespace ContactBook.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok<List<AddressType>>(retAddressType);
+            return Ok(retAddressType);
         }
 
         //Post api/AddressType/InsertType

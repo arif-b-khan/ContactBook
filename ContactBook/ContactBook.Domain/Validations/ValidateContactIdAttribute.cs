@@ -9,6 +9,7 @@ using System.Web;
 using ContactBook.Domain.Contexts;
 using ContactBook.Domain.Contexts.Contacts;
 using ContactBook.Domain.Models;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.Domain.Validations
 {
@@ -44,8 +45,9 @@ namespace ContactBook.Domain.Validations
 
             if (Int32.TryParse(Convert.ToString(value), out contactId))
             {
-                IContactContext contactContext = new ContactContext();
-                IContactBookContext bookContext = new ContactBookContext();
+                IContactContext contactContext = DependencyFactory.Resolve<IContactContext>();
+                IContactBookContext bookContext = DependencyFactory.Resolve<IContactBookContext>();
+
                 ContactBookInfo cbInfo = bookContext.GetContactBook(UserPrincipal.Identity.Name);
 
                 if (cbInfo != null)

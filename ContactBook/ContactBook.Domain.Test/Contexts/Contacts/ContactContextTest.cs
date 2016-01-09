@@ -8,6 +8,7 @@ using ContactBook.Domain.Models;
 using ContactBook.Domain.Test.Fixtures;
 using Moq;
 using Xunit;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.Domain.Test.Contexts.Contacts
 {
@@ -33,7 +34,7 @@ namespace ContactBook.Domain.Test.Contexts.Contacts
         {
             Contact mcontact;
 
-            IContactContext contact = new ContactContext();
+            IContactContext contact = DependencyFactory.Resolve<IContactContext>();
             mcontact = contact.GetContact(1);
 
             Assert.NotNull(mcontact);
@@ -49,19 +50,19 @@ namespace ContactBook.Domain.Test.Contexts.Contacts
                 Numbers = new List<Number>() { new Number() { ContactNumber = "8879856423", NumberTypeId = 1, ContactId = 0, NumberId = 0 } }
             };
 
-            IContactContext contact = new ContactContext();
+            IContactContext contact = DependencyFactory.Resolve<IContactContext>();
             contact.InsertContact(inContact);
         }
 
         [Fact(Skip = "skip this until test completes")]
         public void DeleteContactTest()
         {
-            Contact contact = new ContactContext().GetContact(2);
+            Contact contact = DependencyFactory.Resolve<IContactContext>().GetContact(2);
 
             contact.Numbers.Add(new Number() { ContactId = 2, ContactNumber = "12341234", NumberTypeId = 2 });
             if (contact != null)
             {
-                IContactContext conDelete = new ContactContext();
+                IContactContext conDelete = DependencyFactory.Resolve<IContactContext>();
                 conDelete.DeleteContact(contact);
             }
         }
@@ -703,7 +704,7 @@ namespace ContactBook.Domain.Test.Contexts.Contacts
         //[Fact]
         public void UpdateContactTest()
         {
-            Contact contact = new ContactContext().GetContact(2);
+            Contact contact = DependencyFactory.Resolve<IContactContext>().GetContact(2);
 
             if (contact.Numbers != null && contact.Numbers.Count >= 1)
             {
@@ -721,7 +722,7 @@ namespace ContactBook.Domain.Test.Contexts.Contacts
 
             if (contact != null)
             {
-                IContactContext conUpdate = new ContactContext();
+                IContactContext conUpdate = DependencyFactory.Resolve<IContactContext>();
                 conUpdate.UpdateContact(contact);
             }
         }

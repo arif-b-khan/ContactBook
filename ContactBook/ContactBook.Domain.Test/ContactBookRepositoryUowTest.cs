@@ -20,8 +20,7 @@ namespace ContactBook.Domain.Test
         public void GetEntityByType_TestForNotNull()
         {
             //arrange
-            ContactBookRepositoryUow work = dataFixture.UnitOfWork;
-            //IUnityContainer container = new UnityContainer()
+            IContactBookRepositoryUow work = dataFixture.UnitOfWork;
 
             //act
             var address = work.GetEntityByType<CB_Address>();

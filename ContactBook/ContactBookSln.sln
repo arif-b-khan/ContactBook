@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.WebApi", "ContactBook.WebApi\ContactBook.WebApi.csproj", "{4F78953F-7AC8-40B9-8CCC-C4094A6DE47F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Web", "ContactBook.Web\ContactBook.Web.csproj", "{98E5D88C-821D-4EAF-9DDA-736C7DC9B078}"
@@ -12,6 +14,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.WebApi.Test", "ContactBook.WebApi.Test\ContactBook.WebApi.Test.csproj", "{33CC365E-E5BB-4F46-AF5B-C81CFC53A45F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Domain.Test", "ContactBook.Domain.Test\ContactBook.Domain.Test.csproj", "{E41C67AA-A681-49D7-B7BB-49270324E40B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{FA580AE4-F07A-45D2-9497-171BBFB9AE49}"
+	ProjectSection(SolutionItems) = preProject
+		unity-config-domaintest.xml = unity-config-domaintest.xml
+		unity-config-webapi.xml = unity-config-webapi.xml
+		unity-config-webapitest.xml = unity-config-webapitest.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

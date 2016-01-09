@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="$(SolutionDir)unity-config-webapi.xml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
