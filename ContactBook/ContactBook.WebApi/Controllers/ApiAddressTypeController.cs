@@ -20,12 +20,7 @@ namespace ContactBook.WebApi.Controllers
         private IGenericContextTypes<AddressType, CB_AddressType> genericContext;
         private IGenericContextTypes<AddressType, CB_AddressType> readOnlyContext;
         private IContactBookRepositoryUow getUnitOfWork;
-
-        public ApiAddressTypeController()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
-
+        
         public ApiAddressTypeController(IContactBookRepositoryUow uow, IContactBookRepositoryUow getUnitOfWork)
         {
             unitOfWork = uow;
@@ -48,7 +43,7 @@ namespace ContactBook.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok<List<AddressType>>(retAddressType);
+            return Ok(retAddressType);
         }
 
         //Post api/AddressType/InsertType

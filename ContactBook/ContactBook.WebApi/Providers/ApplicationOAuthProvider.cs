@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ContactBook.WebApi.Common;
 using ContactBook.Domain.Contexts;
+using ContactBook.Domain.IoC;
 
 namespace ContactBook.WebApi.Providers
 {
@@ -108,7 +109,7 @@ namespace ContactBook.WebApi.Providers
 
         public static string GetContactBookNumber(string userName)
         {
-            var cbContext = new ContactBookContext();
+            var cbContext = DependencyFactory.Resolve<IContactBookContext>();
             var cbInfo = cbContext.GetContactBook(userName);
             if (cbInfo != null)
             {

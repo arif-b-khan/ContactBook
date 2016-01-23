@@ -21,12 +21,7 @@ namespace ContactBook.WebApi.Controllers
         private IContactBookRepositoryUow _readOnlyUow;
         private IGenericContextTypes<EmailType, CB_EmailType> emailTypeRepo;
         private IGenericContextTypes<EmailType, CB_EmailType> readOnlyRepo;
-
-        public ApiEmailTypeController()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
-
+       
         public ApiEmailTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;

@@ -24,11 +24,12 @@ namespace ContactBook.Domain.IoC
         {
             var container = new UnityContainer();
 
-            var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
-            if (section != null)
-            {
-                section.Configure(container);
-            }
+            //var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+            //if (section != null)
+            //{
+            //    section.Configure(container);
+            //}
+            container.LoadConfiguration();
             _container = container;
         }
 

@@ -1,4 +1,5 @@
 ﻿using ContactBook.Domain.Contexts;
+using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -42,7 +43,7 @@ namespace ContactBook.Domain.Validations
 
             if (Int64.TryParse(Convert.ToString(value), out bookId))
             {
-                IContactBookContext cbContext = new ContactBookContext();
+                IContactBookContext cbContext = DependencyFactory.Resolve<IContactBookContext>();
 
                 ContactBookInfo cbInfo = cbContext.GetContactBook(UserPrincipal.Identity.Name);
 

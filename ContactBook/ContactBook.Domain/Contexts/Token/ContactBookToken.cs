@@ -16,7 +16,7 @@ namespace ContactBook.Domain.Contexts.Token
         public const string EmailToken = "Email";
         public const string PasswordToken = "Password";
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookRepositoryUow readOnlyUow;
+        //private IContactBookRepositoryUow readOnlyUow;
         private IContactBookDbRepository<CB_Tokens> conBookRepo;
         private IContactBookDbRepository<CB_Tokens> readOnlyRepo;
         private readonly ICBLogger _logger;

@@ -13,13 +13,11 @@ namespace ContactBook.Domain.Test.Fixtures
     public class ContactBookDataFixture : IDisposable
     {
         private bool disposed = false;
-        private ContactBookRepositoryUow uow;
-        private ContactBookEdmContainer container;
+        private IContactBookRepositoryUow uow;
 
         public ContactBookDataFixture()
         {
-            container = DependencyFactory.Resolve<ContactBookEdmContainer>();
-            uow = new ContactBookRepositoryUow(container);
+            uow = DependencyFactory.Resolve<IContactBookRepositoryUow>();
         }
 
         public IContactBookDbRepository<T> Repository<T>(List<T> plist) where T : class
@@ -64,7 +62,6 @@ namespace ContactBook.Domain.Test.Fixtures
             return repository.Object;
         }
 
-
         public Mock<IContactBookDbRepository<T>> MockRepository<T>(List<T> plist) where T : class
         {
             var repository = new Mock<IContactBookDbRepository<T>>();
@@ -107,17 +104,7 @@ namespace ContactBook.Domain.Test.Fixtures
             return repository;
         }
 
-
-
-        public ContactBookEdmContainer Container
-        {
-            get
-            {
-                return container;
-            }
-        }
-
-        public ContactBookRepositoryUow UnitOfWork
+        public IContactBookRepositoryUow UnitOfWork
         {
             get
             {
@@ -149,7 +136,6 @@ namespace ContactBook.Domain.Test.Fixtures
             if (dispose)
             {
                 uow.Dispose();
-                container.Dispose();
             }
         }
 

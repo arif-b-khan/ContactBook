@@ -16,6 +16,7 @@ namespace ContactBook.WebApi.Controllers
     public class ApiRoleController : ApiController
     {
         public UserManager<IdentityUser> UserManager { get; private set; }
+
         public ApiRoleController(): this(HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>())
         {
             

@@ -22,7 +22,7 @@ namespace ContactBook.WebApi.Common
                 {TraceLevel.Warn, cbLogger.Warn},
                 {TraceLevel.Fatal, cbLogger.Fatal}
             };
-            return retLogger;
+            return retLogger;   
         }, true);
 
         public void Trace(System.Net.Http.HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)

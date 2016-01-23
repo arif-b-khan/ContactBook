@@ -17,10 +17,6 @@ namespace ContactBook.Domain.Contexts.Contacts
         private IContactBookDbRepository<CB_Contact> contactRepo;
         private IContactBookDbRepository<CB_Contact> rContactRepo;
         private ChildEntityDbOperations childOperations;
-        public ContactContext()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
 
         public ContactContext(IContactBookRepositoryUow unitOfWork, IContactBookRepositoryUow pReadOnlyUow)
         {
