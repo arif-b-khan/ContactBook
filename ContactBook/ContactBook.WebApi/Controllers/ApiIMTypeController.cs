@@ -21,12 +21,7 @@ namespace ContactBook.WebApi.Controllers
         private IContactBookRepositoryUow _readOnlyUow;
         private IGenericContextTypes<IMType, CB_IMType> imTypeRepo;
         private IGenericContextTypes<IMType, CB_IMType> readOnlyRepo;
-
-        public ApiIMTypeController()
-            : this(DependencyFactory.Resolve<IContactBookRepositoryUow>(), DependencyFactory.Resolve<IContactBookRepositoryUow>())
-        {
-        }
-
+        
         public ApiIMTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;

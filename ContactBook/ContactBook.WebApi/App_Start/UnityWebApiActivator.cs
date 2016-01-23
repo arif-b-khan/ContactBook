@@ -1,5 +1,6 @@
 using System.Web.Http;
 using Microsoft.Practices.Unity.WebApi;
+using ContactBook.Domain.IoC;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ContactBook.WebApi.App_Start.UnityWebApiActivator), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(ContactBook.WebApi.App_Start.UnityWebApiActivator), "Shutdown")]
@@ -14,7 +15,9 @@ namespace ContactBook.WebApi.App_Start
         {
             // Use UnityHierarchicalDependencyResolver if you want to use a new child container for each IHttpController resolution.
             // var resolver = new UnityHierarchicalDependencyResolver(UnityConfig.GetConfiguredContainer());
-            var resolver = new UnityDependencyResolver(UnityConfig.GetConfiguredContainer());
+            //var resolver = new UnityDependencyResolver(UnityConfig.GetConfiguredContainer());
+
+            var resolver = new UnityDependencyResolver(DependencyFactory.Container);
 
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
         }

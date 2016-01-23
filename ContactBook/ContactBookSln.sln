@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Domain.Test", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{FA580AE4-F07A-45D2-9497-171BBFB9AE49}"
 	ProjectSection(SolutionItems) = preProject
-		unity-config-domaintest.xml = unity-config-domaintest.xml
-		unity-config-webapi.xml = unity-config-webapi.xml
-		unity-config-webapitest.xml = unity-config-webapitest.xml
+		unity-config-domaintest.config = unity-config-domaintest.config
+		unity-config-webapi.config = unity-config-webapi.config
+		unity-config-webapitest.config = unity-config-webapitest.config
 	EndProjectSection
 EndProject
 Global

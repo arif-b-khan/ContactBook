@@ -36,6 +36,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>03/18/2015 10:13:35</publishTime>
     </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>01/09/2016 21:12:50</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>01/09/2016 21:12:50</publishTime>
+    </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>03/28/2015 12:06:45</publishTime>
     </File>
@@ -46,22 +52,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2015 12:06:45</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.dll">
-      <publishTime>08/30/2015 11:20:02</publishTime>
+      <publishTime>01/09/2016 22:11:31</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.pdb">
-      <publishTime>08/30/2015 11:20:02</publishTime>
+      <publishTime>01/09/2016 22:11:31</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.dll">
-      <publishTime>08/30/2015 11:20:07</publishTime>
+      <publishTime>01/23/2016 20:21:40</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.pdb">
-      <publishTime>08/30/2015 11:20:06</publishTime>
+      <publishTime>01/23/2016 20:21:40</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>09/08/2015 22:44:13</publishTime>
+      <publishTime>01/23/2016 20:21:43</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.pdb">
-      <publishTime>09/08/2015 22:44:13</publishTime>
+      <publishTime>01/23/2016 20:21:43</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -219,20 +225,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Owin.xml">
       <publishTime>03/18/2015 10:14:17</publishTime>
     </File>
+    <File Include="bin/Microsoft.Practices.ServiceLocation.dll">
+      <publishTime>12/26/2015 22:11:33</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.ServiceLocation.pdb">
+      <publishTime>12/26/2015 22:11:33</publishTime>
+    </File>
     <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
-      <publishTime>03/22/2015 12:54:04</publishTime>
+      <publishTime>12/26/2015 22:11:34</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.Configuration.xml">
       <publishTime>03/22/2015 12:54:04</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.dll">
-      <publishTime>03/22/2015 12:54:04</publishTime>
+      <publishTime>12/26/2015 22:11:34</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
-      <publishTime>03/22/2015 12:54:04</publishTime>
+      <publishTime>12/26/2015 22:11:34</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.xml">
       <publishTime>03/22/2015 12:54:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.WebApi.dll">
+      <publishTime>12/26/2015 22:11:35</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.xml">
       <publishTime>03/22/2015 12:54:04</publishTime>
@@ -360,6 +375,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Webpages.xml">
       <publishTime>03/18/2015 10:13:58</publishTime>
     </File>
+    <File Include="bin/unity-config-webapi.config">
+      <publishTime>01/09/2016 21:08:16</publishTime>
+    </File>
+    <File Include="bin/unity-config-webapi.xml">
+      <publishTime>01/09/2016 21:08:16</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>12/26/2015 22:11:34</publishTime>
+    </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>03/18/2015 10:14:33</publishTime>
     </File>
@@ -478,10 +502,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2015 18:21:54</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>05/07/2015 09:52:04</publishTime>
+      <publishTime>12/26/2015 21:59:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/14/2015 16:49:33</publishTime>
+      <publishTime>01/09/2016 22:10:40</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>01/09/2016 21:12:12</publishTime>
     </File>
     <File Include="Properties/AssemblyInfo.cs">
       <publishTime>04/05/2015 14:28:47</publishTime>
@@ -537,6 +564,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="test.html">
       <publishTime>05/05/2015 08:30:44</publishTime>
     </File>
+    <File Include="unity-config-webapi.config">
+      <publishTime>01/09/2016 21:45:48</publishTime>
+    </File>
     <File Include="Views/web.config">
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
@@ -547,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/08/2015 22:44:16</publishTime>
+      <publishTime>01/23/2016 19:58:55</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>04/05/2015 14:29:30</publishTime>
