@@ -9,7 +9,6 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ContactBook.WebApi.Filters;
-using System.Threading.Tasks;
 
 namespace ContactBook.WebApi.Controllers
 {
@@ -35,7 +34,7 @@ namespace ContactBook.WebApi.Controllers
         [ResponseType(typeof(List<AddressType>))]
         [BookIdValidationFilter("bookId")]
         [HttpGet]
-        public async Task<IHttpActionResult> Get(long bookId)
+        public IHttpActionResult Get(long bookId)
         {
             List<AddressType> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
 
@@ -49,7 +48,7 @@ namespace ContactBook.WebApi.Controllers
 
         //Post api/AddressType/InsertType
         [HttpPost]
-        public async IHttpActionResult Post([FromBody]AddressType addressType)
+        public IHttpActionResult Post([FromBody]AddressType addressType)
         {
             Exception retException = null;
             bool status = true;
