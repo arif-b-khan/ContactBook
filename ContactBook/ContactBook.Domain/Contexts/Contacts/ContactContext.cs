@@ -13,25 +13,22 @@ namespace ContactBook.Domain.Contexts.Contacts
     {
         private const string CONTACT_FIELDS = "CB_Addresses, CB_Numbers, CB_Emails, CB_Websites, CB_ContactByGroups, CB_Addresses, CB_IMs, CB_Relationships, CB_SpecialDates, CB_InternetCalls";
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookRepositoryUow readOnlyUow;
         private IContactBookDbRepository<CB_Contact> contactRepo;
-        private IContactBookDbRepository<CB_Contact> rContactRepo;
         private ChildEntityDbOperations childOperations;
 
-        public ContactContext(IContactBookRepositoryUow unitOfWork, IContactBookRepositoryUow pReadOnlyUow)
+        public ContactContext(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            this.readOnlyUow = pReadOnlyUow;
-            childOperations = new ChildEntityDbOperations(unitOfWork);
+
             contactRepo = this.unitOfWork.GetEntityByType<CB_Contact>();
-            rContactRepo = this.readOnlyUow.GetEntityByType<CB_Contact>();
+            childOperations = new ChildEntityDbOperations(contactRepo, unitOfWork);
             CBContactToContactMapping();
             ContactToCBContactMapping();
         }
 
         public Contact GetContact(long contactId)
         {
-            CB_Contact contact = rContactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
+            CB_Contact contact = contactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
 
             Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
 
@@ -40,7 +37,7 @@ namespace ContactBook.Domain.Contexts.Contacts
 
         public Contact GetContact(long bookId, long contactId)
         {
-            CB_Contact contact = rContactRepo.Get(con => con.ContactId == contactId && con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
+            CB_Contact contact = contactRepo.Get(con => con.ContactId == contactId && con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
 
             Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
 
@@ -50,7 +47,7 @@ namespace ContactBook.Domain.Contexts.Contacts
 
         public List<Contact> GetContacts(long bookId)
         {
-            List<CB_Contact> contacts = rContactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
+            List<CB_Contact> contacts = contactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
             List<Contact> contactList = Mapper.Map<List<Contact>>(contacts);
             return contactList;
         }
@@ -58,7 +55,6 @@ namespace ContactBook.Domain.Contexts.Contacts
         public void InsertContact(Contact contact)
         {
             CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
-            //cbContact.CB_Numbers.First().CB_Contacts = cbContact;
             contactRepo.Insert(cbContact);
             unitOfWork.Save();
         }
@@ -73,10 +69,11 @@ namespace ContactBook.Domain.Contexts.Contacts
         public void UpdateContact(Contact contact)
         {
             CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
-            CB_Contact dContact = rContactRepo.GetById(contact.ContactId);
+            //CB_Contact dContact = rContactRepo.GetById(contact.ContactId);
+            CB_Contact dContact = contactRepo.GetById(contact.ContactId);
             if (dContact != null && cbContact != null)
                 childOperations.PerformOperations(cbContact, dContact);
-            contactRepo.Update(cbContact);
+            contactRepo.Update(dContact);
             unitOfWork.Save();
         }
 

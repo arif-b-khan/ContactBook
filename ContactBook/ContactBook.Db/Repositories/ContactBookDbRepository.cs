@@ -48,6 +48,14 @@ namespace ContactBook.Db.Repositories
             }
         }
 
+        public virtual void Update(T existingObj, T newObj)
+        {
+            lock (lockObj)
+            {
+                context.Entry(existingObj).CurrentValues.SetValues(newObj);
+            }
+        }
+
         public T GetById(object id)
         {
             return dbSet.Find(id);

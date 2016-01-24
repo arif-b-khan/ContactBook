@@ -13,6 +13,8 @@ namespace ContactBook.Db.Repositories
 
         void Update(T t);
 
+        void Update(T oldObj, T newObj);
+
         T GetById(object id);
 
         IEnumerable<T> Get();

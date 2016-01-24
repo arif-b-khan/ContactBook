@@ -42,7 +42,7 @@ namespace ContactBook.WebApi.Test.Controllers
             //Arrange
             ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() => ControllerFixture.MockRepository<CB_EmailType>(null));
 
-            ApiEmailTypeController numberTypeCnt = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberTypeCnt = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberTypeCnt.Request = new HttpRequestMessage();
             numberTypeCnt.Configuration = new HttpConfiguration();
 
@@ -61,7 +61,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 () => ControllerFixture.MockRepository<CB_EmailType>(emailTypeList
                     ));
 
-            ApiEmailTypeController emailTypeCntr = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController emailTypeCntr = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             emailTypeCntr.Request = new HttpRequestMessage();
             emailTypeCntr.Configuration = new HttpConfiguration();
 
@@ -88,7 +88,7 @@ namespace ContactBook.WebApi.Test.Controllers
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
-            ApiEmailTypeController EmailTypeCntr = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController EmailTypeCntr = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             EmailTypeCntr.Request = new HttpRequestMessage();
             EmailTypeCntr.Configuration = config;
 
@@ -138,7 +138,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 return mockRepo.Object;
             });
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
 
             //Act
             numberController.Post(emailType);
@@ -194,7 +194,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
             numberController.Url = urlHelperMock.Object;
@@ -244,7 +244,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
 
@@ -278,7 +278,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
 
@@ -325,7 +325,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage();
             numberController.Configuration = config;
 
@@ -362,7 +362,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiEmailTypeController numberController = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage();
             numberController.Configuration = config;
 

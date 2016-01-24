@@ -1,4 +1,6 @@
 ﻿using ContactBook.Db.Data;
+using ContactBook.Domain.Contexts;
+using ContactBook.Domain.Contexts.Contacts;
 using ContactBook.Domain.Models;
 using ContactBook.WebApi.Controllers;
 using ContactBook.WebApi.Test.Fixtures;
@@ -29,7 +31,8 @@ namespace ContactBook.WebApi.Test.Controllers
             ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_ContactBook>()).Returns(
                 () => ControllerFixture.MockRepository<CB_ContactBook>(null)
                 );
-            ApiContactBookController cbController = new ApiContactBookController(ControllerFixture.MockUnitOfWork.Object);
+
+            ApiContactBookController cbController = new ApiContactBookController(new ContactBookContext(ControllerFixture.MockUnitOfWork.Object));
             cbController.Request = new HttpRequestMessage();
             cbController.Configuration = new HttpConfiguration();
 
@@ -55,7 +58,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 () => ControllerFixture.MockRepository<CB_ContactBook>(contactBookList
                 )
                 );
-            ApiContactBookController cbController = new ApiContactBookController(ControllerFixture.MockUnitOfWork.Object);
+            ApiContactBookController cbController = new ApiContactBookController(new ContactBookContext(ControllerFixture.MockUnitOfWork.Object));
             cbController.Request = new HttpRequestMessage();
             cbController.Configuration = new HttpConfiguration();
 
