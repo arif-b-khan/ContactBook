@@ -224,8 +224,8 @@ namespace ContactBook.WebApi.Test.Controllers
 
             Mock<IContactBookDbRepository<CB_RelationshipType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_RelationshipType>(relationshipTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_RelationshipType>())).Callback<CB_RelationshipType>(
-                c =>
+            mockRepo.Setup(s => s.Update(It.IsAny<CB_RelationshipType>(), It.IsAny<CB_RelationshipType>())).Callback<CB_RelationshipType, CB_RelationshipType>(
+                (a, c) =>
                 {
                     CB_RelationshipType upGroup = relationshipTypeList.Where(cb => cb.RelationshipTypeId == c.RelationshipTypeId).SingleOrDefault();
                     upGroup.Relationship_TypeName = c.Relationship_TypeName;

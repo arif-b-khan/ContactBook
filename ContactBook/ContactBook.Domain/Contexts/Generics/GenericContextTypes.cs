@@ -40,25 +40,16 @@ namespace ContactBook.Domain.Contexts.Generics
             unitOfWork.Save();
         }
 
-        public void UpdateTypes(List<M> typeList)
+        public void UpdateTypes(T existingType, M cbType)
         {
-            List<T> addrTypeList = mapper.GetMappedType<M, T>(typeList);
-
-            foreach (var item in addrTypeList)
-            {
-                repoType.Update(item);
-            }
+            T addrType = mapper.GetMappedType<M, T>(cbType);
+            repoType.Update(existingType, addrType);
             unitOfWork.Save();
         }
 
-        public void DeleteTypes(List<M> typeList)
+        public void DeleteTypes(T cbType)
         {
-            List<T> addrTypeList = mapper.GetMappedType<M, T>(typeList);
-
-            foreach (var item in addrTypeList)
-            {
-                repoType.Delete(item);
-            }
+            repoType.Delete(cbType);
             unitOfWork.Save();
         }
 
@@ -73,6 +64,11 @@ namespace ContactBook.Domain.Contexts.Generics
             }
 
             return retTypes;
+        }
+
+        public List<T> GetCBTypes(Expression<Func<T, bool>> filter)
+        {
+            return repoType.Get(filter).ToList<T>();
         }
 
         public M Find(object id)

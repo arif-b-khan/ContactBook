@@ -224,8 +224,8 @@ namespace ContactBook.WebApi.Test.Controllers
 
             Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_EmailType>(emailTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_EmailType>())).Callback<CB_EmailType>(
-                c =>
+            mockRepo.Setup(s => s.Update(It.IsAny<CB_EmailType>(), It.IsAny<CB_EmailType>())).Callback<CB_EmailType, CB_EmailType>(
+                (a, c) =>
                 {
                     CB_EmailType upAddr = emailTypeList.Where(cb => cb.EmailTypeId == c.EmailTypeId).SingleOrDefault();
                     upAddr.Email_TypeName = c.Email_TypeName;

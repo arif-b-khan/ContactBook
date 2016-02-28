@@ -42,7 +42,7 @@ namespace ContactBook.WebApi.Test.Controllers
             //Arrange
             ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() => ControllerFixture.MockRepository<CB_GroupType>(null));
 
-            ApiGroupTypeController groupTypeCnt = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController groupTypeCnt = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             groupTypeCnt.Request = new HttpRequestMessage();
             groupTypeCnt.Configuration = new HttpConfiguration();
 
@@ -61,7 +61,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 () => ControllerFixture.MockRepository<CB_GroupType>(groupTypeList
                     ));
 
-            ApiGroupTypeController groupTypeCntr = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController groupTypeCntr = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             groupTypeCntr.Request = new HttpRequestMessage();
             groupTypeCntr.Configuration = new HttpConfiguration();
 
@@ -88,7 +88,7 @@ namespace ContactBook.WebApi.Test.Controllers
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
-            ApiGroupTypeController groupTypeCntr = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController groupTypeCntr = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             groupTypeCntr.Request = new HttpRequestMessage();
             groupTypeCntr.Configuration = config;
 
@@ -138,7 +138,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 return mockRepo.Object;
             });
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
 
             //Act
             numberController.Post(groupType);
@@ -194,7 +194,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
             numberController.Url = urlHelperMock.Object;
@@ -224,8 +224,8 @@ namespace ContactBook.WebApi.Test.Controllers
 
             Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_GroupType>(groupTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_GroupType>())).Callback<CB_GroupType>(
-                c =>
+            mockRepo.Setup(s => s.Update(It.IsAny<CB_GroupType>(), It.IsAny<CB_GroupType>())).Callback<CB_GroupType, CB_GroupType>(
+                (a, c) =>
                 {
                     CB_GroupType upGroup = groupTypeList.Where(cb => cb.GroupId == c.GroupId).SingleOrDefault();
                     upGroup.Group_TypeName = c.Group_TypeName;
@@ -244,7 +244,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
 
@@ -278,7 +278,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             numberController.Configuration = config;
 
@@ -325,7 +325,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage();
             numberController.Configuration = config;
 
@@ -362,7 +362,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiGroupTypeController numberController = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberController.Request = new HttpRequestMessage();
             numberController.Configuration = config;
 

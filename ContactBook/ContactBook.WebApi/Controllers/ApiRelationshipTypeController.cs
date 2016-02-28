@@ -75,18 +75,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<RelationshipType> relatiionshipTypeList = readOnlyRepo.GetTypes(nbt => nbt.RelationshipTypeId == pRelationshipType.RelationshipTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pRelationshipType.BookId));
+            List<CB_RelationshipType> relatiionshipTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.RelationshipTypeId == pRelationshipType.RelationshipTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pRelationshipType.BookId));
 
             if (relatiionshipTypeList == null || relatiionshipTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            RelationshipType dbRelationshipType = relatiionshipTypeList.SingleOrDefault();
+            CB_RelationshipType dbRelationshipType = relatiionshipTypeList.SingleOrDefault();
 
             if (dbRelationshipType != null && !dbRelationshipType.Equals(pRelationshipType))
             {
-                if (ApiHelper.TryExecuteContext(() => relationshipTypeRepo.UpdateTypes(new List<RelationshipType>() { pRelationshipType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => relationshipTypeRepo.UpdateTypes(dbRelationshipType, pRelationshipType), out exOut))
                 {
                     return Ok();
                 }
@@ -102,14 +102,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            RelationshipType relationshipType = null;
+            CB_RelationshipType relationshipType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            relationshipType = readOnlyRepo.GetTypes(nb => nb.RelationshipTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            relationshipType = readOnlyRepo.GetCBTypes(nb => nb.RelationshipTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (relationshipType == null)
             {
@@ -118,7 +118,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (relationshipType.BookId.HasValue)
             {
-                relationshipTypeRepo.DeleteTypes(new List<RelationshipType>() { relationshipType });
+                relationshipTypeRepo.DeleteTypes(relationshipType);
             }
             else
             {

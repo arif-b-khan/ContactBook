@@ -75,18 +75,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<IMType> imTypeList = readOnlyRepo.GetTypes(nbt => nbt.IMTypeId == pIMType.IMTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pIMType.BookId));
+            List<CB_IMType> imTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.IMTypeId == pIMType.IMTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pIMType.BookId));
 
             if (imTypeList == null || imTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            IMType dbIMType = imTypeList.SingleOrDefault();
+            CB_IMType dbIMType = imTypeList.SingleOrDefault();
 
             if (dbIMType != null && !dbIMType.Equals(pIMType))
             {
-                if (ApiHelper.TryExecuteContext(() => imTypeRepo.UpdateTypes(new List<IMType>() { pIMType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => imTypeRepo.UpdateTypes(dbIMType, pIMType), out exOut))
                 {
                     return Ok();
                 }
@@ -102,14 +102,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            IMType imType = null;
+            CB_IMType imType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            imType = readOnlyRepo.GetTypes(nb => nb.IMTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            imType = readOnlyRepo.GetCBTypes(nb => nb.IMTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (imType == null)
             {
@@ -118,7 +118,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (imType.BookId.HasValue)
             {
-                imTypeRepo.DeleteTypes(new List<IMType>() { imType });
+                imTypeRepo.DeleteTypes(imType);
             }
             else
             {

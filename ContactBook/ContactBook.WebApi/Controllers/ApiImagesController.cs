@@ -16,55 +16,11 @@ using ContactBook.Domain.Common;
 
 namespace ContactBook.WebApi.Controllers
 {
-    public class ImageReponseMessage : IHttpActionResult
-    {
-        string _fileName;
-        List<string> rootPaths;
-
-        public ImageReponseMessage(string fileName, string userName)
-        {
-            _fileName = fileName;
-            rootPaths = new List<string>();
-            rootPaths.Add(ConfigurationManager.AppSettings["AvatarPath"]);
-            rootPaths.Add(Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], userName));
-        }
-
-        public Task<HttpResponseMessage> ExecuteAsync(System.Threading.CancellationToken cancellationToken)
-        {
-            var filePath = rootPaths.Select(f => Path.Combine(f, _fileName)).SingleOrDefault(pth =>
-            {
-                return File.Exists(pth);
-            });
-
-            if (filePath == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.OK);
-            }
-
-            string fileExtension = Path.GetExtension(filePath);
-            string mediaType = "image/" + fileExtension;
-
-            var taskMessage = Task<HttpResponseMessage>.Run(() =>
-            {
-                var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
-
-                byte[] fileData = File.ReadAllBytes(filePath);
-
-                var memStream = new MemoryStream(fileData);
-                responseMessage.Content = new StreamContent(memStream);
-                responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
-                return responseMessage;
-            });
-
-            return taskMessage;
-        }
-    }
-
+    
     [Authorize]
     [RoutePrefix("ApiImages")]
     public class ApiImagesController : ApiController
     {
-        
         [HttpGet]
         [Route("GetImageFileNames")]
         public IHttpActionResult GetImageFileNames()
@@ -148,4 +104,49 @@ namespace ContactBook.WebApi.Controllers
             }
         }
     }
+
+    public class ImageReponseMessage : IHttpActionResult
+    {
+        string _fileName;
+        List<string> rootPaths;
+
+        public ImageReponseMessage(string fileName, string userName)
+        {
+            _fileName = fileName;
+            rootPaths = new List<string>();
+            rootPaths.Add(ConfigurationManager.AppSettings["AvatarPath"]);
+            rootPaths.Add(Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], userName));
+        }
+
+        public Task<HttpResponseMessage> ExecuteAsync(System.Threading.CancellationToken cancellationToken)
+        {
+            var filePath = rootPaths.Select(f => Path.Combine(f, _fileName)).SingleOrDefault(pth =>
+            {
+                return File.Exists(pth);
+            });
+
+            if (filePath == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.OK);
+            }
+
+            string fileExtension = Path.GetExtension(filePath);
+            string mediaType = "image/" + fileExtension;
+
+            var taskMessage = Task<HttpResponseMessage>.Run(() =>
+            {
+                var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
+
+                byte[] fileData = File.ReadAllBytes(filePath);
+
+                var memStream = new MemoryStream(fileData);
+                responseMessage.Content = new StreamContent(memStream);
+                responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
+                return responseMessage;
+            });
+
+            return taskMessage;
+        }
+    }
+
 }

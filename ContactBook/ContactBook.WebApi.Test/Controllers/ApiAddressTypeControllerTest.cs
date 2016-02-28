@@ -43,7 +43,7 @@ namespace ContactBook.WebApi.Test.Controllers
             ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(
                 () => ControllerFixture.MockRepository<CB_AddressType>(null));
 
-            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressTypeCntr.Request = new HttpRequestMessage();
             addressTypeCntr.Configuration = new HttpConfiguration();
 
@@ -62,7 +62,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 () => ControllerFixture.MockRepository<CB_AddressType>(addressTypeList
                     ));
 
-            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressTypeCntr.Request = new HttpRequestMessage();
             addressTypeCntr.Configuration = new HttpConfiguration();
 
@@ -89,7 +89,7 @@ namespace ContactBook.WebApi.Test.Controllers
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
-            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressTypeCntr.Request = new HttpRequestMessage();
             addressTypeCntr.Configuration = config;
 
@@ -139,7 +139,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 return mockRepo.Object;
             });
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
 
             //Act
             addressController.Post(addressType);
@@ -189,7 +189,7 @@ namespace ContactBook.WebApi.Test.Controllers
                 return mockRepo.Object;
             });
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
 
             //Act
             addressController.Post(addressType);
@@ -245,7 +245,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             addressController.Configuration = config;
             addressController.Url = urlHelperMock.Object;
@@ -275,8 +275,8 @@ namespace ContactBook.WebApi.Test.Controllers
 
             Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_AddressType>(addressTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_AddressType>())).Callback<CB_AddressType>(
-                c =>
+            mockRepo.Setup(s => s.Update(It.IsAny<CB_AddressType>(), It.IsAny<CB_AddressType>())).Callback<CB_AddressType, CB_AddressType>(
+                (a, c) =>
                 {
                     CB_AddressType upAddr = addressTypeList.Where(cb => cb.AddressTypeId == c.AddressTypeId).SingleOrDefault();
                     upAddr.Address_TypeName = c.Address_TypeName;
@@ -295,7 +295,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             addressController.Configuration = config;
 
@@ -329,7 +329,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressController.Request = new HttpRequestMessage() { RequestUri = new Uri("http://localhost/api/testcontroller/get") };
             addressController.Configuration = config;
 
@@ -376,7 +376,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressController.Request = new HttpRequestMessage();
             addressController.Configuration = config;
 
@@ -413,7 +413,7 @@ namespace ContactBook.WebApi.Test.Controllers
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
 
-            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
+            ApiAddressTypeController addressController = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressController.Request = new HttpRequestMessage();
             addressController.Configuration = config;
 

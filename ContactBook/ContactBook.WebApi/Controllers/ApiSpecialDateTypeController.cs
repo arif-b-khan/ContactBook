@@ -75,18 +75,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<SpecialDateType> specialdateTypeList = readOnlyRepo.GetTypes(nbt => nbt.SpecialDateTpId == pSpecialDateType.SpecialDateTpId && (nbt.BookId.HasValue && nbt.BookId.Value == pSpecialDateType.BookId));
+            List<CB_SpecialDateType> specialdateTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.SpecialDateTpId == pSpecialDateType.SpecialDateTpId && (nbt.BookId.HasValue && nbt.BookId.Value == pSpecialDateType.BookId));
 
             if (specialdateTypeList == null || specialdateTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            SpecialDateType dbSpecialDateType = specialdateTypeList.SingleOrDefault();
+            CB_SpecialDateType dbSpecialDateType = specialdateTypeList.SingleOrDefault();
 
             if (dbSpecialDateType != null && !dbSpecialDateType.Equals(pSpecialDateType))
             {
-                if (ApiHelper.TryExecuteContext(() => specialDateTypeRepo.UpdateTypes(new List<SpecialDateType>() { pSpecialDateType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => specialDateTypeRepo.UpdateTypes(dbSpecialDateType, pSpecialDateType), out exOut))
                 {
                     return Ok();
                 }
@@ -102,14 +102,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            SpecialDateType specialType = null;
+            CB_SpecialDateType specialType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            specialType = readOnlyRepo.GetTypes(nb => nb.SpecialDateTpId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            specialType = readOnlyRepo.GetCBTypes(nb => nb.SpecialDateTpId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (specialType == null)
             {
@@ -118,7 +118,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (specialType.BookId.HasValue)
             {
-                specialDateTypeRepo.DeleteTypes(new List<SpecialDateType>() { specialType });
+                specialDateTypeRepo.DeleteTypes(specialType);
             }
             else
             {

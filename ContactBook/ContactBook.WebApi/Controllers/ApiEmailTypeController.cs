@@ -71,18 +71,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<EmailType> emailTypeList = emailTypeRepo.GetTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
+            List<CB_EmailType> emailTypeList = emailTypeRepo.GetCBTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
 
             if (emailTypeList == null || emailTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            EmailType dbEmailType = emailTypeList.SingleOrDefault();
+            CB_EmailType dbEmailType = emailTypeList.SingleOrDefault();
 
             if (dbEmailType != null && !dbEmailType.Equals(pEmailType))
             {
-                if (ApiHelper.TryExecuteContext(() => emailTypeRepo.UpdateTypes(new List<EmailType>() { pEmailType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => emailTypeRepo.UpdateTypes(dbEmailType, pEmailType), out exOut))
                 {
                     return Ok();
                 }
@@ -98,14 +98,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            EmailType emailType = null;
+            CB_EmailType emailType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            emailType = emailTypeRepo.GetTypes(nb => nb.EmailTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            emailType = emailTypeRepo.GetCBTypes(nb => nb.EmailTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (emailType == null)
             {
@@ -114,7 +114,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (emailType.BookId.HasValue)
             {
-                emailTypeRepo.DeleteTypes(new List<EmailType>() { emailType });
+                emailTypeRepo.DeleteTypes(emailType);
             }
             else
             {

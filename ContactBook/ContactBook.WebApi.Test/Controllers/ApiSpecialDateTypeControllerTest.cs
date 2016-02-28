@@ -224,8 +224,8 @@ namespace ContactBook.WebApi.Test.Controllers
 
             Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_SpecialDateType>(specialDateTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType>(
-                c =>
+            mockRepo.Setup(s => s.Update(It.IsAny<CB_SpecialDateType>(), It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType, CB_SpecialDateType>(
+                (a, c) =>
                 {
                     CB_SpecialDateType upGroup = specialDateTypeList.Where(cb => cb.SpecialDateTpId == c.SpecialDateTpId).SingleOrDefault();
                     upGroup.Date_TypeName = c.Date_TypeName;

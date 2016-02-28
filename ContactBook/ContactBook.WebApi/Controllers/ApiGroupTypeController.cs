@@ -17,17 +17,11 @@ namespace ContactBook.WebApi.Controllers
     [RoutePrefix("api/ApiGroupType")]
     public class ApiGroupTypeController : ApiController
     {
-        private IContactBookRepositoryUow _unitofWork;
-        private IContactBookRepositoryUow _readOnlyUow;
         private IGenericContextTypes<GroupType, CB_GroupType> groupTypeRepo;
-        private IGenericContextTypes<GroupType, CB_GroupType> readOnlyRepo;
         
-        public ApiGroupTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
+        public ApiGroupTypeController(IContactBookRepositoryUow unitofWork)
         {
-            _unitofWork = unitofWork;
-            _readOnlyUow = readOnlyUow;
             groupTypeRepo = new GenericContextTypes<GroupType, CB_GroupType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<GroupType, CB_GroupType>(_readOnlyUow);
         }
 
         //Get api/GroupType/1
@@ -75,18 +69,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<GroupType> groupTypeList = readOnlyRepo.GetTypes(nbt => nbt.GroupId == pGroupType.GroupId && (nbt.BookId.HasValue && nbt.BookId.Value == pGroupType.BookId));
+            List<CB_GroupType> groupTypeList = groupTypeRepo.GetCBTypes(nbt => nbt.GroupId == pGroupType.GroupId && (nbt.BookId.HasValue && nbt.BookId.Value == pGroupType.BookId));
 
             if (groupTypeList == null || groupTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            GroupType dbGroupType = groupTypeList.SingleOrDefault();
+            CB_GroupType dbGroupType = groupTypeList.SingleOrDefault();
 
             if (dbGroupType != null && !dbGroupType.Equals(pGroupType))
             {
-                if (ApiHelper.TryExecuteContext(() => groupTypeRepo.UpdateTypes(new List<GroupType>() { pGroupType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => groupTypeRepo.UpdateTypes(dbGroupType, pGroupType), out exOut))
                 {
                     return Ok();
                 }
@@ -102,14 +96,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            GroupType groupType = null;
+            CB_GroupType groupType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            groupType = readOnlyRepo.GetTypes(nb => nb.GroupId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            groupType = groupTypeRepo.GetCBTypes(nb => nb.GroupId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (groupType == null)
             {
@@ -118,7 +112,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (groupType.BookId.HasValue)
             {
-                groupTypeRepo.DeleteTypes(new List<GroupType>() { groupType });
+                groupTypeRepo.DeleteTypes(groupType);
             }
             else
             {

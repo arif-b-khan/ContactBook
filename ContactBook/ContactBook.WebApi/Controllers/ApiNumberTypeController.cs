@@ -74,18 +74,18 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<NumberType> numberTypeList = readOnlyRepo.GetTypes(nbt => nbt.NumberTypeId == pNumberType.NumberTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pNumberType.BookId));
+            List<CB_NumberType> numberTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.NumberTypeId == pNumberType.NumberTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pNumberType.BookId));
 
             if (numberTypeList == null || numberTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            NumberType dbNumberType = numberTypeList.SingleOrDefault();
+            CB_NumberType dbNumberType = numberTypeList.SingleOrDefault();
 
             if (dbNumberType != null && !dbNumberType.Equals(pNumberType))
             {
-                if (ApiHelper.TryExecuteContext(() => numberTypeRepo.UpdateTypes(new List<NumberType>() { pNumberType }), out exOut))
+                if (ApiHelper.TryExecuteContext(() => numberTypeRepo.UpdateTypes(dbNumberType, pNumberType), out exOut))
                 {
                     return Ok();
                 }
@@ -101,14 +101,14 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            NumberType numberType = null;
+            CB_NumberType numberType = null;
 
             if (bookId <= 0)
             {
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            numberType = readOnlyRepo.GetTypes(nb => nb.NumberTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            numberType = readOnlyRepo.GetCBTypes(nb => nb.NumberTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (numberType == null)
             {
@@ -117,7 +117,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (numberType.BookId.HasValue)
             {
-                numberTypeRepo.DeleteTypes(new List<NumberType>() { numberType });
+                numberTypeRepo.DeleteTypes(numberType);
             }
             else
             {
