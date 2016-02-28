@@ -12,88 +12,70 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
 
     public class ChildEntityDbOperations
     {
-        IContactBookRepositoryUow _unitOfWork;
+        IContactBookDbRepository<CB_Contact> contactRepo;
+        IContactBookRepositoryUow uow;
 
-        public ChildEntityDbOperations(IContactBookRepositoryUow unitOfWork)
+        public ChildEntityDbOperations(IContactBookDbRepository<CB_Contact> contactRepository, IContactBookRepositoryUow unitOfWork) 
         {
-            _unitOfWork = unitOfWork;
+            contactRepo = contactRepository;
+            uow = unitOfWork;
         }
 
         public void PerformOperations(CB_Contact mContact, CB_Contact dContact)
         {
-            DbOperationsCheck<CB_Number>(mContact.CB_Numbers, dContact.CB_Numbers);
-            DbOperationsCheck<CB_Email>(mContact.CB_Emails, dContact.CB_Emails);
-            DbOperationsCheck<CB_IM>(mContact.CB_IMs, dContact.CB_IMs);
-            DbOperationsCheck<CB_Address>(mContact.CB_Addresses, dContact.CB_Addresses);
-            DbOperationsCheck<CB_InternetCall>(mContact.CB_InternetCalls, dContact.CB_InternetCalls);
-            DbOperationsCheck<CB_Website>(mContact.CB_Websites, dContact.CB_Websites);
-            DbOperationsCheck<CB_Relationship>(mContact.CB_Relationships, dContact.CB_Relationships);
-            DbOperationsCheck<CB_SpecialDate>(mContact.CB_SpecialDates, dContact.CB_SpecialDates);
-            DbOperationsCheck<CB_ContactByGroup>(mContact.CB_ContactByGroups, dContact.CB_ContactByGroups);
+            DbOperationsCheck<CB_Number>(mContact.CB_Numbers, dContact.CB_Numbers, uow.GetEntityByType<CB_Number>());
+            DbOperationsCheck<CB_Email>(mContact.CB_Emails, dContact.CB_Emails, uow.GetEntityByType<CB_Email>());
+            DbOperationsCheck<CB_IM>(mContact.CB_IMs, dContact.CB_IMs, uow.GetEntityByType<CB_IM>());
+            DbOperationsCheck<CB_Address>(mContact.CB_Addresses, dContact.CB_Addresses, uow.GetEntityByType<CB_Address>());
+            DbOperationsCheck<CB_InternetCall>(mContact.CB_InternetCalls, dContact.CB_InternetCalls, uow.GetEntityByType<CB_InternetCall>());
+            DbOperationsCheck<CB_Website>(mContact.CB_Websites, dContact.CB_Websites, uow.GetEntityByType<CB_Website>());
+            DbOperationsCheck<CB_Relationship>(mContact.CB_Relationships, dContact.CB_Relationships, uow.GetEntityByType<CB_Relationship>());
+            DbOperationsCheck<CB_SpecialDate>(mContact.CB_SpecialDates, dContact.CB_SpecialDates,  uow.GetEntityByType<CB_SpecialDate>());
+            DbOperationsCheck<CB_ContactByGroup>(mContact.CB_ContactByGroups, dContact.CB_ContactByGroups, uow.GetEntityByType<CB_ContactByGroup>());
         }
 
-        private void DbOperationsCheck<T>(ICollection<T> collection1, ICollection<T> collection2) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
+        private void DbOperationsCheck<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> actualEntity) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
         {
             if (collection1 != null && collection2 != null && (collection1.Any() || collection2.Any()))
             {
-                DbOperations<T>(collection1, collection2, _unitOfWork.GetEntityByType<T>(), ComparerFactory.GetComparer<T>());
+                DbOperations<T>(collection1, collection2, actualEntity, ComparerFactory.GetComparer<T>());
             }
         }
 
-        private void DbOperations<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> dbRepo, IEqualityComparer<T> tcomparer) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
+        private void DbOperations<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> actualEntity, IEqualityComparer<T> tcomparer) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>
         {
             try
             {
-                Task insertTask = Task.Run(() =>
+                // populate insert collections
+                foreach (T item in collection1.Where(t => t.Equals(0)))
                 {
-                    if (collection1 != null)
+                    actualEntity.Insert(item.Clone());
+                }
+
+                IList<T> removeList = new List<T>();
+                foreach (T item in collection2.Except(collection1, tcomparer))
+                {
+                    removeList.Add(item);
+                }
+
+                foreach(T item in removeList)
+                {
+                    actualEntity.Delete(item);
+                }
+
+                foreach (T item in collection1.Intersect(collection2, tcomparer))
+                {
+                    T oldEntity = collection2.Where(t => tcomparer.Equals(t, item)).SingleOrDefault();
+                    if (oldEntity != null && !oldEntity.Equals(item))
                     {
-                        // populate insert collections
-                        foreach (T item in collection1.Where(t => t.Equals(0)))
-                        {
-                            dbRepo.Insert(item);
-                        }
+                        actualEntity.Update(oldEntity, item);
                     }
-                });
-
-                Task deleteTask = Task.Run(() =>
-                {
-                    if (collection1 != null && collection2 != null)
-                    {
-                        //populate delete collections
-                        foreach (T item in collection2.Except(collection1, tcomparer))
-                        {
-                            dbRepo.Delete(item.Clone());
-                        }
-                    }
-                });
-
-                Task updateTask = Task.Run(() =>
-                {
-                    if (collection1 != null && collection2 != null)
-                    {
-                        foreach (T item in collection1.Intersect(collection2, tcomparer))
-                        {
-                            T singleEmail = collection2.Where(t => tcomparer.Equals(t, item)).SingleOrDefault();
-                            if (singleEmail != null && !singleEmail.Equals(item))
-                            {
-                                dbRepo.Update(item);
-                            }
-                        }
-                    }
-                });
-
-                Task.WaitAll(insertTask, updateTask, deleteTask);
-            }
-            catch (AggregateException aggException)
-            {
-                foreach (Exception ex in aggException.InnerExceptions)
-                {
-
                 }
             }
+            catch (Exception aggException)
+            {
+
+            }
         }
-
     }
-
 }

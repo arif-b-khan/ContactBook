@@ -15,7 +15,6 @@ namespace ContactBook.Db.Repositories
         private bool disposed = false;
         private DbContext container;
         private IDictionary<string, Type> entityDictionary = new Dictionary<string, Type>();
-        private IDictionary<string, object> cachedInstance = new Dictionary<string, object>();
         private static readonly Logger _logger;
 
         static ContactBookRepositoryUow()
@@ -25,8 +24,12 @@ namespace ContactBook.Db.Repositories
 
         public ContactBookRepositoryUow(DbContext container)
         {
-
             this.container = container;
+
+            container.Database.Log = s =>
+            {
+                System.Diagnostics.Debug.Write(s);
+            };
 
             var types = Assembly.Load("ContactBook.Db").GetTypes()
                 .Where(w =>
@@ -45,25 +48,8 @@ namespace ContactBook.Db.Repositories
         public IContactBookDbRepository<T> GetEntityByType<T>() where T : class
         {
             string key = typeof(T).Name;
-
-            if (entityDictionary.ContainsKey(key))
-            {
-                if (!cachedInstance.ContainsKey(key))
-                {
-                    lock (cachedInstance)
-                    {
-                        if (!cachedInstance.ContainsKey(key))
-                        {
-                            var contactDbRepoType = typeof(ContactBookDbRepository<>).MakeGenericType(entityDictionary[key]);
-                            
-                            cachedInstance.Add(key, Activator.CreateInstance(contactDbRepoType, container));
-                            _logger.Info("Creating instance of \""+key+"\"");
-                        }
-                    }
-                }
-                return (ContactBookDbRepository<T>)cachedInstance[key];
-            }
-            return default(ContactBookDbRepository<T>);
+            var contactDbRepoType = typeof(ContactBookDbRepository<>).MakeGenericType(entityDictionary[key]);
+            return (ContactBookDbRepository<T>)Activator.CreateInstance(contactDbRepoType, container);
         }
 
         public bool Save()

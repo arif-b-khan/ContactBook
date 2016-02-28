@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using ContactBook.Db.Repositories;
 using Moq;
+using ContactBook.Domain.Contexts.Contacts;
 
 namespace ContactBook.WebApi.Test.Fixtures
 {
     public class ControllerTestFixtures
     {
         Mock<IContactBookRepositoryUow> mockUnitOfWork = new Mock<IContactBookRepositoryUow>();
-
+        
         public ControllerTestFixtures()
         {
-
+            
         }
 
         public IContactBookDbRepository<T> MockRepository<T>(List<T> plist) where T : class

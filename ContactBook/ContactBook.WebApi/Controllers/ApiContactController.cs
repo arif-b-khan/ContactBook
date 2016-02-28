@@ -18,13 +18,10 @@ namespace ContactBook.WebApi.Controllers
     [Authorize]
     public class ApiContactController : ApiController
     {
-        IContactBookRepositoryUow unitOfWork;
-        IContactBookRepositoryUow readOnlyUow;
-        
-        public ApiContactController(IContactBookRepositoryUow pUnitOfWork, IContactBookRepositoryUow pReadOnlyUow)
+        IContactContext contactContext;        
+        public ApiContactController(IContactContext pContactContext)
         {
-            unitOfWork = pUnitOfWork;
-            readOnlyUow = pReadOnlyUow;
+            contactContext = pContactContext;
         }
 
         // GET api/<controller>
@@ -33,7 +30,6 @@ namespace ContactBook.WebApi.Controllers
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            IContactContext  contactContext = new ContactContext(unitOfWork, readOnlyUow);
             List<Contact> contacts = contactContext.GetContacts(bookId);
 
             if (contacts == null && !contacts.Any())
@@ -52,7 +48,6 @@ namespace ContactBook.WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            IContactContext contactContext = new ContactContext(unitOfWork, readOnlyUow);
 
             if (ApiHelper.TryExecuteContext(() => contactContext.InsertContact(contact), out exOut))
             {
@@ -73,8 +68,6 @@ namespace ContactBook.WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
-            IContactContext contactContext = new ContactContext(unitOfWork, readOnlyUow);
 
             if (ApiHelper.TryExecuteContext(() => contactContext.UpdateContact(contact), out exOut))
             {
@@ -93,7 +86,7 @@ namespace ContactBook.WebApi.Controllers
         public IHttpActionResult Delete(long bookId, long contactId)
         {
             Exception exOut;
-            IContactContext contactContext = new ContactContext(unitOfWork, readOnlyUow);
+
             Contact contactToDel = contactContext.GetContact(bookId, contactId);
             
             if (contactToDel == null)

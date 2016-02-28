@@ -10,15 +10,11 @@ namespace ContactBook.WebApi.Controllers
     [RoutePrefix("api/ApiContactBook")]
     public class ApiContactBookController : ApiController
     {
-        private IContactBookRepositoryUow unitOfWork = null;
+        IContactBookContext contactContext;
 
-        public ApiContactBookController(IContactBookRepositoryUow unitOfWork)
+        public ApiContactBookController(IContactBookContext pcontactContext)
         {
-            if (unitOfWork != null)
-            {
-                this.unitOfWork = unitOfWork;
-                unitOfWork.GetEntityByType<CB_ContactBook>();
-            }
+            contactContext = pcontactContext;
         }
 
         //todo: remove the username parameter from getcontactbook it is a security issuse
@@ -27,8 +23,8 @@ namespace ContactBook.WebApi.Controllers
         public IHttpActionResult GetContactBook(string username)
         {
             ContactBookInfo cbInfo = null;
-            IContactBookContext cbContext = new ContactBookContext(unitOfWork);
-            cbInfo = cbContext.GetContactBook(username);
+
+            cbInfo = contactContext.GetContactBook(username);
 
             if (cbInfo == null)
             {

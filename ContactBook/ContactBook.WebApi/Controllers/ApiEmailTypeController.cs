@@ -18,16 +18,12 @@ namespace ContactBook.WebApi.Controllers
     public class ApiEmailTypeController : ApiController
     {
         private IContactBookRepositoryUow _unitofWork;
-        private IContactBookRepositoryUow _readOnlyUow;
         private IGenericContextTypes<EmailType, CB_EmailType> emailTypeRepo;
-        private IGenericContextTypes<EmailType, CB_EmailType> readOnlyRepo;
        
-        public ApiEmailTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
+        public ApiEmailTypeController(IContactBookRepositoryUow unitofWork)
         {
             _unitofWork = unitofWork;
-            _readOnlyUow = readOnlyUow;
             emailTypeRepo = new GenericContextTypes<EmailType, CB_EmailType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<EmailType, CB_EmailType>(_readOnlyUow);
         }
 
         //Get api/EmailType/1
@@ -75,7 +71,7 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<EmailType> emailTypeList = readOnlyRepo.GetTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
+            List<EmailType> emailTypeList = emailTypeRepo.GetTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
 
             if (emailTypeList == null || emailTypeList.Count == 0)
             {
@@ -109,7 +105,7 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(string.Format("Invalid book id {0}", bookId));
             }
 
-            emailType = readOnlyRepo.GetTypes(nb => nb.EmailTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
+            emailType = emailTypeRepo.GetTypes(nb => nb.EmailTypeId == typeId && (nb.BookId.HasValue && nb.BookId.Value == bookId)).SingleOrDefault();
 
             if (emailType == null)
             {
