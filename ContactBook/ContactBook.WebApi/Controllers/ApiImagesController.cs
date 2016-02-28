@@ -13,32 +13,36 @@ using ContactBook.WebApi.Filters;
 using System.Configuration;
 using System.Security.AccessControl;
 using ContactBook.Domain.Common;
+using ContactBook.Domain.ImageRepository;
 
 namespace ContactBook.WebApi.Controllers
 {
-    
+
     [Authorize]
-    [RoutePrefix("ApiImages")]
+    [RoutePrefix("api/ApiImages")]
     public class ApiImagesController : ApiController
     {
+        private readonly IImageRepository _imageRepository;
+
+        public ApiImagesController()
+        {
+            _imageRepository = new FileImageRepository(ConfigurationManager.AppSettings["UserImagePath"], ConfigurationManager.AppSettings["AvatarPath"]);
+        }
+
         [HttpGet]
         [Route("GetImageFileNames")]
         public IHttpActionResult GetImageFileNames()
         {
-            List<string> fileNames = new List<string>();
+            List<string> fileNames;
 
-            var folderList = new List<String>()
+            try
             {
-                ConfigurationManager.AppSettings["AvatarPath"],
-                Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], User.Identity.Name)
-            };
-
-            foreach (string folderPath in folderList)
+                _imageRepository.UserName = User.Identity.Name;
+                fileNames = _imageRepository.GetFileNames();
+            }
+            catch (Exception ex)
             {
-                foreach (string file in Directory.GetFiles(folderPath))
-                {
-                    fileNames.Add(Path.GetFileName(file));
-                }
+                return InternalServerError();
             }
 
             return Ok<List<string>>(fileNames);
@@ -47,10 +51,12 @@ namespace ContactBook.WebApi.Controllers
         // GET api/<controller>
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetImage/{userName}/{fileName}")]
-        public IHttpActionResult GetImage(string userName, string fileName)
+        [Route("{fileName}")]
+        [FileNameValidationFilter("fileName")]
+        public IHttpActionResult GetImage(string fileName, string userName)
         {
-            return new ImageReponseMessage(fileName, userName);
+            _imageRepository.UserName = userName;
+            return new ImageReponseMessage(_imageRepository, fileName);
         }
 
         [HttpPost]
@@ -59,19 +65,15 @@ namespace ContactBook.WebApi.Controllers
         {
             if (HttpContext.Current.Request.Files.AllKeys.Any())
             {
-                string directoryPath = Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], User.Identity.Name);
+                _imageRepository.UserName = User.Identity.Name;
                 var fileExtensions = new List<string>();
-                
-                LoadFileExtensions(fileExtensions);
 
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
+                FileNameValidationFilterAttribute.LoadFileExtensions(fileExtensions);
+                string imagePath = Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], User.Identity.Name);
 
                 var httpPostedFile = HttpContext.Current.Request.Files["file"];
                 string fileExtension = Path.GetExtension(httpPostedFile.FileName);
-                
+
                 if (fileExtensions != null && !fileExtensions.Contains(fileExtension))
                 {
                     ModelState.AddModelError("ExtensionSupport", "Extension not supported. Supported extensions are : " + string.Join(",", fileExtensions.ToArray()));
@@ -83,8 +85,8 @@ namespace ContactBook.WebApi.Controllers
 
                 if (httpPostedFile.ContentLength <= uploadFileSize)
                 {
-                    var savePath = Path.Combine(directoryPath, httpPostedFile.FileName);
-                    httpPostedFile.SaveAs(savePath);
+                    var savePath = Path.Combine(imagePath, httpPostedFile.FileName);
+                    _imageRepository.SaveAsync(savePath, httpPostedFile.InputStream);
                 }
                 else
                 {
@@ -95,51 +97,35 @@ namespace ContactBook.WebApi.Controllers
             return Ok();
         }
 
-        private void LoadFileExtensions(List<string> fileExtensions)
-        {
-            string[] listExtensions = ConfigurationManager.AppSettings[ContactBookConstants.AppSettings_FileUploadExtensions].Split(',');
-            foreach (string extensions in listExtensions)
-            {
-                fileExtensions.Add(extensions);
-            }
-        }
+
     }
 
     public class ImageReponseMessage : IHttpActionResult
     {
-        string _fileName;
-        List<string> rootPaths;
+        private readonly IImageRepository _imageRepository;
+        private string _fileName;
 
-        public ImageReponseMessage(string fileName, string userName)
+        public ImageReponseMessage(IImageRepository imageRepository, string fileName)
         {
+            _imageRepository = imageRepository;
             _fileName = fileName;
-            rootPaths = new List<string>();
-            rootPaths.Add(ConfigurationManager.AppSettings["AvatarPath"]);
-            rootPaths.Add(Path.Combine(ConfigurationManager.AppSettings["UserImagePath"], userName));
         }
 
         public Task<HttpResponseMessage> ExecuteAsync(System.Threading.CancellationToken cancellationToken)
         {
-            var filePath = rootPaths.Select(f => Path.Combine(f, _fileName)).SingleOrDefault(pth =>
-            {
-                return File.Exists(pth);
-            });
+            ImageFileData fileData = _imageRepository.GetFileData(_fileName);
 
-            if (filePath == null)
+            if (string.IsNullOrEmpty(fileData.FilePath))
             {
-                throw new HttpResponseException(HttpStatusCode.OK);
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            string fileExtension = Path.GetExtension(filePath);
-            string mediaType = "image/" + fileExtension;
+            string mediaType = "image/" + fileData.FileExtension;
 
             var taskMessage = Task<HttpResponseMessage>.Run(() =>
             {
                 var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
-
-                byte[] fileData = File.ReadAllBytes(filePath);
-
-                var memStream = new MemoryStream(fileData);
+                var memStream = new MemoryStream(fileData.FileData);
                 responseMessage.Content = new StreamContent(memStream);
                 responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
                 return responseMessage;

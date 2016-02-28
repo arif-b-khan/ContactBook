@@ -58,16 +58,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/28/2016 14:53:24</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.dll">
-      <publishTime>02/28/2016 18:31:37</publishTime>
+      <publishTime>02/28/2016 22:39:28</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.pdb">
-      <publishTime>02/28/2016 18:31:37</publishTime>
+      <publishTime>02/28/2016 22:39:28</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>02/28/2016 18:31:38</publishTime>
+      <publishTime>02/28/2016 23:19:43</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.pdb">
-      <publishTime>02/28/2016 18:31:38</publishTime>
+      <publishTime>02/28/2016 23:19:43</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -577,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/28/2016 15:13:48</publishTime>
+      <publishTime>02/28/2016 21:59:13</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>04/05/2015 14:29:30</publishTime>

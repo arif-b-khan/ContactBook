@@ -18,10 +18,10 @@
                 <div>
                     <span>{{file.name}}</span><div style="float: right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
                 </div>
-                
+
                 <progressbar animate="false" value="fileUploadPercent" max="100">
-        
-    </progressbar>
+
+                </progressbar>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="file in uploadedFiles">
-            <img style="width: 200px; height: 200px" ng-src="{{avatarUrl}}?userName={{userInfo.Username}}&fileName={{file}}"></img>
+            <img style="width: 200px; height: 200px" ng-src="{{avatarUrl}}?fileName={{file}}&userName={{userInfo.Username}}"></img>
         </li>
     </ul>
 </div>

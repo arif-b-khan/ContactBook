@@ -15,8 +15,8 @@ namespace ContactBook.WebApi.Filters
 {
     public class BookIdValidationFilterAttribute : ActionFilterAttribute
     {
-        string parameterName;
-        const string InvalidBookIdMessage = "Invalid bookId. Value of bookid must be a valid number";
+        private string parameterName;
+        private const string InvalidBookIdMessage = "Invalid bookId. Value of bookid must be a valid number";
         public BookIdValidationFilterAttribute(string bookId)
         {
             this.parameterName = bookId;
