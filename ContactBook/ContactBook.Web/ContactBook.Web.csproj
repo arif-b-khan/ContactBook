@@ -98,10 +98,6 @@
     <Content Include="app\controllers\controllers.js" />
     <Content Include="app\directives\directives.js" />
     <Content Include="app\filters\filters.js" />
-    <Content Include="app\lib\angular\angular-csp.css" />
-    <Content Include="app\lib\angular\angular.js" />
-    <Content Include="app\lib\angular\angular.min.js" />
-    <Content Include="app\lib\angular\index.js" />
     <Content Include="app\services\accountSvc.js" />
     <Content Include="app\services\authenticationSvc.js" />
     <Content Include="app\services\cbUploader.js" />
@@ -881,12 +877,7 @@
     <Content Include="logs\.gitkeep" />
     <Content Include=".travis.yml" />
     <Content Include="package.json" />
-    <Content Include="app\lib\angular\.bower.json" />
-    <Content Include="app\lib\angular\angular.min.js.gzip" />
-    <Content Include="app\lib\angular\angular.min.js.map" />
-    <Content Include="app\lib\angular\bower.json" />
-    <Content Include="app\lib\angular\package.json" />
-    <Content Include="app\lib\angular\README.md" />
+    <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\contactbook.web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -934,6 +925,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\lib\" />
     <Folder Include="app\shared\controllers\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
