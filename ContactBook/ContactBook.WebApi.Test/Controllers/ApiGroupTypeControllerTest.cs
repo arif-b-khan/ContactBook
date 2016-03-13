@@ -342,7 +342,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GroupTypeDeleteReturnNotFound()
         {
             //Arrange
-            bool saveCalled = false;
+            //bool saveCalled = false;
             List<GroupType> groupTypeResult = new List<GroupType>();
 
             var groupType = new GroupType()

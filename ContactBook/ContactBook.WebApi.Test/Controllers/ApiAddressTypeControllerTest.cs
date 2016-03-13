@@ -393,7 +393,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void AddressTypeDeleteReturnNotFound()
         {
             //Arrange
-            bool saveCalled = false;
+            //bool saveCalled = false;
             List<AddressType> addressTypeResult = new List<AddressType>();
 
             var addressType = new AddressType()

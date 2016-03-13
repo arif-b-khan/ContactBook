@@ -342,7 +342,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void IMTypeDeleteReturnNotFound()
         {
             //Arrange
-            bool saveCalled = false;
+            //bool saveCalled = false;
             List<IMType> imTypeResult = new List<IMType>();
 
             var imType = new IMType()

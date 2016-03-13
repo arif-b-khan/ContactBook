@@ -1,4 +1,7 @@
 ﻿using Owin;
+using System.Diagnostics;
+
+using System.Web.Http;
 
 namespace ContactBook.WebApi
 {
@@ -17,7 +20,16 @@ namespace ContactBook.WebApi
             //    AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
             //    SlidingExpiration = true
             //});
+            //ContactBookGlobalConfiguration.ApplicationStart();
             ConfigureAuth(app);
+            Debug.WriteLine("Outside selfthos tag");
+
+#if USESELFHOST
+            var config = new HttpConfiguration();
+            Debug.WriteLine("Registering configuration");
+            WebApiConfig.Register(config);
+            app.UseWebApi(config);
+#endif
         }
     }
 

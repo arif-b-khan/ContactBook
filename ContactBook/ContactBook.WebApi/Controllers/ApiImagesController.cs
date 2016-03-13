@@ -61,8 +61,16 @@ namespace ContactBook.WebApi.Controllers
 
         [HttpPost]
         [Route("UploadImage")]
-        public IHttpActionResult UploadImage()
+        public async Task<IHttpActionResult> UploadImage()
         {
+            //if (!Request.Content.IsMimeMultipartContent("form-data"))
+            //{
+            //    return BadRequest();
+            //}
+
+            //var mulitpartStream = new MultipartFormDataStreamProvider(ConfigurationManager.AppSettings["UserImagePath"]);
+            //await Request.Content.ReadAsMulitpartAsync(mulitpartStream);
+
             if (HttpContext.Current.Request.Files.AllKeys.Any())
             {
                 _imageRepository.UserName = User.Identity.Name;

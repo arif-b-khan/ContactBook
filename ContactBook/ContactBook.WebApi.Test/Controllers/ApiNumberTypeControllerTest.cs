@@ -343,7 +343,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void NumberTypeDeleteReturnNotFound()
         {
             //Arrange
-            bool saveCalled = false;
+            //bool saveCalled = false;
             List<NumberType> NumberTypeResult = new List<NumberType>();
 
             var NumberType = new NumberType()

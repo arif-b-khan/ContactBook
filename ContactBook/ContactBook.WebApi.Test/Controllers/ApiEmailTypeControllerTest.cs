@@ -342,7 +342,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void EmailTypeDeleteReturnNotFound()
         {
             //Arrange
-            bool saveCalled = false;
+            //bool saveCalled = false;
             List<EmailType> emailTypeResult = new List<EmailType>();
 
             var emailType = new EmailType()
