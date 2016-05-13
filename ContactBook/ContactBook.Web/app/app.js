@@ -1,12 +1,14 @@
-'use strict';
-(function (cbApp) {
+//var contactBookApp = angular.module('contactbook', []);
+(function () {
+    'use strict';
+    
     //var baseSvc = 'http://contactbookapi.azurewebsites.net';
     var baseSvc = "http://contactbook.com/Contactbook.webapi";
 
     //var baseSvc = "http://localhost:5000";
 
     // Declare app level module which depends on filters, and services
-    cbApp.module('contactbook', [
+    var cbApp = angular.module('contactbook', [
         'ngAnimate',
         'ui.bootstrap',
         'pasvaz.bindonce',
@@ -66,4 +68,4 @@
 
         });
 
-})(angular);
+})();
