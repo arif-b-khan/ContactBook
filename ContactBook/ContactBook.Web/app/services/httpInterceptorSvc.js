@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-cbServices.factory("httpInterceptorSvc", ['$q', '$location', '$injector', '$rootScope', 'localStorageService', 'storageSettings', function($q, $location, $injector, $rootScope, localStorageService, storageSettings){
+angular.module('contactbook.services').factory("httpInterceptorSvc", ['$q', '$location', '$injector', '$rootScope', 'localStorageService', 'storageSettings', function ($q, $location, $injector, $rootScope, localStorageService, storageSettings) {
     
     var _request = function(config){
         

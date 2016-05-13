@@ -1,7 +1,7 @@
 (function () {
     'use stricts';
 
-    cbServices.factory("contactsSvc", ['$http', '$q', 'cbSettings', function ($http, $q, cbSettings) {
+    angular.module('contactbook.services').factory("contactsSvc", ['$http', '$q', 'cbSettings', function ($http, $q, cbSettings) {
         
         var getContacts = function () {
             var deferred = $q.defer();

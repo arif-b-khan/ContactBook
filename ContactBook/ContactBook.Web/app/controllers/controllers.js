@@ -1,5 +1,7 @@
-'use strict';
+(function () {
+    'use strict';
+    angular.module('contactbook.controllers', ['ui.uploader']);
+})();
 
 /* Controllers */
 
-var cbControllers = angular.module('contactbook.controllers', ['ui.uploader']);

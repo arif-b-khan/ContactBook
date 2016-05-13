@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    cbServices.factory("authenticationSvc", ['$http', '$q', '$rootScope', 'localStorageService', 'cbSettings', 'storageSettings', function($http, $q, $rootScope, localStorageService, cbSettings, storageSettings) {
+    angular.module('contactbook.services').factory("authenticationSvc", ['$http', '$q', '$rootScope', 'localStorageService', 'cbSettings', 'storageSettings', function ($http, $q, $rootScope, localStorageService, cbSettings, storageSettings) {
 
         var url = cbSettings.serviceBase;
 

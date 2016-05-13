@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    cbControllers.controller('loginController', ['$scope', '$location', '$rootScope', 'contactBookSpinner', 'authenticationSvc', function($scope, $location, $rootScope, contactBookSpinner, authenticationSvc) {
+    angular.module('contactbook.controllers').controller('loginController', ['$scope', '$location', '$rootScope', 'contactBookSpinner', 'authenticationSvc', function ($scope, $location, $rootScope, contactBookSpinner, authenticationSvc) {
         $scope.signinDisable = false;
         $scope.registerHref = "#/register";
         $scope.forgotPasswordHref = "#/retrievePassword";

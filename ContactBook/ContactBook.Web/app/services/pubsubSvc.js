@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    cbServices.service('cbPubSubScopeFactory', function($log) {
+    angular.module('contactbook.services').service('cbPubSubScopeFactory', function($log) {
 
         return function(scope) {
 
@@ -104,11 +104,5 @@
                 cbPubSubScopeFactory($scope);
             }
         };
-    });
-
-
-    // Initialize handlers on root scope so all child scopes automatically get them
-    // (via prototypical inheritence)
-    
-    
+    }); 
 })();

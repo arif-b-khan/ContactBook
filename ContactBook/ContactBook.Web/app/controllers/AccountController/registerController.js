@@ -45,6 +45,6 @@
 
     registerController.$inject = ['$scope', '$location', '$timeout', 'contactBookSpinner', 'accountSvc'];
 
-    cbControllers.controller("registerController", registerController);
+    angular.module('contactbook.controllers').controller("registerController", registerController);
 
 })();

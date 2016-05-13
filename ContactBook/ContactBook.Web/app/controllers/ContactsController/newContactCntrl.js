@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    cbControllers.controller('newContactCntrl', ['$scope', '$filter', '$modal', '$log', 'contactsSvc', function($scope, $filter, $modal, $log, contactsSvc) {
+    angular.module('contactbook.controllers').controller('newContactCntrl', ['$scope', '$filter', '$modal', '$log', 'contactsSvc', function ($scope, $filter, $modal, $log, contactsSvc) {
         var serverObjects = [];
 
         $scope.search = '';
@@ -138,7 +138,7 @@
         init();
     }]);
 
-    cbControllers.controller('deleteModalCntrl', ['$scope', '$modalInstance', 'contact', function($scope, $modalInstance, contact) {
+    angular.module('contactbook.controllers').controller('deleteModalCntrl', ['$scope', '$modalInstance', 'contact', function ($scope, $modalInstance, contact) {
 
         $scope.contactId = contact;
 

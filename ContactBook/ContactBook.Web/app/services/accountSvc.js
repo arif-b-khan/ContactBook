@@ -1,7 +1,7 @@
 (function () {
     'use stricts';
 
-    cbServices.factory("accountSvc", ['$http', '$q', 'cbSettings', '$window', function ($http, $q, cbSettings, $window) {
+    angular.module('contactbook.services').factory("accountSvc", ['$http', '$q', 'cbSettings', '$window', function ($http, $q, cbSettings, $window) {
         var userList = [];
 
         var init = function () {

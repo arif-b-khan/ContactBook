@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    cbControllers.controller('confirmEmailCntrl', ['$scope', '$location', 'contactBookSpinner', 'accountSvc', function ($scope, $location, contactBookSpinner, accountSvc) {
+    angular.module('contactbook.controllers').controller('confirmEmailCntrl', ['$scope', '$location', 'contactBookSpinner', 'accountSvc', function ($scope, $location, contactBookSpinner, accountSvc) {
         $scope.confirmSuccess = false;
         $scope.confirmFailed = false;
         $scope.invalidUrl = false;

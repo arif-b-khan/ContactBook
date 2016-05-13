@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    cbServices.factory("contactBookSpinner", ['$timeout', 'usSpinnerService',
+    angular.module('contactbook.services').factory("contactBookSpinner", ['$timeout', 'usSpinnerService',
         function($timeout, usSpinnerService) {
             var defaultName = "tempSpinner";
             var name = '';

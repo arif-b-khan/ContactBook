@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    cbControllers.controller('changePasswordCntrl', ['$scope', '$location', '$timeout', 'contactBookSpinner', 'accountSvc', function ($scope, $location, $timeout, contactBookSpinner, accountSvc) {
+    angular.module('contactbook.controllers').controller('changePasswordCntrl', ['$scope', '$location', '$timeout', 'contactBookSpinner', 'accountSvc', function ($scope, $location, $timeout, contactBookSpinner, accountSvc) {
 
         $scope.user = {};
         $scope.changePwdError = false;

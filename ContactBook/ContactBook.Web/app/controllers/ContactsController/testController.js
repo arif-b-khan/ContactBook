@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict'
-    cbControllers.controller('testController', ['$scope', '$http', '$log', '$filter', 'cbUploader', 'cbSettings', function ($scope, $http, $log, $filter, cbUploader, cbSettings) {
+    angular.module('contactbook.controllers').controller('testController', ['$scope', '$http', '$log', '$filter', 'cbUploader', 'cbSettings', function ($scope, $http, $log, $filter, cbUploader, cbSettings) {
         $scope.avatarUrl = cbSettings.serviceBase + '/api/ApiImages/GetImage';
         $scope.avatarUrlList = cbSettings.serviceBase + '/api/ApiImages/GetImageFileNames';
         $scope.uploadUrl = cbSettings.serviceBase + '/api/ApiImages/UploadImage';

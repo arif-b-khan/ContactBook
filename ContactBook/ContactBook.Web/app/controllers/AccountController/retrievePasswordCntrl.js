@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    cbControllers.controller('retrievePasswordCntrl', ['$scope', '$location', '$timeout', 'accountSvc', function ($scope, $location, $timeout, accountSvc) {
+    angular.module('contactbook.controllers').controller('retrievePasswordCntrl', ['$scope', '$location', '$timeout', 'accountSvc', function ($scope, $location, $timeout, accountSvc) {
         
         $scope.emailSuccess = false;
         $scope.emailFailed = false;

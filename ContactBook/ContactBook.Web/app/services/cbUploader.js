@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict'
 
-    cbServices.service('cbUploader', uiUploader);
+    angular.module('contactbook.services').service('cbUploader', uiUploader);
 
     uiUploader.$inject = ['$log'];
 
