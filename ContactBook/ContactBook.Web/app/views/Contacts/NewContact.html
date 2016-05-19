@@ -34,7 +34,7 @@
                 <div class="col-sm-6 col-md-3 col-lg-4" ng-repeat="contact in pagedContactList">
                     <div class="card">
                         <button class="btn close cardClose" title="Delete Customer" data-ng-click="open('sm', contact)">&times;</button>
-                        <div class="cardHeader"><a href="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="white">{{contact.name}} <i class="icon-edit icon-white editIcon"></i></a></div>
+                        <div class="cardHeader"><a href="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="white">{{contact.firstname}} <i class="icon-edit icon-white editIcon"></i></a></div>
                         <div class="cardBody">
                             <div class="clearfix">
                                 <div class="pull-left cardBodyLeft">
@@ -42,7 +42,7 @@
                                         <img ng-src="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="image-rounded cardImage" /></a>
                                 </div>
                                 <div class="pull-left cardBodyRight">
-                                    <div class="cardBodyContent">{{contact.phone}}</div>
+                                    <div class="cardBodyContent">{{contact.numbers[0].contactNumber}}</div>
                                     <div class="cardBodyContent">{{contact.email}}</div>
                                 </div>
                             </div>

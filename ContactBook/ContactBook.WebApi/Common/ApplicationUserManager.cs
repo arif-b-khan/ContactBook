@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
+using ContactBook.WebApi.App_Start;
+using Microsoft.Practices.Unity;
 
 namespace ContactBook.WebApi.Common
 {
@@ -22,9 +24,15 @@ namespace ContactBook.WebApi.Common
 
         public static UserManager<IdentityUser> Create(IdentityFactoryOptions<UserManager<IdentityUser>> options, IOwinContext context)
         {
+            var container = UnityConfig.GetConfiguredContainer(); //get the configured container.
             var appDbContext = context.Get<CBIndentityDbContext>();
-            var appUserManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(appDbContext));
+            var userStore = new UserStore<IdentityUser>(appDbContext);
+            var appUserManager = new UserManager<IdentityUser>(userStore);
 
+            container.RegisterInstance(userStore);
+            container.RegisterInstance(appUserManager);
+            container.RegisterInstance(Startup.OAuthOptions.AccessTokenFormat);
+            
             // Configure validation logic for usernames
             appUserManager.UserValidator = new UserValidator<IdentityUser>(appUserManager)
             {
@@ -41,11 +49,11 @@ namespace ContactBook.WebApi.Common
 
             appUserManager.EmailService = new ContactbookEmailService();
 
-//#if Azure
+            //#if Azure
             DataProvider = options.DataProtectionProvider;
-//#else
-//            DataProvider = new DpapiDataProtectionProvider();
-//#endif
+            //#else
+            //            DataProvider = new DpapiDataProtectionProvider();
+            //#endif
 
             if (DataProvider != null)
             {

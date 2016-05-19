@@ -22,7 +22,7 @@ namespace ContactBook.WebApi
             //});
             //ContactBookGlobalConfiguration.ApplicationStart();
             ConfigureAuth(app);
-            Debug.WriteLine("Outside selfthos tag");
+            Debug.WriteLine("Outside selfthost tag");
 
 #if USESELFHOST
             var config = new HttpConfiguration();

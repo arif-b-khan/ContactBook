@@ -17,7 +17,7 @@ namespace ContactBook.WebApi.App_Start
             // var resolver = new UnityHierarchicalDependencyResolver(UnityConfig.GetConfiguredContainer());
             //var resolver = new UnityDependencyResolver(UnityConfig.GetConfiguredContainer());
 
-            var resolver = new UnityDependencyResolver(DependencyFactory.Container);
+            var resolver = new UnityDependencyResolver(UnityConfig.GetConfiguredContainer());
 
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
         }

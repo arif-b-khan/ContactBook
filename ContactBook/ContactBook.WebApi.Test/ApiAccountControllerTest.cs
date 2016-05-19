@@ -14,9 +14,9 @@ namespace ContactBook.WebApi.Test
        [Fact(Skip ="Skipping this test")]
        public void GetUserInfoTest()
        {
-           var controller = new ApiAccountController();
-           UserInfoViewModel model = controller.GetUserInfo();
-           Assert.True(model != null, "UserInfoViewModel shouldn't be null");
+           //var controller = new ApiAccountController();
+           //UserInfoViewModel model = controller.GetUserInfo();
+           //Assert.True(model != null, "UserInfoViewModel shouldn't be null");
        }
        
     }

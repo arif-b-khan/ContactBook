@@ -1,12 +1,17 @@
 (function () {
     'use stricts';
 
-    angular.module('contactbook.services').factory("contactsSvc", ['$http', '$q', 'cbSettings', function ($http, $q, cbSettings) {
-        
+    angular.module('contactbook.services').factory("contactsSvc", ['$http', '$q', '$rootScope', 'cbSettings', function ($http, $q, $rootScope, cbSettings) {
+        var url = cbSettings.serviceBase;
+
+        var contactUrl = {
+            GetContact: url + "/api/ApiContact"
+        }
+
         var getContacts = function () {
             var deferred = $q.defer();
 
-            $http.get("http://contactbook-arif-bannehasan1.c9.io/ContactBook/ContactBook.Web/app/data/contactslist.json?_c9_id=livepreview0&_c9_host=https://ide.c9.io#/newContact").then(function (data) {
+            $http.get(contactUrl.GetContact+'/'+$rootScope.userInfo.BookId).then(function (data) {
                 deferred.resolve(data);
             });
             return deferred.promise;

@@ -37,7 +37,7 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest();
             }
 
-            return Ok<List<Contact>>(contacts);
+            return Ok(contacts);
         }
 
         // POST api/<controller>

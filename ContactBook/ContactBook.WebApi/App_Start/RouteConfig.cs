@@ -14,9 +14,7 @@ namespace ContactBook.WebApi
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            //httpConfig.Routes.MapHttpRoute(name:"ApiRoute",
-            //    url:"api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional });
+
         }
     }
 }

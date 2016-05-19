@@ -39,21 +39,16 @@ namespace ContactBook.WebApi.Controllers
         private const string LocalLoginProvider = "Local";
         private readonly ICBLogger _logger;
 
-        public UserManager<IdentityUser> UserManager { get; private set; }
+        private UserManager<IdentityUser> UserManager { get; set; }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
-        public ApiAccountController()
-            : this(HttpContext.Current.GetOwinContext().GetUserManager<UserManager<IdentityUser>>(), Startup.OAuthOptions.AccessTokenFormat)
-        {
-        }
+        private ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; set; }
 
         public ApiAccountController(UserManager<IdentityUser> userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat, ICBLogger logger)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
-            _logger = DependencyFactory.Resolve<ICBLogger>();
+            _logger = logger;
         }
 
         //Get api/Account/UserExists
@@ -604,16 +599,6 @@ namespace ContactBook.WebApi.Controllers
             return Ok();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                UserManager.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
-
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }
@@ -633,7 +618,8 @@ namespace ContactBook.WebApi.Controllers
                     foreach (string error in result.Errors)
                     {
                         ModelState.AddModelError("", error);
-                        Configuration.Services.GetTraceWriter().Error(Request, Category, "MethodName: GetErrorResult Message: {0}", error);
+                        ITraceWriter writer = Configuration.Services.GetTraceWriter();
+                        writer.Error(Request, Category, "MethodName: GetErrorResult Message: {0}", error);
                     }
                 }
 

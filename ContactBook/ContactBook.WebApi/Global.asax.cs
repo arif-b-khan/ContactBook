@@ -13,6 +13,7 @@ namespace ContactBook.WebApi
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

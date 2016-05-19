@@ -3,9 +3,9 @@
     'use strict';
     
     //var baseSvc = 'http://contactbookapi.azurewebsites.net';
-    var baseSvc = "http://contactbook.com/Contactbook.webapi";
+    //var baseSvc = "http://contactbook.com/Contactbook.webapi";
 
-    //var baseSvc = "http://localhost:5000";
+    var baseSvc = "http://localhost:63484";
 
     // Declare app level module which depends on filters, and services
     var cbApp = angular.module('contactbook', [

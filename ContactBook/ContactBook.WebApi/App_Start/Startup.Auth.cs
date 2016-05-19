@@ -15,6 +15,9 @@ using ContactBook.WebApi.Common;
 using ContactBook.Domain.IoC;
 using Microsoft.Owin.Security.DataProtection;
 using System.Web;
+using ContactBook.WebApi.App_Start;
+using Microsoft.Practices.Unity;
+using Microsoft.Owin.Security;
 
 namespace ContactBook.WebApi
 {
@@ -26,7 +29,7 @@ namespace ContactBook.WebApi
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             app.CreatePerOwinContext(CBIndentityDbContext.Create);
-            app.CreatePerOwinContext<UserManager<IdentityUser>>((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) =>
+            app.CreatePerOwinContext((IdentityFactoryOptions<UserManager<IdentityUser>> opt, IOwinContext con) =>
                 {
                     UserManager<IdentityUser> retUserManager = ApplicationUserManager.Create(opt, con);
                     return retUserManager;

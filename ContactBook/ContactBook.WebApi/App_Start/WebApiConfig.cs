@@ -10,7 +10,7 @@ namespace ContactBook.WebApi
         public static void Register(HttpConfiguration config)
         {
             //Register tracing mechanism
-            //config.Services.Replace(typeof(System.Web.Http.Tracing.ITraceWriter), new CBTraceWriter());
+            config.Services.Replace(typeof(System.Web.Http.Tracing.ITraceWriter), new CBTraceWriter());
 
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
