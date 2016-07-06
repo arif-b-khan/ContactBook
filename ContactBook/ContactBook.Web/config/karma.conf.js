@@ -3,8 +3,9 @@ module.exports = function (config) {
         basePath: '../',
 
         files: [
-            'Scripts/angular.js',
-            'Scripts/angular-*.js',
+            'app/lib/angular/angular.js',
+            'app/lib/angular-mocks/angular-mocks.js',
+            'app/app.js',
             'app/controllers/**/*.js',
             'test/unit/**/*.js'
         ],
@@ -16,7 +17,7 @@ module.exports = function (config) {
             'karma-junit-reporter',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
-            'karma-jasmine'
+            'karma-jasmine' 
         ],
 
         junitReporter: {

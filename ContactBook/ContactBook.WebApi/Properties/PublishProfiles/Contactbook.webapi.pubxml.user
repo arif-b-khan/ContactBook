@@ -52,22 +52,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2015 12:06:45</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.dll">
-      <publishTime>02/28/2016 14:53:24</publishTime>
+      <publishTime>05/16/2016 22:05:25</publishTime>
     </File>
     <File Include="bin/ContactBook.Db.pdb">
-      <publishTime>02/28/2016 14:53:24</publishTime>
+      <publishTime>05/16/2016 22:05:25</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.dll">
-      <publishTime>02/28/2016 22:39:28</publishTime>
+      <publishTime>06/03/2016 20:55:11</publishTime>
     </File>
     <File Include="bin/ContactBook.Domain.pdb">
-      <publishTime>02/28/2016 22:39:28</publishTime>
+      <publishTime>06/03/2016 20:55:11</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.dll">
-      <publishTime>03/13/2016 18:46:06</publishTime>
+      <publishTime>06/03/2016 20:55:15</publishTime>
     </File>
     <File Include="bin/ContactBook.WebApi.pdb">
-      <publishTime>03/13/2016 18:46:05</publishTime>
+      <publishTime>06/03/2016 20:55:15</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>03/18/2015 10:14:01</publishTime>
@@ -505,7 +505,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2015 21:59:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/05/2016 18:34:41</publishTime>
+      <publishTime>05/16/2016 21:33:33</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
       <publishTime>01/09/2016 21:12:12</publishTime>
@@ -577,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2015 07:39:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/13/2016 18:47:35</publishTime>
+      <publishTime>06/03/2016 20:56:06</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>04/05/2015 14:29:30</publishTime>
