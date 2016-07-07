@@ -15,17 +15,22 @@
                 <div class="search-container">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" type="text" name="name" ng-model="search.name" ng-maxlength="30" />
+                        <input class="form-control" type="text" name="name" ng-model="search.firstname" ng-maxlength="30" />
                     </div>
                     <div class="form-group">
                         <label for="phnNumber">Phone Number</label>
-                        <input class="form-control" type="text" name="phnNumber" ng-model="search.phone" ng-maxlength="20" ng-pattern='/^\d{2}$/' />
+                        <input class="form-control" type="text" name="phnNumber" ng-model="search.numbers.contactNumber" ng-maxlength="20" ng-pattern='/^\d{2}$/' />
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddrress">Email Address</label>
+                        <input class="form-control" type="text" name="emailAddrress" ng-model="search.emails.emailAddress" ng-maxlength="20"/>
                     </div>
                     <button class="btn btn-default" ng-click="searchContact(search)">
-                        <span class="glyphicon glyphicon-search"></span>Search</button>
-                        <button class="btn btn-default" ng-click="clearSearchBox()">
-                            Clear
-                        </button>
+                        <span class="glyphicon glyphicon-search"></span>Search
+                    </button>
+                    <button class="btn btn-default" ng-click="clearSearchBox()">
+                        Clear
+                    </button>
                 </div>
             </div>
         </div>
@@ -38,12 +43,13 @@
                         <div class="cardBody">
                             <div class="clearfix">
                                 <div class="pull-left cardBodyLeft">
-                                    <a href="#/customeredit/{{customer.id}}" class="white">
-                                        <img ng-src="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="image-rounded cardImage" /></a>
+                                    <a href="#/contactDetail/{{customer.id}}" class="white">
+                                        <img ng-src="http://contactbook.com/Contactbook.webapi/api/ApiImages/GetImage?userName=axkhan2&fileName=Male1.png" class="image-rounded cardImage" />
+                                    </a>
                                 </div>
                                 <div class="pull-left cardBodyRight">
                                     <div class="cardBodyContent">{{contact.numbers[0].contactNumber}}</div>
-                                    <div class="cardBodyContent">{{contact.email}}</div>
+                                    <div class="cardBodyContent">{{contact.emails[0].emailAddress}}</div>
                                 </div>
                             </div>
                         </div>

@@ -4,13 +4,20 @@
     var mainViewConfiguration = function ($routeProvider) {
         $routeProvider.when('/test', {
             templateUrl: "views/Contacts/Test.html",
-            controller: 'testController'
+            controller: 'testController',
+            access: {
+                hideWhenLoggedin: false,
+                isRequired: true
+            }
         })
         .when('/newContact', {
             templateUrl: "views/Contacts/NewContact.html",
-            controller: "newContactCntrl"
+            controller: "newContactCntrl",
+            access: {
+                hideWhenLoggedin: false,
+                isRequired: true
+            }
         });
-
     };
 
     mainViewConfiguration.$inject = ['$routeProvider'];

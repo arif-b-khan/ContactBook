@@ -6,7 +6,6 @@ using ContactBook.Domain.Models;
 using ContactBook.WebApi.Providers;
 using ContactBook.WebApi.Results;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -19,14 +18,10 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Transactions;
 using ContactBook.Domain.Common.Logging;
-using NLog;
 using System.Web.Http.Tracing;
 using ContactBook.Domain.IoC;
-using ContactBook.WebApi.Common;
-using ContactBook.WebApi.Model;
 using ContactBook.Domain.Contexts.Token;
 
 namespace ContactBook.WebApi.Controllers

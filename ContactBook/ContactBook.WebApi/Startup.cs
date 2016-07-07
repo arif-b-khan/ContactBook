@@ -1,6 +1,6 @@
 ﻿using Owin;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ContactBook.WebApi
@@ -21,6 +21,13 @@ namespace ContactBook.WebApi
             //    SlidingExpiration = true
             //});
             //ContactBookGlobalConfiguration.ApplicationStart();
+            app.Use((o, t) =>
+            {
+                Debug.WriteLine(o.Request.Uri.AbsolutePath);
+                return t();
+            });
+
+
             ConfigureAuth(app);
             Debug.WriteLine("Outside selfthost tag");
 
