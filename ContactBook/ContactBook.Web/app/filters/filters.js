@@ -19,7 +19,7 @@ angular.module('contactbook.filters', []).filter('bytes', function() {
         }
         else {
             input.forEach(function(item) {
-                if (item.name.charAt(0).toUpperCase() == letter) {
+                if (item.firstname.charAt(0).toUpperCase() == letter) {
                     out.push(item);
                 }
             });

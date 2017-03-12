@@ -22,7 +22,6 @@
                 $scope.invalidUrl = true;
             }
         };
-
     }
     ]);
 })();

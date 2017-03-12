@@ -114,6 +114,7 @@
     <Content Include="app\views\Account\RegisterSuccess.html" />
     <Content Include="app\views\Account\RetrievePassword.html" />
     <Content Include="app\views\Account\ResetPassword.html" />
+    <Content Include="app\views\Contacts\ContactDetails.html" />
     <Content Include="app\views\Contacts\contactsView.js" />
     <Content Include="app\views\Contacts\NewContact.html" />
     <Content Include="app\views\Contacts\Test.html" />
