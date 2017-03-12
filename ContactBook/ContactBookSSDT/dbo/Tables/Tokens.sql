@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CB_Tokens] (
+﻿CREATE TABLE [dbo].[Tokens] (
     [Id]         INT              IDENTITY (1, 1) NOT NULL,
     [UserId]     NVARCHAR (100)   NULL,
     [Token]      NVARCHAR (500)   NULL,

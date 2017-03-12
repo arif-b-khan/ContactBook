@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CB_Contact] (
+﻿CREATE TABLE [dbo].[Contacts] (
     [ContactId]     BIGINT         IDENTITY (1, 1) NOT NULL,
     [Firstname]     NVARCHAR (100) NOT NULL,
     [Lastname]      NVARCHAR (100) NULL,
@@ -15,11 +15,11 @@
     [ImagePath]     NVARCHAR (MAX) NULL,
     [ThumbnailPath] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_CB_Contact] PRIMARY KEY CLUSTERED ([ContactId] ASC),
-    CONSTRAINT [FK_CB_ContactBookCB_Contacts] FOREIGN KEY ([BookId]) REFERENCES [dbo].[CB_ContactBook] ([BookId])
+    CONSTRAINT [FK_CB_ContactBookCB_Contacts] FOREIGN KEY ([BookId]) REFERENCES [dbo].[ContactBooks] ([BookId])
 );
 
 
 GO
 CREATE NONCLUSTERED INDEX [IX_FK_CB_ContactBookCB_Contacts]
-    ON [dbo].[CB_Contact]([BookId] ASC);
+    ON [dbo].[Contacts]([BookId] ASC);
 

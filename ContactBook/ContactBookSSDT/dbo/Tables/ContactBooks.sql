@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CB_ContactBook] (
+﻿CREATE TABLE [dbo].[ContactBooks] (
     [BookId]   BIGINT         IDENTITY (1, 1) NOT NULL,
     [BookName] NVARCHAR (300) NOT NULL,
     [Enabled]  BIT            NOT NULL,

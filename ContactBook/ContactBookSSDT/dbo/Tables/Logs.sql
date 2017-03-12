@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CB_Log] (
+﻿CREATE TABLE [dbo].[Logs] (
     [LoggingId]   UNIQUEIDENTIFIER CONSTRAINT [DF_Logging_LoggingId] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
     [Date]        DATETIME         CONSTRAINT [DF_Logging_date] DEFAULT (getdate()) NULL,
     [Application] VARCHAR (200)    NULL,

@@ -64,33 +64,33 @@
     <Folder Include="Data" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\CB_IMType.sql" />
-    <Build Include="dbo\Tables\CB_Website.sql" />
-    <Build Include="dbo\Tables\CB_Relationship.sql" />
-    <Build Include="dbo\Tables\CB_RelationshipType.sql" />
-    <Build Include="dbo\Tables\CB_SpecialDate.sql" />
-    <Build Include="dbo\Tables\CB_SpecialDateType.sql" />
-    <Build Include="dbo\Tables\CB_InternetCall.sql" />
-    <Build Include="dbo\Tables\CB_ContactBook.sql" />
-    <Build Include="dbo\Tables\CB_Secret.sql" />
-    <Build Include="dbo\Tables\CB_Tokens.sql" />
+    <Build Include="dbo\Tables\IMTypes.sql" />
+    <Build Include="dbo\Tables\Websites.sql" />
+    <Build Include="dbo\Tables\Relationships.sql" />
+    <Build Include="dbo\Tables\RelationshipTypes.sql" />
+    <Build Include="dbo\Tables\SpecialDates.sql" />
+    <Build Include="dbo\Tables\SpecialDateTypes.sql" />
+    <Build Include="dbo\Tables\InternetCalls.sql" />
+    <Build Include="dbo\Tables\ContactBooks.sql" />
+    <Build Include="dbo\Tables\Secrets.sql" />
+    <Build Include="dbo\Tables\Tokens.sql" />
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\CB_Log.sql" />
+    <Build Include="dbo\Tables\Logs.sql" />
     <Build Include="dbo\Tables\AspNetUserClaims.sql" />
     <Build Include="dbo\Tables\AspNetUserLogins.sql" />
     <Build Include="dbo\Tables\__MigrationHistory.sql" />
-    <Build Include="dbo\Tables\CB_Contact.sql" />
-    <Build Include="dbo\Tables\CB_Number.sql" />
-    <Build Include="dbo\Tables\CB_Email.sql" />
-    <Build Include="dbo\Tables\CB_Address.sql" />
-    <Build Include="dbo\Tables\CB_GroupType.sql" />
-    <Build Include="dbo\Tables\CB_NumberType.sql" />
-    <Build Include="dbo\Tables\CB_ContactByGroup.sql" />
-    <Build Include="dbo\Tables\CB_AddressType.sql" />
-    <Build Include="dbo\Tables\CB_EmailType.sql" />
-    <Build Include="dbo\Tables\CB_IM.sql" />
+    <Build Include="dbo\Tables\Contacts.sql" />
+    <Build Include="dbo\Tables\Numbers.sql" />
+    <Build Include="dbo\Tables\Emails.sql" />
+    <Build Include="dbo\Tables\Addresses.sql" />
+    <Build Include="dbo\Tables\GroupTypes.sql" />
+    <Build Include="dbo\Tables\NumberTypes.sql" />
+    <Build Include="dbo\Tables\ContactByGroups.sql" />
+    <Build Include="dbo\Tables\AddressTypes.sql" />
+    <Build Include="dbo\Tables\EmailTypes.sql" />
+    <Build Include="dbo\Tables\IMs.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ContactBookSSDT.publish.xml" />
