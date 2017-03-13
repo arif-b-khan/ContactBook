@@ -45,7 +45,7 @@ namespace ContactBook.Domain.Validations
             {
                 IContactBookContext cbContext = DependencyFactory.Resolve<IContactBookContext>();
 
-                ContactBookInfo cbInfo = cbContext.GetContactBook(UserPrincipal.Identity.Name);
+                ContactBookInfoModel cbInfo = cbContext.GetContactBook(UserPrincipal.Identity.Name);
 
                 if (cbInfo != null)
                 {

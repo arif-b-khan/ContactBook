@@ -20,17 +20,17 @@ namespace ContactBook.WebApi.Test.Controllers
     public class ApiGroupTypeControllerTest : IClassFixture<ControllerTestFixtures>
     {
         private CancellationTokenSource cts;
-        private List<CB_GroupType> groupTypeList = null;
+        private List<GroupType> groupTypeList = null;
 
         public ApiGroupTypeControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
             cts = new CancellationTokenSource(10000);
-            groupTypeList = new List<CB_GroupType>()
+            groupTypeList = new List<GroupType>()
             {
-                new CB_GroupType(){ GroupId = 1, Group_TypeName="Home", BookId=null},
-                new CB_GroupType(){ GroupId = 2, Group_TypeName="Office", BookId=null},
-                new CB_GroupType(){ GroupId = 3, Group_TypeName="abc", BookId=1}
+                new GroupType(){ GroupId = 1, Group_TypeName="Home", BookId=null},
+                new GroupType(){ GroupId = 2, Group_TypeName="Office", BookId=null},
+                new GroupType(){ GroupId = 3, Group_TypeName="abc", BookId=1}
             };
         }
 
@@ -40,7 +40,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetGroupTypeShouldReturnNotFound()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() => ControllerFixture.MockRepository<CB_GroupType>(null));
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() => ControllerFixture.MockRepository<GroupType>(null));
 
             ApiGroupTypeController groupTypeCnt = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
             groupTypeCnt.Request = new HttpRequestMessage();
@@ -57,8 +57,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetGroupTypeShouldReturnNumber()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_GroupType>(groupTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(
+                () => ControllerFixture.MockRepository<GroupType>(groupTypeList
                     ));
 
             ApiGroupTypeController groupTypeCntr = new ApiGroupTypeController(ControllerFixture.MockUnitOfWork.Object);
@@ -68,8 +68,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(groupTypeCntr.Get(1), cts.Token);
 
-            List<GroupType> resultType;
-            result.TryGetContentValue<List<GroupType>>(out resultType);
+            List<GroupTypeModel> resultType;
+            result.TryGetContentValue<List<GroupTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -83,8 +83,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetGroupTypeShouldOnlyDefaultNumbers()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_GroupType>(groupTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(
+                () => ControllerFixture.MockRepository<GroupType>(groupTypeList
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
@@ -95,8 +95,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(groupTypeCntr.Get(-1), cts.Token);
 
-            List<GroupType> resultType;
-            result.TryGetContentValue<List<GroupType>>(out resultType);
+            List<GroupTypeModel> resultType;
+            result.TryGetContentValue<List<GroupTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -111,29 +111,29 @@ namespace ContactBook.WebApi.Test.Controllers
         {
             //Arrange
             List<GroupType> groupTypeResult = new List<GroupType>();
-            var groupType = new GroupType()
+            var groupType = new GroupTypeModel()
             {
                 GroupId = 1,
                 GroupTypeName = "Home",
                 BookId = 1
             };
-            var cbGroupType = new CB_GroupType()
+            var cbGroupType = new GroupType()
             {
                 GroupId = 1,
                 Group_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepository<CB_GroupType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_GroupType>())).Callback<CB_GroupType>(
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepository<GroupType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<GroupType>())).Callback<GroupType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_GroupType, GroupType>().ForMember(at => at.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
+                    Mapper.CreateMap<GroupType, GroupTypeModel>().ForMember(at => at.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
 
                     groupTypeResult.Add(Mapper.Map<GroupType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -154,30 +154,30 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<GroupType> groupTypeResult = new List<GroupType>();
 
-            var groupType = new GroupType()
+            var groupType = new GroupTypeModel()
             {
                 GroupId = 1,
                 GroupTypeName = "Home",
                 BookId = 1
             };
 
-            var cbGroupType = new CB_GroupType()
+            var cbGroupType = new GroupType()
             {
                 GroupId = 1,
                 Group_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepository<CB_GroupType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_GroupType>())).Callback<CB_GroupType>(
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepository<GroupType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<GroupType>())).Callback<GroupType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_GroupType, GroupType>().ForMember(at => at.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
+                    Mapper.CreateMap<GroupType, GroupTypeModel>().ForMember(at => at.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
 
                     groupTypeResult.Add(Mapper.Map<GroupType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -215,23 +215,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<GroupType> groupTypeResult = new List<GroupType>();
 
-            var imType = new GroupType()
+            var imType = new GroupTypeModel()
             {
                 GroupId = 3,
                 GroupTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_GroupType>(groupTypeList);
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<GroupType>(groupTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_GroupType>(), It.IsAny<CB_GroupType>())).Callback<CB_GroupType, CB_GroupType>(
+            mockRepo.Setup(s => s.Update(It.IsAny<GroupType>(), It.IsAny<GroupType>())).Callback<GroupType, GroupType>(
                 (a, c) =>
                 {
-                    CB_GroupType upGroup = groupTypeList.Where(cb => cb.GroupId == c.GroupId).SingleOrDefault();
+                    GroupType upGroup = groupTypeList.Where(cb => cb.GroupId == c.GroupId).SingleOrDefault();
                     upGroup.Group_TypeName = c.Group_TypeName;
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -261,16 +261,16 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GroupTypeUpdateShouldReturnNotFound()
         {
             //Arrange
-            var imType = new GroupType()
+            var imType = new GroupTypeModel()
             {
                 GroupId = -3,
                 GroupTypeName = "Updated",
                 BookId = -1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_GroupType>(groupTypeList);
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<GroupType>(groupTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -296,23 +296,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<GroupType> groupTypeResult = new List<GroupType>();
 
-            var groupType = new GroupType()
+            var groupType = new GroupTypeModel()
             {
                 GroupId = 3,
                 GroupTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_GroupType>(groupTypeList);
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<GroupType>(groupTypeList);
 
-            mockRepo.Setup(s => s.Delete(It.IsAny<CB_GroupType>())).Callback<CB_GroupType>(
+            mockRepo.Setup(s => s.Delete(It.IsAny<GroupType>())).Callback<GroupType>(
                 c =>
                 {
-                    CB_GroupType delAddr = groupTypeList.Where(cb => cb.GroupId == c.GroupId).SingleOrDefault();
+                    GroupType delAddr = groupTypeList.Where(cb => cb.GroupId == c.GroupId).SingleOrDefault();
                     groupTypeList.Remove(delAddr);
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -345,16 +345,16 @@ namespace ContactBook.WebApi.Test.Controllers
             //bool saveCalled = false;
             List<GroupType> groupTypeResult = new List<GroupType>();
 
-            var groupType = new GroupType()
+            var groupType = new GroupTypeModel()
             {
                 GroupId = 3,
                 GroupTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_GroupType>(groupTypeList);
+            Mock<IContactBookDbRepository<GroupType>> mockRepo = ControllerFixture.MockRepositoryNeedList<GroupType>(groupTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_GroupType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<GroupType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });

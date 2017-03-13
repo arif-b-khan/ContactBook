@@ -4,9 +4,9 @@ namespace ContactBook.Domain.Contexts
 {
     public interface IContactBookContext
     {
-        void AddContactBook(ContactBookInfo mCb);
+        void AddContactBook(ContactBookInfoModel mCb);
 
-        ContactBookInfo GetContactBook(string userName);
+        ContactBookInfoModel GetContactBook(string userName);
 
         void CreateContactBook(string username, string Id);
     }

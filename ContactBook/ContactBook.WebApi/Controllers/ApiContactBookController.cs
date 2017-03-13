@@ -22,7 +22,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("GetContactBook/{username}")]
         public IHttpActionResult GetContactBook(string username)
         {
-            ContactBookInfo cbInfo = null;
+            ContactBookInfoModel cbInfo = null;
 
             cbInfo = contactContext.GetContactBook(username);
 

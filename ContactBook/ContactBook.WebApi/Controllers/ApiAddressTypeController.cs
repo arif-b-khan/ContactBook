@@ -16,21 +16,21 @@ namespace ContactBook.WebApi.Controllers
     [Authorize]
     public class ApiAddressTypeController : ApiController
     {
-        private IGenericContextTypes<AddressType, CB_AddressType> genericContext;
+        private IGenericContextTypes<AddressTypeModel, AddressType> genericContext;
         
         public ApiAddressTypeController(IContactBookRepositoryUow uow)
         {
-            genericContext = new GenericContextTypes<AddressType, CB_AddressType>(uow);
+            genericContext = new GenericContextTypes<AddressTypeModel, AddressType>(uow);
         }
 
         // GET api/AddressType/GetTypes/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<AddressType>))]
+        [ResponseType(typeof(List<AddressTypeModel>))]
         [BookIdValidationFilter("bookId")]
         [HttpGet]
         public IHttpActionResult Get(long bookId)
         {
-            List<AddressType> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
+            List<AddressTypeModel> retAddressType = genericContext.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue));
 
             if (retAddressType == null || retAddressType.Count == 0)
             {
@@ -42,7 +42,7 @@ namespace ContactBook.WebApi.Controllers
 
         //Post api/AddressType/InsertType
         [HttpPost]
-        public IHttpActionResult Post([FromBody]AddressType addressType)
+        public IHttpActionResult Post([FromBody]AddressTypeModel addressType)
         {
             Exception retException = null;
             bool status = true;
@@ -54,7 +54,7 @@ namespace ContactBook.WebApi.Controllers
 
             try
             {
-                genericContext.InsertTypes(new List<AddressType>() { addressType });
+                genericContext.InsertTypes(new List<AddressTypeModel>() { addressType });
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace ContactBook.WebApi.Controllers
 
             if (status)
             {
-                return CreatedAtRoute<AddressType>("DefaultApi", new { controller = "AddressType", action = "GetTypes", bookid = addressType.BookId }, addressType);
+                return CreatedAtRoute<AddressTypeModel>("DefaultApi", new { controller = "AddressType", action = "GetTypes", bookid = addressType.BookId }, addressType);
             }
             else
             {
@@ -75,7 +75,7 @@ namespace ContactBook.WebApi.Controllers
 
         // PUT api/<controller>/5
         [HttpPut]
-        public IHttpActionResult Put([FromBody]AddressType addressType)
+        public IHttpActionResult Put([FromBody]AddressTypeModel addressType)
         {
             Exception retException = null;
             bool status = true;
@@ -89,14 +89,14 @@ namespace ContactBook.WebApi.Controllers
 
             try
             {
-                List<CB_AddressType> existingTypeList = genericContext.GetCBTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) && cbt.AddressTypeId == addressType.AddressTypeId));
+                List<AddressType> existingTypeList = genericContext.GetCBTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) && cbt.AddressTypeId == addressType.AddressTypeId));
 
                 if (existingTypeList == null || existingTypeList.Count == 0)
                 {
                     return NotFound();
                 }
 
-                CB_AddressType existingAddressType = existingTypeList.SingleOrDefault();
+                AddressType existingAddressType = existingTypeList.SingleOrDefault();
 
                 if (!existingAddressType.Equals(addressType))
                 {
@@ -126,7 +126,7 @@ namespace ContactBook.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult Delete(int addressTypeId, long bookId)
         {
-            CB_AddressType addressType = null;
+            AddressType addressType = null;
 
             if (bookId <= 0)
             {

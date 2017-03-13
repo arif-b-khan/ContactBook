@@ -14,7 +14,7 @@ namespace ContactBook.Domain.Validations.Helper
             switch (typeName)
             {
                 case "NumberType":
-                    IGenericContextTypes<NumberType, CB_NumberType> numberType = new GenericContextTypes<NumberType, CB_NumberType>();
+                    IGenericContextTypes<NumberTypeModel, NumberType> numberType = new GenericContextTypes<NumberTypeModel, NumberType>();
 
                     foreach (string item in numberType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.NumberTypeName))
                     {
@@ -26,7 +26,7 @@ namespace ContactBook.Domain.Validations.Helper
                     break;
 
                 case "AddressType":
-                    IGenericContextTypes<AddressType, CB_AddressType> addressType = new GenericContextTypes<AddressType, CB_AddressType>();
+                    IGenericContextTypes<AddressTypeModel, AddressType> addressType = new GenericContextTypes<AddressTypeModel, AddressType>();
 
                     foreach (string item in addressType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.AddressTypeName))
                     {
@@ -38,7 +38,7 @@ namespace ContactBook.Domain.Validations.Helper
                     break;
 
                 case "EmailType":
-                    IGenericContextTypes<EmailType, CB_EmailType> emailType = new GenericContextTypes<EmailType, CB_EmailType>();
+                    IGenericContextTypes<EmailTypeModel, EmailType> emailType = new GenericContextTypes<EmailTypeModel, EmailType>();
 
                     foreach (string item in emailType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.EmailTypeName))
                     {
@@ -50,7 +50,7 @@ namespace ContactBook.Domain.Validations.Helper
                     break;
 
                 case "IMType":
-                    IGenericContextTypes<IMType, CB_IMType> imType = new GenericContextTypes<IMType, CB_IMType>();
+                    IGenericContextTypes<IMTypeModel, IMType> imType = new GenericContextTypes<IMTypeModel, IMType>();
 
                     foreach (string item in imType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.IMTypeName))
                     {
@@ -62,7 +62,7 @@ namespace ContactBook.Domain.Validations.Helper
                     break;
 
                 case "GroupType":
-                    IGenericContextTypes<GroupType, CB_GroupType> groupType = new GenericContextTypes<GroupType, CB_GroupType>();
+                    var groupType = new GenericContextTypes<GroupTypeModel, GroupType>();
 
                     foreach (string item in groupType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.GroupTypeName))
                     {
@@ -74,7 +74,7 @@ namespace ContactBook.Domain.Validations.Helper
                     break;
 
                 case "RelationshipType":
-                    IGenericContextTypes<RelationshipType, CB_RelationshipType> relationshipType = new GenericContextTypes<RelationshipType, CB_RelationshipType>();
+                    var relationshipType = new GenericContextTypes<RelationshipTypeModel, RelationshipType>();
 
                     foreach (string item in relationshipType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.RelationshipTypeName))
                     {
@@ -85,7 +85,7 @@ namespace ContactBook.Domain.Validations.Helper
                     }
                     break;
                 case "SpecialDateType":
-                    IGenericContextTypes<SpecialDateType, CB_SpecialDateType> specialDateType = new GenericContextTypes<SpecialDateType, CB_SpecialDateType>();
+                    var specialDateType = new GenericContextTypes<SpecialDateTypeModel, SpecialDateType>();
 
                     foreach (string item in specialDateType.GetTypes(cbt => ((cbt.BookId.HasValue && cbt.BookId.Value == bookId) || !cbt.BookId.HasValue)).Select(ad => ad.DateTypeName))
                     {

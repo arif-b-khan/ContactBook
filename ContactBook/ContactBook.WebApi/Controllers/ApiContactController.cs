@@ -26,11 +26,11 @@ namespace ContactBook.WebApi.Controllers
 
         // GET api/<controller>
         [Route("{bookId}")]
-        [ResponseType(typeof(List<Contact>))]
+        [ResponseType(typeof(List<ContactModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<Contact> contacts = contactContext.GetContacts(bookId);
+            List<ContactModel> contacts = contactContext.GetContacts(bookId);
 
             if (contacts == null && !contacts.Any())
             {
@@ -41,7 +41,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // POST api/<controller>
-        public IHttpActionResult Post([FromBody]Contact contact)
+        public IHttpActionResult Post([FromBody]ContactModel contact)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        public IHttpActionResult Put([FromBody]Contact contact)
+        public IHttpActionResult Put([FromBody]ContactModel contact)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace ContactBook.WebApi.Controllers
         {
             Exception exOut;
 
-            Contact contactToDel = contactContext.GetContact(bookId, contactId);
+            ContactModel contactToDel = contactContext.GetContact(bookId, contactId);
             
             if (contactToDel == null)
             {

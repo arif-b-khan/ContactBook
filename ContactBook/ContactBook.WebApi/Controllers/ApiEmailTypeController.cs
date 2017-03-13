@@ -18,21 +18,21 @@ namespace ContactBook.WebApi.Controllers
     public class ApiEmailTypeController : ApiController
     {
         private IContactBookRepositoryUow _unitofWork;
-        private IGenericContextTypes<EmailType, CB_EmailType> emailTypeRepo;
+        private IGenericContextTypes<EmailTypeModel, EmailType> emailTypeRepo;
        
         public ApiEmailTypeController(IContactBookRepositoryUow unitofWork)
         {
             _unitofWork = unitofWork;
-            emailTypeRepo = new GenericContextTypes<EmailType, CB_EmailType>(unitofWork);
+            emailTypeRepo = new GenericContextTypes<EmailTypeModel, EmailType>(unitofWork);
         }
 
         //Get api/EmailType/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<EmailType>))]
+        [ResponseType(typeof(List<EmailTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<EmailType> emailTypes = emailTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
+            List<EmailTypeModel> emailTypes = emailTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
 
             if (emailTypes == null || emailTypes.Count == 0)
             {
@@ -43,7 +43,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/ApiEmailType
-        public IHttpActionResult Post([FromBody]EmailType emailType)
+        public IHttpActionResult Post([FromBody]EmailTypeModel emailType)
         {
             Exception exOut;
 
@@ -52,9 +52,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => emailTypeRepo.InsertTypes(new List<EmailType>() { emailType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => emailTypeRepo.InsertTypes(new List<EmailTypeModel>() { emailType }), out exOut))
             {
-                return CreatedAtRoute<EmailType>("DefaultApi", new { controller = "ApiEmailType", action = "Get", bookId = emailType.BookId }, emailType);
+                return CreatedAtRoute<EmailTypeModel>("DefaultApi", new { controller = "ApiEmailType", action = "Get", bookId = emailType.BookId }, emailType);
             }
             else
             {
@@ -63,7 +63,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/ApiEmailType
-        public IHttpActionResult Put([FromBody]EmailType pEmailType)
+        public IHttpActionResult Put([FromBody]EmailTypeModel pEmailType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -71,14 +71,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_EmailType> emailTypeList = emailTypeRepo.GetCBTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
+            List<EmailType> emailTypeList = emailTypeRepo.GetCBTypes(nbt => nbt.EmailTypeId == pEmailType.EmailTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pEmailType.BookId));
 
             if (emailTypeList == null || emailTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_EmailType dbEmailType = emailTypeList.SingleOrDefault();
+            EmailType dbEmailType = emailTypeList.SingleOrDefault();
 
             if (dbEmailType != null && !dbEmailType.Equals(pEmailType))
             {
@@ -98,7 +98,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_EmailType emailType = null;
+            EmailType emailType = null;
 
             if (bookId <= 0)
             {

@@ -19,24 +19,24 @@ namespace ContactBook.WebApi.Controllers
     {
         private IContactBookRepositoryUow _unitofWork;
         private IContactBookRepositoryUow _readOnlyUow;
-        private IGenericContextTypes<NumberType, CB_NumberType> numberTypeRepo;
-        private IGenericContextTypes<NumberType, CB_NumberType> readOnlyRepo;
+        private IGenericContextTypes<NumberTypeModel, NumberType> numberTypeRepo;
+        private IGenericContextTypes<NumberTypeModel, NumberType> readOnlyRepo;
         
         public ApiNumberTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;
             _readOnlyUow = readOnlyUow;
-            numberTypeRepo = new GenericContextTypes<NumberType, CB_NumberType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<NumberType, CB_NumberType>(_readOnlyUow);
+            numberTypeRepo = new GenericContextTypes<NumberTypeModel, NumberType>(unitofWork);
+            readOnlyRepo = new GenericContextTypes<NumberTypeModel, NumberType>(_readOnlyUow);
         }
 
         //Get api/<controller>/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<NumberType>))]
+        [ResponseType(typeof(List<NumberTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<NumberType> numberTypes = numberTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
+            List<NumberTypeModel> numberTypes = numberTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
             if (numberTypes == null || numberTypes.Count == 0)
             {
                 return NotFound();
@@ -46,7 +46,7 @@ namespace ContactBook.WebApi.Controllers
 
         // POST api/<controller>
 
-        public IHttpActionResult Post([FromBody]NumberType numberType)
+        public IHttpActionResult Post([FromBody]NumberTypeModel numberType)
         {
             Exception exOut;
 
@@ -55,9 +55,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => numberTypeRepo.InsertTypes(new List<NumberType>() { numberType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => numberTypeRepo.InsertTypes(new List<NumberTypeModel>() { numberType }), out exOut))
             {
-                return CreatedAtRoute<NumberType>("DefaultApi", new { controller = "ApiNumberType", action = "Get", bookId = numberType.BookId }, numberType);
+                return CreatedAtRoute<NumberTypeModel>("DefaultApi", new { controller = "ApiNumberType", action = "Get", bookId = numberType.BookId }, numberType);
             }
             else
             {
@@ -66,7 +66,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        public IHttpActionResult Put([FromBody]NumberType pNumberType)
+        public IHttpActionResult Put([FromBody]NumberTypeModel pNumberType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -74,14 +74,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_NumberType> numberTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.NumberTypeId == pNumberType.NumberTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pNumberType.BookId));
+            List<NumberType> numberTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.NumberTypeId == pNumberType.NumberTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pNumberType.BookId));
 
             if (numberTypeList == null || numberTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_NumberType dbNumberType = numberTypeList.SingleOrDefault();
+            NumberType dbNumberType = numberTypeList.SingleOrDefault();
 
             if (dbNumberType != null && !dbNumberType.Equals(pNumberType))
             {
@@ -101,7 +101,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_NumberType numberType = null;
+            NumberType numberType = null;
 
             if (bookId <= 0)
             {

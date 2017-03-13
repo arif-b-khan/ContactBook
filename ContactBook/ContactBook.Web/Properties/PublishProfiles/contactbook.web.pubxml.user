@@ -13,40 +13,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/app.js">
-      <publishTime>11/12/2015 18:17:47</publishTime>
+      <publishTime>03/12/2017 15:20:44</publishTime>
     </File>
     <File Include="app/controllers/AccountController/changePasswordCntrl.js">
-      <publishTime>05/07/2015 09:52:03</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/AccountController/confirmEmailCntrl.js">
-      <publishTime>05/14/2015 21:03:42</publishTime>
+      <publishTime>03/12/2017 12:48:03</publishTime>
     </File>
     <File Include="app/controllers/AccountController/loginController.js">
-      <publishTime>05/14/2015 22:17:42</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/AccountController/registerController.js">
-      <publishTime>05/14/2015 21:22:29</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/AccountController/registerSuccessCntrl.js">
-      <publishTime>05/14/2015 20:41:19</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/AccountController/resetPasswordCntrl.js">
-      <publishTime>05/15/2015 17:54:00</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/AccountController/retrievePasswordCntrl.js">
-      <publishTime>05/15/2015 17:46:28</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/ContactsController/newContactCntrl.js">
-      <publishTime>11/07/2015 11:09:56</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/ContactsController/testController.js">
-      <publishTime>05/19/2015 17:08:44</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/controllers.js">
-      <publishTime>05/18/2015 13:09:15</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/controllers/homeController.js">
-      <publishTime>01/09/2016 15:10:19</publishTime>
+      <publishTime>07/06/2016 11:11:46</publishTime>
     </File>
     <File Include="app/css/.gitkeep">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -58,10 +58,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/25/2015 13:11:58</publishTime>
     </File>
     <File Include="app/directives/directives.js">
-      <publishTime>04/29/2015 08:27:37</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/filters/filters.js">
-      <publishTime>09/24/2015 20:15:12</publishTime>
+      <publishTime>03/12/2017 12:48:03</publishTime>
     </File>
     <File Include="app/img/.gitkeep">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -70,31 +70,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="app/index.html">
-      <publishTime>10/25/2015 13:11:58</publishTime>
+      <publishTime>05/13/2016 20:58:41</publishTime>
     </File>
     <File Include="app/services/accountSvc.js">
-      <publishTime>08/30/2015 13:01:02</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/authenticationSvc.js">
-      <publishTime>05/18/2015 22:01:43</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/cbUploader.js">
-      <publishTime>05/19/2015 17:15:52</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/contactBookSpinner.js">
-      <publishTime>05/07/2015 09:52:03</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/contactsSvc.js">
-      <publishTime>10/25/2015 13:11:58</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/httpInterceptorSvc.js">
-      <publishTime>05/07/2015 09:52:03</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/pubsubSvc.js">
-      <publishTime>04/29/2015 08:27:37</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/services/services.js">
-      <publishTime>04/29/2015 08:27:37</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="app/views/Account/accountView.js">
       <publishTime>05/15/2015 17:54:36</publishTime>
@@ -120,14 +120,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="app/views/Account/RetrievePassword.html">
       <publishTime>05/15/2015 18:22:46</publishTime>
     </File>
+    <File Include="app/views/Contacts/ContactDetails.html">
+      <publishTime>03/12/2017 12:48:03</publishTime>
+    </File>
     <File Include="app/views/Contacts/contactsView.js">
-      <publishTime>05/21/2015 20:46:25</publishTime>
+      <publishTime>03/12/2017 12:48:03</publishTime>
     </File>
     <File Include="app/views/Contacts/NewContact.html">
-      <publishTime>10/25/2015 13:11:58</publishTime>
+      <publishTime>03/12/2017 12:48:03</publishTime>
     </File>
     <File Include="app/views/Contacts/Test.html">
-      <publishTime>02/28/2016 21:27:50</publishTime>
+      <publishTime>05/12/2016 21:13:10</publishTime>
     </File>
     <File Include="app/views/Home.html">
       <publishTime>04/29/2015 08:27:37</publishTime>
@@ -136,7 +139,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:37</publishTime>
     </File>
     <File Include="bin/ContactBook.Web.dll">
-      <publishTime>01/23/2016 23:21:55</publishTime>
+      <publishTime>03/12/2017 15:21:19</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>03/18/2015 10:14:20</publishTime>
@@ -158,6 +161,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.Webpages.Razor.dll">
       <publishTime>03/18/2015 10:13:58</publishTime>
+    </File>
+    <File Include="bower.json">
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="bower_components/angular-animate/.bower.json">
       <publishTime>10/25/2015 13:11:58</publishTime>
@@ -733,7 +739,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:41</publishTime>
     </File>
     <File Include="config/karma.conf.js">
-      <publishTime>11/07/2015 14:36:34</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="Index.html">
       <publishTime>05/15/2015 18:10:42</publishTime>
@@ -742,7 +748,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 08:27:41</publishTime>
     </File>
     <File Include="package.json">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>05/12/2016 21:28:14</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/13/2015 21:57:44</publishTime>
@@ -3073,16 +3079,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2015 10:53:51</publishTime>
     </File>
     <File Include="test/unit/directivesSpec.js">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>07/06/2016 11:11:47</publishTime>
     </File>
     <File Include="test/unit/filtersSpec.js">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>05/19/2016 23:35:52</publishTime>
     </File>
     <File Include="test/unit/servicesSpec.js">
-      <publishTime>04/29/2015 08:27:41</publishTime>
+      <publishTime>05/19/2016 23:36:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/23/2016 23:22:14</publishTime>
+      <publishTime>03/12/2017 15:21:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

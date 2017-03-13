@@ -78,6 +78,7 @@ namespace ContactBook.WebApi
             //});
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseGoogleAuthentication();
             ConfigureOAuthTokenGeneration(app);
         }
     }

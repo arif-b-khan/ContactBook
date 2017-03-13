@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ContactBook.Db.Data;
+using data = ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.IoC;
 using ContactBook.Domain.Models;
@@ -11,31 +11,31 @@ namespace ContactBook.Domain.Contexts
     public class ContactBookContext : IContactBookContext
     {
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookDbRepository<CB_ContactBook> conBookRepo;
+        private IContactBookDbRepository<data.ContactBook> conBookRepo;
 
         public ContactBookContext(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            conBookRepo = unitOfWork.GetEntityByType<CB_ContactBook>();
+            conBookRepo = unitOfWork.GetEntityByType<data.ContactBook>();
         }
 
-        public void AddContactBook(ContactBookInfo mCb)
+        public void AddContactBook(ContactBookInfoModel mCb)
         {
-            Mapper.CreateMap<ContactBookInfo, CB_ContactBook>();
-            CB_ContactBook contactBook = Mapper.Map<CB_ContactBook>(mCb);
+            Mapper.CreateMap<ContactBookInfoModel, data.ContactBook>();
+            data.ContactBook contactBook = Mapper.Map<data.ContactBook>(mCb);
             conBookRepo.Insert(contactBook);
             unitOfWork.Save();
         }
 
-        public ContactBookInfo GetContactBook(string userName)
+        public ContactBookInfoModel GetContactBook(string userName)
         {
-            ContactBookInfo retBook = null;
+            ContactBookInfoModel retBook = null;
 
             try
             {
-                CB_ContactBook cb = conBookRepo.Get(c => c.Username == userName).FirstOrDefault();
-                Mapper.CreateMap<CB_ContactBook, ContactBookInfo>();
-                retBook = Mapper.Map<ContactBookInfo>(cb);
+                data.ContactBook cb = conBookRepo.Get(c => c.Username == userName).FirstOrDefault();
+                Mapper.CreateMap<data.ContactBook, ContactBookInfoModel>();
+                retBook = Mapper.Map<ContactBookInfoModel>(cb);
             }
             catch (ArgumentNullException ex)
             {
@@ -48,7 +48,7 @@ namespace ContactBook.Domain.Contexts
         
         public void CreateContactBook(string userName, string Id)
         {
-            this.AddContactBook(new ContactBookInfo()
+            this.AddContactBook(new ContactBookInfoModel()
             {
                 Username = userName,
                 BookName = Id + "-" + userName,

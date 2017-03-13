@@ -14,60 +14,59 @@ namespace ContactBook.Domain.Models.ModelMapper
             List<D> retListD = null;
             switch (convertType)
             {
-                case "CB_AddressType-to-AddressType":
-                    retListD = AddressTypeMapper(t as List<CB_AddressType>) as List<D>;
+                case "AddressTypeModel-to-AddressType":
+                    retListD = AddressTypeModelToAddressType(t as List<AddressTypeModel>) as List<D>;
                     break;
 
-                case "AddressType-to-CB_AddressType":
-                    retListD = MdlAddressTypeToAddressType(t as List<AddressType>) as List<D>;
+                case "AddressType-to-AddressTypeModel":
+                    retListD = AddressTypeToAddressTypeModel(t as List<AddressType>) as List<D>;
                     break;
 
-                case "NumberType-to-CB_NumberType":
-                    retListD = MdlNumberTypeToCBNumberType(t as List<NumberType>) as List<D>;
+                case "NumberTypeModel-to-NumberType":
+                    retListD = NumberTypeModelToNumberType(t as List<NumberTypeModel>) as List<D>;
                     break;
 
-                case "CB_NumberType-to-NumberType":
-                    retListD = CBNumberTypeToMdlModelType(t as List<CB_NumberType>) as List<D>;
+                case "NumberType-to-NumberTypeModel":
+                    retListD = NumberTypeToNumberTypeModel(t as List<NumberType>) as List<D>;
                     break;
 
-                case "EmailType-to-CB_EmailType":
-                    retListD = EmailTypeToCBEmailType(t as List<EmailType>) as List<D>;
+                case "EmailTypeModel-to-EmailType":
+                    retListD = EmailTypeModelToEmailType(t as List<EmailTypeModel>) as List<D>;
                     break;
 
-                case "CB_EmailType-to-EmailType":
-                    retListD = CBEmailTypeToEmailType(t as List<CB_EmailType>) as List<D>;
+                case "EmailType-to-EmailTypeModel":
+                    retListD = EmailTypeToEmailTypeModel(t as List<EmailType>) as List<D>;
                     break;
 
-                case "IMType-to-CB_IMType":
-                    retListD = IMTypeToCBIMType(t as List<IMType>) as List<D>;
+                case "IMTypeModel-to-IMType":
+                    retListD = IMTypeModelToIMType(t as List<IMTypeModel>) as List<D>;
                     break;
 
-                case "CB_IMType-to-IMType":
-                    retListD = CBIMTypeToIMType(t as List<CB_IMType>) as List<D>;
+                case "IMType-to-IMTypeModel":
+                    retListD = IMTypeToIMTypeModel(t as List<IMType>) as List<D>;
                     break;
 
-                case "GroupType-to-CB_GroupType":
-                    retListD = GroupTypeToCBGroupType(t as List<GroupType>) as List<D>;
+                case "GroupType-to-GroupTypeModel":
+                    retListD = GroupTypeToGroupTypeModel(t as List<GroupType>) as List<D>;
                     break;
 
-                case "CB_GroupType-to-GroupType":
-                    retListD = CBGroupTypeToGroupType(t as List<CB_GroupType>) as List<D>;
+                case "GroupTypeModel-to-GroupType":
+                    retListD = GroupTypeModelToGroupType(t as List<GroupTypeModel>) as List<D>;
                     break;
 
-                case "RelationshipType-to-CB_RelationshipType":
-                    retListD = RelationshipTypeToCBRelationshipType(t as List<RelationshipType>) as List<D>;
+                case "RelationshipType-to-RelationshipTypeModel":
+                    retListD = RelationshipTypeToRelationshipTypeModel(t as List<RelationshipType>) as List<D>;
                     break;
 
-                case "CB_RelationshipType-to-RelationshipType":
-                    retListD = CBRelationshipTypeToRelationshipType(t as List<CB_RelationshipType>) as List<D>;
+                case "RelationshipTypeModel-to-RelationshipType":
+                    retListD = RelationshipTypeModelToRelationshipType(t as List<RelationshipTypeModel>) as List<D>; 
                     break;
-                case "SpecialDateType-to-CB_SpecialDateType":
-                    retListD = SpecialDateTypeToCBSpecialDate(t as List<SpecialDateType>) as List<D>;
+                case "SpecialDateType-to-SpecialDateTypeModel":
+                    retListD = SpecialDateTypeToSpecialDateTypeModel(t as List<SpecialDateType>) as List<D>;
                     break;
-                case "CB_SpecialDateType-to-SpecialDateType":
-                    retListD = CBSpecialDateTypeToSpecialDateType(t as List<CB_SpecialDateType>) as List<D>; 
+                case "SpecialDateTypeModel-to-SpecialDateType":
+                    retListD = SpecialDateTypeModelToSpecialDateType(t as List<SpecialDateTypeModel>) as List<D>;
                     break;
-
                 default:
                     throw new ModelMapperException(string.Format("Mapping method not available.\nPlease add mapping method to convert the type from {0} to {1}", typeof(T).Name, typeof(D).Name));
             }
@@ -92,93 +91,93 @@ namespace ContactBook.Domain.Models.ModelMapper
             return d;
         }
 
-        private List<CB_SpecialDateType> SpecialDateTypeToCBSpecialDate(List<SpecialDateType> source)
+        private List<SpecialDateType> SpecialDateTypeModelToSpecialDateType(List<SpecialDateTypeModel> source)
         {
-            Mapper.CreateMap<SpecialDateType, CB_SpecialDateType>().ForMember(cb => cb.Date_TypeName, em => em.MapFrom(m => m.DateTypeName));
-            return Mapper.Map<List<CB_SpecialDateType>>(source);
-        }
-
-        private List<SpecialDateType> CBSpecialDateTypeToSpecialDateType(List<CB_SpecialDateType> source)
-        {
-            Mapper.CreateMap<CB_SpecialDateType, SpecialDateType>().ForMember(em => em.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
+            Mapper.CreateMap<SpecialDateTypeModel, SpecialDateType>().ForMember(cb => cb.Date_TypeName, em => em.MapFrom(m => m.DateTypeName));
             return Mapper.Map<List<SpecialDateType>>(source);
         }
 
-        private List<CB_RelationshipType> RelationshipTypeToCBRelationshipType(List<RelationshipType> source)
+        private List<SpecialDateTypeModel> SpecialDateTypeToSpecialDateTypeModel(List<SpecialDateType> source)
         {
-            Mapper.CreateMap<RelationshipType, CB_RelationshipType>().ForMember(cb => cb.Relationship_TypeName, em => em.MapFrom(m => m.RelationshipTypeName));
-            return Mapper.Map<List<CB_RelationshipType>>(source);
+            Mapper.CreateMap<SpecialDateType, SpecialDateTypeModel>().ForMember(em => em.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
+            return Mapper.Map<List<SpecialDateTypeModel>>(source);
         }
 
-        private List<RelationshipType> CBRelationshipTypeToRelationshipType(List<CB_RelationshipType> source)
+        private List<RelationshipType> RelationshipTypeModelToRelationshipType(List<RelationshipTypeModel> source)
         {
-            Mapper.CreateMap<CB_RelationshipType, RelationshipType>().ForMember(em => em.RelationshipTypeName, cb => cb.MapFrom(m => m.Relationship_TypeName));
+            Mapper.CreateMap<RelationshipTypeModel, RelationshipType>().ForMember(cb => cb.Relationship_TypeName, em => em.MapFrom(m => m.RelationshipTypeName));
             return Mapper.Map<List<RelationshipType>>(source);
         }
 
-        private List<CB_GroupType> GroupTypeToCBGroupType(List<GroupType> source)
+        private List<RelationshipTypeModel> RelationshipTypeToRelationshipTypeModel(List<RelationshipType> source)
         {
-            Mapper.CreateMap<GroupType, CB_GroupType>().ForMember(cb => cb.Group_TypeName, em => em.MapFrom(m => m.GroupTypeName));
-            return Mapper.Map<List<CB_GroupType>>(source);
+            Mapper.CreateMap<RelationshipType, RelationshipTypeModel>().ForMember(em => em.RelationshipTypeName, cb => cb.MapFrom(m => m.Relationship_TypeName));
+            return Mapper.Map<List<RelationshipTypeModel>>(source);
         }
 
-        private List<GroupType> CBGroupTypeToGroupType(List<CB_GroupType> source)
+        private List<GroupType> GroupTypeModelToGroupType(List<GroupTypeModel> source)
         {
-            Mapper.CreateMap<CB_GroupType, GroupType>().ForMember(em => em.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
+            Mapper.CreateMap<GroupTypeModel, GroupType>().ForMember(cb => cb.Group_TypeName, em => em.MapFrom(m => m.GroupTypeName));
             return Mapper.Map<List<GroupType>>(source);
         }
 
-        private List<IMType> CBIMTypeToIMType(List<CB_IMType> source)
+        private List<GroupTypeModel> GroupTypeToGroupTypeModel(List<GroupType> source)
         {
-            Mapper.CreateMap<CB_IMType, IMType>().ForMember(em => em.IMTypeName, cb => cb.MapFrom(m => m.IM_TypeName)).ForSourceMember(s => s.IMLogoPath, sb => sb.Ignore());
+            Mapper.CreateMap<GroupType, GroupTypeModel>().ForMember(em => em.GroupTypeName, cb => cb.MapFrom(m => m.Group_TypeName));
+            return Mapper.Map<List<GroupTypeModel>>(source);
+        }
+
+        private List<IMTypeModel> IMTypeToIMTypeModel(List<IMType> source)
+        {
+            Mapper.CreateMap<IMType, IMTypeModel>().ForMember(em => em.IMTypeName, cb => cb.MapFrom(m => m.IM_TypeName)).ForSourceMember(s => s.IMLogoPath, sb => sb.Ignore());
+            return Mapper.Map<List<IMTypeModel>>(source);
+        }
+
+        private List<IMType> IMTypeModelToIMType(List<IMTypeModel> source)
+        {
+            Mapper.CreateMap<IMTypeModel, IMType>().ForMember(cb => cb.IM_TypeName, em => em.MapFrom(m => m.IMTypeName));
             return Mapper.Map<List<IMType>>(source);
         }
 
-        private List<CB_IMType> IMTypeToCBIMType(List<IMType> source)
+        private List<EmailTypeModel> EmailTypeToEmailTypeModel(List<EmailType> source)
         {
-            Mapper.CreateMap<IMType, CB_IMType>().ForMember(cb => cb.IM_TypeName, em => em.MapFrom(m => m.IMTypeName));
-            return Mapper.Map<List<CB_IMType>>(source);
+            Mapper.CreateMap<EmailType, EmailTypeModel>().ForMember(em => em.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
+            return Mapper.Map<List<EmailTypeModel>>(source);
         }
 
-        private List<EmailType> CBEmailTypeToEmailType(List<CB_EmailType> source)
+        private List<EmailType> EmailTypeModelToEmailType(List<EmailTypeModel> source)
         {
-            Mapper.CreateMap<CB_EmailType, EmailType>().ForMember(em => em.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
+            Mapper.CreateMap<EmailTypeModel, EmailType>().ForMember(cb => cb.Email_TypeName, em => em.MapFrom(m => m.EmailTypeName));
             return Mapper.Map<List<EmailType>>(source);
         }
 
-        private List<CB_EmailType> EmailTypeToCBEmailType(List<EmailType> source)
+        private List<AddressType> AddressTypeModelToAddressType(List<AddressTypeModel> source)
         {
-            Mapper.CreateMap<EmailType, CB_EmailType>().ForMember(cb => cb.Email_TypeName, em => em.MapFrom(m => m.EmailTypeName));
-            return Mapper.Map<List<CB_EmailType>>(source);
-        }
-
-        private List<AddressType> AddressTypeMapper(List<CB_AddressType> source)
-        {
-            Mapper.CreateMap<CB_AddressType, AddressType>().ForMember(at => at.AddressTypeName, ca => ca.MapFrom(a => a.Address_TypeName));
+            Mapper.CreateMap<AddressTypeModel, AddressType>().ForMember(at => at.Address_TypeName, ca => ca.MapFrom(a => a.AddressTypeName));
             return Mapper.Map<List<AddressType>>(source);
         }
 
-        private List<CB_AddressType> MdlAddressTypeToAddressType(List<AddressType> source)
+        private List<AddressTypeModel> AddressTypeToAddressTypeModel(List<AddressType> source)
         {
-            Mapper.CreateMap<AddressType, CB_AddressType>().ForMember(m => m.Address_TypeName, ad => ad.MapFrom(a => a.AddressTypeName));
-            return Mapper.Map<List<CB_AddressType>>(source);
+            Mapper.CreateMap<AddressType, AddressTypeModel>().ForMember(m => m.AddressTypeName, ad => ad.MapFrom(a => a.Address_TypeName));
+            return Mapper.Map<List<AddressTypeModel>>(source);
         }
 
-        private List<CB_NumberType> MdlNumberTypeToCBNumberType(List<NumberType> source)
+        private List<NumberType> NumberTypeModelToNumberType(List<NumberTypeModel> source)
         {
-            Mapper.CreateMap<NumberType, CB_NumberType>()
+            Mapper.CreateMap<NumberTypeModel, NumberType>()
     .ForMember(md => md.Number_TypeName, cb => cb.MapFrom(m => m.NumberTypeName));
-            List<CB_NumberType> numberTypeList = Mapper.Map<List<CB_NumberType>>(source);
+            List<NumberType> numberTypeList = Mapper.Map<List<NumberType>>(source);
             return numberTypeList;
         }
 
-        private List<NumberType> CBNumberTypeToMdlModelType(List<CB_NumberType> cbNumberType)
+        private List<NumberTypeModel> NumberTypeToNumberTypeModel(List<NumberType> cbNumberType)
         {
-            Mapper.CreateMap<CB_NumberType, NumberType>()
+            Mapper.CreateMap<NumberType, NumberTypeModel>()
     .ForMember(md => md.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName))
-    .ForSourceMember(cb => cb.CB_ContactBook, c => c.Ignore())
-    .ForSourceMember(cb => cb.CB_Numbers, c => c.Ignore());
-            return Mapper.Map<List<NumberType>>(cbNumberType);
+    .ForSourceMember(cb => cb.ContactBook, c => c.Ignore())
+    .ForSourceMember(cb => cb.Numbers, c => c.Ignore());
+            return Mapper.Map<List<NumberTypeModel>>(cbNumberType);
         }
     }
 

@@ -19,24 +19,24 @@ namespace ContactBook.WebApi.Controllers
     {
         private IContactBookRepositoryUow _unitofWork;
         private IContactBookRepositoryUow _readOnlyUow;
-        private IGenericContextTypes<RelationshipType, CB_RelationshipType> relationshipTypeRepo;
-        private IGenericContextTypes<RelationshipType, CB_RelationshipType> readOnlyRepo;
+        private IGenericContextTypes<RelationshipTypeModel, RelationshipType> relationshipTypeRepo;
+        private IGenericContextTypes<RelationshipTypeModel, RelationshipType> readOnlyRepo;
         
         public ApiRelationshipTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;
             _readOnlyUow = readOnlyUow;
-            relationshipTypeRepo = new GenericContextTypes<RelationshipType, CB_RelationshipType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<RelationshipType, CB_RelationshipType>(_readOnlyUow);
+            relationshipTypeRepo = new GenericContextTypes<RelationshipTypeModel, RelationshipType>(unitofWork);
+            readOnlyRepo = new GenericContextTypes<RelationshipTypeModel, RelationshipType>(_readOnlyUow);
         }
 
         //Get api/RelationshipType/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<RelationshipType>))]
+        [ResponseType(typeof(List<RelationshipTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<RelationshipType> relationshipTypes = relationshipTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
+            List<RelationshipTypeModel> relationshipTypes = relationshipTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
 
             if (relationshipTypes == null || relationshipTypes.Count == 0)
             {
@@ -47,7 +47,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/ApiRelationshipType
-        public IHttpActionResult Post([FromBody]RelationshipType relationshipType)
+        public IHttpActionResult Post([FromBody]RelationshipTypeModel relationshipType)
         {
             Exception exOut;
 
@@ -56,9 +56,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => relationshipTypeRepo.InsertTypes(new List<RelationshipType>() { relationshipType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => relationshipTypeRepo.InsertTypes(new List<RelationshipTypeModel>() { relationshipType }), out exOut))
             {
-                return CreatedAtRoute<RelationshipType>("DefaultApi", new { controller = "ApiRelationshipType", action = "Get", bookId = relationshipType.BookId }, relationshipType);
+                return CreatedAtRoute<RelationshipTypeModel>("DefaultApi", new { controller = "ApiRelationshipType", action = "Get", bookId = relationshipType.BookId }, relationshipType);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/ApiRelationshipType
-        public IHttpActionResult Put([FromBody]RelationshipType pRelationshipType)
+        public IHttpActionResult Put([FromBody]RelationshipTypeModel pRelationshipType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -75,14 +75,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_RelationshipType> relatiionshipTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.RelationshipTypeId == pRelationshipType.RelationshipTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pRelationshipType.BookId));
+            List<RelationshipType> relatiionshipTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.RelationshipTypeId == pRelationshipType.RelationshipTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pRelationshipType.BookId));
 
             if (relatiionshipTypeList == null || relatiionshipTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_RelationshipType dbRelationshipType = relatiionshipTypeList.SingleOrDefault();
+            RelationshipType dbRelationshipType = relatiionshipTypeList.SingleOrDefault();
 
             if (dbRelationshipType != null && !dbRelationshipType.Equals(pRelationshipType))
             {
@@ -102,7 +102,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_RelationshipType relationshipType = null;
+            RelationshipType relationshipType = null;
 
             if (bookId <= 0)
             {

@@ -20,17 +20,17 @@ namespace ContactBook.WebApi.Test.Controllers
     public class ApiNumberTypeControllerTest : IClassFixture<ControllerTestFixtures>
     {
         private CancellationTokenSource cts;
-        private List<CB_NumberType> NumberTypeList = null;
+        private List<NumberType> NumberTypeList = null;
 
         public ApiNumberTypeControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
             cts = new CancellationTokenSource(10000);
-            NumberTypeList = new List<CB_NumberType>()
+            NumberTypeList = new List<NumberType>()
             {
-                new CB_NumberType(){ NumberTypeId = 1, Number_TypeName="Home", BookId=null},
-                new CB_NumberType(){ NumberTypeId = 2, Number_TypeName="Office", BookId=null},
-                new CB_NumberType(){ NumberTypeId = 3, Number_TypeName="abc", BookId=1}
+                new NumberType(){ NumberTypeId = 1, Number_TypeName="Home", BookId=null},
+                new NumberType(){ NumberTypeId = 2, Number_TypeName="Office", BookId=null},
+                new NumberType(){ NumberTypeId = 3, Number_TypeName="abc", BookId=1}
             };
         }
 
@@ -40,8 +40,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetNumberTypeShouldReturnNotFound()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_NumberType>(null));
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(
+                () => ControllerFixture.MockRepository<NumberType>(null));
 
             ApiNumberTypeController numberTypeCnt = new ApiNumberTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
             numberTypeCnt.Request = new HttpRequestMessage();
@@ -58,8 +58,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetNumberTypeShouldReturnNumber()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_NumberType>(NumberTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(
+                () => ControllerFixture.MockRepository<NumberType>(NumberTypeList
                     ));
 
             ApiNumberTypeController NumberTypeCntr = new ApiNumberTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
@@ -69,8 +69,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(NumberTypeCntr.Get(1), cts.Token);
 
-            List<NumberType> resultType;
-            result.TryGetContentValue<List<NumberType>>(out resultType);
+            List<NumberTypeModel> resultType;
+            result.TryGetContentValue<List<NumberTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -84,8 +84,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetNumberTypeShouldOnlyDefaultNumbers()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_NumberType>(NumberTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(
+                () => ControllerFixture.MockRepository<NumberType>(NumberTypeList
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
@@ -96,8 +96,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(NumberTypeCntr.Get(-1), cts.Token);
 
-            List<NumberType> resultType;
-            result.TryGetContentValue<List<NumberType>>(out resultType);
+            List<NumberTypeModel> resultType;
+            result.TryGetContentValue<List<NumberTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -112,29 +112,29 @@ namespace ContactBook.WebApi.Test.Controllers
         {
             //Arrange
             List<NumberType> NumberTypeResult = new List<NumberType>();
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = 1,
                 NumberTypeName = "Home",
                 BookId = 1
             };
-            var cbNumberType = new CB_NumberType()
+            var cbNumberType = new NumberType()
             {
                 NumberTypeId = 1,
                 Number_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepository<CB_NumberType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_NumberType>())).Callback<CB_NumberType>(
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepository<NumberType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<NumberType>())).Callback<NumberType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_NumberType, NumberType>().ForMember(at => at.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName));
+                    Mapper.CreateMap<NumberType, NumberTypeModel>().ForMember(at => at.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName));
 
                     NumberTypeResult.Add(Mapper.Map<NumberType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -155,30 +155,30 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<NumberType> NumberTypeResult = new List<NumberType>();
 
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = 1,
                 NumberTypeName = "Home",
                 BookId = 1
             };
 
-            var cbNumberType = new CB_NumberType()
+            var cbNumberType = new NumberType()
             {
                 NumberTypeId = 1,
                 Number_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepository<CB_NumberType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_NumberType>())).Callback<CB_NumberType>(
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepository<NumberType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<NumberType>())).Callback<NumberType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_NumberType, NumberType>().ForMember(at => at.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName));
+                    Mapper.CreateMap<NumberType, NumberTypeModel>().ForMember(at => at.NumberTypeName, cb => cb.MapFrom(m => m.Number_TypeName));
 
                     NumberTypeResult.Add(Mapper.Map<NumberType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -216,23 +216,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<NumberType> NumberTypeResult = new List<NumberType>();
 
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = 3,
                 NumberTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_NumberType>(NumberTypeList);
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<NumberType>(NumberTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_NumberType>(), It.IsAny<CB_NumberType>())).Callback<CB_NumberType, CB_NumberType>(
+            mockRepo.Setup(s => s.Update(It.IsAny<NumberType>(), It.IsAny<NumberType>())).Callback<NumberType, NumberType>(
                 (a, c) =>
                 {
-                    CB_NumberType upAddr = NumberTypeList.Where(cb => cb.NumberTypeId == c.NumberTypeId).SingleOrDefault();
+                    NumberType upAddr = NumberTypeList.Where(cb => cb.NumberTypeId == c.NumberTypeId).SingleOrDefault();
                     upAddr.Number_TypeName = c.Number_TypeName;
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -262,16 +262,16 @@ namespace ContactBook.WebApi.Test.Controllers
         public void NumberTypeUpdateShouldReturnNotFound()
         {
             //Arrange
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = -3,
                 NumberTypeName = "Updated",
                 BookId = -1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_NumberType>(NumberTypeList);
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<NumberType>(NumberTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -297,23 +297,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<NumberType> NumberTypeResult = new List<NumberType>();
 
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = 3,
                 NumberTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_NumberType>(NumberTypeList);
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<NumberType>(NumberTypeList);
 
-            mockRepo.Setup(s => s.Delete(It.IsAny<CB_NumberType>())).Callback<CB_NumberType>(
+            mockRepo.Setup(s => s.Delete(It.IsAny<NumberType>())).Callback<NumberType>(
                 c =>
                 {
-                    CB_NumberType delAddr = NumberTypeList.Where(cb => cb.NumberTypeId == c.NumberTypeId).SingleOrDefault();
+                    NumberType delAddr = NumberTypeList.Where(cb => cb.NumberTypeId == c.NumberTypeId).SingleOrDefault();
                     NumberTypeList.Remove(delAddr);
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -346,16 +346,16 @@ namespace ContactBook.WebApi.Test.Controllers
             //bool saveCalled = false;
             List<NumberType> NumberTypeResult = new List<NumberType>();
 
-            var NumberType = new NumberType()
+            var NumberType = new NumberTypeModel()
             {
                 NumberTypeId = 3,
                 NumberTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_NumberType>(NumberTypeList);
+            Mock<IContactBookDbRepository<NumberType>> mockRepo = ControllerFixture.MockRepositoryNeedList<NumberType>(NumberTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_NumberType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<NumberType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });

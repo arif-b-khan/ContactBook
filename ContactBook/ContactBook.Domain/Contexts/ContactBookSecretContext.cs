@@ -12,14 +12,14 @@ namespace ContactBook.Domain.Contexts
     public class ContactBookSecretContext : ContactBook.Domain.Contexts.IContactBookSecretContext
     {
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookDbRepository<CB_Secret> conSecret;
+        private IContactBookDbRepository<Secret> conSecret;
 
         public ContactBookSecretContext() : this(DependencyFactory.Resolve<IContactBookRepositoryUow>()) { }
 
         public ContactBookSecretContext(IContactBookRepositoryUow pUnitofwork)
         {
             unitOfWork = pUnitofwork;
-            conSecret = unitOfWork.GetEntityByType<CB_Secret>();
+            conSecret = unitOfWork.GetEntityByType<Secret>();
         }
 
         public Dictionary<string, string> GetKeyValue()

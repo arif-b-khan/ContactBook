@@ -1,4 +1,4 @@
-﻿using ContactBook.Db.Data;
+﻿using data = ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Common.Logging;
 using ContactBook.Domain.IoC;
@@ -17,8 +17,8 @@ namespace ContactBook.Domain.Contexts.Token
         public const string PasswordToken = "Password";
         private IContactBookRepositoryUow unitOfWork;
         //private IContactBookRepositoryUow readOnlyUow;
-        private IContactBookDbRepository<CB_Tokens> conBookRepo;
-        private IContactBookDbRepository<CB_Tokens> readOnlyRepo;
+        private IContactBookDbRepository<data.Token> conBookRepo;
+        private IContactBookDbRepository<data.Token> readOnlyRepo;
         private readonly ICBLogger _logger;
 
         public ContactBookToken()
@@ -30,15 +30,15 @@ namespace ContactBook.Domain.Contexts.Token
         public ContactBookToken(IContactBookRepositoryUow pUnitOfWork, IContactBookRepositoryUow rUnitOfWork)
         {
             this.unitOfWork = pUnitOfWork;
-            readOnlyRepo = rUnitOfWork.GetEntityByType<CB_Tokens>();
-            conBookRepo = pUnitOfWork.GetEntityByType<CB_Tokens>();
+            readOnlyRepo = rUnitOfWork.GetEntityByType<data.Token>();
+            conBookRepo = pUnitOfWork.GetEntityByType<data.Token>();
             _logger = DependencyFactory.Resolve<ICBLogger>();
         }
 
         public bool SaveToken(string id, string token, string tokenType, Guid guid)
         {
             bool retResult = false;
-            conBookRepo.Insert(new CB_Tokens() { UserId = id, Token = token, TokenType = tokenType, Identifier = guid });
+            conBookRepo.Insert(new data.Token() { UserId = id, Token1 = token, TokenType = tokenType, Identifier = guid });
             try
             {
                 unitOfWork.Save();
@@ -55,7 +55,7 @@ namespace ContactBook.Domain.Contexts.Token
         public bool DeleteToken(string userId)
         {
             bool retResult = true;
-            CB_Tokens rtToken = readOnlyRepo.Get(cb => cb.UserId == userId).SingleOrDefault();
+            data.Token rtToken = readOnlyRepo.Get(cb => cb.UserId == userId).SingleOrDefault();
             try
             {
                 if (rtToken != null)
@@ -77,10 +77,10 @@ namespace ContactBook.Domain.Contexts.Token
             return retResult;
         }
 
-        public CB_Tokens GetToken(string identifier)
+        public data.Token GetToken(string identifier)
         {
             string token = string.Empty;
-            CB_Tokens rtToken = readOnlyRepo.Get(cb => cb.Identifier.ToString() == identifier).SingleOrDefault();
+            data.Token rtToken = readOnlyRepo.Get(cb => cb.Identifier.ToString() == identifier).SingleOrDefault();
             return rtToken;
         }
     }
