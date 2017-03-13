@@ -32,6 +32,7 @@ namespace ContactBook.WebApi.Controllers
     {
         private const string Category = "ApiAccountController";
         private const string LocalLoginProvider = "Local";
+ 
         private readonly ICBLogger _logger;
 
         private UserManager<IdentityUser> UserManager { get; set; }
@@ -243,12 +244,12 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var contactToken = new ContactBookToken();
-            CB_Tokens userToken = contactToken.GetToken(model.Identifier);
+            Token userToken = contactToken.GetToken(model.Identifier);
 
             if (userToken != null)
             {
 
-                IdentityResult result = await UserManager.ResetPasswordAsync(userToken.UserId, userToken.Token, model.NewPassword);
+                IdentityResult result = await UserManager.ResetPasswordAsync(userToken.UserId, userToken.Token1, model.NewPassword);
                 IHttpActionResult errorResult = GetErrorResult(result);
 
                 if (errorResult != null)
@@ -530,13 +531,13 @@ namespace ContactBook.WebApi.Controllers
         {
 
             var contactToken = new ContactBookToken();
-            CB_Tokens cbToken = contactToken.GetToken(identifier);
+            Token cbToken = contactToken.GetToken(identifier);
 
             IdentityResult idResult = null;
 
             if (cbToken != null && !string.IsNullOrEmpty(cbToken.UserId))
             {
-                idResult = UserManager.ConfirmEmail(cbToken.UserId, cbToken.Token);
+                idResult = UserManager.ConfirmEmail(cbToken.UserId, cbToken.Token1);
             }
             else
             {

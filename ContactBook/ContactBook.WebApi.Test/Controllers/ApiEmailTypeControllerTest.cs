@@ -20,17 +20,17 @@ namespace ContactBook.WebApi.Test.Controllers
     public class ApiEmailTypeControllerTest : IClassFixture<ControllerTestFixtures>
     {
         private CancellationTokenSource cts;
-        private List<CB_EmailType> emailTypeList = null;
+        private List<EmailType> emailTypeList = null;
 
         public ApiEmailTypeControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
             cts = new CancellationTokenSource(10000);
-            emailTypeList = new List<CB_EmailType>()
+            emailTypeList = new List<EmailType>()
             {
-                new CB_EmailType(){ EmailTypeId = 1, Email_TypeName="Home", BookId=null},
-                new CB_EmailType(){ EmailTypeId = 2, Email_TypeName="Office", BookId=null},
-                new CB_EmailType(){ EmailTypeId = 3, Email_TypeName="abc", BookId=1}
+                new EmailType(){ EmailTypeId = 1, Email_TypeName="Home", BookId=null},
+                new EmailType(){ EmailTypeId = 2, Email_TypeName="Office", BookId=null},
+                new EmailType(){ EmailTypeId = 3, Email_TypeName="abc", BookId=1}
             };
         }
 
@@ -40,7 +40,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetEmailTypeShouldReturnNotFound()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() => ControllerFixture.MockRepository<CB_EmailType>(null));
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() => ControllerFixture.MockRepository<EmailType>(null));
 
             ApiEmailTypeController numberTypeCnt = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
             numberTypeCnt.Request = new HttpRequestMessage();
@@ -57,8 +57,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetEmailTypeShouldReturnNumber()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_EmailType>(emailTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(
+                () => ControllerFixture.MockRepository<EmailType>(emailTypeList
                     ));
 
             ApiEmailTypeController emailTypeCntr = new ApiEmailTypeController(ControllerFixture.MockUnitOfWork.Object);
@@ -68,8 +68,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(emailTypeCntr.Get(1), cts.Token);
 
-            List<EmailType> resultType;
-            result.TryGetContentValue<List<EmailType>>(out resultType);
+            List<EmailTypeModel> resultType;
+            result.TryGetContentValue<List<EmailTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -83,8 +83,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetEmailTypeShouldOnlyDefaultNumbers()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_EmailType>(emailTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(
+                () => ControllerFixture.MockRepository<EmailType>(emailTypeList
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
@@ -95,8 +95,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(EmailTypeCntr.Get(-1), cts.Token);
 
-            List<EmailType> resultType;
-            result.TryGetContentValue<List<EmailType>>(out resultType);
+            List<EmailTypeModel> resultType;
+            result.TryGetContentValue<List<EmailTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -111,29 +111,29 @@ namespace ContactBook.WebApi.Test.Controllers
         {
             //Arrange
             List<EmailType> emailTypeResult = new List<EmailType>();
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = 1,
                 EmailTypeName = "Home",
                 BookId = 1
             };
-            var cbEmailType = new CB_EmailType()
+            var cbEmailType = new EmailType()
             {
                 EmailTypeId = 1,
                 Email_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepository<CB_EmailType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_EmailType>())).Callback<CB_EmailType>(
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepository<EmailType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<EmailType>())).Callback<EmailType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_EmailType, EmailType>().ForMember(at => at.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
+                    Mapper.CreateMap<EmailType, EmailTypeModel>().ForMember(at => at.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
 
                     emailTypeResult.Add(Mapper.Map<EmailType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -154,30 +154,30 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<EmailType> emailTypeResult = new List<EmailType>();
 
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = 1,
                 EmailTypeName = "Home",
                 BookId = 1
             };
 
-            var cbEmailType = new CB_EmailType()
+            var cbEmailType = new EmailType()
             {
                 EmailTypeId = 1,
                 Email_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepository<CB_EmailType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_EmailType>())).Callback<CB_EmailType>(
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepository<EmailType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<EmailType>())).Callback<EmailType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_EmailType, EmailType>().ForMember(at => at.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
+                    Mapper.CreateMap<EmailType, EmailTypeModel>().ForMember(at => at.EmailTypeName, cb => cb.MapFrom(m => m.Email_TypeName));
 
                     emailTypeResult.Add(Mapper.Map<EmailType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -215,23 +215,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<EmailType> emailTypeResult = new List<EmailType>();
 
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = 3,
                 EmailTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_EmailType>(emailTypeList);
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<EmailType>(emailTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_EmailType>(), It.IsAny<CB_EmailType>())).Callback<CB_EmailType, CB_EmailType>(
+            mockRepo.Setup(s => s.Update(It.IsAny<EmailType>(), It.IsAny<EmailType>())).Callback<EmailType, EmailType>(
                 (a, c) =>
                 {
-                    CB_EmailType upAddr = emailTypeList.Where(cb => cb.EmailTypeId == c.EmailTypeId).SingleOrDefault();
+                    EmailType upAddr = emailTypeList.Where(cb => cb.EmailTypeId == c.EmailTypeId).SingleOrDefault();
                     upAddr.Email_TypeName = c.Email_TypeName;
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -261,16 +261,16 @@ namespace ContactBook.WebApi.Test.Controllers
         public void EmailTypeUpdateShouldReturnNotFound()
         {
             //Arrange
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = -3,
                 EmailTypeName = "Updated",
                 BookId = -1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_EmailType>(emailTypeList);
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<EmailType>(emailTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -296,23 +296,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<EmailType> emailTypeResult = new List<EmailType>();
 
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = 3,
                 EmailTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_EmailType>(emailTypeList);
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<EmailType>(emailTypeList);
 
-            mockRepo.Setup(s => s.Delete(It.IsAny<CB_EmailType>())).Callback<CB_EmailType>(
+            mockRepo.Setup(s => s.Delete(It.IsAny<EmailType>())).Callback<EmailType>(
                 c =>
                 {
-                    CB_EmailType delAddr = emailTypeList.Where(cb => cb.EmailTypeId == c.EmailTypeId).SingleOrDefault();
+                    EmailType delAddr = emailTypeList.Where(cb => cb.EmailTypeId == c.EmailTypeId).SingleOrDefault();
                     emailTypeList.Remove(delAddr);
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -345,16 +345,16 @@ namespace ContactBook.WebApi.Test.Controllers
             //bool saveCalled = false;
             List<EmailType> emailTypeResult = new List<EmailType>();
 
-            var emailType = new EmailType()
+            var emailType = new EmailTypeModel()
             {
                 EmailTypeId = 3,
                 EmailTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_EmailType>(emailTypeList);
+            Mock<IContactBookDbRepository<EmailType>> mockRepo = ControllerFixture.MockRepositoryNeedList<EmailType>(emailTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_EmailType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<EmailType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });

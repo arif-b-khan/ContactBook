@@ -1,4 +1,4 @@
-﻿using ContactBook.Db.Data;
+﻿using data  = ContactBook.Db.Data;
 using ContactBook.Domain.Contexts;
 using ContactBook.Domain.Contexts.Contacts;
 using ContactBook.Domain.Models;
@@ -28,8 +28,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetContactBookShouldReturnBadRequest()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_ContactBook>()).Returns(
-                () => ControllerFixture.MockRepository<CB_ContactBook>(null)
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<data.ContactBook>()).Returns(
+                () => ControllerFixture.MockRepository<data.ContactBook>(null)
                 );
 
             ApiContactBookController cbController = new ApiContactBookController(new ContactBookContext(ControllerFixture.MockUnitOfWork.Object));
@@ -48,14 +48,14 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetContactBookShouldReturnContactBook()
         {
             //Arrange
-            ContactBookInfo cbInfo;
-            var contactBookList = new List<CB_ContactBook>()
+            ContactBookInfoModel cbInfo;
+            var contactBookList = new List<data.ContactBook>()
                 {
-                    new CB_ContactBook(){BookId = 1, BookName="Temp1", Username="axkhan2"},
-                                        new CB_ContactBook(){BookId = 2, BookName="Temp2", Username="axkhan1"}
+                    new data.ContactBook(){BookId = 1, BookName="Temp1", Username="axkhan2"},
+                                        new data.ContactBook(){BookId = 2, BookName="Temp2", Username="axkhan1"}
                 };
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_ContactBook>()).Returns(
-                () => ControllerFixture.MockRepository<CB_ContactBook>(contactBookList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<data.ContactBook>()).Returns(
+                () => ControllerFixture.MockRepository<data.ContactBook>(contactBookList
                 )
                 );
             ApiContactBookController cbController = new ApiContactBookController(new ContactBookContext(ControllerFixture.MockUnitOfWork.Object));
@@ -68,7 +68,7 @@ namespace ContactBook.WebApi.Test.Controllers
 
             //Assert
             Assert.True(message.StatusCode == System.Net.HttpStatusCode.OK);
-            message.TryGetContentValue<ContactBookInfo>(out cbInfo);
+            message.TryGetContentValue<ContactBookInfoModel>(out cbInfo);
             Assert.NotNull(cbInfo);
         }
     }

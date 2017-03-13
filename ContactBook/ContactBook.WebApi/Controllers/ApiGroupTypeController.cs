@@ -17,20 +17,20 @@ namespace ContactBook.WebApi.Controllers
     [RoutePrefix("api/ApiGroupType")]
     public class ApiGroupTypeController : ApiController
     {
-        private IGenericContextTypes<GroupType, CB_GroupType> groupTypeRepo;
+        private IGenericContextTypes<GroupTypeModel, GroupType> groupTypeRepo;
         
         public ApiGroupTypeController(IContactBookRepositoryUow unitofWork)
         {
-            groupTypeRepo = new GenericContextTypes<GroupType, CB_GroupType>(unitofWork);
+            groupTypeRepo = new GenericContextTypes<GroupTypeModel, GroupType>(unitofWork);
         }
 
         //Get api/GroupType/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<GroupType>))]
+        [ResponseType(typeof(List<GroupTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<GroupType> groupTypes = groupTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
+            List<GroupTypeModel> groupTypes = groupTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
 
             if (groupTypes == null || groupTypes.Count == 0)
             {
@@ -41,7 +41,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/ApiGroupType
-        public IHttpActionResult Post([FromBody]GroupType groupType)
+        public IHttpActionResult Post([FromBody]GroupTypeModel groupType)
         {
             Exception exOut;
 
@@ -50,9 +50,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => groupTypeRepo.InsertTypes(new List<GroupType>() { groupType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => groupTypeRepo.InsertTypes(new List<GroupTypeModel>() { groupType }), out exOut))
             {
-                return CreatedAtRoute<GroupType>("DefaultApi", new { controller = "ApiGroupType", action = "Get", bookId = groupType.BookId }, groupType);
+                return CreatedAtRoute<GroupTypeModel>("DefaultApi", new { controller = "ApiGroupType", action = "Get", bookId = groupType.BookId }, groupType);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/ApiGroupType
-        public IHttpActionResult Put([FromBody]GroupType pGroupType)
+        public IHttpActionResult Put([FromBody]GroupTypeModel pGroupType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -69,14 +69,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_GroupType> groupTypeList = groupTypeRepo.GetCBTypes(nbt => nbt.GroupId == pGroupType.GroupId && (nbt.BookId.HasValue && nbt.BookId.Value == pGroupType.BookId));
+            List<GroupType> groupTypeList = groupTypeRepo.GetCBTypes(nbt => nbt.GroupId == pGroupType.GroupId && (nbt.BookId.HasValue && nbt.BookId.Value == pGroupType.BookId));
 
             if (groupTypeList == null || groupTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_GroupType dbGroupType = groupTypeList.SingleOrDefault();
+            GroupType dbGroupType = groupTypeList.SingleOrDefault();
 
             if (dbGroupType != null && !dbGroupType.Equals(pGroupType))
             {
@@ -96,7 +96,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_GroupType groupType = null;
+            GroupType groupType = null;
 
             if (bookId <= 0)
             {

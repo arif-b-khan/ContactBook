@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ContactBook.Db.Data;
+using data = ContactBook.Db.Data;
 using ContactBook.Db.Repositories;
 using ContactBook.Domain.Models;
 using System.Collections.Generic;
@@ -10,22 +10,22 @@ namespace ContactBook.Domain.Contexts.Addresses
     public class AddressContext : ContactBook.Domain.Contexts.Addresses.IAddressContext
     {
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookDbRepository<CB_Address> addressRepo;
+        private IContactBookDbRepository<Db.Data.Address> addressRepo;
 
         public AddressContext(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            addressRepo = this.unitOfWork.GetEntityByType<CB_Address>();
+            addressRepo = this.unitOfWork.GetEntityByType<Db.Data.Address>();
         }
 
-        public List<Address> GetAddressContactId(long contactId)
+        public List<AddressModel> GetAddressContactId(long contactId)
         {
-            List<CB_Address> address = addressRepo.Get(ad => ad.ContactId == contactId, null, "CB_AddressType").ToList();
-            Mapper.CreateMap<CB_Address, Address>();
-            return Mapper.Map<List<Address>>(address);
+            List<Db.Data.Address> address = addressRepo.Get(ad => ad.ContactId == contactId, null, "AddressType").ToList();
+            Mapper.CreateMap<Db.Data.Address, AddressModel>();
+            return Mapper.Map<List<AddressModel>>(address);
         }
 
-        public void InsertAddresses(List<Address> addresses)
+        public void InsertAddresses(List<AddressModel> addresses)
         {
             foreach (var address in ReturnAddressFromModel(addresses))
             {
@@ -34,7 +34,7 @@ namespace ContactBook.Domain.Contexts.Addresses
             unitOfWork.Save();
         }
 
-        public void UpdateAddresses(List<Address> addresses)
+        public void UpdateAddresses(List<AddressModel> addresses)
         {
             foreach (var address in ReturnAddressFromModel(addresses))
             {
@@ -43,7 +43,7 @@ namespace ContactBook.Domain.Contexts.Addresses
             unitOfWork.Save();
         }
 
-        public void DeleteAddresses(List<Address> addresses)
+        public void DeleteAddresses(List<AddressModel> addresses)
         {
             foreach (var address in ReturnAddressFromModel(addresses))
             {
@@ -52,10 +52,10 @@ namespace ContactBook.Domain.Contexts.Addresses
             unitOfWork.Save();
         }
 
-        private List<CB_Address> ReturnAddressFromModel(List<Address> addresses)
+        private List<Db.Data.Address> ReturnAddressFromModel(List<AddressModel> addresses)
         {
-            Mapper.CreateMap<Address, CB_Address>();
-            return Mapper.Map<List<CB_Address>>(addresses);
+            Mapper.CreateMap<AddressModel, Db.Data.Address>();
+            return Mapper.Map<List<Db.Data.Address>>(addresses);
         }
     }
 }

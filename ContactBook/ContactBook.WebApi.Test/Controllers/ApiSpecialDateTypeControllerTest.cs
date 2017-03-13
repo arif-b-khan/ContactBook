@@ -20,17 +20,17 @@ namespace ContactBook.WebApi.Test.Controllers
     public class ApiSpecialDateTypeControllerTest : IClassFixture<ControllerTestFixtures>
     {
         private CancellationTokenSource cts;
-        private List<CB_SpecialDateType> specialDateTypeList = null;
+        private List<SpecialDateType> specialDateTypeList = null;
 
         public ApiSpecialDateTypeControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
             cts = new CancellationTokenSource(10000);
-            specialDateTypeList = new List<CB_SpecialDateType>()
+            specialDateTypeList = new List<SpecialDateType>()
             {
-                new CB_SpecialDateType(){ SpecialDateTpId = 1, Date_TypeName="Home", BookId=null},
-                new CB_SpecialDateType(){ SpecialDateTpId = 2, Date_TypeName="Office", BookId=null},
-                new CB_SpecialDateType(){ SpecialDateTpId = 3, Date_TypeName="abc", BookId=1}
+                new SpecialDateType(){ SpecialDateTpId = 1, Date_TypeName="Home", BookId=null},
+                new SpecialDateType(){ SpecialDateTpId = 2, Date_TypeName="Office", BookId=null},
+                new SpecialDateType(){ SpecialDateTpId = 3, Date_TypeName="abc", BookId=1}
             };
         }
 
@@ -40,7 +40,7 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetSpecialDateTypeShouldReturnNotFound()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() => ControllerFixture.MockRepository<CB_SpecialDateType>(null));
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() => ControllerFixture.MockRepository<SpecialDateType>(null));
 
             ApiSpecialDateTypeController typeCnt = new ApiSpecialDateTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
             typeCnt.Request = new HttpRequestMessage();
@@ -57,8 +57,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetSpecialDateTypeShouldReturnNumber()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_SpecialDateType>(specialDateTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(
+                () => ControllerFixture.MockRepository<SpecialDateType>(specialDateTypeList
                     ));
 
             ApiSpecialDateTypeController typeCntr = new ApiSpecialDateTypeController(ControllerFixture.MockUnitOfWork.Object, ControllerFixture.MockUnitOfWork.Object);
@@ -68,8 +68,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(typeCntr.Get(1), cts.Token);
 
-            List<SpecialDateType> resultType;
-            result.TryGetContentValue<List<SpecialDateType>>(out resultType);
+            List<SpecialDateTypeModel> resultType;
+            result.TryGetContentValue<List<SpecialDateTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -83,8 +83,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetSpecialDateTypeShouldOnlyDefaultNumbers()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_SpecialDateType>(specialDateTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(
+                () => ControllerFixture.MockRepository<SpecialDateType>(specialDateTypeList
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
@@ -95,8 +95,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(typeCntr.Get(-1), cts.Token);
 
-            List<SpecialDateType> resultType;
-            result.TryGetContentValue<List<SpecialDateType>>(out resultType);
+            List<SpecialDateTypeModel> resultType;
+            result.TryGetContentValue<List<SpecialDateTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -111,29 +111,29 @@ namespace ContactBook.WebApi.Test.Controllers
         {
             //Arrange
             List<SpecialDateType> typeResult = new List<SpecialDateType>();
-            var specialDateType = new SpecialDateType()
+            var specialDateType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = 1,
                 DateTypeName = "Home",
                 BookId = 1
             };
-            var cbSpecialDateType = new CB_SpecialDateType()
+            var cbSpecialDateType = new SpecialDateType()
             {
                 SpecialDateTpId = 1,
                 Date_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepository<CB_SpecialDateType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType>(
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepository<SpecialDateType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<SpecialDateType>())).Callback<SpecialDateType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_SpecialDateType, SpecialDateType>().ForMember(at => at.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
+                    Mapper.CreateMap<SpecialDateType, SpecialDateTypeModel>().ForMember(at => at.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
 
                     typeResult.Add(Mapper.Map<SpecialDateType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -154,30 +154,30 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<SpecialDateType> typeResult = new List<SpecialDateType>();
 
-            var specialDateType = new SpecialDateType()
+            var specialDateType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = 1,
                 DateTypeName = "Home",
                 BookId = 1
             };
 
-            var cbSpecialDateType = new CB_SpecialDateType()
+            var cbSpecialDateType = new SpecialDateType()
             {
                 SpecialDateTpId = 1,
                 Date_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepository<CB_SpecialDateType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType>(
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepository<SpecialDateType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<SpecialDateType>())).Callback<SpecialDateType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_SpecialDateType, SpecialDateType>().ForMember(at => at.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
+                    Mapper.CreateMap<SpecialDateType, SpecialDateTypeModel>().ForMember(at => at.DateTypeName, cb => cb.MapFrom(m => m.Date_TypeName));
 
                     typeResult.Add(Mapper.Map<SpecialDateType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -215,23 +215,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<SpecialDateType> typeResult = new List<SpecialDateType>();
 
-            var cbType = new SpecialDateType()
+            var cbType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = 3,
                 DateTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_SpecialDateType>(specialDateTypeList);
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<SpecialDateType>(specialDateTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_SpecialDateType>(), It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType, CB_SpecialDateType>(
+            mockRepo.Setup(s => s.Update(It.IsAny<SpecialDateType>(), It.IsAny<SpecialDateType>())).Callback<SpecialDateType, SpecialDateType>(
                 (a, c) =>
                 {
-                    CB_SpecialDateType upGroup = specialDateTypeList.Where(cb => cb.SpecialDateTpId == c.SpecialDateTpId).SingleOrDefault();
+                    SpecialDateType upGroup = specialDateTypeList.Where(cb => cb.SpecialDateTpId == c.SpecialDateTpId).SingleOrDefault();
                     upGroup.Date_TypeName = c.Date_TypeName;
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -261,16 +261,16 @@ namespace ContactBook.WebApi.Test.Controllers
         public void SpecialDateTypeUpdateShouldReturnNotFound()
         {
             //Arrange
-            var cbType = new SpecialDateType()
+            var cbType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = -3,
                 DateTypeName = "Updated",
                 BookId = -1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_SpecialDateType>(specialDateTypeList);
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<SpecialDateType>(specialDateTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -296,23 +296,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<SpecialDateType> typeResult = new List<SpecialDateType>();
 
-            var specialdateType = new SpecialDateType()
+            var specialdateType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = 3,
                 DateTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_SpecialDateType>(specialDateTypeList);
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<SpecialDateType>(specialDateTypeList);
 
-            mockRepo.Setup(s => s.Delete(It.IsAny<CB_SpecialDateType>())).Callback<CB_SpecialDateType>(
+            mockRepo.Setup(s => s.Delete(It.IsAny<SpecialDateType>())).Callback<SpecialDateType>(
                 c =>
                 {
-                    CB_SpecialDateType delAddr = specialDateTypeList.Where(cb => cb.SpecialDateTpId == c.SpecialDateTpId).SingleOrDefault();
+                    SpecialDateType delAddr = specialDateTypeList.Where(cb => cb.SpecialDateTpId == c.SpecialDateTpId).SingleOrDefault();
                     specialDateTypeList.Remove(delAddr);
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -344,16 +344,16 @@ namespace ContactBook.WebApi.Test.Controllers
             //Arrange
             List<SpecialDateType> typeResult = new List<SpecialDateType>();
 
-            var cbType = new SpecialDateType()
+            var cbType = new SpecialDateTypeModel()
             {
                 SpecialDateTpId = 3,
                 DateTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_SpecialDateType>(specialDateTypeList);
+            Mock<IContactBookDbRepository<SpecialDateType>> mockRepo = ControllerFixture.MockRepositoryNeedList<SpecialDateType>(specialDateTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_SpecialDateType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<SpecialDateType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });

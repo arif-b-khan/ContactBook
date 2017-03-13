@@ -13,7 +13,7 @@ namespace ContactBook.Db.Repositories
         private DbSet<T> dbSet;
         private object lockObj = new object();
 
-        public ContactBookDbRepository(ContactBookEdmContainer con)
+        public ContactBookDbRepository(ContactbookDbContext con)
         {
             this.context = con;
             this.dbSet = context.Set<T>();

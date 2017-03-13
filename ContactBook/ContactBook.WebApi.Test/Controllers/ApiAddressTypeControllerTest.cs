@@ -20,17 +20,17 @@ namespace ContactBook.WebApi.Test.Controllers
     public class ApiAddressTypeControllerTest : IClassFixture<ControllerTestFixtures>
     {
         private CancellationTokenSource cts;
-        private List<CB_AddressType> addressTypeList = null;
+        private List<AddressType> addressTypeList = null;
 
         public ApiAddressTypeControllerTest(ControllerTestFixtures fixture)
         {
             ControllerFixture = fixture;
             cts = new CancellationTokenSource(10000);
-            addressTypeList = new List<CB_AddressType>()
+            addressTypeList = new List<AddressType>()
             {
-                new CB_AddressType(){ AddressTypeId = 1, Address_TypeName="Home", BookId=null},
-                new CB_AddressType(){ AddressTypeId = 2, Address_TypeName="Office", BookId=null},
-                new CB_AddressType(){ AddressTypeId = 3, Address_TypeName="abc", BookId=1}
+                new AddressType(){ AddressTypeId = 1, Address_TypeName="Home", BookId=null},
+                new AddressType(){ AddressTypeId = 2, Address_TypeName="Office", BookId=null},
+                new AddressType(){ AddressTypeId = 3, Address_TypeName="abc", BookId=1}
             };
         }
 
@@ -40,8 +40,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetAddressTypeShouldReturnNotFound()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_AddressType>(null));
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(
+                () => ControllerFixture.MockRepository<AddressType>(null));
 
             ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
             addressTypeCntr.Request = new HttpRequestMessage();
@@ -58,8 +58,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetAddressTypeShouldReturnAddress()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_AddressType>(addressTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(
+                () => ControllerFixture.MockRepository<AddressType>(addressTypeList
                     ));
 
             ApiAddressTypeController addressTypeCntr = new ApiAddressTypeController(ControllerFixture.MockUnitOfWork.Object);
@@ -69,8 +69,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(addressTypeCntr.Get(1), cts.Token);
 
-            List<AddressType> resultType;
-            result.TryGetContentValue<List<AddressType>>(out resultType);
+            List<AddressTypeModel> resultType;
+            result.TryGetContentValue<List<AddressTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -84,8 +84,8 @@ namespace ContactBook.WebApi.Test.Controllers
         public void GetAddressTypeShouldOnlyDefaultAddresses()
         {
             //Arrange
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(
-                () => ControllerFixture.MockRepository<CB_AddressType>(addressTypeList
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(
+                () => ControllerFixture.MockRepository<AddressType>(addressTypeList
                     ));
             var config = new HttpConfiguration();
             ControllerFixture.RouteConfig(config);
@@ -96,8 +96,8 @@ namespace ContactBook.WebApi.Test.Controllers
             //Act
             HttpResponseMessage result = ControllerFixture.GetResponseMessage(addressTypeCntr.Get(-1), cts.Token);
 
-            List<AddressType> resultType;
-            result.TryGetContentValue<List<AddressType>>(out resultType);
+            List<AddressTypeModel> resultType;
+            result.TryGetContentValue<List<AddressTypeModel>>(out resultType);
 
             //Assert
             Assert.True(result.StatusCode == HttpStatusCode.OK);
@@ -112,29 +112,29 @@ namespace ContactBook.WebApi.Test.Controllers
         {
             //Arrange
             List<AddressType> addressTypeResult = new List<AddressType>();
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 1,
                 AddressTypeName = "Home",
                 BookId = 1
             };
-            var cbaddressType = new CB_AddressType()
+            var cbaddressType = new AddressType()
             {
                 AddressTypeId = 1,
                 Address_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepository<CB_AddressType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_AddressType>())).Callback<CB_AddressType>(
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepository<AddressType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<AddressType>())).Callback<AddressType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_AddressType, AddressType>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
+                    Mapper.CreateMap<AddressType, AddressTypeModel>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
 
                     addressTypeResult.Add(Mapper.Map<AddressType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -161,30 +161,30 @@ namespace ContactBook.WebApi.Test.Controllers
             //Arrange
             List<AddressType> addressTypeResult = new List<AddressType>();
 
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 1,
                 AddressTypeName = "Home",
                 BookId = 1
             };
 
-            var cbaddressType = new CB_AddressType()
+            var cbaddressType = new AddressType()
             {
                 AddressTypeId = 1,
                 Address_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepository<CB_AddressType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_AddressType>())).Callback<CB_AddressType>(
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepository<AddressType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<AddressType>())).Callback<AddressType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_AddressType, AddressType>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
+                    Mapper.CreateMap<AddressType, AddressTypeModel>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
 
                     addressTypeResult.Add(Mapper.Map<AddressType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -205,30 +205,30 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<AddressType> addressTypeResult = new List<AddressType>();
 
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 1,
                 AddressTypeName = "Home",
                 BookId = 1
             };
 
-            var cbaddressType = new CB_AddressType()
+            var cbaddressType = new AddressType()
             {
                 AddressTypeId = 1,
                 Address_TypeName = "Home",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepository<CB_AddressType>();
-            mockRepo.Setup(s => s.Insert(It.IsAny<CB_AddressType>())).Callback<CB_AddressType>(
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepository<AddressType>();
+            mockRepo.Setup(s => s.Insert(It.IsAny<AddressType>())).Callback<AddressType>(
                 c =>
                 {
-                    Mapper.CreateMap<CB_AddressType, AddressType>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
+                    Mapper.CreateMap<AddressType, AddressTypeModel>().ForMember(at => at.AddressTypeName, cb => cb.MapFrom(m => m.Address_TypeName));
 
                     addressTypeResult.Add(Mapper.Map<AddressType>(c));
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -266,23 +266,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<AddressType> addressTypeResult = new List<AddressType>();
 
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 3,
                 AddressTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_AddressType>(addressTypeList);
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<AddressType>(addressTypeList);
 
-            mockRepo.Setup(s => s.Update(It.IsAny<CB_AddressType>(), It.IsAny<CB_AddressType>())).Callback<CB_AddressType, CB_AddressType>(
+            mockRepo.Setup(s => s.Update(It.IsAny<AddressType>(), It.IsAny<AddressType>())).Callback<AddressType, AddressType>(
                 (a, c) =>
                 {
-                    CB_AddressType upAddr = addressTypeList.Where(cb => cb.AddressTypeId == c.AddressTypeId).SingleOrDefault();
+                    AddressType upAddr = addressTypeList.Where(cb => cb.AddressTypeId == c.AddressTypeId).SingleOrDefault();
                     upAddr.Address_TypeName = c.Address_TypeName;
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -312,16 +312,16 @@ namespace ContactBook.WebApi.Test.Controllers
         public void AddressTypeUpdateShouldReturnNotFound()
         {
             //Arrange
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = -3,
                 AddressTypeName = "Updated",
                 BookId = -1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_AddressType>(addressTypeList);
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<AddressType>(addressTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -347,23 +347,23 @@ namespace ContactBook.WebApi.Test.Controllers
             bool saveCalled = false;
             List<AddressType> addressTypeResult = new List<AddressType>();
 
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 3,
                 AddressTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_AddressType>(addressTypeList);
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<AddressType>(addressTypeList);
 
-            mockRepo.Setup(s => s.Delete(It.IsAny<CB_AddressType>())).Callback<CB_AddressType>(
+            mockRepo.Setup(s => s.Delete(It.IsAny<AddressType>())).Callback<AddressType>(
                 c =>
                 {
-                    CB_AddressType delAddr = addressTypeList.Where(cb => cb.AddressTypeId == c.AddressTypeId).SingleOrDefault();
+                    AddressType delAddr = addressTypeList.Where(cb => cb.AddressTypeId == c.AddressTypeId).SingleOrDefault();
                     addressTypeList.Remove(delAddr);
                 });
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });
@@ -396,16 +396,16 @@ namespace ContactBook.WebApi.Test.Controllers
             //bool saveCalled = false;
             List<AddressType> addressTypeResult = new List<AddressType>();
 
-            var addressType = new AddressType()
+            var addressType = new AddressTypeModel()
             {
                 AddressTypeId = 3,
                 AddressTypeName = "Updated",
                 BookId = 1
             };
 
-            Mock<IContactBookDbRepository<CB_AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<CB_AddressType>(addressTypeList);
+            Mock<IContactBookDbRepository<AddressType>> mockRepo = ControllerFixture.MockRepositoryNeedList<AddressType>(addressTypeList);
 
-            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<CB_AddressType>()).Returns(() =>
+            ControllerFixture.MockUnitOfWork.Setup(rp => rp.GetEntityByType<AddressType>()).Returns(() =>
             {
                 return mockRepo.Object;
             });

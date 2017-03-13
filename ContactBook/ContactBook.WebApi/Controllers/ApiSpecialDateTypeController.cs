@@ -19,24 +19,24 @@ namespace ContactBook.WebApi.Controllers
     {
         private IContactBookRepositoryUow _unitofWork;
         private IContactBookRepositoryUow _readOnlyUow;
-        private IGenericContextTypes<SpecialDateType, CB_SpecialDateType> specialDateTypeRepo;
-        private IGenericContextTypes<SpecialDateType, CB_SpecialDateType> readOnlyRepo;
+        private IGenericContextTypes<SpecialDateTypeModel, SpecialDateType> specialDateTypeRepo;
+        private IGenericContextTypes<SpecialDateTypeModel, SpecialDateType> readOnlyRepo;
         
         public ApiSpecialDateTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;
             _readOnlyUow = readOnlyUow;
-            specialDateTypeRepo = new GenericContextTypes<SpecialDateType, CB_SpecialDateType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<SpecialDateType, CB_SpecialDateType>(_readOnlyUow);
+            specialDateTypeRepo = new GenericContextTypes<SpecialDateTypeModel, SpecialDateType>(unitofWork);
+            readOnlyRepo = new GenericContextTypes<SpecialDateTypeModel, SpecialDateType>(_readOnlyUow);
         }
 
         //Get api/SpecialDateType/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<SpecialDateType>))]
+        [ResponseType(typeof(List<SpecialDateTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<SpecialDateType> specialDateTypes = specialDateTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
+            List<SpecialDateTypeModel> specialDateTypes = specialDateTypeRepo.GetTypes(nbt => ((nbt.BookId.HasValue && nbt.BookId.Value == bookId) || !nbt.BookId.HasValue));
 
             if (specialDateTypes == null || specialDateTypes.Count == 0)
             {
@@ -47,7 +47,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/ApiSpecialDateType
-        public IHttpActionResult Post([FromBody]SpecialDateType specialDateType)
+        public IHttpActionResult Post([FromBody]SpecialDateTypeModel specialDateType)
         {
             Exception exOut;
 
@@ -56,9 +56,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => specialDateTypeRepo.InsertTypes(new List<SpecialDateType>() { specialDateType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => specialDateTypeRepo.InsertTypes(new List<SpecialDateTypeModel>() { specialDateType }), out exOut))
             {
-                return CreatedAtRoute<SpecialDateType>("DefaultApi", new { controller = "ApiSpecialDateType", action = "Get", bookId = specialDateType.BookId }, specialDateType);
+                return CreatedAtRoute<SpecialDateTypeModel>("DefaultApi", new { controller = "ApiSpecialDateType", action = "Get", bookId = specialDateType.BookId }, specialDateType);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/ApiSpecialDateType
-        public IHttpActionResult Put([FromBody]SpecialDateType pSpecialDateType)
+        public IHttpActionResult Put([FromBody]SpecialDateTypeModel pSpecialDateType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -75,14 +75,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_SpecialDateType> specialdateTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.SpecialDateTpId == pSpecialDateType.SpecialDateTpId && (nbt.BookId.HasValue && nbt.BookId.Value == pSpecialDateType.BookId));
+            List<SpecialDateType> specialdateTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.SpecialDateTpId == pSpecialDateType.SpecialDateTpId && (nbt.BookId.HasValue && nbt.BookId.Value == pSpecialDateType.BookId));
 
             if (specialdateTypeList == null || specialdateTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_SpecialDateType dbSpecialDateType = specialdateTypeList.SingleOrDefault();
+            SpecialDateType dbSpecialDateType = specialdateTypeList.SingleOrDefault();
 
             if (dbSpecialDateType != null && !dbSpecialDateType.Equals(pSpecialDateType))
             {
@@ -102,7 +102,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_SpecialDateType specialType = null;
+            SpecialDateType specialType = null;
 
             if (bookId <= 0)
             {

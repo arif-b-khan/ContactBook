@@ -11,164 +11,164 @@ namespace ContactBook.Domain.Contexts.Contacts
 {
     public class ContactContext : IContactContext
     {
-        private const string CONTACT_FIELDS = "CB_Addresses, CB_Numbers, CB_Emails, CB_Websites, CB_ContactByGroups, CB_Addresses, CB_IMs, CB_Relationships, CB_SpecialDates, CB_InternetCalls";
+        private const string CONTACT_FIELDS = "Addresses, Numbers, Emails, Websites, ContactByGroups, Addresses, IMs, Relationships, SpecialDates, InternetCalls";
         private IContactBookRepositoryUow unitOfWork;
-        private IContactBookDbRepository<CB_Contact> contactRepo;
+        private IContactBookDbRepository<Contact> contactRepo;
         private ChildEntityDbOperations childOperations;
 
         public ContactContext(IContactBookRepositoryUow unitOfWork)
         {
             this.unitOfWork = unitOfWork;
 
-            contactRepo = this.unitOfWork.GetEntityByType<CB_Contact>();
+            contactRepo = this.unitOfWork.GetEntityByType<Contact>();
             childOperations = new ChildEntityDbOperations(contactRepo, unitOfWork);
-            CBContactToContactMapping();
-            ContactToCBContactMapping();
+            ContactModelToContactMapping();
+            ContactToContactModelMapping();
         }
 
-        public Contact GetContact(long contactId)
+        public ContactModel GetContact(long contactId)
         {
-            CB_Contact contact = contactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
+            Contact contact = contactRepo.Get(con => con.ContactId == contactId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
 
-            Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
+            ContactModel retContact = Mapper.Map<Contact, ContactModel>(contact);
 
             return retContact;
         }
 
-        public Contact GetContact(long bookId, long contactId)
+        public ContactModel GetContact(long bookId, long contactId)
         {
-            CB_Contact contact = contactRepo.Get(con => con.ContactId == contactId && con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
+            Contact contact = contactRepo.Get(con => con.ContactId == contactId && con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).FirstOrDefault();
 
-            Contact retContact = Mapper.Map<CB_Contact, Contact>(contact);
+            ContactModel retContact = Mapper.Map<Contact, ContactModel>(contact);
 
             return retContact;
         
         }
 
-        public List<Contact> GetContacts(long bookId)
+        public List<ContactModel> GetContacts(long bookId)
         {
-            List<CB_Contact> contacts = contactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
-            List<Contact> contactList = Mapper.Map<List<Contact>>(contacts);
+            List<Contact> contacts = contactRepo.Get(con => con.BookId == bookId, odr => odr.OrderBy(o => o.Firstname), CONTACT_FIELDS).ToList();
+            List<ContactModel> contactList = Mapper.Map<List<ContactModel>>(contacts);
             return contactList;
         }
 
-        public void InsertContact(Contact contact)
+        public void InsertContact(ContactModel contact)
         {
-            CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
+            Contact cbContact = Mapper.Map<Contact>(contact);
             contactRepo.Insert(cbContact);
             unitOfWork.Save();
         }
 
-        public void DeleteContact(Contact contact)
+        public void DeleteContact(ContactModel contact)
         {
-            CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
+            Contact cbContact = Mapper.Map<Contact>(contact);
             contactRepo.Delete(cbContact);
             unitOfWork.Save();
         }
 
-        public void UpdateContact(Contact contact)
+        public void UpdateContact(ContactModel contact)
         {
-            CB_Contact cbContact = Mapper.Map<CB_Contact>(contact);
-            //CB_Contact dContact = rContactRepo.GetById(contact.ContactId);
-            CB_Contact dContact = contactRepo.GetById(contact.ContactId);
-            if (dContact != null && cbContact != null)
-                childOperations.PerformOperations(cbContact, dContact);
+            Contact modelContact = Mapper.Map<Contact>(contact);
+            //Contact dContact = rContactRepo.GetById(contact.ContactId);
+            Contact dContact = contactRepo.GetById(contact.ContactId);
+            if (dContact != null && modelContact != null)
+                childOperations.PerformOperations(modelContact, dContact);
             contactRepo.Update(dContact);
             unitOfWork.Save();
         }
 
-        private static void ContactToCBContactMapping()
+        private static void ContactModelToContactMapping()
         {
-            Mapper.CreateMap<Contact, CB_Contact>()
-                .ForMember(md => md.CB_Addresses, cn => cn.MapFrom(m => m.Addresses))
-                .ForMember(md => md.CB_Numbers, cn => cn.MapFrom(m => m.Numbers))
-                .ForMember(md => md.CB_InternetCalls, cn => cn.MapFrom(m => m.InternetCalls))
-                .ForMember(md => md.CB_Websites, cn => cn.MapFrom(m => m.Websites))
-                .ForMember(md => md.CB_Relationships, cn => cn.MapFrom(m => m.Relationships))
-                .ForMember(md => md.CB_IMs, cn => cn.MapFrom(m => m.IMs))
-                .ForMember(md => md.CB_ContactByGroups, cn => cn.MapFrom(m => m.ContactByGroups))
-                .ForMember(md => md.CB_Emails, cn => cn.MapFrom(m => m.Emails))
-                .ForMember(md => md.CB_SpecialDates, cn => cn.MapFrom(m => m.SpecialDates));
+            Mapper.CreateMap<ContactModel, Contact>()
+                .ForMember(md => md.Addresses, cn => cn.MapFrom(m => m.Addresses))
+                .ForMember(md => md.Numbers, cn => cn.MapFrom(m => m.Numbers))
+                .ForMember(md => md.InternetCalls, cn => cn.MapFrom(m => m.InternetCalls))
+                .ForMember(md => md.Websites, cn => cn.MapFrom(m => m.Websites))
+                .ForMember(md => md.Relationships, cn => cn.MapFrom(m => m.Relationships))
+                .ForMember(md => md.IMs, cn => cn.MapFrom(m => m.IMs))
+                .ForMember(md => md.ContactByGroups, cn => cn.MapFrom(m => m.ContactByGroups))
+                .ForMember(md => md.Emails, cn => cn.MapFrom(m => m.Emails))
+                .ForMember(md => md.SpecialDates, cn => cn.MapFrom(m => m.SpecialDates));
 
-            Mapper.CreateMap<Address, CB_Address>()
-                .ForMember(cad => cad.Address, ad => ad.MapFrom(a => a.AddressDescription));
+            Mapper.CreateMap<AddressModel, Db.Data.Address>()
+                .ForMember(cad => cad.Address1, (IMemberConfigurationExpression<AddressModel> ad) => ad.MapFrom(a => a.AddressDescription));
 
-            Mapper.CreateMap<Number, CB_Number>().ForMember(cb => cb.Number,
+            Mapper.CreateMap<NumberModel, Number>().ForMember(cb => cb.Number1,
                 nm => nm.MapFrom(n => n.ContactNumber));
 
-            Mapper.CreateMap<IM, CB_IM>();
+            Mapper.CreateMap<IMModel, IM>();
 
-            Mapper.CreateMap<InternetCall, CB_InternetCall>();
+            Mapper.CreateMap<InternetCallModel, InternetCall>();
 
-            Mapper.CreateMap<Website, CB_Website>()
-                .ForMember(cbw => cbw.Website, wb => wb.MapFrom(w => w.WebsiteUrl));
+            Mapper.CreateMap<WebsiteModel, Website>()
+                .ForMember(cbw => cbw.Website1, wb => wb.MapFrom(w => w.WebsiteUrl));
 
-            Mapper.CreateMap<Relationship, CB_Relationship>();
+            Mapper.CreateMap<RelationshipModel, Relationship>();
 
-            Mapper.CreateMap<SpecialDate, CB_SpecialDate>();
+            Mapper.CreateMap<SpecialDateModel, SpecialDate>();
 
-            Mapper.CreateMap<ContactByGroup, CB_ContactByGroup>();
+            Mapper.CreateMap<ContactByGroupModel, ContactByGroup>();
 
-            Mapper.CreateMap<Email, CB_Email>()
-                .ForMember(c => c.Email, em => em.MapFrom(e => e.EmailAddress));
+            Mapper.CreateMap<EmailModel, Email>()
+                .ForMember(c => c.Email1, em => em.MapFrom(e => e.EmailAddress));
 
         }
 
-        private static void CBContactToContactMapping()
+        private static void ContactToContactModelMapping()
         {
-            Mapper.CreateMap<CB_Contact, Contact>()
-                .ForSourceMember(cn => cn.CB_ContactBook, cb => cb.Ignore())
-                .ForMember(md => md.Addresses, cn => cn.MapFrom(m => m.CB_Addresses))
-                .ForMember(md => md.Numbers, cn => cn.MapFrom(m => m.CB_Numbers))
-                .ForMember(md => md.InternetCalls, cn => cn.MapFrom(m => m.CB_InternetCalls))
-                .ForMember(md => md.Websites, cn => cn.MapFrom(m => m.CB_Websites))
-                .ForMember(md => md.Relationships, cn => cn.MapFrom(m => m.CB_Relationships))
-                .ForMember(md => md.IMs, cn => cn.MapFrom(m => m.CB_IMs))
-                .ForMember(md => md.ContactByGroups, cn => cn.MapFrom(m => m.CB_ContactByGroups))
-                .ForMember(md => md.Emails, cn => cn.MapFrom(m => m.CB_Emails))
-                .ForMember(md => md.SpecialDates, cn => cn.MapFrom(m => m.CB_SpecialDates));
+            Mapper.CreateMap<Contact, ContactModel>()
+                .ForSourceMember(cn => cn.ContactBook, cb => cb.Ignore())
+                .ForMember(md => md.Addresses, cn => cn.MapFrom(m => m.Addresses))
+                .ForMember(md => md.Numbers, cn => cn.MapFrom(m => m.Numbers))
+                .ForMember(md => md.InternetCalls, cn => cn.MapFrom(m => m.InternetCalls))
+                .ForMember(md => md.Websites, cn => cn.MapFrom(m => m.Websites))
+                .ForMember(md => md.Relationships, cn => cn.MapFrom(m => m.Relationships))
+                .ForMember(md => md.IMs, cn => cn.MapFrom(m => m.IMs))
+                .ForMember(md => md.ContactByGroups, cn => cn.MapFrom(m => m.ContactByGroups))
+                .ForMember(md => md.Emails, cn => cn.MapFrom(m => m.Emails))
+                .ForMember(md => md.SpecialDates, cn => cn.MapFrom(m => m.SpecialDates));
 
-            Mapper.CreateMap<CB_Address, Address>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_AddressType, cbs => cbs.Ignore())
-                .ForMember(cad => cad.AddressDescription, ad => ad.MapFrom(a => a.Address));
+            Mapper.CreateMap<Db.Data.Address, AddressModel>()
+                .ForSourceMember(cb => cb.Contact, (ISourceMemberConfigurationExpression<Db.Data.Address> cbs) => cbs.Ignore())
+                .ForSourceMember(cb => cb.AddressType, (ISourceMemberConfigurationExpression<Db.Data.Address> cbs) => cbs.Ignore())
+                .ForMember(cad => cad.AddressDescription, (IMemberConfigurationExpression<Db.Data.Address> ad) => ad.MapFrom(a => a.Address1));
 
-            Mapper.CreateMap<CB_Number, Number>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_NumberType, cbs => cbs.Ignore())
-                .ForMember(n => n.ContactNumber, cb => cb.MapFrom(nm => nm.Number));
+            Mapper.CreateMap<Number, NumberModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.NumberType, cbs => cbs.Ignore())
+                .ForMember(n => n.ContactNumber, cb => cb.MapFrom(nm => nm.Number1));
 
-            Mapper.CreateMap<CB_IM, IM>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_IMType, cbs => cbs.Ignore());
+            Mapper.CreateMap<IM, IM>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.IMType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_InternetCall, InternetCall>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore());
+            Mapper.CreateMap<InternetCall, InternetCall>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_Website, Website>()
-                .ForSourceMember(cb => cb.CB_Contact, cbs => cbs.Ignore())
-                .ForMember(cbw => cbw.WebsiteUrl, wb => wb.MapFrom(w => w.Website));
+            Mapper.CreateMap<Website, WebsiteModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForMember(cbw => cbw.WebsiteUrl, wb => wb.MapFrom(w => w.Website1));
 
-            Mapper.CreateMap<CB_Relationship, Relationship>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_RelationshipType, cbs => cbs.Ignore());
+            Mapper.CreateMap<Relationship, RelationshipModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.RelationshipType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_SpecialDate, SpecialDate>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_SpecialDateType, cbs => cbs.Ignore());
+            Mapper.CreateMap<SpecialDate, SpecialDateModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.SpecialDateType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_ContactByGroup, ContactByGroup>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_GroupTypes, cbs => cbs.Ignore());
+            Mapper.CreateMap<ContactByGroup, ContactByGroupModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.GroupType, cbs => cbs.Ignore());
 
-            Mapper.CreateMap<CB_Email, Email>()
-                .ForSourceMember(cb => cb.CB_Contacts, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_EmailType, cbs => cbs.Ignore())
-                .ForMember(c => c.EmailAddress, em => em.MapFrom(e => e.Email));
+            Mapper.CreateMap<Email, EmailModel>()
+                .ForSourceMember(cb => cb.Contact, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.EmailType, cbs => cbs.Ignore())
+                .ForMember(c => c.EmailAddress, em => em.MapFrom(e => e.Email1));
 
-            Mapper.CreateMap<CB_AddressType, AddressType>()
-                .ForSourceMember(cb => cb.CB_Address, cbs => cbs.Ignore())
-                .ForSourceMember(cb => cb.CB_ContactBook, cbs => cbs.Ignore());
+            Mapper.CreateMap<AddressType, AddressTypeModel>()
+                .ForSourceMember(cb => cb.Addresses, cbs => cbs.Ignore())
+                .ForSourceMember(cb => cb.ContactBook, cbs => cbs.Ignore());
         }
     }
 }

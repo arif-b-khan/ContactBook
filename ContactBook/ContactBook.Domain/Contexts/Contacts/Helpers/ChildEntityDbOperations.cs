@@ -12,26 +12,26 @@ namespace ContactBook.Domain.Contexts.Contacts.Helpers
 
     public class ChildEntityDbOperations
     {
-        IContactBookDbRepository<CB_Contact> contactRepo;
+        IContactBookDbRepository<Contact> contactRepo;
         IContactBookRepositoryUow uow;
 
-        public ChildEntityDbOperations(IContactBookDbRepository<CB_Contact> contactRepository, IContactBookRepositoryUow unitOfWork) 
+        public ChildEntityDbOperations(IContactBookDbRepository<Contact> contactRepository, IContactBookRepositoryUow unitOfWork) 
         {
             contactRepo = contactRepository;
             uow = unitOfWork;
         }
 
-        public void PerformOperations(CB_Contact mContact, CB_Contact dContact)
+        public void PerformOperations(Contact mContact, Contact dContact)
         {
-            DbOperationsCheck<CB_Number>(mContact.CB_Numbers, dContact.CB_Numbers, uow.GetEntityByType<CB_Number>());
-            DbOperationsCheck<CB_Email>(mContact.CB_Emails, dContact.CB_Emails, uow.GetEntityByType<CB_Email>());
-            DbOperationsCheck<CB_IM>(mContact.CB_IMs, dContact.CB_IMs, uow.GetEntityByType<CB_IM>());
-            DbOperationsCheck<CB_Address>(mContact.CB_Addresses, dContact.CB_Addresses, uow.GetEntityByType<CB_Address>());
-            DbOperationsCheck<CB_InternetCall>(mContact.CB_InternetCalls, dContact.CB_InternetCalls, uow.GetEntityByType<CB_InternetCall>());
-            DbOperationsCheck<CB_Website>(mContact.CB_Websites, dContact.CB_Websites, uow.GetEntityByType<CB_Website>());
-            DbOperationsCheck<CB_Relationship>(mContact.CB_Relationships, dContact.CB_Relationships, uow.GetEntityByType<CB_Relationship>());
-            DbOperationsCheck<CB_SpecialDate>(mContact.CB_SpecialDates, dContact.CB_SpecialDates,  uow.GetEntityByType<CB_SpecialDate>());
-            DbOperationsCheck<CB_ContactByGroup>(mContact.CB_ContactByGroups, dContact.CB_ContactByGroups, uow.GetEntityByType<CB_ContactByGroup>());
+            DbOperationsCheck<Number>(mContact.Numbers, dContact.Numbers, uow.GetEntityByType<Number>());
+            DbOperationsCheck<Email>(mContact.Emails, dContact.Emails, uow.GetEntityByType<Email>());
+            DbOperationsCheck<IM>(mContact.IMs, dContact.IMs, uow.GetEntityByType<IM>());
+            DbOperationsCheck<Db.Data.Address>(mContact.Addresses, dContact.Addresses, uow.GetEntityByType<Db.Data.Address>());
+            DbOperationsCheck<InternetCall>(mContact.InternetCalls, dContact.InternetCalls, uow.GetEntityByType<InternetCall>());
+            DbOperationsCheck<Website>(mContact.Websites, dContact.Websites, uow.GetEntityByType<Website>());
+            DbOperationsCheck<Relationship>(mContact.Relationships, dContact.Relationships, uow.GetEntityByType<Relationship>());
+            DbOperationsCheck<SpecialDate>(mContact.SpecialDates, dContact.SpecialDates,  uow.GetEntityByType<SpecialDate>());
+            DbOperationsCheck<ContactByGroup>(mContact.ContactByGroups, dContact.ContactByGroups, uow.GetEntityByType<ContactByGroup>());
         }
 
         private void DbOperationsCheck<T>(ICollection<T> collection1, ICollection<T> collection2, IContactBookDbRepository<T> actualEntity) where T : class, INewEntity<T>, IEntityCloneable<T>, IEquatable<T>

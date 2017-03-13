@@ -5,12 +5,12 @@ namespace ContactBook.Domain.Contexts.Addresses
 {
     internal interface IAddressContext
     {
-        void DeleteAddresses(List<Address> addresses);
+        void DeleteAddresses(List<AddressModel> addresses);
 
-        List<Address> GetAddressContactId(long contactId);
+        List<AddressModel> GetAddressContactId(long contactId);
 
-        void InsertAddresses(List<Address> addresses);
+        void InsertAddresses(List<AddressModel> addresses);
 
-        void UpdateAddresses(List<Address> addresses);
+        void UpdateAddresses(List<AddressModel> addresses);
     }
 }

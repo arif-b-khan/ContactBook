@@ -5,11 +5,11 @@ namespace ContactBook.Domain.Contexts.Contacts
 {
     public interface IContactContext
     {
-        List<Contact> GetContacts(long bookId);
-        Contact GetContact(long contactId);
-        Contact GetContact(long bookId, long contactId);
-        void InsertContact(Contact contact);
-        void DeleteContact(Contact contact);
-        void UpdateContact(Contact contact);
+        List<ContactModel> GetContacts(long bookId);
+        ContactModel GetContact(long contactId);
+        ContactModel GetContact(long bookId, long contactId);
+        void InsertContact(ContactModel contact);
+        void DeleteContact(ContactModel contact);
+        void UpdateContact(ContactModel contact);
     }
 }

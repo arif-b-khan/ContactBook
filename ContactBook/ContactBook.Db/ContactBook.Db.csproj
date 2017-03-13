@@ -76,93 +76,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections\ConnectionString.cs" />
-    <Compile Include="Data\CB_Address.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_AddressType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Contact.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_ContactBook.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_ContactByGroup.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Email.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_EmailType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_GroupType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_IM.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_IMType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_InternetCall.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Number.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_NumberType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Relationship.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_RelationshipType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Secret.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_SpecialDate.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_SpecialDateType.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Tokens.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CB_Website.cs">
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ContactBookEdm.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContactBookEdm.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ContactBookEdm.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContactBookEdm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ContactBookEdm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContactBookEdm.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Partials\CB_Address.cs" />
-    <Compile Include="Data\Partials\CB_ContactByGroup.cs" />
-    <Compile Include="Data\Partials\CB_Email.cs" />
-    <Compile Include="Data\Partials\CB_IM.cs" />
-    <Compile Include="Data\Partials\CB_InternetCall.cs" />
-    <Compile Include="Data\Partials\CB_Number.cs" />
-    <Compile Include="Data\Partials\CB_Relationship.cs" />
-    <Compile Include="Data\Partials\CB_SpecialDate.cs" />
-    <Compile Include="Data\Partials\CB_Website.cs" />
-    <Compile Include="Data\Partials\ContactBookEdmContainer.partial.cs" />
+    <Compile Include="Data\Address.cs" />
+    <Compile Include="Data\AddressType.cs" />
+    <Compile Include="Data\Contact.cs" />
+    <Compile Include="Data\ContactBook.cs" />
+    <Compile Include="Data\ContactbookDbContext.cs" />
+    <Compile Include="Data\ContactByGroup.cs" />
+    <Compile Include="Data\Email.cs" />
+    <Compile Include="Data\EmailType.cs" />
+    <Compile Include="Data\GroupType.cs" />
+    <Compile Include="Data\IM.cs" />
+    <Compile Include="Data\IMType.cs" />
+    <Compile Include="Data\InternetCall.cs" />
+    <Compile Include="Data\Log.cs" />
+    <Compile Include="Data\Number.cs" />
+    <Compile Include="Data\NumberType.cs" />
+    <Compile Include="Data\Partials\Address.cs" />
+    <Compile Include="Data\Partials\ContactByGroup.cs" />
+    <Compile Include="Data\Partials\Email.cs" />
+    <Compile Include="Data\Partials\IM.cs" />
+    <Compile Include="Data\Partials\InternetCall.cs" />
+    <Compile Include="Data\Partials\Number.cs" />
+    <Compile Include="Data\Partials\Relationship.cs" />
+    <Compile Include="Data\Partials\SpecialDate.cs" />
+    <Compile Include="Data\Partials\Website.cs" />
     <Compile Include="Data\Partials\IEntityCloneable.cs" />
     <Compile Include="Data\Partials\INewEntity.cs" />
+    <Compile Include="Data\Relationship.cs" />
+    <Compile Include="Data\RelationshipType.cs" />
+    <Compile Include="Data\Secret.cs" />
+    <Compile Include="Data\SpecialDate.cs" />
+    <Compile Include="Data\SpecialDateType.cs" />
+    <Compile Include="Data\Token.cs" />
+    <Compile Include="Data\Website.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -176,26 +122,7 @@
     <Compile Include="Repositories\IContactBookRepositoryUow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Data\ContactBookEdm.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ContactBookEdm.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Data\ContactBookEdm.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContactBookEdm.edmx</DependentUpon>
-      <LastGenOutput>ContactBookEdm.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Data\ContactBookEdm.edmx.diagram">
-      <DependentUpon>ContactBookEdm.edmx</DependentUpon>
-    </None>
-    <None Include="Data\ContactBookEdm.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContactBookEdm.edmx</DependentUpon>
-      <LastGenOutput>ContactBookEdm.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -207,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultData.edmx.sql" />
-    <Content Include="Data\ContactBookEdm.edmx.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

@@ -48,11 +48,11 @@ namespace ContactBook.Domain.Validations
                 IContactContext contactContext = DependencyFactory.Resolve<IContactContext>();
                 IContactBookContext bookContext = DependencyFactory.Resolve<IContactBookContext>();
 
-                ContactBookInfo cbInfo = bookContext.GetContactBook(UserPrincipal.Identity.Name);
+                ContactBookInfoModel cbInfo = bookContext.GetContactBook(UserPrincipal.Identity.Name);
 
                 if (cbInfo != null)
                 {
-                    Contact contact = contactContext.GetContact(cbInfo.BookId, contactId);
+                    ContactModel contact = contactContext.GetContact(cbInfo.BookId, contactId);
                     if (contact != null)
                     {
                         return ValidationResult.Success;

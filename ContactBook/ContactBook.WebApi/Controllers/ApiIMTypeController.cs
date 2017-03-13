@@ -19,24 +19,24 @@ namespace ContactBook.WebApi.Controllers
     {
         private IContactBookRepositoryUow _unitofWork;
         private IContactBookRepositoryUow _readOnlyUow;
-        private IGenericContextTypes<IMType, CB_IMType> imTypeRepo;
-        private IGenericContextTypes<IMType, CB_IMType> readOnlyRepo;
+        private IGenericContextTypes<IMTypeModel, IMType> imTypeRepo;
+        private IGenericContextTypes<IMTypeModel, IMType> readOnlyRepo;
         
         public ApiIMTypeController(IContactBookRepositoryUow unitofWork, IContactBookRepositoryUow readOnlyUow)
         {
             _unitofWork = unitofWork;
             _readOnlyUow = readOnlyUow;
-            imTypeRepo = new GenericContextTypes<IMType, CB_IMType>(unitofWork);
-            readOnlyRepo = new GenericContextTypes<IMType, CB_IMType>(_readOnlyUow);
+            imTypeRepo = new GenericContextTypes<IMTypeModel, IMType>(unitofWork);
+            readOnlyRepo = new GenericContextTypes<IMTypeModel, IMType>(_readOnlyUow);
         }
 
         //Get api/EmailType/1
         [Route("{bookId}")]
-        [ResponseType(typeof(List<IMType>))]
+        [ResponseType(typeof(List<IMTypeModel>))]
         [BookIdValidationFilter("bookId")]
         public IHttpActionResult Get(long bookId)
         {
-            List<IMType> imTypes = imTypeRepo.GetTypes(imt => ((imt.BookId.HasValue && imt.BookId.Value == bookId) || !imt.BookId.HasValue));
+            List<IMTypeModel> imTypes = imTypeRepo.GetTypes(imt => ((imt.BookId.HasValue && imt.BookId.Value == bookId) || !imt.BookId.HasValue));
 
             if (imTypes == null || imTypes.Count == 0)
             {
@@ -47,7 +47,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         //Post api/ApiEmailType
-        public IHttpActionResult Post([FromBody]IMType imType)
+        public IHttpActionResult Post([FromBody]IMTypeModel imType)
         {
             Exception exOut;
 
@@ -56,9 +56,9 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ApiHelper.TryExecuteContext(() => imTypeRepo.InsertTypes(new List<IMType>() { imType }), out exOut))
+            if (ApiHelper.TryExecuteContext(() => imTypeRepo.InsertTypes(new List<IMTypeModel>() { imType }), out exOut))
             {
-                return CreatedAtRoute<IMType>("DefaultApi", new { controller = "ApiIMType", action = "Get", bookId = imType.BookId }, imType);
+                return CreatedAtRoute<IMTypeModel>("DefaultApi", new { controller = "ApiIMType", action = "Get", bookId = imType.BookId }, imType);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace ContactBook.WebApi.Controllers
         }
 
         // PUT api/ApiEmailType
-        public IHttpActionResult Put([FromBody]IMType pIMType)
+        public IHttpActionResult Put([FromBody]IMTypeModel pIMType)
         {
             Exception exOut;
             if (!ModelState.IsValid)
@@ -75,14 +75,14 @@ namespace ContactBook.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<CB_IMType> imTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.IMTypeId == pIMType.IMTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pIMType.BookId));
+            List<IMType> imTypeList = readOnlyRepo.GetCBTypes(nbt => nbt.IMTypeId == pIMType.IMTypeId && (nbt.BookId.HasValue && nbt.BookId.Value == pIMType.BookId));
 
             if (imTypeList == null || imTypeList.Count == 0)
             {
                 return NotFound();
             }
 
-            CB_IMType dbIMType = imTypeList.SingleOrDefault();
+            IMType dbIMType = imTypeList.SingleOrDefault();
 
             if (dbIMType != null && !dbIMType.Equals(pIMType))
             {
@@ -102,7 +102,7 @@ namespace ContactBook.WebApi.Controllers
         [Route("{bookId}/{typeId}")]
         public IHttpActionResult Delete(long bookId, int typeId)
         {
-            CB_IMType imType = null;
+            IMType imType = null;
 
             if (bookId <= 0)
             {
