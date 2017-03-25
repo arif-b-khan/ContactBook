@@ -216,5 +216,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # ignoring node_modules/
-/contactbook/ContactBook/packages/
-/contactbook/ContactBook/ContactBook.Web/'
+/ContactBook/packages/
+/ContactBook/ContactBook.Web/node_modules/
+/ContactBook/ContactBook.Web/**/*.rar
+
