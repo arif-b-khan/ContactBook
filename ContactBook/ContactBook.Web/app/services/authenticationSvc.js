@@ -6,10 +6,11 @@
 
         var authUrls = {
             loginUrl: url + "/Token",
-            registUrl: url + "/Register"
+            registUrl: url + "/Register",
+            getExternalLogins: url + "api/Account/ExternalLogins"
         };
 
-        var _login = function(username, pwd) {
+        var _login = function login(username, pwd) {
             var data = "Username=" + username + "&Password=" + pwd+"&grant_type=password";
             var deferred = $q.defer();
 
@@ -39,15 +40,20 @@
             return deferred.promise;
         };
 
-        var _logout = function() {
+        var _logout = function logout() {
             delete $rootScope.userInfo;
             localStorageService.remove(storageSettings.USERINFO_KEY);
             $rootScope.isAuthenticated = false;
         }
 
+        var _getExternalLogins = function getExternalLogins() {
+            return $http.get(authUrls.getExternalLogins + encodeURI("?returnUrl=\"&generateState=true"));
+        }
+
         return {
             login: _login,
-            logout: _logout
+            logout: _logout,
+            externalLogins: _getExternalLogins
         };
     }]);
 })();
