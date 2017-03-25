@@ -218,5 +218,5 @@ ModelManifest.xml
 # ignoring node_modules/
 /ContactBook/packages/
 /ContactBook/ContactBook.Web/node_modules/
-/ContactBook/ContactBook.Web/**/*.rar
+/ContactBook/**/*.rar
 
