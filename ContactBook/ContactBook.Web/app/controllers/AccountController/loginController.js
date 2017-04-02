@@ -7,6 +7,19 @@
         $scope.forgotPasswordHref = "#/retrievePassword";
         $scope.loginError = {};
         $scope.loginError.success = false;
+        $scope.externalLoginResult = {};
+
+
+        function init() {
+            //load externallogins
+            $scope.getExternalLogins();
+        }
+
+        $scope.getExternalLogins = function () {
+            authenticationSvc.externalLogins().then(function (data) {
+                $scope.externalLoginResult = data;
+            });
+        };
 
         $scope.loginUser = function(user, frm) {
             if (!frm.$invalid) {
@@ -34,6 +47,7 @@
                 );
             }
         };
+
         var afterLoginCall = function() {
             contactBookSpinner.stop();
             $scope.signinDisable = false;
@@ -47,5 +61,6 @@
             $scope.registerHref = "";
             $scope.forgotPasswordHref = "";
         };
+        init();
     }])
 })();
